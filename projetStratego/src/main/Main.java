@@ -1,9 +1,14 @@
 package main;
 
+import pawn.*;
+
 public class Main {
 
 	public static void main(String[] args){ 
-		System.out.println("Hello world");
-		System.out.println("Hello !!");
+//		Window fenetre = new Window();
+//		Grid test = new Grid(10);
+//		test.showGrid();
+		Captain cap = new Captain();
+		System.out.println(cap);
 	}
 }

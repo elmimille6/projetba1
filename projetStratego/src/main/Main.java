@@ -8,7 +8,8 @@ public class Main {
 //		Window fenetre = new Window();
 //		Grid test = new Grid(10);
 //		test.showGrid();
-		Captain cap = new Captain();
-		System.out.println(cap);
+//		Captain cap = new Captain();
+//		System.out.println(cap);
+		System.out.println("hello world");
 	}
 }

@@ -6,9 +6,11 @@ public class Captain extends APawn {
 		setLevelPawn(6);
 		setNamePawn("captain");
 		setTeam(team);
+		setValue(this.levelPawn*10);
 	}
 	public Captain(){
 		setLevelPawn(6);
 		setNamePawn("captain");
+		setValue(this.levelPawn*10);
 	}
 }

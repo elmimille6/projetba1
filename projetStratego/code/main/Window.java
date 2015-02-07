@@ -2,6 +2,11 @@ package main;
 
 import javax.swing.JFrame;
 
+/**
+* This class creates a window.
+*
+* @author CAREDDA Giuliano, DUCOBU Alexandre
+*/
 public class Window extends JFrame {
   public Window(){
     this.setTitle("Stratego");

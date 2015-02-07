@@ -4,6 +4,11 @@ import java.util.Vector;
 
 import pawn.*;
 
+/**
+* GridIA is the class that creates a "grid" object for the IA.
+*
+* @author CAREDDA Giuliano, DUCOBU Alexandre
+*/
 public class GridIA {
 
 	APawn[][] grid;
@@ -21,6 +26,10 @@ public class GridIA {
 		}
 		System.out.println(i);
 	}
+
+	/**
+	 * Displays the grid.
+	 */
 	public void showGrid(){
 		for (int i = 0;i<grid.length;i++){
 			for (int j = 0; j<grid[0].length;j++){

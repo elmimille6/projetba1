@@ -2,6 +2,11 @@ package main;
 
 import pawn.*;
 
+/**
+* This is the main class of this project.
+*
+* @author CAREDDA Giuliano, DUCOBU Alexandre
+*/
 public class Main {
 
 	public static void main(String[] args){ 

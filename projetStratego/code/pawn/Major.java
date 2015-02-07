@@ -14,7 +14,7 @@ public class Major extends APawn {
 	 *    Team of the pawn, must be 1 or 2
 	 */
 	public Major(int team){
-		setLevelPawn(4);
+		setLevelPawn(7);
 		setNamePawn("major");
 		setTeam(team);
 		setValue(this.levelPawn*10);

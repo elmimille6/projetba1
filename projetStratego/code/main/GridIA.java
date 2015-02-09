@@ -15,7 +15,7 @@ public class GridIA {
 	int val=0;
 	public GridIA() {
 		int i=0;
-		while(val<17000){
+		while(val<17150){
 			APawn[][] gridEval= createGrid();
 			int value = evalGrid(gridEval);
 			if (value > val){
@@ -69,26 +69,26 @@ public class GridIA {
 						valeur+=bonus;
 					}
 				if (i!=9){
-					if(grid[2][i+1] instanceof Bomb|| grid[2][i-1] instanceof Marshal){
+					if(grid[2][i+1] instanceof Bomb|| grid[2][i+1] instanceof Marshal){
 						valeur+=bonus;
 					}
 				}
-				if(grid[1][i] instanceof Bomb|| grid[2][i-1] instanceof Marshal){
+				if(grid[1][i] instanceof Bomb|| grid[1][i] instanceof Marshal){
 					valeur+=bonus;
 				}
 				}
 			}
 			if (grid[3][i] instanceof Flag){
 				if (i!=0){
-					if(grid[2][i-1] instanceof Bomb|| grid[2][i-1] instanceof Marshal){
+					if(grid[3][i-1] instanceof Bomb|| grid[3][i-1] instanceof Marshal){
 						valeur+=bonus;
 					}
 				if (i!=9){
-					if(grid[2][i+1] instanceof Bomb|| grid[2][i-1] instanceof Marshal){
+					if(grid[3][i+1] instanceof Bomb|| grid[3][i+1] instanceof Marshal){
 						valeur+=bonus;
 					}
 				}
-				if(grid[1][i] instanceof Bomb|| grid[2][i-1] instanceof Marshal){
+				if(grid[2][i] instanceof Bomb|| grid[2][i] instanceof Marshal){
 					valeur+=bonus;
 				}
 				}

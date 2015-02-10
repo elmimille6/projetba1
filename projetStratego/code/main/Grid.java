@@ -38,6 +38,7 @@ public class Grid {
 	 */
 	public void set(int i, int j,APawn x){
 		grid[i][j]=x;
+		x.setPos(i,j);
 	}
 	
 	/**
@@ -76,5 +77,8 @@ public class Grid {
 			}
 		}
 		return false;
+	}
+	public APawn get(int i,int j){
+		return grid[i][j];
 	}
 }

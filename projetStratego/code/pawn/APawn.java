@@ -9,7 +9,7 @@ import main.Grid;
 * @author CAREDDA Giuliano, DUCOBU Alexandre
 */
 public abstract class APawn{
-
+	
 	protected int levelPawn;
 	protected String namePawn;
 	protected int team=0;
@@ -23,12 +23,19 @@ public abstract class APawn{
 		}
 		return String.valueOf(levelPawn);
 	}
-	
+	/**
+	 * set the position on the grid of the pawn
+	 * @param posX the x coord
+	 * @param posY the y coord
+	 */
 	public void setPos(int posX,int posY){
 		this.posY=posY;
 		this.posX=posX;
 	}
-	
+	/**
+	 * set the value of the pawn
+	 * @param valuePawn the value of the pawn
+	 */
 	protected void setValue(int valuePawn){
 		this.value=valuePawn;
 	}
@@ -112,15 +119,24 @@ public abstract class APawn{
 		
 		return listPawn;
 	}
-	
+	/**
+	 * get the level of the pawn
+	 * @return the level of the pawn
+	 */
 	public int getLevel(){
 		return levelPawn;
 	}
-	
+	/**
+	 * get the value of the pawn to create a starter grid for AI
+	 * @return the value of the pawn
+	 */
 	public int getValue(){
 		return value;
 	}
-
+	/**
+	 * get the team of the pawn
+	 * @return the number of the team
+	 */
 	public int getTeam(){
 		return this.team;
 	}
@@ -181,24 +197,26 @@ public abstract class APawn{
 	 */
 	public Grid move(Grid grid, int x, int y){
 		APawn tar = grid.get(x, y);
-		if (tar==null){
-			grid.set(x, y, this);
+		if (tar==null){//no pawn on the coord targeted
+			grid.set(this.posX, this.posY, null);//delete the old coord of the pawn
+			grid.set(x, y, this);//set the new coord of the pawn
 			return grid;
 		}
-		int res = this.attack(tar);
-		if (res==0){
-			tar.setPos(-1, -1);
-			this.setPos(-1,-1);
-			grid.set(x, y, null);
-			grid.set(this.posX, this.posY, null);
+		int res = this.attack(tar);//get the resultat of the fight
+		if (res==0){//i'ts a draw
+			
+			grid.set(x, y, null);//delete the pawn targeted
+			grid.set(this.posX, this.posY, null);//delete the pawn who attack
+
 		}
-		else if (res==1){
-			tar.setPos(-1, -1);
-			grid.set(x,y,this);
+		else if (res==1){//the pawn who attack win
+			grid.set(this.posX, this.posY, null);//delete the old coord of the pawn
+			grid.set(x,y,this);//set the new coord of the pawn
+			
 		}
-		else if (res==2){
-			this.setPos(-1, -1);
-			grid.set(this.posX,this.posY,null);
+		else if (res==2){//the pawn who attack loose
+			
+			grid.set(this.posX,this.posY,null);//delete the pawn who attack
 		}
 		return grid;
 	}

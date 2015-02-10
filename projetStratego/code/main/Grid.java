@@ -36,9 +36,11 @@ public class Grid {
 	 * @param x
 	 *    The pawn to put
 	 */
-	public void set(int i, int j,APawn x){
+	public void set(int i, int j, APawn x){
 		grid[i][j]=x;
+		if(x instanceof APawn){
 		x.setPos(i,j);
+		}
 	}
 	
 	/**
@@ -47,10 +49,16 @@ public class Grid {
 	public void showGrid(){
 		for (int i = 0;i<grid.length;i++){
 			for (int j = 0; j<grid[0].length;j++){
-				System.out.print(grid[i][j]+"   ");
+				if(grid[i][j]==null){
+					System.out.print("n     ");
+				}
+				else{
+					System.out.print(grid[i][j]+"    ");
+				}
 			}
 			System.out.println();
 		}
+		System.out.println();
 	}
 	
 	/**

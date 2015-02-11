@@ -16,6 +16,7 @@ public abstract class APawn{
 	protected int value;
 	public int posX;
 	public int posY;
+	protected String URI;
 	
 	public String toString(){
 		if (levelPawn<10){
@@ -38,6 +39,13 @@ public abstract class APawn{
 	 */
 	protected void setValue(int valuePawn){
 		this.value=valuePawn;
+	}
+	/**
+	 * set the URI of the image of the pawn
+	 * @param URI the URI of the image of the pawn
+	 */
+	protected void setURI(String URI){
+		this.URI=URI;
 	}
 	
 	/**

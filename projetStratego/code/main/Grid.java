@@ -61,31 +61,31 @@ public class Grid {
 		System.out.println();
 	}
 	
-	/**
-	 * Check if the pawn can move.
-	 * 
-	 * @param i 
-	 *    Line of the pawn
-	 *
-	 * @param j
-	 *    Column of the pawn
-	 *
-	 * @return
-	 *    A boolean: true or false
-	 */
-	public boolean pawnCanMove(int i, int j){
-		APawn pawn = grid[i][j];
-		if (pawn!= null){
-			if (pawn.canMove()){
-				if (i!=0){
-					if (grid[i-1][j]==null){
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
+//	/**
+//	 * Check if the pawn can move.
+//	 * 
+//	 * @param i 
+//	 *    Line of the pawn
+//	 *
+//	 * @param j
+//	 *    Column of the pawn
+//	 *
+//	 * @return
+//	 *    A boolean: true or false
+//	 */
+//	public boolean pawnCanMove(int i, int j){
+//		APawn pawn = grid[i][j];
+//		if (pawn!= null){
+//			if (pawn.canMove()){
+//				if (i!=0){
+//					if (grid[i-1][j]==null){
+//						return true;
+//					}
+//				}
+//			}
+//		}
+//		return false;
+//	}
 	public APawn get(int i,int j){
 		return grid[i][j];
 	}

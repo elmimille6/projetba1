@@ -1,5 +1,7 @@
 package pawn;
 
+import main.Grid;
+
 /**
 * Flag is the class that creates a "flag" pawn.
 *
@@ -27,5 +29,9 @@ public class Flag extends APawn {
 		setLevelPawn(12);
 		setNamePawn("flag");
 		setValue(400);
+	}
+	
+	public boolean movePoss(Grid grid,int x, int y){
+		return false;
 	}
 }

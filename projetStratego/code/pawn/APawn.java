@@ -70,15 +70,6 @@ public abstract class APawn{
 		this.team=team;
 	}
 	
-	/**
-	 * Tell if the pawn can move.
-	 * 
-	 * @return
-	 *    A boolean: true or false
-	 */
-	public boolean canMove(){
-		return true;
-	}
 	
 	/**
 	 * Make a vector of the 40 pawn in a team at the begin of the game.

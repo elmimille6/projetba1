@@ -1,5 +1,7 @@
 package pawn;
 
+import main.Grid;
+
 /**
 * Bomb is the class that creates a "bomb" pawn.
 *
@@ -28,5 +30,7 @@ public class Bomb extends APawn {
 		setNamePawn("bomb");
 		setValue(this.levelPawn*10);
 	}
-
+	public boolean movePoss(Grid grid,int x, int y){
+		return false;
+	}
 }

@@ -30,9 +30,13 @@ public class Miner extends APawn {
 	}
 	
 	/**
-	 * return the result of the fight between this pawn and the target
-	 * @param tar the pawn who is targeted by this pawn
-	 * @return 0 if it's a drawn <br/> 1 if this pawn win <br/> 2 if this pawn loose
+	 * Return the result of the fight between this pawn and the target.
+	 * 
+	 * @param tar
+	 *     The pawn who is targeted by this pawn
+	 *     
+	 * @return
+	 *     0 if it's a drawn <br/> 1 if this pawn win <br/> 2 if this pawn loose
 	 */
 	public int attack(APawn tar){
 		if (tar instanceof Bomb){

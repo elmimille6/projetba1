@@ -39,6 +39,7 @@ public class GridIA {
 		}
 		System.out.println(val);
 	}
+
 	public static APawn[][] createGrid(){
 		APawn[][] grid = new APawn[4][10];
 		Vector<APawn> listPawn = APawn.createTeam();
@@ -54,6 +55,7 @@ public class GridIA {
 		}
 		return grid;
 	}
+
 	public int evalGrid(APawn[][] grid){
 		int bonus=2000;
 		int valeur=0;
@@ -68,14 +70,14 @@ public class GridIA {
 					if(grid[2][i-1] instanceof Bomb || grid[2][i-1] instanceof Marshal){
 						valeur+=bonus;
 					}
-				if (i!=9){
-					if(grid[2][i+1] instanceof Bomb|| grid[2][i+1] instanceof Marshal){
+					if (i!=9){
+						if(grid[2][i+1] instanceof Bomb|| grid[2][i+1] instanceof Marshal){
+							valeur+=bonus;
+						}
+					}
+					if(grid[1][i] instanceof Bomb|| grid[1][i] instanceof Marshal){
 						valeur+=bonus;
 					}
-				}
-				if(grid[1][i] instanceof Bomb|| grid[1][i] instanceof Marshal){
-					valeur+=bonus;
-				}
 				}
 			}
 			if (grid[3][i] instanceof Flag){
@@ -83,17 +85,17 @@ public class GridIA {
 					if(grid[3][i-1] instanceof Bomb|| grid[3][i-1] instanceof Marshal){
 						valeur+=bonus;
 					}
-				if (i!=9){
-					if(grid[3][i+1] instanceof Bomb|| grid[3][i+1] instanceof Marshal){
-						valeur+=bonus;
+					if (i!=9){
+						if(grid[3][i+1] instanceof Bomb|| grid[3][i+1] instanceof Marshal){
+							valeur+=bonus;
+						}
 					}
-				}
-				if(grid[2][i] instanceof Bomb|| grid[2][i] instanceof Marshal){
-					valeur+=bonus;
-				}
-				}
-		}}
+					if(grid[2][i] instanceof Bomb|| grid[2][i] instanceof Marshal){
+						valeur+=bonus;
+						}
+					}
+			}
+		}
 		return valeur+l1+2*l2+4*l3+6*l4;
 	}
-	
 }

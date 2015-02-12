@@ -13,6 +13,10 @@ public class GridIA {
 
 	APawn[][] grid;
 	int val=0;
+	
+	/**
+	 * Constructor of the grid for the IA.
+	 */
 	public GridIA() {
 		int i=0;
 		while(val<17150){

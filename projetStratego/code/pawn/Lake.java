@@ -17,6 +17,7 @@ public class Lake extends APawn{
 		setTeam(0);
 		setNamePawn("lake");
 	}
+	
 	public boolean movePoss(Grid grid,int x, int y){
 		return false;
 	}

@@ -13,7 +13,7 @@ public class Scout extends APawn {
 	 * Constructor of the scout pawn.
 	 * 
 	 * @param team
-	 *            Team of the pawn, must be 1 or 2
+	 *    Team of the pawn, must be 1 or 2
 	 */
 	public Scout(int team) {
 		setLevelPawn(2);
@@ -32,15 +32,19 @@ public class Scout extends APawn {
 	}
 
 	/**
-	 * test if a move is possible
+	 * Test if a move is possible.
 	 * 
 	 * @param grid
-	 *            the grid of the game
+	 *    The grid of the game
+	 *    
 	 * @param x
-	 *            the coord to move
+	 *    The abscissa of the object
+	 *    
 	 * @param y
-	 *            the coord to move
-	 * @return the grid after the moving
+	 *    The ordinate of the object
+	 *    
+	 * @return
+	 *    The grid after the moving
 	 */
 	public boolean movePoss(Grid grid, int x, int y) {
 		APawn target = grid.get(x, y);

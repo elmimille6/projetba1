@@ -11,6 +11,12 @@ import pawn.Lake;
 public class Grid {
 	private APawn[][] grid; 
 	
+	/**
+	 * Constructor of the grid.
+	 * 
+	 * @param size
+	 *    Size of the grid
+	 */
 	public Grid(int size){
 		grid = new APawn[10][10];
 		APawn lake = new Lake();
@@ -86,7 +92,20 @@ public class Grid {
 //		}
 //		return false;
 //	}
-	public APawn get(int i,int j){
+	
+	/**
+	 * Gets the pawn at the given coordinates.
+	 * 
+	 * @param i 
+	 *    Line of the pawn
+	 *
+	 * @param j
+	 *    Column of the pawn
+	 * 
+	 * @return
+	 *    Pawn at the given coordinates
+	 */
+	public APawn get(int i, int j){
 		return grid[i][j];
 	}
 }

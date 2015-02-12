@@ -11,7 +11,7 @@ public class Marshal extends APawn {
 	 * Constructor of the marshal pawn.
 	 * 
 	 * @param team
-	 *     Team of the pawn, must be 1 or 2
+	 *    Team of the pawn, must be 1 or 2
 	 */
 	public Marshal(int team){
 		setLevelPawn(10);

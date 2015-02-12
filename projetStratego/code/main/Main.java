@@ -13,8 +13,10 @@ public class Main {
 //		Window fenetre = new Window();
 		Grid test = new Grid(10);
 //		
-		Bomb p1 = new Bomb(2);
-		Miner p2 = new Miner(1);
+//		Bomb p1 = new Bomb(2);
+//		Miner p2 = new Miner(1);
+		Flag p1 = new Flag(2);
+    	Miner p2 = new Miner(1);
 		test.set(2, 2, p1);
 		test.set(2, 3, p2);
 		test.showGrid();

@@ -14,7 +14,7 @@ public class Grid {
 	 * Constructor of the grid.
 	 * 
 	 * @param size
-	 *    Size of the grid
+	 *    Size of the grid.
 	 */
 	public Grid(int size){
 		grid = new APawn[10][10];
@@ -33,17 +33,17 @@ public class Grid {
 	 * Put the pawn on the grid.
 	 * 
 	 * @param i
-	 *    Line of the grid
+	 *    Line of the grid.
 	 *
 	 * @param j
-	 *    Column of the grid
+	 *    Column of the grid.
 	 *
 	 * @param x
-	 *    The pawn to put
+	 *    The pawn to put.
 	 */
 	public void set(int i, int j, APawn x){
 		grid[i][j]=x;
-		if(x instanceof APawn){
+		if (x instanceof APawn){
 		x.setPos(i,j);
 		}
 	}
@@ -54,7 +54,7 @@ public class Grid {
 	public void showGrid(){
 		for (int i = 0;i<grid.length;i++){
 			for (int j = 0; j<grid[0].length;j++){
-				if(grid[i][j]==null){
+				if (grid[i][j]==null){
 					System.out.print("n     ");
 				}
 				else{
@@ -70,13 +70,13 @@ public class Grid {
 //	 * Check if the pawn can move.
 //	 * 
 //	 * @param i 
-//	 *    Line of the pawn
+//	 *    Line of the pawn.
 //	 *
 //	 * @param j
-//	 *    Column of the pawn
+//	 *    Column of the pawn.
 //	 *
 //	 * @return
-//	 *    A boolean: true or false
+//	 *    A boolean: true or false.
 //	 */
 //	public boolean pawnCanMove(int i, int j){
 //		APawn pawn = grid[i][j];
@@ -96,13 +96,13 @@ public class Grid {
 	 * Gets the pawn at the given coordinates.
 	 * 
 	 * @param i 
-	 *    Line of the pawn
+	 *    Line of the pawn.
 	 *
 	 * @param j
-	 *    Column of the pawn
+	 *    Column of the pawn.
 	 * 
 	 * @return
-	 *    Pawn at the given coordinates
+	 *    Pawn at the given coordinates.
 	 */
 	public APawn get(int i, int j){
 		return grid[i][j];

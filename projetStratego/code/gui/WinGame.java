@@ -27,7 +27,6 @@ public class WinGame extends JFrame {
 	 * 
 	 * @param jeuGive
 	 */
-
 	@SuppressWarnings("static-access")
 	public WinGame() {
 		Grid test = new Grid(10);
@@ -39,12 +38,12 @@ public class WinGame extends JFrame {
 		pane = new PaneGame(test);
 		pane.setLayout(new BorderLayout());
 		this.setSize(700, 700);
-		// grid = jeu.recupGrid();
-		// nbrPlayer = jeu.nbrPlayer();
-		// pane.recupGrid(grid);
-		// pane.recupGame(jeu);
-		// this.setResizable(true);
-		// typeGame = jeu.recupeType();
+//		grid = jeu.recupGrid();
+//		nbrPlayer = jeu.nbrPlayer();
+//		pane.recupGrid(grid);
+//		pane.recupGame(jeu);
+//		this.setResizable(true);
+//		typeGame = jeu.recupeType();
 		this.setContentPane(pane);
 		this.setVisible(true);
 

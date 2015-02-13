@@ -82,7 +82,7 @@ public class PaneGame extends JPanel {
 		grid = nouvGrid;
 	}
 
-	// public void recupGame(AGame type){
-	// jeu = type;
-	// }
+//  public void recupGame(AGame type){
+//  	jeu = type;
+//  }
 }

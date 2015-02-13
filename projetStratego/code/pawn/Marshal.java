@@ -6,33 +6,33 @@ package pawn;
 * @author CAREDDA Giuliano, DUCOBU Alexandre
 */
 public class Marshal extends APawn {
+	
+	/**
+	 * Main constructor of the marshal pawn.
+	 */
+	public Marshal() {
+		setLevelPawn(10);
+		setNamePawn("marshal");
+		setValue(this.levelPawn*10);
+	}
 
 	/**
 	 * Constructor of the marshal pawn.
 	 * 
 	 * @param team
-	 *    Team of the pawn, must be 1 or 2
+	 *    Team of the pawn, must be 1 or 2.
 	 */
 	public Marshal(int team){
 		setLevelPawn(10);
 		setNamePawn("marshal");
 		setTeam(team);
 		setValue(this.levelPawn*10);
-		if(team==1){
+		if (team==1){
 			setURI("/image/red/marshal.png");
 		}
-		if(team==2){
+		if (team==2){
 			setURI("/image/blue/marshal.png");
 		}
-	}
-	
-	/**
-	 * Constructor of the marshal pawn.
-	 */
-	public Marshal() {
-		setLevelPawn(10);
-		setNamePawn("marshal");
-		setValue(this.levelPawn*10);
 	}
 	
 }

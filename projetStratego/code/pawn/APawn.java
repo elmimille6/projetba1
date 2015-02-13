@@ -32,10 +32,10 @@ public abstract class APawn{
 	 * Set the position on the grid of the pawn.
 	 * 
 	 * @param posX
-	 *    The abscissa of the object
+	 *    The abscissa of the object.
 	 *    
 	 * @param posY
-	 *    The ordinate of the object
+	 *    The ordinate of the object.
 	 */
 	public void setPos(int posX,int posY){
 		this.posY=posY;
@@ -46,7 +46,7 @@ public abstract class APawn{
 	 * Set the value of the pawn.
 	 * 
 	 * @param valuePawn
-	 *    The value of the pawn
+	 *    The value of the pawn.
 	 */
 	protected void setValue(int valuePawn){
 		this.value=valuePawn;
@@ -56,7 +56,7 @@ public abstract class APawn{
 	 * Set the URI of the image of the pawn.
 	 * 
 	 * @param URI
-	 *    The URI of the image of the pawn
+	 *    The URI of the image of the pawn.
 	 */
 	protected void setURI(String URI){
 		this.URI=URI;
@@ -66,7 +66,7 @@ public abstract class APawn{
 	 * Set the level of the pawn.
 	 * 
 	 * @param levelPawn
-	 *    The level of the pawn, must be between 0 and 12  
+	 *    The level of the pawn, must be between 0 and 12.
 	 */
 	protected void setLevelPawn(int levelPawn){
 		this.levelPawn=levelPawn;
@@ -76,7 +76,7 @@ public abstract class APawn{
 	 * Set the name of the pawn.
 	 * 
 	 * @param namePawn
-	 *    The name of the pawn
+	 *    The name of the pawn.
 	 */
 	protected void setNamePawn(String namePawn){
 		this.namePawn=namePawn;
@@ -86,7 +86,7 @@ public abstract class APawn{
 	 * Set the team of the pawn.
 	 * 
 	 * @param team
-	 *    The number of the team, 0 for neutral, 1 for red, 2 for blue
+	 *    The number of the team, 0 for neutral, 1 for red, 2 for blue.
 	 */
 	protected void setTeam(int team){
 		this.team=team;
@@ -96,7 +96,7 @@ public abstract class APawn{
 	 * Make a vector of the 40 pawn in a team at the begin of the game.
 	 * 
 	 * @return
-	 *    The vector of 40 pawn
+	 *    The vector of 40 pawn.
 	 */
 	public static Vector<APawn> createTeam(int team){
 		Vector<APawn> listPawn = new Vector<APawn>();
@@ -145,7 +145,7 @@ public abstract class APawn{
 	 * Get the level of the pawn.
 	 * 
 	 * @return
-	 *    The level of the pawn
+	 *    The level of the pawn.
 	 */
 	public int getLevel(){
 		return levelPawn;
@@ -155,7 +155,7 @@ public abstract class APawn{
 	 * Get the value of the pawn to create a starter grid for AI.
 	 * 
 	 * @return
-	 *    The value of the pawn
+	 *    The value of the pawn.
 	 */
 	public int getValue(){
 		return value;
@@ -165,15 +165,16 @@ public abstract class APawn{
 	 * Get the team of the pawn.
 	 * 
 	 * @return
-	 *    The number of the team
+	 *    The number of the team.
 	 */
 	public int getTeam(){
 		return this.team;
 	}
 	/**
-	 * get the URI of the pawn
+	 * Get the URI of the pawn.
+	 * 
 	 * @return
-	 *    The URI of the pawn
+	 *    The URI of the pawn.
 	 */
 	public String getURI(){
 		return this.URI;
@@ -183,16 +184,16 @@ public abstract class APawn{
 	 * Test if a move is possible.
 	 * 
 	 * @param grid
-	 *    The grid of the game
+	 *    The grid of the game.
 	 *
 	 * @param x
-	 *    The abscissa of the object
+	 *    The abscissa of the object.
 	 *    
 	 * @param y
-	 *    The ordinate of the object
+	 *    The ordinate of the object.
 	 *    
 	 * @return
-	 *    The grid after the move
+	 *    The grid after the move.
 	 */
 	public boolean movePoss(Grid grid, int x, int y){
 		APawn target = grid.get(x, y); 
@@ -223,20 +224,20 @@ public abstract class APawn{
 	 * Return the result of the fight between this pawn and the target.
 	 * 
 	 * @param tar
-	 *    The pawn who is targeted by this pawn
+	 *    The pawn who is targeted by this pawn.
 	 *    
 	 * @return
 	 *    0 if it's a drawn <br/> 1 if this pawn win
-	 *    <br/> 2 if this pawn loose <br/> 3 if tar is the flag
+	 *    <br/> 2 if this pawn loose <br/> 3 if tar is the flag.
 	 */
 	public int attack(APawn tar){
-		if(tar.getLevel()==12)
+		if (tar.getLevel()==12)
 			return 3;
-		if(tar.getLevel()==this.levelPawn)
+		if (tar.getLevel()==this.levelPawn)
 			return 0;
-		if(tar.getLevel()<this.levelPawn)
+		if (tar.getLevel()<this.levelPawn)
 			return 1;
-		if(tar.getLevel()>this.levelPawn)
+		if (tar.getLevel()>this.levelPawn)
 			return 2;
 		return -1;
 	}
@@ -246,16 +247,16 @@ public abstract class APawn{
 	 * <br/> ! warning: be careful to test if the moving is possible BEFORE with movePoss(Grid grid, int x, int y).
 	 * 
 	 * @param grid
-	 *    The grid of the game
+	 *    The grid of the game.
 	 *
 	 * @param x
-	 *    The abscissa of the object
+	 *    The abscissa of the object.
 	 *    
 	 * @param y
-	 *    The ordinate of the object
+	 *    The ordinate of the object.
 	 *    
 	 * @return
-	 *    The grid after the move
+	 *    The grid after the move.
 	 */
 	public Grid move(Grid grid, int x, int y){
 		APawn tar = grid.get(x, y);

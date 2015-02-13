@@ -71,30 +71,30 @@ public class GridIA {
 			l4+=grid[3][i].getValue();
 			if (grid[2][i] instanceof Flag){
 				if (i!=0){
-					if(grid[2][i-1] instanceof Bomb || grid[2][i-1] instanceof Marshal){
+					if (grid[2][i-1] instanceof Bomb || grid[2][i-1] instanceof Marshal){
 						valeur+=bonus;
 					}
 					if (i!=9){
-						if(grid[2][i+1] instanceof Bomb|| grid[2][i+1] instanceof Marshal){
+						if (grid[2][i+1] instanceof Bomb|| grid[2][i+1] instanceof Marshal){
 							valeur+=bonus;
 						}
 					}
-					if(grid[1][i] instanceof Bomb|| grid[1][i] instanceof Marshal){
+					if (grid[1][i] instanceof Bomb|| grid[1][i] instanceof Marshal){
 						valeur+=bonus;
 					}
 				}
 			}
 			if (grid[3][i] instanceof Flag){
 				if (i!=0){
-					if(grid[3][i-1] instanceof Bomb|| grid[3][i-1] instanceof Marshal){
+					if (grid[3][i-1] instanceof Bomb|| grid[3][i-1] instanceof Marshal){
 						valeur+=bonus;
 					}
 					if (i!=9){
-						if(grid[3][i+1] instanceof Bomb|| grid[3][i+1] instanceof Marshal){
+						if (grid[3][i+1] instanceof Bomb|| grid[3][i+1] instanceof Marshal){
 							valeur+=bonus;
 						}
 					}
-					if(grid[2][i] instanceof Bomb|| grid[2][i] instanceof Marshal){
+					if (grid[2][i] instanceof Bomb|| grid[2][i] instanceof Marshal){
 						valeur+=bonus;
 						}
 					}

@@ -13,7 +13,7 @@ public class Main {
 	public static void main(String[] args){ 
 //		Window fenetre = new Window();
 //		Grid test = new Grid(10);
-//		
+		
 //		Bomb p1 = new Bomb(2);
 //		Miner p2 = new Miner(1);
 //		Flag p1 = new Flag(2);

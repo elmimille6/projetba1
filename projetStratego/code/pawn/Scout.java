@@ -10,26 +10,7 @@ import main.Grid;
 public class Scout extends APawn {
 
 	/**
-	 * Constructor of the scout pawn.
-	 * 
-	 * @param team
-	 *    Team of the pawn, must be 1 or 2
-	 */
-	public Scout(int team) {
-		setLevelPawn(2);
-		setNamePawn("scout");
-		setTeam(team);
-		setValue(this.levelPawn * 10);
-		if(team==1){
-			setURI("/image/red/scout.png");
-		}
-		if(team==2){
-			setURI("/image/blue/scout.png");
-		}
-	}
-
-	/**
-	 * Constructor of the scout pawn.
+	 * Main Constructor of the scout pawn.
 	 */
 	public Scout() {
 		setLevelPawn(2);
@@ -38,19 +19,38 @@ public class Scout extends APawn {
 	}
 
 	/**
+	 * Constructor of the scout pawn.
+	 * 
+	 * @param team
+	 *    Team of the pawn, must be 1 or 2.
+	 */
+	public Scout(int team) {
+		setLevelPawn(2);
+		setNamePawn("scout");
+		setTeam(team);
+		setValue(this.levelPawn * 10);
+		if (team==1){
+			setURI("/image/red/scout.png");
+		}
+		if (team==2){
+			setURI("/image/blue/scout.png");
+		}
+	}
+
+	/**
 	 * Test if a move is possible.
 	 * 
 	 * @param grid
-	 *    The grid of the game
+	 *    The grid of the game.
 	 *    
 	 * @param x
-	 *    The abscissa of the object
+	 *    The abscissa of the object.
 	 *    
 	 * @param y
-	 *    The ordinate of the object
+	 *    The ordinate of the object.
 	 *    
 	 * @return
-	 *    The grid after the moving
+	 *    The grid after the moving.
 	 */
 	public boolean movePoss(Grid grid, int x, int y) {
 		APawn target = grid.get(x, y);
@@ -77,7 +77,6 @@ public class Scout extends APawn {
 					}
 				}
 			}
-
 		}
 		else if (y - this.posY != 0) { //check if the lane X is empty
 			for (int i = 1; i < Math.abs(y - this.posY); i++) {
@@ -92,7 +91,6 @@ public class Scout extends APawn {
 					}
 				}
 			}
-
 		}
 		return true;
 	}

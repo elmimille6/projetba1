@@ -10,7 +10,7 @@ import main.Grid;
 public class Lake extends APawn{
 
 	/**
-	 * Constructor of the lake pawn.
+	 * Main constructor of the lake pawn.
 	 */
 	public Lake(){
 		setLevelPawn(0);

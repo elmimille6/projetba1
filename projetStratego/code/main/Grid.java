@@ -1,7 +1,6 @@
 package main;
 
-import pawn.APawn;
-import pawn.Lake;
+import pawn.*;
 
 /**
 * Grid is the class that creates a "grid" object.
@@ -20,14 +19,14 @@ public class Grid {
 	public Grid(int size){
 		grid = new APawn[10][10];
 		APawn lake = new Lake();
-//		grid[4][2]= lake;
-//		grid[4][3]= lake;
-//		grid[5][2]= lake;
-//		grid[5][3]= lake;
-//		grid[4][6]= lake;
-//		grid[4][7]= lake;
-//		grid[5][6]= lake;
-//		grid[5][7]= lake;
+		grid[4][2]= lake;
+		grid[4][3]= lake;
+		grid[5][2]= lake;
+		grid[5][3]= lake;
+		grid[4][6]= lake;
+		grid[4][7]= lake;
+		grid[5][6]= lake;
+		grid[5][7]= lake;
 	}
 	
 	/**
@@ -107,5 +106,22 @@ public class Grid {
 	 */
 	public APawn get(int i, int j){
 		return grid[i][j];
+	}
+	
+	public void placeTeam(APawn[][] tgrid,int side){
+		if (side==1){
+			for (int i =0;i<tgrid.length;i++){
+				for (int j=0;j<tgrid[0].length;j++){
+					grid[6+i][0+j]=tgrid[i][j];
+				}
+			}
+		}
+		if (side==2){
+			for (int i =0;i<tgrid.length;i++){
+				for (int j=0;j<tgrid[0].length;j++){
+					grid[3-i][9-j]=tgrid[i][j];
+				}
+			}
+		}
 	}
 }

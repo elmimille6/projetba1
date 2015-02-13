@@ -26,6 +26,7 @@ public class Bomb extends APawn {
 		if(team==2){
 			setURI("/image/blue/bomb.png");
 		}
+//		setURI("/image/red/bomb.png");
 	}
 	
 	/**

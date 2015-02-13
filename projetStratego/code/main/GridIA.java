@@ -17,10 +17,10 @@ public class GridIA {
 	/**
 	 * Constructor of the grid for the IA.
 	 */
-	public GridIA() {
+	public GridIA(int team) {
 		int i=0;
 		while(val<17150){
-			APawn[][] gridEval= createGrid();
+			APawn[][] gridEval= createGrid( team);
 			int value = evalGrid(gridEval);
 			if (value > val){
 				grid = gridEval;
@@ -44,9 +44,9 @@ public class GridIA {
 		System.out.println(val);
 	}
 
-	public static APawn[][] createGrid(){
+	public static APawn[][] createGrid(int team){
 		APawn[][] grid = new APawn[4][10];
-		Vector<APawn> listPawn = APawn.createTeam();
+		Vector<APawn> listPawn = APawn.createTeam(team);
 		while (!listPawn.isEmpty()){
 			for (int i=0;i<4;i++){
 				for (int j=0;j<10;j++){
@@ -101,5 +101,9 @@ public class GridIA {
 			}
 		}
 		return valeur+l1+2*l2+4*l3+6*l4;
+	}
+	
+	public APawn[][] getGrid(){
+		return this.grid;
 	}
 }

@@ -98,45 +98,45 @@ public abstract class APawn{
 	 * @return
 	 *    The vector of 40 pawn
 	 */
-	public static Vector<APawn> createTeam(){
+	public static Vector<APawn> createTeam(int team){
 		Vector<APawn> listPawn = new Vector<APawn>();
 		
 		for (int i=0;i<6;i++){
-			listPawn.add(new Bomb());
+			listPawn.add(new Bomb(team));
 		}
 		
 		for (int i=0;i<8;i++){
-			listPawn.add(new Scout());
+			listPawn.add(new Scout(team));
 		}
 		
 		for (int i=0;i<5;i++){
-			listPawn.add(new Miner());
+			listPawn.add(new Miner(team));
 		}
 		
 		for (int i=0;i<4;i++){
-			listPawn.add(new Sergeant());
+			listPawn.add(new Sergeant(team));
 		}
 		
 		for (int i=0;i<4;i++){
-			listPawn.add(new Captain());
+			listPawn.add(new Captain(team));
 		}
 		
 		for (int i=0;i<4;i++){
-			listPawn.add(new Lieutenant());
+			listPawn.add(new Lieutenant(team));
 		}
 		
 		for (int i=0;i<3;i++){
-			listPawn.add(new Major());
+			listPawn.add(new Major(team));
 		}
 		
 		for (int i=0;i<2;i++){
-			listPawn.add(new Colonel());
+			listPawn.add(new Colonel(team));
 		}
 		
-		listPawn.add(new Spy());
-		listPawn.add(new Marshal());
-		listPawn.add(new General());
-		listPawn.add(new Flag());
+		listPawn.add(new Spy(team));
+		listPawn.add(new Marshal(team));
+		listPawn.add(new General(team));
+		listPawn.add(new Flag(team));
 		
 		return listPawn;
 	}
@@ -169,6 +169,14 @@ public abstract class APawn{
 	 */
 	public int getTeam(){
 		return this.team;
+	}
+	/**
+	 * get the URI of the pawn
+	 * @return
+	 *    The URI of the pawn
+	 */
+	public String getURI(){
+		return this.URI;
 	}
 	
 	/**

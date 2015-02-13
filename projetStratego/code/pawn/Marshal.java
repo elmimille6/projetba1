@@ -18,6 +18,12 @@ public class Marshal extends APawn {
 		setNamePawn("marshal");
 		setTeam(team);
 		setValue(this.levelPawn*10);
+		if(team==1){
+			setURI("/image/red/marshal.png");
+		}
+		if(team==2){
+			setURI("/image/blue/marshal.png");
+		}
 	}
 	
 	/**

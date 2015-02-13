@@ -20,6 +20,12 @@ public class Scout extends APawn {
 		setNamePawn("scout");
 		setTeam(team);
 		setValue(this.levelPawn * 10);
+		if(team==1){
+			setURI("/image/red/scout.png");
+		}
+		if(team==2){
+			setURI("/image/blue/scout.png");
+		}
 	}
 
 	/**

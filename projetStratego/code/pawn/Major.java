@@ -18,6 +18,12 @@ public class Major extends APawn {
 		setNamePawn("major");
 		setTeam(team);
 		setValue(this.levelPawn*10);
+		if(team==1){
+			setURI("/image/red/major.png");
+		}
+		if(team==2){
+			setURI("/image/blue/major.png");
+		}
 	}
 	
 	/**

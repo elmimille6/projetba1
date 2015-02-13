@@ -16,6 +16,7 @@ public class Lake extends APawn{
 		setLevelPawn(0);
 		setTeam(0);
 		setNamePawn("lake");
+		setURI("/image/lake.png");
 	}
 	
 	public boolean movePoss(Grid grid,int x, int y){

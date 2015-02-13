@@ -18,6 +18,12 @@ public class Sergeant extends APawn {
 		setNamePawn("sergeant");
 		setTeam(team);
 		setValue(this.levelPawn*10);
+		if(team==1){
+			setURI("/image/red/sergeant.png");
+		}
+		if(team==2){
+			setURI("/image/blue/sergeant.png");
+		}
 	}
 	
 	/**

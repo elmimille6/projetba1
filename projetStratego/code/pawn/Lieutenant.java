@@ -18,6 +18,12 @@ public class Lieutenant extends APawn {
 		setNamePawn("lieutenant");
 		setTeam(team);
 		setValue(this.levelPawn*10);
+		if(team==1){
+			setURI("/image/red/lieutenant.png");
+		}
+		if(team==2){
+			setURI("/image/blue/lieutenant.png");
+		}
 	}
 	
 	/**

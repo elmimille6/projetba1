@@ -20,6 +20,12 @@ public class Flag extends APawn {
 		setNamePawn("flag");
 		setTeam(team);
 		setValue(400);
+		if(team==1){
+			setURI("/image/red/flag.png");
+		}
+		if(team==2){
+			setURI("/image/blue/flag.png");
+		}
 	}
 	
 	/**

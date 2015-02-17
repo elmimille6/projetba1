@@ -9,6 +9,7 @@ import pawn.*;
 */
 public class Grid {
 	private APawn[][] grid; 
+	private int row,line;
 	
 	/**
 	 * Constructor of the grid.
@@ -17,7 +18,9 @@ public class Grid {
 	 *    Size of the grid.
 	 */
 	public Grid(int size){
-		grid = new APawn[10][10];
+		row=size;
+		line=size;
+		grid = new APawn[line][row];
 		APawn lake = new Lake();
 		grid[4][2]= lake;
 		grid[4][3]= lake;
@@ -123,5 +126,11 @@ public class Grid {
 				}
 			}
 		}
+	}
+	public int getRow(){
+		return row;
+	}
+	public int getLine(){
+		return line;
 	}
 }

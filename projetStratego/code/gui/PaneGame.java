@@ -16,11 +16,13 @@ public class PaneGame extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public Image img, imgX, imgBack, imgOOO;
+	public Image img, imgBack;
 	public Grid grid;
+	public int[][] arrow;
 
 	public PaneGame(Grid grid) {
 		this.grid = grid;
+		
 		
 		try {
 			java.net.URL urlBack = getClass().getResource("/image/back.jpg");
@@ -40,8 +42,8 @@ public class PaneGame extends JPanel {
 	public void paintComponent(Graphics g) {
 
 		// dessine le quadrillage
-		int nbrLigne = 10;
-		int nbrCol = 10;
+		int nbrLigne = grid.getLine();
+		int nbrCol = grid.getRow();
 
 		g.drawImage(imgBack, 0, 0, this.getWidth(), this.getHeight(), this);
 
@@ -75,9 +77,12 @@ public class PaneGame extends JPanel {
 				}
 			}
 		}
+		
 
 	}
-
+	public void recupArrow(int[][] nouvArrow){
+		arrow=nouvArrow;
+	}
 	public void recupGrid(Grid nouvGrid) {
 		grid = nouvGrid;
 	}

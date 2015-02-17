@@ -41,12 +41,12 @@ public class WinGame extends JFrame {
 		pane = new PaneGame(grid);
 		pane.setLayout(new BorderLayout());
 		this.setSize(700, 700);
-		//		grid = jeu.recupGrid();
-		//		nbrPlayer = jeu.nbrPlayer();
-		//		pane.recupGrid(grid);
-		//		pane.recupGame(jeu);
-		//		this.setResizable(true);
-		//		typeGame = jeu.recupeType();
+		// grid = jeu.recupGrid();
+		// nbrPlayer = jeu.nbrPlayer();
+		// pane.recupGrid(grid);
+		// pane.recupGame(jeu);
+		// this.setResizable(true);
+		// typeGame = jeu.recupeType();
 		this.setContentPane(pane);
 		this.setVisible(true);
 		this.addMouseListener(new MouseAdapter() {
@@ -55,22 +55,22 @@ public class WinGame extends JFrame {
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					posX = e.getX();
 					posY = e.getY();
-					int[] res=getRes(posX,posY);
+					int[] res = getRes(posX, posY);
 					int line = res[0];
 					int row = res[1];
-					focus(line,row);
-					
-					
-					
-				}}
+					focus(line, row);
+
+				}
+			}
 		});
-		}
-	
+	}
+
 	public int[] getRes(int posX, int posY) {
 
 		int[] res = { 0, 0 };
 		for (int i = 1; i <= grid.getLine(); i++) {
-			if (posY > (this.getHeight() / grid.getLine()) * (i - 1) && posY < (this.getHeight() / grid.getLine()) * i) {
+			if (posY > (this.getHeight() / grid.getLine()) * (i - 1)
+					&& posY < (this.getHeight() / grid.getLine()) * i) {
 				res[0] = i - 1;
 			}
 		}
@@ -83,21 +83,57 @@ public class WinGame extends JFrame {
 
 		return res;
 	}
-	//TODO a finir
-	public void focus(int line,int row){
-		int[][] arrow=new int[4][2];
+
+	public void focus(int line, int row) {
+		int[][] arrow = new int[4][2];
 		focus = grid.get(line, row);
-		if(line!=grid.getLine()-1){//verifie si mouvement vers le bas possible
-			if (focus.movePoss(grid, line+1, row)){
-				arrow[0][0]=line+1;
-				arrow[0][1]= row;
+		if (line != grid.getLine()) {// check down move
+			if (focus.movePoss(grid, line + 1, row)) {
+				arrow[2][0] = line + 1;
+				arrow[2][1] = row;
+			} else {
+				arrow[2][0] = -1;
+				arrow[2][1] = -1;
 			}
+		} else {
+			arrow[2][0] = -1;
+			arrow[2][1] = -1;
 		}
-		if(line!=0){//verifie si mouvement vers la droite possible
-			if (focus.movePoss(grid, line, row+1)){
-				arrow[0][0]=line;
-				arrow[0][1]= row+1;
+		if (row != grid.getRow()) {// check right move
+			if (focus.movePoss(grid, line, row + 1)) {
+				arrow[1][0] = line;
+				arrow[1][1] = row + 1;
+			} else {
+				arrow[1][0] = -1;
+				arrow[1][1] = -1;
 			}
+		} else {
+			arrow[1][0] = -1;
+			arrow[1][1] = -1;
+		}
+		if (line != 0) {// check up move
+			if (focus.movePoss(grid, line + 1, row)) {
+				arrow[0][0] = line + 1;
+				arrow[0][1] = row;
+			} else {
+				arrow[0][0] = -1;
+				arrow[0][1] = -1;
+			}
+		} else {
+			arrow[0][0] = -1;
+			arrow[0][1] = -1;
+		}
+		if (row != 0) {// check left move
+			if (focus.movePoss(grid, line, row - 1)) {
+				arrow[3][0] = line;
+				arrow[3][1] = row - 1;
+			} else {
+				arrow[3][0] = -1;
+				arrow[3][1] = -1;
+			}
+		} else {
+			arrow[0][0] = -1;
+			arrow[0][1] = -1;
 		}
 	}
 }

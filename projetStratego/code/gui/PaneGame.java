@@ -18,7 +18,7 @@ public class PaneGame extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public Image img, imgBack;
 	public Grid grid;
-	public int[][] arrow;
+	public int[][] arrow={{-1,-1},{-1,-1},{-1,-1},{-1,-1}};
 
 	public PaneGame(Grid grid) {
 		this.grid = grid;
@@ -77,6 +77,7 @@ public class PaneGame extends JPanel {
 				}
 			}
 		}
+		//TODO draw arrow
 		
 
 	}

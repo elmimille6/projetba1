@@ -193,28 +193,28 @@ public abstract class APawn{
 	 *    The ordinate of the object.
 	 *    
 	 * @return
-	 *    The grid after the move.
+	 *    true or false
 	 */
 	public boolean movePoss(Grid grid, int x, int y){
 		APawn target = grid.get(x, y); 
 		if (target instanceof Lake){ //test if the target isn't a lake
 			return false;
 		}
-		else if (target instanceof APawn){ //test if the target isn't a pawn of the same team
+		if (target instanceof APawn){ //test if the target isn't a pawn of the same team
 			if (target.getTeam()==this.team){
 				return false;
 			}
 		}
-		else if (x-this.posX!=1 && x-this.posX!=-1 ){ //test if the move is not too long
+		if (x-this.posX!=1 && x-this.posX!=-1 ){ //test if the move is not too long
 			return false;
 		}
-		else if (y-this.posY!=1 && y-this.posY!=-1){ //test if the move is not too long
+		if (y-this.posY!=1 && y-this.posY!=-1){ //test if the move is not too long
 			return false;
 		}
-		else if (x-this.posX!=0 && y-this.posY!=0){ //test if the move is in the same lane
+		if (x-this.posX!=0 && y-this.posY!=0){ //test if the move is in the same lane
 			return false;
 		}
-		else if (y-this.posY==0 && x-this.posX==0){ //test if the pawn isn't already on the target
+		if (y-this.posY==0 && x-this.posX==0){ //test if the pawn isn't already on the target
 			return false;
 		}
 		return true;

@@ -18,7 +18,7 @@ public class PaneGame extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public Image img, imgBack;
 	public Grid grid;
-	public int[][] arrow={{-1,-1},{-1,-1},{-1,-1},{-1,-1}};
+	public int[][] arrow={{-1,-1},{-1,-1},{-1,-1},{-1,-1},{-1,-1}};
 
 	public PaneGame(Grid grid) {
 		this.grid = grid;
@@ -78,6 +78,48 @@ public class PaneGame extends JPanel {
 			}
 		}
 		//TODO draw arrow
+		int row = arrow[4][0];
+		int line = arrow[4][0];
+		if(arrow[0][0]!=-1){
+			String linkUp = "image/up.png";
+			java.net.URL uriUp = getClass().getResource(linkUp);
+			try {
+				img = ImageIO.read(uriUp);
+			} catch (IOException e) {
+				e.printStackTrace();}
+			g.drawImage(img, (row * (this.getWidth() / nbrCol)) + 10,
+					(line-1 * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
+		}
+		if(arrow[1][0]!=-1){
+			String linkR = "image/right.png";
+			java.net.URL uriR = getClass().getResource(linkR);
+			try {
+				img = ImageIO.read(uriR);
+			} catch (IOException e) {
+				e.printStackTrace();}
+			g.drawImage(img, (row +1* (this.getWidth() / nbrCol)) + 10,
+					(line * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
+		}
+		if(arrow[2][0]!=-1){
+			String linkD = "image/down.png";
+			java.net.URL uriD = getClass().getResource(linkD);
+			try {
+				img = ImageIO.read(uriD);
+			} catch (IOException e) {
+				e.printStackTrace();}
+			g.drawImage(img, (row * (this.getWidth() / nbrCol)) + 10,
+					(line+1 * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
+			}
+			if(arrow[2][0]!=-1){
+				String linkL = "image/left.png";
+				java.net.URL uriL = getClass().getResource(linkL);
+				try {
+					img = ImageIO.read(uriL);
+				} catch (IOException e) {
+					e.printStackTrace();}
+				g.drawImage(img, (row * (this.getWidth() / nbrCol)) + 10,
+						(line+1 * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
+				}
 		
 
 	}

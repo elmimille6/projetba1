@@ -128,9 +128,9 @@ public class Grid {
 		}
 	}
 	public int getRow(){
-		return row;
+		return row-1;
 	}
 	public int getLine(){
-		return line;
+		return line-1;
 	}
 }

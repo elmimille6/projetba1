@@ -116,6 +116,7 @@ public class Grid {
 			for (int i =0;i<tgrid.length;i++){
 				for (int j=0;j<tgrid[0].length;j++){
 					grid[6+i][0+j]=tgrid[i][j];
+					tgrid[i][j].setPos(6+i, 0+j);
 				}
 			}
 		}
@@ -123,6 +124,7 @@ public class Grid {
 			for (int i =0;i<tgrid.length;i++){
 				for (int j=0;j<tgrid[0].length;j++){
 					grid[3-i][9-j]=tgrid[i][j];
+					tgrid[i][j].setPos(3-i, 9-j);
 				}
 			}
 		}

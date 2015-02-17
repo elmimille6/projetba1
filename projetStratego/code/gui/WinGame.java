@@ -89,7 +89,7 @@ public class WinGame extends JFrame {
 
 	public void focus(int line, int row) { //TODO check movePoss
 		focus = grid.get(line, row);
-		System.out.println(focus.movePoss(grid, line - 1, row));
+		System.out.println(focus.posX);
 		arrow[4][0] = line;
 		arrow[4][1] = row;
 		if (line != grid.getLine()) {// check down move
@@ -148,10 +148,10 @@ public class WinGame extends JFrame {
 			arrow[0][0] = -1;
 			arrow[0][1] = -1;
 		}
-		for (int i =0;i<5;i++){
-			for(int j = 0;j<2;j++){
-				System.out.println(arrow[i][j]);
-			}
-		}
+//		for (int i =0;i<5;i++){
+//			for(int j = 0;j<2;j++){
+//				System.out.println(arrow[i][j]);
+//			}
+//		}
 	}
 }

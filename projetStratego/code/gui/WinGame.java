@@ -49,7 +49,6 @@ public class WinGame extends JFrame {
 		// pane.recupGrid(grid);
 		// pane.recupGame(jeu);
 		// this.setResizable(true);
-		// typeGame = jeu.recupeType();
 		this.setContentPane(pane);
 		this.setVisible(true);
 		this.addMouseListener(new MouseAdapter() {

@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import main.Grid;
 import main.GridIA;
 import pawn.APawn;
+import pawn.Marshal;
 
 /**
  * 
@@ -25,6 +26,7 @@ public class WinGame extends JFrame {
 	public Grid grid;
 	public APawn focus;
 	public int[][] arrow={{-1,-1},{-1,-1},{-1,-1},{-1,-1},{-1,-1}};
+	public final int[][] arrowN={{-1,-1},{-1,-1},{-1,-1},{-1,-1},{-1,-1}};
 
 	/**
 	 * 
@@ -59,11 +61,25 @@ public class WinGame extends JFrame {
 					int[] res = getRes(posX, posY);
 					int line = res[0];
 					int row = res[1];
-					focus(line, row);
-					pane.recupArrow(arrow);
-					repaint();
-
+					APawn pawn = grid.get(line, row);
+					if (focus != null) {
+						if (focus.movePoss(grid, line, row)) {
+							grid = focus.move(grid, line, row);
+							focus = null;
+							pane.recupArrow(arrowN);	
+						}
+					}
+					if (pawn != null) {
+						focus(line, row);
+						pane.recupArrow(arrow);
+						repaint();
+					} else {
+						pane.recupArrow(arrowN);
+						focus = null;
+						repaint();
+					}
 				}
+				repaint();
 			}
 		});
 	}
@@ -71,15 +87,15 @@ public class WinGame extends JFrame {
 	public int[] getRes(int posX, int posY) {
 
 		int[] res = { 0, 0 };
-		for (int i = 1; i <= grid.getLine(); i++) {
-			if (posY > (this.getHeight() / grid.getLine()) * (i - 1)
-					&& posY < (this.getHeight() / grid.getLine()) * i) {
+		for (int i = 1; i <= grid.getLine()+1; i++) {
+			if (posY > (this.getHeight() / (grid.getLine()+1)) * (i - 1)
+					&& posY < (this.getHeight() / (grid.getLine()+1)) * i) {
 				res[0] = i - 1;
 			}
 		}
-		for (int j = 1; j <= grid.getRow(); j++) {
-			if (posX > (this.getWidth() / grid.getRow()) * (j - 1)
-					&& posX < (this.getWidth() / grid.getRow()) * j) {
+		for (int j = 1; j <= grid.getRow()+1; j++) {
+			if (posX > (this.getWidth() / (grid.getRow()+1)) * (j - 1)
+					&& posX < (this.getWidth() /( grid.getRow()+1)) * j) {
 				res[1] = j - 1;
 			}
 		}
@@ -89,7 +105,7 @@ public class WinGame extends JFrame {
 
 	public void focus(int line, int row) { //TODO check movePoss
 		focus = grid.get(line, row);
-		System.out.println(focus.posX);
+//		System.out.println(focus);
 		arrow[4][0] = line;
 		arrow[4][1] = row;
 		if (line != grid.getLine()) {// check down move
@@ -107,11 +123,11 @@ public class WinGame extends JFrame {
 			arrow[2][1] = -1;
 		}
 		if (row != grid.getRow()) {// check right move
-//			System.out.println("R");
+			System.out.println("R");
 			if (focus.movePoss(grid, line, row + 1)) {
 				arrow[1][0] = line;
 				arrow[1][1] = row + 1;
-//				System.out.println("ok");
+				System.out.println("ok");
 			} else {
 				arrow[1][0] = -1;
 				arrow[1][1] = -1;
@@ -121,11 +137,11 @@ public class WinGame extends JFrame {
 			arrow[1][1] = -1;
 		}
 		if (line != 0) {// check up move
-			System.out.println("U");
+//			System.out.println("U");
 			if (focus.movePoss(grid, line - 1, row)) {
 				arrow[0][0] = line- 1;
 				arrow[0][1] = row;
-				System.out.println("ok");
+//				System.out.println("ok");
 			} else {
 				arrow[0][0] = -1;
 				arrow[0][1] = -1;
@@ -135,11 +151,11 @@ public class WinGame extends JFrame {
 			arrow[0][1] = -1;
 		}
 		if (row != 0) {// check left move
-//			System.out.println("L");
+			System.out.println("L");
 			if (focus.movePoss(grid, line, row - 1)) {
 				arrow[3][0] = line;
 				arrow[3][1] = row - 1;
-//				System.out.println("ok");
+				System.out.println("ok");
 			} else {
 				arrow[3][0] = -1;
 				arrow[3][1] = -1;
@@ -148,10 +164,10 @@ public class WinGame extends JFrame {
 			arrow[3][0] = -1;
 			arrow[3][1] = -1;
 		}
-//		for (int i =0;i<5;i++){
-//			for(int j = 0;j<2;j++){
-//				System.out.println(arrow[i][j]);
-//			}
-//		}
+		for (int i =0;i<5;i++){
+			for(int j = 0;j<2;j++){
+				System.out.println(arrow[i][j]);
+			}
+		}
 	}
 }

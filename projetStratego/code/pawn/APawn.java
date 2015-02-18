@@ -198,29 +198,29 @@ public abstract class APawn{
 	public boolean movePoss(Grid grid, int x, int y){
 		APawn target = grid.get(x, y); 
 		if (target instanceof Lake){ //test if the target isn't a lake
-			System.out.println(1);
+//			System.out.println(1);
 			return false;
 		}
 		if (target instanceof APawn){ //test if the target isn't a pawn of the same team
 			if (target.getTeam()==this.team){
-				System.out.println(2);
+//				System.out.println(2);
 				return false;
 			}
 		}
 		if (x-this.posX!=1 && x-this.posX!=-1 ){ //test if the move is not too long
-			System.out.println(3);
+//			System.out.println(3);
 			return false;
 		}
-		if (y-this.posY!=1 && y-this.posY!=-1){ //test if the move is not too long
-			System.out.println(4);
+		if (y-this.posY>=1 && y-this.posY<=-1){ //test if the move is not too long
+//			System.out.println(4);
 			return false;
 		}
 		if (x-this.posX!=0 && y-this.posY!=0){ //test if the move is in the same lane
-			System.out.println(5);
+//			System.out.println(5);
 			return false;
 		}
 		if (y-this.posY==0 && x-this.posX==0){ //test if the pawn isn't already on the target
-			System.out.println(6);
+//			System.out.println(6);
 			return false;
 		}
 		return true;

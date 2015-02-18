@@ -19,7 +19,7 @@ public class GridIA {
 	 */
 	public GridIA(int team) {
 		int i=0;
-		while(val<17150){
+		while(val<17000){
 			APawn[][] gridEval= createGrid( team);
 			int value = evalGrid(gridEval);
 			if (value > val){

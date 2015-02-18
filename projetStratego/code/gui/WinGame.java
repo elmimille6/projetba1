@@ -93,11 +93,11 @@ public class WinGame extends JFrame {
 		arrow[4][0] = line;
 		arrow[4][1] = row;
 		if (line != grid.getLine()) {// check down move
-			System.out.println("D");
+//			System.out.println("D");
 			if (focus.movePoss(grid, line + 1, row)) {
 				arrow[2][0] = line + 1;
 				arrow[2][1] = row;
-				System.out.println("ok");
+//				System.out.println("ok");
 			} else {
 				arrow[2][0] = -1;
 				arrow[2][1] = -1;
@@ -107,11 +107,11 @@ public class WinGame extends JFrame {
 			arrow[2][1] = -1;
 		}
 		if (row != grid.getRow()) {// check right move
-			System.out.println("R");
+//			System.out.println("R");
 			if (focus.movePoss(grid, line, row + 1)) {
 				arrow[1][0] = line;
 				arrow[1][1] = row + 1;
-				System.out.println("ok");
+//				System.out.println("ok");
 			} else {
 				arrow[1][0] = -1;
 				arrow[1][1] = -1;
@@ -123,7 +123,7 @@ public class WinGame extends JFrame {
 		if (line != 0) {// check up move
 			System.out.println("U");
 			if (focus.movePoss(grid, line - 1, row)) {
-				arrow[0][0] = line + 1;
+				arrow[0][0] = line- 1;
 				arrow[0][1] = row;
 				System.out.println("ok");
 			} else {
@@ -135,18 +135,18 @@ public class WinGame extends JFrame {
 			arrow[0][1] = -1;
 		}
 		if (row != 0) {// check left move
-			System.out.println("L");
+//			System.out.println("L");
 			if (focus.movePoss(grid, line, row - 1)) {
 				arrow[3][0] = line;
 				arrow[3][1] = row - 1;
-				System.out.println("ok");
+//				System.out.println("ok");
 			} else {
 				arrow[3][0] = -1;
 				arrow[3][1] = -1;
 			}
 		} else {
-			arrow[0][0] = -1;
-			arrow[0][1] = -1;
+			arrow[3][0] = -1;
+			arrow[3][1] = -1;
 		}
 //		for (int i =0;i<5;i++){
 //			for(int j = 0;j<2;j++){

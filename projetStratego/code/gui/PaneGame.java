@@ -42,25 +42,27 @@ public class PaneGame extends JPanel {
 	public void paintComponent(Graphics g) {
 
 		// dessine le quadrillage
-		int nbrLigne = grid.getLine();
-		int nbrCol = grid.getRow();
-
+		int nbrLigne = grid.getLine()+1;
+		int nbrCol = grid.getRow()+1;
+		
+		System.out.println(nbrLigne+" ligne");
+		System.out.println(nbrCol+" col");
 		g.drawImage(imgBack, 0, 0, this.getWidth(), this.getHeight(), this);
 
-		for (int lig = 1; lig <= nbrCol - 1; lig++) {
+		for (int lig = 1; lig < nbrCol; lig++) {
 			g.drawLine((this.getWidth() / nbrCol) * lig, 0,
 					(this.getWidth() / nbrCol) * lig, this.getHeight());
 		}
-		for (int lig = 1; lig <= nbrLigne - 1; lig++) {
-			g.drawLine(0, (this.getHeight() / nbrLigne) * lig, this.getWidth(),
-					(this.getHeight() / nbrLigne) * lig);
+		for (int lig = 1; lig <= nbrLigne ; lig++) {
+			g.drawLine(0, (this.getHeight() / nbrLigne+1) * lig, this.getWidth(),
+					(this.getHeight() / nbrLigne+1) * lig);
 		}
 
 		// dessine les images des pions selon la grid
 		int i;
 		int j;
-		for (i = 0; i <= (nbrLigne - 1); i++) {
-			for (j = 0; j <= (nbrCol - 1); j++) {
+		for (i = 0; i < (nbrLigne); i++) {
+			for (j = 0; j < (nbrCol ); j++) {
 				if (grid.get(i, j) != null) {
 					APawn pawn = grid.get(i, j);
 					String link = pawn.getURI();
@@ -72,53 +74,56 @@ public class PaneGame extends JPanel {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					g.drawImage(img, (j * (this.getWidth() / nbrCol)) + 10,
-							(i * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
+					g.drawImage(img, (j * (this.getWidth() / (nbrCol))) + 10,
+							(i * (this.getHeight() / (nbrLigne))) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
 				}
 			}
 		}
 		//TODO draw arrow
-		int row = arrow[4][0];
 		int line = arrow[4][0];
+		int row = arrow[4][1];
+		System.out.println(row);
+		System.out.println(line);
 		if(arrow[0][0]!=-1){
-			String linkUp = "image/up.png";
+			String linkUp = "/image/up.png";
 			java.net.URL uriUp = getClass().getResource(linkUp);
 			try {
 				img = ImageIO.read(uriUp);
 			} catch (IOException e) {
 				e.printStackTrace();}
 			g.drawImage(img, (row * (this.getWidth() / nbrCol)) + 10,
-					(line-1 * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
+					((line-1) * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
+			System.out.println("dessin");
 		}
 		if(arrow[1][0]!=-1){
-			String linkR = "image/right.png";
+			String linkR = "/image/right.png";
 			java.net.URL uriR = getClass().getResource(linkR);
 			try {
 				img = ImageIO.read(uriR);
 			} catch (IOException e) {
 				e.printStackTrace();}
-			g.drawImage(img, (row +1* (this.getWidth() / nbrCol)) + 10,
+			g.drawImage(img, ((row +1)* (this.getWidth() / nbrCol)) + 10,
 					(line * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
 		}
 		if(arrow[2][0]!=-1){
-			String linkD = "image/down.png";
+			String linkD = "/image/down.png";
 			java.net.URL uriD = getClass().getResource(linkD);
 			try {
 				img = ImageIO.read(uriD);
 			} catch (IOException e) {
 				e.printStackTrace();}
-			g.drawImage(img, (row * (this.getWidth() / nbrCol)) + 10,
-					(line+1 * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
+			g.drawImage(img, ( row* (this.getWidth() / nbrCol)) + 10,
+					((line+1) * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
 			}
-			if(arrow[2][0]!=-1){
-				String linkL = "image/left.png";
+			if(arrow[3][0]!=-1){
+				String linkL = "/image/left.png";
 				java.net.URL uriL = getClass().getResource(linkL);
 				try {
 					img = ImageIO.read(uriL);
 				} catch (IOException e) {
 					e.printStackTrace();}
-				g.drawImage(img, (row * (this.getWidth() / nbrCol)) + 10,
-						(line+1 * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
+				g.drawImage(img, ((row-1) * (this.getWidth() / nbrCol)) + 10,
+						(line * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
 				}
 		
 

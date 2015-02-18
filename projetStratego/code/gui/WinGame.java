@@ -66,7 +66,7 @@ public class WinGame extends JFrame {
 						if (focus.movePoss(grid, line, row)) {
 							grid = focus.move(grid, line, row);
 							focus = null;
-							pane.recupArrow(arrowN);	
+							pane.recupArrow(arrowN);
 						}
 					}
 					if (pawn != null) {

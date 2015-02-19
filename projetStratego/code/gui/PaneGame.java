@@ -18,7 +18,7 @@ public class PaneGame extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public Image img, imgBack;
 	public Grid grid;
-	public int[][] arrow={{-1,-1},{-1,-1},{-1,-1},{-1,-1},{-1,-1}};
+	public int[] arrow={-1,-1,-1,-1,-1,-1};
 
 	public PaneGame(Grid grid) {
 		this.grid = grid;
@@ -80,11 +80,11 @@ public class PaneGame extends JPanel {
 			}
 		}
 		//TODO draw arrow
-		int line = arrow[4][0];
-		int row = arrow[4][1];
+		int line = arrow[4];
+		int row = arrow[5];
 //		System.out.println(row);
-//		System.out.println(line);
-		if(arrow[0][0]!=-1){
+//		System.out.println(arrow[0]+" ICI");
+		if(arrow[0]!=-1){
 			String linkUp = "/image/up.png";
 			java.net.URL uriUp = getClass().getResource(linkUp);
 			try {
@@ -92,20 +92,20 @@ public class PaneGame extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();}
 			g.drawImage(img, (row * (this.getWidth() / nbrCol)) + 10,
-					((line-1) * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
+					((line-arrow[0]) * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
 //			System.out.println("dessin");
 		}
-		if(arrow[1][0]!=-1){
+		if(arrow[1]!=-1){
 			String linkR = "/image/right.png";
 			java.net.URL uriR = getClass().getResource(linkR);
 			try {
 				img = ImageIO.read(uriR);
 			} catch (IOException e) {
 				e.printStackTrace();}
-			g.drawImage(img, ((row +1)* (this.getWidth() / nbrCol)) + 10,
+			g.drawImage(img, ((row +arrow[1])* (this.getWidth() / nbrCol)) + 10,
 					(line * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
 		}
-		if(arrow[2][0]!=-1){
+		if(arrow[2]!=-1){
 			String linkD = "/image/down.png";
 			java.net.URL uriD = getClass().getResource(linkD);
 			try {
@@ -113,24 +113,32 @@ public class PaneGame extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();}
 			g.drawImage(img, ( row* (this.getWidth() / nbrCol)) + 10,
-					((line+1) * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
+					((line+arrow[2]) * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
 			}
-			if(arrow[3][0]!=-1){
+			if(arrow[3]!=-1){
 				String linkL = "/image/left.png";
 				java.net.URL uriL = getClass().getResource(linkL);
 				try {
 					img = ImageIO.read(uriL);
 				} catch (IOException e) {
 					e.printStackTrace();}
-				g.drawImage(img, ((row-1) * (this.getWidth() / nbrCol)) + 10,
+				g.drawImage(img, ((row-arrow[3]) * (this.getWidth() / nbrCol)) + 10,
 						(line * (this.getHeight() / nbrLigne)) + 10,this.getWidth() / nbrCol - 20, this.getHeight()/ nbrLigne - 20, this);
 				}
 		
 
 	}
-	public void recupArrow(int[][] nouvArrow){
+	/**
+	 * get the array 'nouvArrow' and store it into 'arrow'
+	 * @param nouvArrow the new array 'arrow'
+	 */
+	public void recupArrow(int[] nouvArrow){
 		arrow=nouvArrow;
 	}
+	/**
+	 * 
+	 * @param nouvGrid
+	 */
 	public void recupGrid(Grid nouvGrid) {
 		grid = nouvGrid;
 	}

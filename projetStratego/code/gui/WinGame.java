@@ -25,12 +25,12 @@ public class WinGame extends JFrame {
 	public int posX, posY;
 	public Grid grid;
 	public APawn focus;
-	public int[][] arrow={{-1,-1},{-1,-1},{-1,-1},{-1,-1},{-1,-1}};
-	public final int[][] arrowN={{-1,-1},{-1,-1},{-1,-1},{-1,-1},{-1,-1}};
+	public int[] arrow={-1,-1,-1,-1,-1,-1};
+	public final int[] arrowN={-1,-1,-1,-1,-1,-1};
+	public boolean att=false;
 
 	/**
 	 * 
-	 * @param jeuGive
 	 */
 	@SuppressWarnings("static-access")
 	public WinGame() {
@@ -44,11 +44,7 @@ public class WinGame extends JFrame {
 		pane = new PaneGame(grid);
 		pane.setLayout(new BorderLayout());
 		this.setSize(700, 700);
-		// grid = jeu.recupGrid();
-		// nbrPlayer = jeu.nbrPlayer();
-		// pane.recupGrid(grid);
-		// pane.recupGame(jeu);
-		// this.setResizable(true);
+		this.setResizable(true);
 		this.setContentPane(pane);
 		this.setVisible(true);
 		this.addMouseListener(new MouseAdapter() {
@@ -66,10 +62,11 @@ public class WinGame extends JFrame {
 							grid = focus.move(grid, line, row);
 							focus = null;
 							pane.recupArrow(arrowN);
+							att = true;
 						}
 					}
-					if (pawn != null) {
-						focus(line, row);
+					if (pawn != null && !att) {
+						arrow = pawn.focus(grid);
 						pane.recupArrow(arrow);
 						repaint();
 					} else {
@@ -78,11 +75,18 @@ public class WinGame extends JFrame {
 						repaint();
 					}
 				}
+				att = false;
 				repaint();
 			}
 		});
 	}
 
+	/**
+	 * transform the coord of the cursor into coord of the grid
+	 * @param posX x coord of the cursor
+	 * @param posY y coord of the cursor
+	 * @return an array with x coord and y coord in the grid
+	 */
 	public int[] getRes(int posX, int posY) {
 
 		int[] res = { 0, 0 };
@@ -102,71 +106,5 @@ public class WinGame extends JFrame {
 		return res;
 	}
 
-	public void focus(int line, int row) { //TODO check movePoss
-		focus = grid.get(line, row);
-//		System.out.println(focus);
-		arrow[4][0] = line;
-		arrow[4][1] = row;
-		if (line != grid.getLine()) {// check down move
-//			System.out.println("D");
-			if (focus.movePoss(grid, line + 1, row)) {
-				arrow[2][0] = line + 1;
-				arrow[2][1] = row;
-//				System.out.println("ok");
-			} else {
-				arrow[2][0] = -1;
-				arrow[2][1] = -1;
-			}
-		} else {
-			arrow[2][0] = -1;
-			arrow[2][1] = -1;
-		}
-		if (row != grid.getRow()) {// check right move
-			System.out.println("R");
-			if (focus.movePoss(grid, line, row + 1)) {
-				arrow[1][0] = line;
-				arrow[1][1] = row + 1;
-				System.out.println("ok");
-			} else {
-				arrow[1][0] = -1;
-				arrow[1][1] = -1;
-			}
-		} else {
-			arrow[1][0] = -1;
-			arrow[1][1] = -1;
-		}
-		if (line != 0) {// check up move
-//			System.out.println("U");
-			if (focus.movePoss(grid, line - 1, row)) {
-				arrow[0][0] = line- 1;
-				arrow[0][1] = row;
-//				System.out.println("ok");
-			} else {
-				arrow[0][0] = -1;
-				arrow[0][1] = -1;
-			}
-		} else {
-			arrow[0][0] = -1;
-			arrow[0][1] = -1;
-		}
-		if (row != 0) {// check left move
-			System.out.println("L");
-			if (focus.movePoss(grid, line, row - 1)) {
-				arrow[3][0] = line;
-				arrow[3][1] = row - 1;
-				System.out.println("ok");
-			} else {
-				arrow[3][0] = -1;
-				arrow[3][1] = -1;
-			}
-		} else {
-			arrow[3][0] = -1;
-			arrow[3][1] = -1;
-		}
-		for (int i =0;i<5;i++){
-			for(int j = 0;j<2;j++){
-				System.out.println(arrow[i][j]);
-			}
-		}
-	}
+	
 }

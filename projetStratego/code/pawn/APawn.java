@@ -287,4 +287,62 @@ public abstract class APawn{
 			System.out.println("Victory !");
 		return grid;
 	}
+	/**
+	 * focus a pawn and check if move is available for him, store the result into the array 'arrow'
+	 * @param line coord of the pawn
+	 * @param row coord of the pawn
+	 */
+	public int[] focus(Grid grid) { 
+		int[] arrow={-1,-1,-1,-1,posX,posY};
+//		System.out.println(focus);
+		if (posX != grid.getLine()) {// check down move
+//			System.out.println("D");
+			if (this.movePoss(grid, posX + 1, posY)) {
+				arrow[2] = 1;
+//				System.out.println("ok");
+			} else {
+				arrow[2] = -1;
+			}
+		} else {
+			arrow[2] = -1;
+			
+		}
+		if (posY != grid.getRow()) {// check right move
+			System.out.println("R");
+			if (this.movePoss(grid, posX, posY + 1)) {
+				arrow[1] = 1;
+				System.out.println("ok");
+			} else {
+				arrow[1] = -1;
+			}
+		} else {
+			arrow[1] = -1;
+		}
+		if (posX != 0) {// check up move
+//			System.out.println("U");
+			if (this.movePoss(grid, posX - 1, posY)) {
+				arrow[0] = 1;
+//				System.out.println("ok");
+			} else {
+				arrow[0] = -1;
+			}
+		} else {
+			arrow[0] = -1;
+		}
+		if (posY != 0) {// check left move
+			System.out.println("L");
+			if (this.movePoss(grid, posX, posY - 1)) {
+				arrow[3] = 1;
+				System.out.println("ok");
+			} else {
+				arrow[3] = -1;
+			}
+		} else {
+			arrow[3] = -1;
+		}
+		for (int i =0;i<arrow.length;i++){
+				System.out.print(arrow[i]+"    ");
+		}
+		return arrow;
+	}
 }

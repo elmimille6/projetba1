@@ -19,6 +19,21 @@ public class Lake extends APawn{
 		setURI("/image/lake2.png");
 	}
 	
+	/**
+	 * Tells that the lakes can't move.
+	 * 
+	 * @param grid
+	 *    The grid of the game.
+	 *    
+	 * @param x
+	 *    The abscissa of the 'lake' pawn.
+	 *    
+	 * @param y
+	 *    The ordinate of the 'lake' pawn.
+	 *    
+	 * @return
+	 *    False
+	 */
 	public boolean movePoss(Grid grid,int x, int y){
 		return false;
 	}

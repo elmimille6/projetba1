@@ -1,5 +1,4 @@
 package gui;
-
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -11,6 +10,11 @@ import javax.swing.JPanel;
 import main.Grid;
 import pawn.APawn;
 
+/**
+ * This class
+ *
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
+ */
 public class PaneGame extends JPanel {
 	/**
 	 * 
@@ -128,16 +132,22 @@ public class PaneGame extends JPanel {
 		
 
 	}
+	
 	/**
-	 * get the array 'nouvArrow' and store it into 'arrow'
-	 * @param nouvArrow the new array 'arrow'
+	 * Gets the array 'nouvArrow' and store it into 'arrow'.
+	 * 
+	 * @param nouvArrow
+	 *    The new array 'arrow'.
 	 */
 	public void recupArrow(int[] nouvArrow){
 		arrow=nouvArrow;
 	}
+	
 	/**
 	 * 
+	 * 
 	 * @param nouvGrid
+	 *    
 	 */
 	public void recupGrid(Grid nouvGrid) {
 		grid = nouvGrid;

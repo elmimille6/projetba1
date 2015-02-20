@@ -27,12 +27,10 @@ public class General extends APawn {
 		setNamePawn("general");
 		setTeam(team);
 		setValue(this.levelPawn*10);
-		if (team==1){
+		if (team==1)
 			setURI("/image/red/general.png");
-		}
-		if (team==2){
+		if (team==2)
 			setURI("/image/blue/general.png");
-		}
 	}
 	
 }

@@ -33,7 +33,7 @@ public class Grid {
 	}
 	
 	/**
-	 * Put the pawn on the grid.
+	 * Puts the pawn on the grid.
 	 * 
 	 * @param i
 	 *    Line of the grid.
@@ -111,28 +111,52 @@ public class Grid {
 		return grid[i][j];
 	}
 	
-	public void placeTeam(APawn[][] tgrid,int side){
+	/**
+	 * Places the teams on each side of the grid.
+	 * 
+	 * @param tgrid
+	 *    The grid of pawn to place in the grid.
+	 * 
+	 * @param side
+	 *    The side of the grid: 1 in the bottom of the grid
+	 *    and 2 on the top of the grid.
+	 */
+	public void placeTeam(APawn[][] tgrid, int side){
 		if (side==1){
-			for (int i =0;i<tgrid.length;i++){
-				for (int j=0;j<tgrid[0].length;j++){
+			for (int i=0;i < tgrid.length; i++){
+				for (int j=0; j < tgrid[0].length; j++){
 //					grid[6+i][0+j]=tgrid[i][j];
-					this.set(6+i, 0+j, tgrid[i][j]);
+					this.set( 6+i, 0+j, tgrid[i][j]);
 				}
 			}
 		}
 		if (side==2){
-			for (int i =0;i<tgrid.length;i++){
-				for (int j=0;j<tgrid[0].length;j++){
+			for (int i=0; i < tgrid.length; i++){
+				for (int j=0; j < tgrid[0].length; j++){
 //					grid[3-i][9-j]=tgrid[i][j];
 //					tgrid[i][j].setPos(3-i, 9-j);
-					this.set(3-i, 9-j, tgrid[i][j]);
+					this.set( 3-i, 9-j, tgrid[i][j]);
 				}
 			}
 		}
 	}
+	
+	/**
+	 * Accessor of the row.
+	 * 
+	 * @return
+	 *    The forward row.
+	 */
 	public int getRow(){
 		return row-1;
 	}
+	
+	/**
+	 * Accessor of the line.
+	 * 
+	 * @return
+	 *    The forward line.
+	 */
 	public int getLine(){
 		return line-1;
 	}

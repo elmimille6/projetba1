@@ -29,14 +29,27 @@ public class Flag extends APawn {
 		setNamePawn("flag");
 		setTeam(team);
 		setValue(400);
-		if (team==1){
+		if (team==1)
 			setURI("/image/red/flag.png");
-		}
-		if (team==2){
+		if (team==2)
 			setURI("/image/blue/flag.png");
-		}
 	}
 	
+	/**
+	 * Tells that the flag can't move.
+	 * 
+	 * @param grid
+	 *    The grid of the game.
+	 *    
+	 * @param x
+	 *    The abscissa of the 'flag' pawn.
+	 *    
+	 * @param y
+	 *    The ordinate of the 'flag' pawn.
+	 *    
+	 * @return
+	 *    False
+	 */
 	public boolean movePoss(Grid grid,int x, int y){
 		return false;
 	}

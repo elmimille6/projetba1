@@ -250,7 +250,7 @@ public abstract class APawn{
 	
 	/**
 	 * Move the pawn.
-	 * <br/> ! warning: be careful to test if the moving is possible BEFORE with movePoss(Grid grid, int x, int y).
+	 * <br/> ! Warning: be careful to test if the move is possible BEFORE with movePoss(Grid grid, int x, int y).
 	 * 
 	 * @param grid
 	 *    The grid of the game.
@@ -288,9 +288,10 @@ public abstract class APawn{
 		return grid;
 	}
 	/**
-	 * focus a pawn and check if move is available for him, store the result into the array 'arrow'
-	 * @param line coord of the pawn
-	 * @param row coord of the pawn
+	 * Focus a pawn and check if move is available for him, store the result into the array 'arrow'.
+	 * 
+	 * @param grid
+	 *    The grid of the game.
 	 */
 	public int[] focus(Grid grid) { 
 		int[] arrow={-1,-1,-1,-1,posX,posY};

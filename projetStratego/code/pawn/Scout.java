@@ -29,12 +29,10 @@ public class Scout extends APawn {
 		setNamePawn("scout");
 		setTeam(team);
 		setValue(this.levelPawn * 10);
-		if (team==1){
+		if (team==1)
 			setURI("/image/red/scout.png");
-		}
-		if (team==2){
+		if (team==2)
 			setURI("/image/blue/scout.png");
-		}
 	}
 
 	/**
@@ -95,9 +93,10 @@ public class Scout extends APawn {
 		return true;
 	}
 	/**
-	 * focus a pawn and check if move is available for him, store the result into the array 'arrow'
-	 * @param line coord of the pawn
-	 * @param row coord of the pawn
+	 * Focus a pawn and check if move is available for him, store the result into the array 'arrow'.
+	 * 
+	 * @param grid
+	 *    The grid of the game.
 	 */
 	public int[] focus(Grid grid) { //TODO retourner le nombre de case qu il peut avancer (avec des for)
 		int[] arrow={-1,-1,-1,-1,posX,posY};

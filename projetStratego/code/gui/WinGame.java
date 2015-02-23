@@ -1,4 +1,5 @@
 package gui;
+
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,7 +17,9 @@ import pawn.Marshal;
  * 
  */
 public class WinGame extends JFrame {
-	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	public PaneGame pane;
 	public int posX, posY;
@@ -55,14 +58,15 @@ public class WinGame extends JFrame {
 					int row = res[1];
 					APawn pawn = grid.get(line, row);
 					if (focus != null) {
+						System.out.println("1#");
 						if (focus.movePoss(grid, line, row)) {
+							System.out.println("2#");
 							grid = focus.move(grid, line, row);
-							focus = null;
-							pane.recupArrow(arrowN);
 							att = true;
 						}
 					}
 					if (pawn != null && !att) {
+						focus=pawn;
 						arrow = pawn.focus(grid);
 						pane.recupArrow(arrow);
 						repaint();
@@ -79,16 +83,10 @@ public class WinGame extends JFrame {
 	}
 
 	/**
-	 * Transforms the coordinates of the cursor into coordinates of the grid.
-	 * 
-	 * @param posX
-	 *    The abscissa of the cursor.
-	 *    
-	 * @param posY
-	 *    The ordinate of the cursor.
-	 *    
-	 * @return
-	 *    An array with the abscissa and the ordinate in the grid.
+	 * transform the coord of the cursor into coord of the grid
+	 * @param posX x coord of the cursor
+	 * @param posY y coord of the cursor
+	 * @return an array with x coord and y coord in the grid
 	 */
 	public int[] getRes(int posX, int posY) {
 

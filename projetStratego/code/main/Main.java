@@ -14,7 +14,7 @@ public class Main {
 //		Window fenetre = new Window();
 //		Grid test = new Grid(10);
 		Grid test = Grid.load();
-		
+//		
 //		Scout p1 = new Scout(1);
 //		Miner p2 = new Miner(2);
 //		Spy p3 = new Spy(2);

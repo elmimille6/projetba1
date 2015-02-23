@@ -103,9 +103,10 @@ public class Scout extends APawn {
 		return true;
 	}
 	/**
-	 * focus a pawn and check if move is available for him, store the result into the array 'arrow'
-	 * @param line coord of the pawn
-	 * @param row coord of the pawn
+	 * Focus a pawn and check if move is available for him, store the result into the array 'arrow'.
+	 * 
+	 * @param grid
+	 *    The grid of the game.
 	 */
 	public int[] focus(Grid grid) { //TODO retourner le nombre de case qu il peut avancer (avec des for)
 		int[] arrow={-1,-1,-1,-1,posX,posY};

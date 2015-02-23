@@ -29,15 +29,28 @@ public class Bomb extends APawn {
 		setNamePawn("bomb");
 		setTeam(team);
 		setValue(this.levelPawn*10);
-		if (team==1){
+		if (team==1)
 			setURI("/image/red/bomb.png");
-		}
-		if (team==2){
+		if (team==2)
 			setURI("/image/blue/bomb.png");
-		}
 //		setURI("/image/red/bomb.png");
 	}
 	
+	/**
+	 * Tells that the bomb can't move.
+	 * 
+	 * @param grid
+	 *    The grid of the game.
+	 *    
+	 * @param x
+	 *    The abscissa of the 'bomb' pawn.
+	 *    
+	 * @param y
+	 *    The ordinate of the 'bomb' pawn.
+	 *    
+	 * @return
+	 *    False
+	 */
 	public boolean movePoss(Grid grid,int x, int y){
 		return false;
 	}

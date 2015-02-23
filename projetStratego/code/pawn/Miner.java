@@ -27,12 +27,10 @@ public class Miner extends APawn {
 		setNamePawn("miner");
 		setTeam(team);
 		setValue(this.levelPawn*10);
-		if (team==1){
+		if (team==1)
 			setURI("/image/red/miner.png");
-		}
-		if (team==2){
+		if (team==2)
 			setURI("/image/blue/miner.png");
-		}
 	}
 	
 	/**

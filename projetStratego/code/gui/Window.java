@@ -1,5 +1,4 @@
 package gui;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,16 +19,14 @@ import javax.swing.JPanel;
 import main.Main;
 
 @SuppressWarnings("rawtypes")
+
 /**
  * This class creates a window.
  *
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Window extends JFrame {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menu1 = new JMenu("Fichier");
@@ -44,7 +41,7 @@ public class Window extends JFrame {
 	private JLabel labPlayer = new JLabel("Nombre de joueur");
 	private JComboBox comboPlayer = new JComboBox();
 
-	private JLabel labIa1 = new JLabel("Niveau de la première ia");
+	private JLabel labIa1 = new JLabel("Niveau de la premiÃ¨re ia");
 	private JComboBox comboIa1 = new JComboBox();
 
 	private JLabel labIa2 = new JLabel("Niveau de la seconde ia");
@@ -59,6 +56,9 @@ public class Window extends JFrame {
 	private JCheckBoxMenuItem changeGrid = new JCheckBoxMenuItem(
 			"modifier la taille de la grille");
 
+	/**
+	 * 
+	 */
 	@SuppressWarnings("unchecked")
 	public Window() {
 		this.setResizable(true);
@@ -213,7 +213,7 @@ public class Window extends JFrame {
 
 	class ItemActionIa1 implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (comboIa1.getSelectedItem() == "nivreau facile") {
+			if (comboIa1.getSelectedItem() == "niveau facile") {
 				lvl1 = 0;
 			} else if (comboIa2.getSelectedItem() == "niveau moyen") {
 				lvl1 = 3;
@@ -228,7 +228,7 @@ public class Window extends JFrame {
 
 	class ItemActionIa2 implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (comboIa2.getSelectedItem() == "nivreau facile") {
+			if (comboIa2.getSelectedItem() == "niveau facile") {
 				lvl2 = 0;
 			} else if (comboIa2.getSelectedItem() == "niveau moyen") {
 				lvl2 = 3;

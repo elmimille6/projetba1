@@ -16,6 +16,9 @@ public class GridIA {
 	
 	/**
 	 * Constructor of the grid for the IA.
+	 * 
+	 * @param team
+	 *    The team of the IA.
 	 */
 	public GridIA(int team) {
 		int i=0;
@@ -44,6 +47,15 @@ public class GridIA {
 		System.out.println(val);
 	}
 
+	/**
+	 * Creates a grid of pawns for the IA.
+	 * 
+	 * @param team
+	 *    The team of the IA.
+	 *    
+	 * @return
+	 *     The created grid of pawns for the IA.
+	 */
 	public static APawn[][] createGrid(int team){
 		APawn[][] grid = new APawn[4][10];
 		Vector<APawn> listPawn = APawn.createTeam(team);
@@ -60,6 +72,15 @@ public class GridIA {
 		return grid;
 	}
 
+	/**
+	 * Evaluates the grid.
+	 * 
+	 * @param grid
+	 *    The grid to evaluate.
+	 * 
+	 * @return
+	 *    The value of the grid.
+	 */
 	public int evalGrid(APawn[][] grid){
 		int bonus=2000;
 		int valeur=0;
@@ -103,6 +124,12 @@ public class GridIA {
 		return valeur+l1+2*l2+4*l3+6*l4;
 	}
 	
+	/**
+	 * Accessor of the grid.
+	 * 
+	 * @return
+	 *    The grid.
+	 */
 	public APawn[][] getGrid(){
 		return this.grid;
 	}

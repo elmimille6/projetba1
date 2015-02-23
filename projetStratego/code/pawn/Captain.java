@@ -28,11 +28,9 @@ public class Captain extends APawn {
 		setTeam(team);
 		setValue(this.levelPawn*10);
 		setURI("/image/red/captain.png");
-		if (team==1){
+		if (team==1)
 			setURI("/image/red/captain.png");
-		}
-		else{
+		if (team==2)
 			setURI("/image/blue/captain.png");
-		}
 	}
 }

@@ -119,29 +119,41 @@ public class Grid implements java.io.Serializable {
 	public APawn get(int i, int j) {
 		return grid[i][j];
 	}
-
+	/**
+	 * Places the teams on each side of the grid.
+	 * 
+	 * @param tgrid
+	 *    The grid of pawn to place in the grid.
+	 * 
+	 * @param side
+	 *    The side of the grid: 1 in the bottom of the grid
+	 *    and 2 on the top of the grid.
+	 */
 	public void placeTeam(APawn[][] tgrid, int side) {
 		if (side == 1) {
 			for (int i = 0; i < tgrid.length; i++) {
 				for (int j = 0; j < tgrid[0].length; j++) {
 					// grid[6+i][0+j]=tgrid[i][j];
-					this.set(6 + i, 0 + j, tgrid[i][j]);
+					this.set(6 + i, 0 + j, tgrid[i][j]);}}}
+			if (side==2){
+				for (int i=0; i < tgrid.length; i++){
+						for (int j=0; j < tgrid[0].length; j++){
+//								grid[3-i][9-j]=tgrid[i][j];
+//								tgrid[i][j].setPos(3-i, 9-j);
+								this.set( 3-i, 9-j, tgrid[i][j]);
 				}
 			}
 		}
-		if (side == 2) {
-			for (int i = 0; i < tgrid.length; i++) {
-				for (int j = 0; j < tgrid[0].length; j++) {
-					// grid[3-i][9-j]=tgrid[i][j];
-					// tgrid[i][j].setPos(3-i, 9-j);
-					this.set(3 - i, 9 - j, tgrid[i][j]);
-				}
-			}
 		}
-	}
 
-	public int getRow() {
-		return row - 1;
+	/**
+	 * Accessor of the row.
+	 * 
+	 * @return
+	 *    The forward row.
+	 */
+	public int getRow(){
+		return row-1;
 	}
 
 	public int getLine() {
@@ -171,5 +183,6 @@ public class Grid implements java.io.Serializable {
 	 
 	} 
 		return null;
+	
 	}
 }

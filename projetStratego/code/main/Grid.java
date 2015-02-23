@@ -161,17 +161,15 @@ public class Grid implements java.io.Serializable {
 
 	public static Grid load() {
 		try {
-			final FileInputStream fichier = new FileInputStream("grid.save");
-			ObjectInputStream ois = new ObjectInputStream(fichier);
-			final Grid grid =(Grid) ois.readObject();
-			ois.close();
-			
-			return grid;
-		} catch (ClassNotFoundException e1) {
-			
-		} catch (IOException e2) {
-			
-		}
+	        ObjectInputStream in = new ObjectInputStream(new FileInputStream("grid.save"));
+	        Grid grid = (Grid)in.readObject();
+	        in.close();
+	        return grid;
+	} catch( ClassNotFoundException e1 ) {
+	 
+	} catch( IOException e2 ) {
+	 
+	} 
 		return null;
 	}
 }

@@ -9,8 +9,12 @@ import main.Grid;
  * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
-public abstract class APawn {
+public abstract class APawn implements java.io.Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4209147509705686893L;
 	protected int levelPawn;
 	protected String namePawn;
 	protected int team = 0;

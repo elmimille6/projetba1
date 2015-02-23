@@ -58,14 +58,15 @@ public class WinGame extends JFrame {
 					int row = res[1];
 					APawn pawn = grid.get(line, row);
 					if (focus != null) {
+						System.out.println("1#");
 						if (focus.movePoss(grid, line, row)) {
+							System.out.println("2#");
 							grid = focus.move(grid, line, row);
-							focus = null;
-							pane.recupArrow(arrowN);
 							att = true;
 						}
 					}
 					if (pawn != null && !att) {
+						focus=pawn;
 						arrow = pawn.focus(grid);
 						pane.recupArrow(arrow);
 						repaint();

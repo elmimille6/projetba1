@@ -79,7 +79,6 @@ public class PaneGame extends JPanel {
 				}
 			}
 		}
-		//TODO draw arrow
 		int line = arrow[4];
 		int row = arrow[5];
 //		System.out.println(row);

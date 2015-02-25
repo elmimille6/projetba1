@@ -111,10 +111,10 @@ public class WinGame extends JFrame {
 	public int[] getRes(int posX, int posY) {
 
 		int[] res = { 0, 0 };
-		res[1] = (posX - (posX % (pane.getWidth() / (grid.getLine() + 1))))
-				/ (pane.getWidth() / (grid.getLine() + 1));
-		res[0] = (posY - (posY % (pane.getHeight() / (grid.getRow() + 1))))
-				/ (pane.getHeight() / (grid.getRow() + 1));
+		res[1] = (posX - (posX % (pane.getWidth() / (grid.getRow() + 1))))
+				/ (pane.getWidth() / (grid.getRow() + 1));
+		res[0] = (posY - (posY % (pane.getHeight() / (grid.getLine() + 1))))
+				/ (pane.getHeight() / (grid.getLine() + 1));
 		return res;
 
 	}

@@ -16,6 +16,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import main.Grid;
+import main.GridIA;
 import main.Main;
 
 @SuppressWarnings("rawtypes")
@@ -77,13 +79,21 @@ public class Window extends JFrame {
 
 		testia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// testIA
+				Grid grid = new Grid(10);
+				grid.setView(2);
+				GridIA gridIA = new GridIA(1);
+				grid.placeTeam(gridIA.getGrid(), 1);
+				GridIA gridIA2 = new GridIA(2);
+				grid.placeTeam(gridIA2.getGrid(), 2);
+				grid.showGrid();
+				grid.save();
 
 			}
 		});
 		startSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// start sauvegarde
+				Grid grid = Grid.load();
+				grid.showGrid();
 			}
 		});
 

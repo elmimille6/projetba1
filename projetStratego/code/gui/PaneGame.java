@@ -28,6 +28,11 @@ public class PaneGame extends JPanel {
 	public PaneGame(Grid grid) {
 		this.grid = grid;
 
+		
+	}
+
+	public void paintComponent(Graphics g) {
+
 		try {
 			java.net.URL urlBack = getClass().getResource("/image/back.jpg");
 			// java.net.URL urlO = getClass().getResource(jeu.recupImg1());
@@ -41,10 +46,7 @@ public class PaneGame extends JPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void paintComponent(Graphics g) {
-
+		
 		// dessine le quadrillage
 		int nbrLigne = grid.getLine() + 1;
 		int nbrCol = grid.getRow() + 1;

@@ -31,12 +31,13 @@ public class Main {
 //		test.showGrid();
 //		p2.move(test, 2, 2);
 //		test.showGrid();
-		Main.play();
+//		Window fen = new Window();
+		play();
 		
 	}
 	public static void play(){
 		Grid grid = new Grid(10);
-		grid.setView(2);
+//		grid.setView(2);
 		GridIA gridIA = new GridIA(1);
 		grid.placeTeam(gridIA.getGrid(), 1);
 		GridIA gridIA2 = new GridIA(2);

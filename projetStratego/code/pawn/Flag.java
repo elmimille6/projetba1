@@ -13,7 +13,7 @@ public class Flag extends APawn {
 	 * Main constructor of the flag pawn.
 	 */
 	public Flag(){
-		setLevelPawn(12);
+		setLevelPawn(-6);
 		setNamePawn("flag");
 		setValue(400);
 	}

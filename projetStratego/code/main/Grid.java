@@ -21,7 +21,7 @@ public class Grid implements java.io.Serializable {
 	private static final long serialVersionUID = 8927958880942845647L;
 	private APawn[][] grid;
 	private int row, line;
-	public int view=0;
+	public int view=0,turn=1,player=2;
 
 	/**
 	 * Constructor of the grid.
@@ -191,5 +191,17 @@ public class Grid implements java.io.Serializable {
 	}
 	public void setView(int vie){
 		this.view=vie;
+	}
+	public int getTurn(){
+		return turn;
+	}
+	public void addTurn(){
+		turn++;
+	}
+	public int getPlayer(){
+		return player;
+	}
+	public void setPlayer(int players){
+		this.player=players;
 	}
 }

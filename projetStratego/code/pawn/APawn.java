@@ -9,11 +9,8 @@ import main.Game;
  * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
-public abstract class APawn implements java.io.Serializable{
+public abstract class APawn implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4209147509705686893L;
 	protected int levelPawn;
 	protected String namePawn;
@@ -34,7 +31,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Set the position on the grid of the pawn.
+	 * Sets the position on the grid of the pawn.
 	 * 
 	 * @param posX
 	 *            The abscissa of the object.
@@ -48,7 +45,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Set the value of the pawn.
+	 * Sets the value of the pawn.
 	 * 
 	 * @param valuePawn
 	 *            The value of the pawn.
@@ -58,7 +55,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Set the URI of the image of the pawn.
+	 * Sets the URI of the image of the pawn.
 	 * 
 	 * @param URI
 	 *            The URI of the image of the pawn.
@@ -68,7 +65,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Set the level of the pawn.
+	 * Sets the level of the pawn.
 	 * 
 	 * @param levelPawn
 	 *            The level of the pawn, must be between 0 and 12.
@@ -78,7 +75,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Set the name of the pawn.
+	 * Sets the name of the pawn.
 	 * 
 	 * @param namePawn
 	 *            The name of the pawn.
@@ -88,7 +85,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Set the team of the pawn.
+	 * Sets the team of the pawn.
 	 * 
 	 * @param team
 	 *            The number of the team, 0 for neutral, 1 for red, 2 for blue.
@@ -98,7 +95,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Make a vector of the 40 pawn in a team at the begin of the game.
+	 * Makes a vector of the 40 pawn in a team at the begin of the game.
 	 * 
 	 * @return The vector of 40 pawn.
 	 */
@@ -146,7 +143,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Get the level of the pawn.
+	 * Gets the level of the pawn.
 	 * 
 	 * @return The level of the pawn.
 	 */
@@ -155,7 +152,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Get the value of the pawn to create a starter grid for AI.
+	 * Gets the value of the pawn to create a starter grid for AI.
 	 * 
 	 * @return The value of the pawn.
 	 */
@@ -164,7 +161,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Get the team of the pawn.
+	 * Gets the team of the pawn.
 	 * 
 	 * @return The number of the team.
 	 */
@@ -173,7 +170,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Get the URI of the pawn.
+	 * Gets the URI of the pawn.
 	 * 
 	 * @return The URI of the pawn.
 	 */
@@ -182,7 +179,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Test if a move is possible.
+	 * Tests if a move is possible.
 	 * 
 	 * @param grid
 	 *            The grid of the game.
@@ -207,13 +204,13 @@ public abstract class APawn implements java.io.Serializable{
 				return false;
 			}
 		}
-		
-		if (Math.abs(x - this.posX )> 1) { // test if the move is
-															// not too long
+
+		if (Math.abs(x - this.posX) > 1) { // test if the move is
+											// not too long
 			return false;
 		}
-		if (Math.abs(y - this.posY) > 1 ) { // test if the move is
-															// not too long
+		if (Math.abs(y - this.posY) > 1) { // test if the move is
+											// not too long
 			return false;
 		}
 		if (x - this.posX != 0 && y - this.posY != 0) { // test if the move is
@@ -229,7 +226,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Return the result of the fight between this pawn and the target.
+	 * Returns the result of the fight between this pawn and the target.
 	 * 
 	 * @param tar
 	 *            The pawn who is targeted by this pawn.
@@ -252,7 +249,7 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * Move the pawn. <br/>
+	 * Moves the pawn. <br/>
 	 * ! warning: be careful to test if the moving is possible BEFORE with
 	 * movePoss(Grid grid, int x, int y).
 	 * 
@@ -292,19 +289,19 @@ public abstract class APawn implements java.io.Serializable{
 	}
 
 	/**
-	 * focus a pawn and check if move is available for him, store the result
+	 * Focus a pawn and check if move is available for him, store the result
 	 * into the array 'arrow'
 	 * 
 	 * @param line
-	 *            coord of the pawn
+	 *            The line of the pawn
 	 * @param row
-	 *            coord of the pawn
+	 *            The row of the pawn
 	 */
 	public int[] focus(Game grid) {
 		int[] arrow = { -1, -1, -1, -1, posX, posY };
 		// System.out.println(focus);
 		if (posX != grid.getLine()) {// check down move
-		// System.out.println("D");
+			// System.out.println("D");
 			if (this.movePoss(grid, posX + 1, posY)) {
 				arrow[2] = 1;
 				// System.out.println("ok");
@@ -316,10 +313,10 @@ public abstract class APawn implements java.io.Serializable{
 
 		}
 		if (posY != grid.getRow()) {// check right move
-//			System.out.println("R");
+			// System.out.println("R");
 			if (this.movePoss(grid, posX, posY + 1)) {
 				arrow[1] = 1;
-//				System.out.println("ok");
+				// System.out.println("ok");
 			} else {
 				arrow[1] = -1;
 			}
@@ -327,7 +324,7 @@ public abstract class APawn implements java.io.Serializable{
 			arrow[1] = -1;
 		}
 		if (posX != 0) {// check up move
-		// System.out.println("U");
+			// System.out.println("U");
 			if (this.movePoss(grid, posX - 1, posY)) {
 				arrow[0] = 1;
 				// System.out.println("ok");
@@ -338,10 +335,10 @@ public abstract class APawn implements java.io.Serializable{
 			arrow[0] = -1;
 		}
 		if (posY != 0) {// check left move
-//			System.out.println("L");
+			// System.out.println("L");
 			if (this.movePoss(grid, posX, posY - 1)) {
 				arrow[3] = 1;
-//				System.out.println("ok");
+				// System.out.println("ok");
 			} else {
 				arrow[3] = -1;
 			}
@@ -349,7 +346,7 @@ public abstract class APawn implements java.io.Serializable{
 			arrow[3] = -1;
 		}
 		for (int i = 0; i < arrow.length; i++) {
-//			System.out.print(arrow[i] + "    ");
+			// System.out.print(arrow[i] + "    ");
 		}
 		return arrow;
 	}

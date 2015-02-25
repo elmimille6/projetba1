@@ -15,13 +15,11 @@ import pawn.Lake;
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Game implements java.io.Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 8927958880942845647L;
 	private APawn[][] grid;
 	private int row, line;
-	public int view=0,turn=1,player=2;
+	public int view = 0, turn = 1, player = 2;
 
 	/**
 	 * Constructor of the grid.
@@ -45,7 +43,7 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
-	 * Put the pawn on the grid.
+	 * Puts the pawn on the grid.
 	 * 
 	 * @param i
 	 *            Line of the grid.
@@ -107,6 +105,69 @@ public class Game implements java.io.Serializable {
 	// }
 
 	/**
+	 * Places the teams on each side of the grid.
+	 * 
+	 * @param tgrid
+	 *            The grid of pawn to place in the grid.
+	 * 
+	 * @param side
+	 *            The side of the grid: 1 in the bottom of the grid and 2 on the
+	 *            top of the grid.
+	 */
+	public void placeTeam(APawn[][] tgrid, int side) {
+		if (side == 1) {
+			for (int i = 0; i < tgrid.length; i++) {
+				for (int j = 0; j < tgrid[0].length; j++) {
+					// grid[6+i][0+j]=tgrid[i][j];
+					this.set(6 + i, 0 + j, tgrid[i][j]);
+				}
+			}
+		}
+		if (side == 2) {
+			for (int i = 0; i < tgrid.length; i++) {
+				for (int j = 0; j < tgrid[0].length; j++) {
+					// grid[3-i][9-j]=tgrid[i][j];
+					// tgrid[i][j].setPos(3-i, 9-j);
+					this.set(3 - i, 9 - j, tgrid[i][j]);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Saves the grid in the 'grid.save' file.
+	 */
+	public void save() {
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(
+					new FileOutputStream("grid.save"));
+			out.writeObject(this);
+			out.close();
+		} catch (IOException e) {
+
+		}
+	}
+
+	/**
+	 * Loads the grid from the 'grid.save' file.
+	 */
+	public static Game load() {
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+					"grid.save"));
+			Game grid = (Game) in.readObject();
+			in.close();
+			return grid;
+		} catch (ClassNotFoundException e1) {
+
+		} catch (IOException e2) {
+
+		}
+		return null;
+
+	}
+
+	/**
 	 * Gets the pawn at the given coordinates.
 	 * 
 	 * @param i
@@ -120,88 +181,76 @@ public class Game implements java.io.Serializable {
 	public APawn get(int i, int j) {
 		return grid[i][j];
 	}
-	/**
-	 * Places the teams on each side of the grid.
-	 * 
-	 * @param tgrid
-	 *    The grid of pawn to place in the grid.
-	 * 
-	 * @param side
-	 *    The side of the grid: 1 in the bottom of the grid
-	 *    and 2 on the top of the grid.
-	 */
-	public void placeTeam(APawn[][] tgrid, int side) {
-		if (side == 1) {
-			for (int i = 0; i < tgrid.length; i++) {
-				for (int j = 0; j < tgrid[0].length; j++) {
-					// grid[6+i][0+j]=tgrid[i][j];
-					this.set(6 + i, 0 + j, tgrid[i][j]);}}}
-			if (side==2){
-				for (int i=0; i < tgrid.length; i++){
-						for (int j=0; j < tgrid[0].length; j++){
-//								grid[3-i][9-j]=tgrid[i][j];
-//								tgrid[i][j].setPos(3-i, 9-j);
-								this.set( 3-i, 9-j, tgrid[i][j]);
-				}
-			}
-		}
-		}
 
 	/**
-	 * Accessor of the row.
+	 * Gets the forward row.
 	 * 
-	 * @return
-	 *    The forward row.
+	 * @return The forward row.
 	 */
-	public int getRow(){
-		return row-1;
+	public int getRow() {
+		return row - 1;
 	}
 
+	/**
+	 * Gets the forward line.
+	 * 
+	 * @return The forward line.
+	 */
 	public int getLine() {
 		return line - 1;
 	}
 
-	public void save() {
-		try {
-			ObjectOutputStream out = new ObjectOutputStream(
-					new FileOutputStream("grid.save"));
-			out.writeObject(this);
-			out.close();
-		} catch (IOException e) {
-
-		}
-	}
-
-	public static Game load() {
-		try {
-	        ObjectInputStream in = new ObjectInputStream(new FileInputStream("grid.save"));
-	        Game grid = (Game)in.readObject();
-	        in.close();
-	        return grid;
-	} catch( ClassNotFoundException e1 ) {
-	 
-	} catch( IOException e2 ) {
-	 
-	} 
-		return null;
-	
-	}
-	public int getView(){
+	/**
+	 * Gets the view.
+	 * 
+	 * @return The value of view.
+	 */
+	public int getView() {
 		return view;
 	}
-	public void setView(int vie){
-		this.view=vie;
+
+	/**
+	 * Sets a new value to the view.
+	 * 
+	 * @param vie
+	 *            Changes the view.
+	 */
+	public void setView(int vie) {
+		this.view = vie;
 	}
-	public int getTurn(){
+
+	/**
+	 * Gets the turn.
+	 * 
+	 * @return The current turn.
+	 */
+	public int getTurn() {
 		return turn;
 	}
-	public void addTurn(){
+
+	/**
+	 * Adds one turn.
+	 */
+	public void addTurn() {
 		turn++;
 	}
-	public int getPlayer(){
+
+	/**
+	 * Gets the number of players.
+	 * 
+	 * @return The current number of player.
+	 */
+	public int getPlayer() {
 		return player;
 	}
-	public void setPlayer(int players){
-		this.player=players;
+
+	/**
+	 * Sets the number of players.
+	 * 
+	 * @param players
+	 *            Changes the number of players.
+	 */
+	public void setPlayer(int players) {
+		this.player = players;
 	}
 }

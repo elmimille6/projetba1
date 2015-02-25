@@ -1,10 +1,10 @@
 package pawn;
 
 /**
-* 
-*
-* @author CAREDDA Giuliano, DUCOBU Alexandre
-*/
+ * This class initializes the IPawn interface.
+ *
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
+ */
 public interface IPawn {
-	
+
 }

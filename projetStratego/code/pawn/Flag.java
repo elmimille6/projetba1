@@ -3,16 +3,16 @@ package pawn;
 import main.Game;
 
 /**
-* Flag is the class that creates a "flag" pawn.
-*
-* @author CAREDDA Giuliano, DUCOBU Alexandre
-*/
+ * Flag is the class that creates a "flag" pawn.
+ *
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
+ */
 public class Flag extends APawn {
-	
+
 	/**
 	 * Main constructor of the flag pawn.
 	 */
-	public Flag(){
+	public Flag() {
 		setLevelPawn(-6);
 		setNamePawn("flag");
 		setValue(400);
@@ -22,35 +22,34 @@ public class Flag extends APawn {
 	 * Constructor of the flag pawn.
 	 * 
 	 * @param team
-	 *    Team of the pawn, must be 1 or 2.
+	 *            Team of the pawn, must be 1 or 2.
 	 */
-	public Flag(int team){
+	public Flag(int team) {
 		setLevelPawn(12);
 		setNamePawn("flag");
 		setTeam(team);
 		setValue(400);
-		if (team==1)
+		if (team == 1)
 			setURI("/image/red/flag.png");
-		if (team==2)
+		if (team == 2)
 			setURI("/image/blue/flag.png");
 	}
-	
+
 	/**
 	 * Tells that the flag can't move.
 	 * 
 	 * @param grid
-	 *    The grid of the game.
-	 *    
+	 *            The grid of the game.
+	 * 
 	 * @param x
-	 *    The abscissa of the 'flag' pawn.
-	 *    
+	 *            The abscissa of the 'flag' pawn.
+	 * 
 	 * @param y
-	 *    The ordinate of the 'flag' pawn.
-	 *    
-	 * @return
-	 *    False
+	 *            The ordinate of the 'flag' pawn.
+	 * 
+	 * @return False
 	 */
-	public boolean movePoss(Game grid,int x, int y){
+	public boolean movePoss(Game grid, int x, int y) {
 		return false;
 	}
 }

@@ -52,8 +52,8 @@ public class WinGame extends JFrame {
 					int row = res[1];
 					grid.showGrid();
 					APawn pawn = grid.get(line, row);
-					System.out.println("pawn= "+pawn);
-					System.out.println("focus= "+focus);
+					System.out.println("pawn= " + pawn);
+					System.out.println("focus= " + focus);
 					if (focus != null) {
 						if (focus.movePoss(grid, line, row)) {
 							grid = focus.move(grid, line, row);
@@ -67,8 +67,8 @@ public class WinGame extends JFrame {
 							jop.showMessageDialog(null,
 									"Joueur "
 											+ (((grid.getTurn() + 1) % 2) + 1)
-											+ " à vous de jouer !",
-									"Tour terminé",
+											+ " Ã  vous de jouer !",
+									"Tour terminÃ©",
 									JOptionPane.INFORMATION_MESSAGE);
 							grid.setView((((grid.getTurn() + 1) % 2) + 1));
 							repaint();

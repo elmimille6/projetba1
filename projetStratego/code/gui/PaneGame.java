@@ -12,25 +12,31 @@ import main.Game;
 import pawn.APawn;
 
 /**
- * This class
+ * This class creates the window of the game.
  * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class PaneGame extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	public Image img, imgBack;
 	public Game grid;
 	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
 
+	/**
+	 * 
+	 * 
+	 * @param grid
+	 *            The grid.
+	 */
 	public PaneGame(Game grid) {
 		this.grid = grid;
 
-		
 	}
 
+	/**
+	 * 
+	 */
 	public void paintComponent(Graphics g) {
 
 		try {
@@ -46,7 +52,7 @@ public class PaneGame extends JPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		// dessine le quadrillage
 		int nbrLigne = grid.getLine() + 1;
 		int nbrCol = grid.getRow() + 1;
@@ -177,10 +183,10 @@ public class PaneGame extends JPanel {
 	}
 
 	/**
-	 * 
+	 * Retrieves the grid in parameter.
 	 * 
 	 * @param nouvGrid
-	 * 
+	 *            The grid.
 	 */
 	public void recupGrid(Game nouvGrid) {
 		grid = nouvGrid;

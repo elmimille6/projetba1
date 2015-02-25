@@ -1,4 +1,5 @@
 package gui;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,14 +22,13 @@ import main.GridIA;
 import main.Main;
 
 @SuppressWarnings("rawtypes")
-
 /**
  * This class creates a window.
  *
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Window extends JFrame {
-	
+
 	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menu1 = new JMenu("Fichier");
@@ -59,7 +59,7 @@ public class Window extends JFrame {
 			"modifier la taille de la grille");
 
 	/**
-	 * 
+	 * Creates the 'Menu' window.
 	 */
 	@SuppressWarnings("unchecked")
 	public Window() {
@@ -111,15 +111,15 @@ public class Window extends JFrame {
 
 		comboJeu.setPreferredSize(new Dimension(100, 20));
 
-//		JPanel panGame = new JPanel();
-//		panGame.add(labJeu);
-//		panGame.add(comboJeu);
-//		comboJeu.addItem("");
-//		comboJeu.addItem("Tic Tac Toe");
-//		comboJeu.addItem("Puissance 4");
-//		comboJeu.addItem("Othello");
-//		comboJeu.addActionListener(new ItemActionGame());
-//		comboJeu.setPreferredSize(new Dimension(100, 20));
+		// JPanel panGame = new JPanel();
+		// panGame.add(labJeu);
+		// panGame.add(comboJeu);
+		// comboJeu.addItem("");
+		// comboJeu.addItem("Tic Tac Toe");
+		// comboJeu.addItem("Puissance 4");
+		// comboJeu.addItem("Othello");
+		// comboJeu.addActionListener(new ItemActionGame());
+		// comboJeu.setPreferredSize(new Dimension(100, 20));
 
 		JPanel panPlayer = new JPanel();
 		panPlayer.add(labPlayer);
@@ -178,7 +178,7 @@ public class Window extends JFrame {
 		});
 		goBtn.setEnabled(true);
 
-//		container.add(panGame);
+		// container.add(panGame);
 		container.add(panPlayer);
 		container.add(panSlide1);
 		container.add(panSlide2);
@@ -252,6 +252,9 @@ public class Window extends JFrame {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void tryEnable() {
 		if (game != 0) {
 			comboPlayer.setEnabled(true);

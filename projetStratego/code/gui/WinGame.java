@@ -43,7 +43,6 @@ public class WinGame extends JFrame {
 		this.setVisible(true);
 		pane.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
-
 				if (e.getButton() == MouseEvent.BUTTON1
 						&& grid.getPlayer() == 2) {
 					posX = e.getX();
@@ -53,7 +52,8 @@ public class WinGame extends JFrame {
 					int row = res[1];
 					grid.showGrid();
 					APawn pawn = grid.get(line, row);
-
+					System.out.println("pawn= "+pawn);
+					System.out.println("focus= "+focus);
 					if (focus != null) {
 						if (focus.movePoss(grid, line, row)) {
 							grid = focus.move(grid, line, row);
@@ -61,6 +61,7 @@ public class WinGame extends JFrame {
 							grid.addTurn();
 							grid.setView(3);
 							pane.recupArrow(arrowN);
+							focus = null;
 							repaint();
 							jop = new JOptionPane();
 							jop.showMessageDialog(null,
@@ -88,9 +89,9 @@ public class WinGame extends JFrame {
 							}
 							att = false;
 							repaint();
-
 						}
 					}
+					att = false;
 				}
 			}
 		});

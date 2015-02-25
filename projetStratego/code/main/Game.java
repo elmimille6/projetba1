@@ -14,7 +14,7 @@ import pawn.Lake;
  * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
-public class Grid implements java.io.Serializable {
+public class Game implements java.io.Serializable {
 	/**
 	 * 
 	 */
@@ -29,7 +29,7 @@ public class Grid implements java.io.Serializable {
 	 * @param size
 	 *            Size of the grid.
 	 */
-	public Grid(int size) {
+	public Game(int size) {
 		row = size;
 		line = size;
 		grid = new APawn[line][row];
@@ -172,10 +172,10 @@ public class Grid implements java.io.Serializable {
 		}
 	}
 
-	public static Grid load() {
+	public static Game load() {
 		try {
 	        ObjectInputStream in = new ObjectInputStream(new FileInputStream("grid.save"));
-	        Grid grid = (Grid)in.readObject();
+	        Game grid = (Game)in.readObject();
 	        in.close();
 	        return grid;
 	} catch( ClassNotFoundException e1 ) {

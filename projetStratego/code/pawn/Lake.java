@@ -1,6 +1,6 @@
 package pawn;
 
-import main.Grid;
+import main.Game;
 
 /**
 * Lake is the class that creates a "lake" pawn.
@@ -34,7 +34,7 @@ public class Lake extends APawn{
 	 * @return
 	 *    False
 	 */
-	public boolean movePoss(Grid grid,int x, int y){
+	public boolean movePoss(Game grid,int x, int y){
 		return false;
 	}
 }

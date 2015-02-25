@@ -2,7 +2,7 @@ package pawn;
 
 import java.util.Vector;
 
-import main.Grid;
+import main.Game;
 
 /**
  * This class creates a "pawn" object.
@@ -195,7 +195,7 @@ public abstract class APawn implements java.io.Serializable{
 	 * 
 	 * @return true or false
 	 */
-	public boolean movePoss(Grid grid, int x, int y) {
+	public boolean movePoss(Game grid, int x, int y) {
 		APawn target = grid.get(x, y);
 		if (target instanceof Lake) { // test if the target isn't a lake
 			System.out.println(1);
@@ -267,7 +267,7 @@ public abstract class APawn implements java.io.Serializable{
 	 * 
 	 * @return The grid after the move.
 	 */
-	public Grid move(Grid grid, int x, int y) {
+	public Game move(Game grid, int x, int y) {
 		APawn tar = grid.get(x, y);
 		if (tar == null) {// no pawn on the coordinates targeted
 			grid.set(this.posX, this.posY, null);// delete the old coordinates
@@ -300,7 +300,7 @@ public abstract class APawn implements java.io.Serializable{
 	 * @param row
 	 *            coord of the pawn
 	 */
-	public int[] focus(Grid grid) {
+	public int[] focus(Game grid) {
 		int[] arrow = { -1, -1, -1, -1, posX, posY };
 		// System.out.println(focus);
 		if (posX != grid.getLine()) {// check down move

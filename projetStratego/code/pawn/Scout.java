@@ -1,6 +1,6 @@
 package pawn;
 
-import main.Grid;
+import main.Game;
 
 /**
  * Scout is the class that creates a "scout" pawn.
@@ -50,7 +50,7 @@ public class Scout extends APawn {
 	 * @return
 	 *    The grid after the moving.
 	 */
-	public boolean movePoss(Grid grid, int x, int y) {
+	public boolean movePoss(Game grid, int x, int y) {
 		
 		if(x>grid.getLine()){
 //			System.out.println("1");
@@ -119,7 +119,7 @@ public class Scout extends APawn {
 	 * @param grid
 	 *    The grid of the game.
 	 */
-	public int[] focus(Grid grid) { //TODO retourner le nombre de case qu il peut avancer (avec des for)
+	public int[] focus(Game grid) { //TODO retourner le nombre de case qu il peut avancer (avec des for)
 		int[] arrow={-1,-1,-1,-1,posX,posY};
 //		System.out.println(focus);
 		if (posX != grid.getLine()) {// check down move

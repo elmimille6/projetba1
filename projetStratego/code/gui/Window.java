@@ -16,7 +16,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import main.Grid;
+import main.Game;
 import main.GridIA;
 import main.Main;
 
@@ -79,7 +79,7 @@ public class Window extends JFrame {
 
 		testia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Grid grid = new Grid(10);
+				Game grid = new Game(10);
 				grid.setView(2);
 				GridIA gridIA = new GridIA(1);
 				grid.placeTeam(gridIA.getGrid(), 1);
@@ -92,7 +92,7 @@ public class Window extends JFrame {
 		});
 		startSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Grid grid = Grid.load();
+				Game grid = Game.load();
 				grid.showGrid();
 			}
 		});

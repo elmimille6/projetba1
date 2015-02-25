@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import main.Grid;
+import main.Game;
 import pawn.APawn;
 
 /**
@@ -20,7 +20,7 @@ public class WinGame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public PaneGame pane;
 	public int posX, posY;
-	public Grid grid;
+	public Game grid;
 	public APawn focus;
 	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
 	public final int[] arrowN = { -1, -1, -1, -1, -1, -1 };
@@ -31,7 +31,7 @@ public class WinGame extends JFrame {
 	 * 
 	 */
 	@SuppressWarnings("static-access")
-	public WinGame(Grid ngrid) {
+	public WinGame(Game ngrid) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.grid = ngrid;
 

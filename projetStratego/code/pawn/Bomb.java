@@ -1,6 +1,6 @@
 package pawn;
 
-import main.Grid;
+import main.Game;
 
 /**
 * Bomb is the class that creates a "bomb" pawn.
@@ -51,7 +51,7 @@ public class Bomb extends APawn {
 	 * @return
 	 *    False
 	 */
-	public boolean movePoss(Grid grid,int x, int y){
+	public boolean movePoss(Game grid,int x, int y){
 		return false;
 	}
 }

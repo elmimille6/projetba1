@@ -36,7 +36,7 @@ public class Main {
 		
 	}
 	public static void play(){
-		Grid grid = new Grid(10);
+		Game grid = new Game(10);
 //		grid.setView(2);
 		GridIA gridIA = new GridIA(1);
 		grid.placeTeam(gridIA.getGrid(), 1);

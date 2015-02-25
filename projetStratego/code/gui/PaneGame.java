@@ -8,7 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import main.Grid;
+import main.Game;
 import pawn.APawn;
 
 /**
@@ -22,10 +22,10 @@ public class PaneGame extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	public Image img, imgBack;
-	public Grid grid;
+	public Game grid;
 	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
 
-	public PaneGame(Grid grid) {
+	public PaneGame(Game grid) {
 		this.grid = grid;
 
 		
@@ -182,7 +182,7 @@ public class PaneGame extends JPanel {
 	 * @param nouvGrid
 	 * 
 	 */
-	public void recupGrid(Grid nouvGrid) {
+	public void recupGrid(Game nouvGrid) {
 		grid = nouvGrid;
 	}
 

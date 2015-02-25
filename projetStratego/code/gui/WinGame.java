@@ -30,21 +30,17 @@ public class WinGame extends JFrame {
 	 * 
 	 */
 	@SuppressWarnings("static-access")
-	public WinGame() {
+	public WinGame(Grid ngrid) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		grid = new Grid(10);
-		GridIA gridIA = new GridIA(1);
-		grid.placeTeam(gridIA.getGrid(), 1);
-		GridIA gridIA2 = new GridIA(2);
-		grid.placeTeam(gridIA2.getGrid(), 2);
-		grid.showGrid();
+		this.grid = ngrid;
+		
 		pane = new PaneGame(grid);
 		pane.setLayout(new BorderLayout());
 		this.setSize(700, 700);
 		this.setResizable(true);
 		this.setContentPane(pane);
 		this.setVisible(true);
-		this.addMouseListener(new MouseAdapter() {
+		pane.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
 
 				if (e.getButton() == MouseEvent.BUTTON1) {
@@ -53,6 +49,8 @@ public class WinGame extends JFrame {
 					int[] res = getRes(posX, posY);
 					int line = res[0];
 					int row = res[1];
+					System.out.println(line+"   "+row);
+					grid.showGrid();
 					APawn pawn = grid.get(line, row);
 					if (focus != null) {
 						System.out.println("1#");
@@ -94,20 +92,10 @@ public class WinGame extends JFrame {
 	public int[] getRes(int posX, int posY) {
 
 		int[] res = { 0, 0 };
-		for (int i = 1; i <= grid.getLine()+1; i++) {
-			if (posY > (this.getHeight() / (grid.getLine()+1)) * (i - 1)
-					&& posY < (this.getHeight() / (grid.getLine()+1)) * i) {
-				res[0] = i - 1;
-			}
-		}
-		for (int j = 1; j <= grid.getRow()+1; j++) {
-			if (posX > (this.getWidth() / (grid.getRow()+1)) * (j - 1)
-					&& posX < (this.getWidth() /( grid.getRow()+1)) * j) {
-				res[1] = j - 1;
-			}
-		}
-
+		res[1]=(posX-(posX%(pane.getWidth()/(grid.getLine()+1))))/(pane.getWidth()/(grid.getLine()+1));
+		res[0]=(posY-(posY%(pane.getHeight()/(grid.getRow()+1))))/(pane.getHeight()/(grid.getRow()+1));
 		return res;
+		
 	}
 
 	

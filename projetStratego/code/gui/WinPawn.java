@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 //import java.awt.Color;
@@ -11,6 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 
+
+
+
+import main.Game;
+import main.GridIA;
 //import main.Game;
 import main.GridPawn;
 //import main.GridIA;
@@ -78,9 +85,25 @@ public class WinPawn extends JFrame {
 
 		JPanel Center = new JPanel();
 		// Center.setPreferredSize(new Dimension(0, centerHeight));
+		JButton play= new JButton("Play");
 		Center.add(new JButton("Save")); // Save the grid in the 'Saves' folder
-		Center.add(new JButton("OK")); // Save the grid for the game
+		//Center.add(new JButton("OK")); // Lauches the game with the grid
+		Center.add(play);
 		Center.add(new JButton("Load")); // Search save in the 'Saves' folder
+		
+		final JFrame fen= this;
+		
+		play.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Game grid = new Game(10);
+				GridPawn gridPlayer = createGrid();
+				GridIA gridIA = new GridIA(2);
+				grid.placeTeam(gridPlayer.getGrid(), 1);
+				grid.placeTeam(gridIA.getGrid(), 2);
+				fen.dispose();
+				WinGame fenGame = new WinGame(grid);
+			}
+		});
 
 		pane2 = new PanePawn(grid2);
 		pane2.setPreferredSize(new Dimension(0, southHeight));
@@ -104,7 +127,7 @@ public class WinPawn extends JFrame {
 					int row = res[1];
 					APawn pawn = grid2.get(line, row);
 					System.out.println("pawn = " + pawn);
-					getCase(pawn);
+					chooseSquare(pawn);
 					repaint();
 				}
 			}
@@ -204,10 +227,12 @@ public class WinPawn extends JFrame {
 	}
 
 	/**
+	 * Chooses the square where the pawn will be placed.
 	 * 
 	 * @param pawnInit
+	 *            The pawn to place.
 	 */
-	public void getCase(final APawn pawnInit) {
+	public void chooseSquare(final APawn pawnInit) {
 		pane1.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
 				if (e.getButton() == MouseEvent.BUTTON1) {
@@ -216,10 +241,13 @@ public class WinPawn extends JFrame {
 					int[] res = getRes(grid1, pane1, posX, posY);
 					int line = res[0];
 					int row = res[1];
-					// APawn pawn = grid1.get(line, row);
-					System.out.println("line = " + line + " row = " + row);
-					placePawn(pawnInit, line, row);
-					repaint();
+					if (grid1.get(line, row) == null) {
+						System.out.println("line = " + line + " row = " + row);
+						placePawn(pawnInit, line, row);
+						repaint();
+					} else {
+						System.out.println("You can't play here !");
+					}
 				}
 			}
 		});
@@ -251,6 +279,10 @@ public class WinPawn extends JFrame {
 			}
 		}
 		// return grid1;
+	}
+	
+	public GridPawn createGrid() {
+		return grid1;
 	}
 
 }

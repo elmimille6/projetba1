@@ -132,4 +132,13 @@ public class GridPawn {
 	public int getLine() {
 		return line - 1;
 	}
+
+	/**
+	 * Gets the grid.
+	 * 
+	 * @return The grid.
+	 */
+	public APawn[][] getGrid() {
+		return this.grid;
+	}
 }

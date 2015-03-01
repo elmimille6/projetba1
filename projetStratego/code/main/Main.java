@@ -11,7 +11,7 @@ import gui.*;
 public class Main {
 
 	public static void main(String[] args) {
-		// Window fenetre = new Window();
+		 Window fenetre = new Window();
 		// Grid test = new Grid(10);
 		// Grid test = Grid.load();
 		//
@@ -32,7 +32,7 @@ public class Main {
 		// p2.move(test, 2, 2);
 		// test.showGrid();
 		// Window fen = new Window();
-		play();
+		// play();
 
 	}
 
@@ -40,16 +40,26 @@ public class Main {
 	 * 
 	 */
 	public static void play() {
-		Game grid = new Game(10);
-		// grid.setView(2);
-		GridIA gridIA = new GridIA(1);
-		grid.placeTeam(gridIA.getGrid(), 1);
-		GridIA gridIA2 = new GridIA(2);
-		grid.placeTeam(gridIA2.getGrid(), 2);
-		grid.showGrid();
-		// Scout p1 = new Scout(1);
-		// grid.set(4, 0, p1);
-		WinGame fen = new WinGame(grid);
-		//WinPawn fen=new WinPawn();
+		int c = 2;
+		if (c == 1) {
+			Game grid = new Game(10);
+			// grid.setView(2);
+			GridIA gridIA = new GridIA(1);
+			grid.placeTeam(gridIA.getGrid(), 1);
+			GridIA gridIA2 = new GridIA(2);
+			grid.placeTeam(gridIA2.getGrid(), 2);
+			grid.showGrid();
+			// Scout p1 = new Scout(1);
+			// grid.set(4, 0, p1);
+			WinGame fenGame = new WinGame(grid);
+		} else {
+			WinPawn fen = new WinPawn();
+//			Game grid = new Game(10);
+//			GridPawn gridPlayer = fen.createGrid();
+//			GridIA gridIA = new GridIA(2);
+//			grid.placeTeam(gridPlayer.getGrid(), 1);
+//			grid.placeTeam(gridIA.getGrid(), 2);
+//			WinGame fenGame = new WinGame(grid);
+		}
 	}
 }

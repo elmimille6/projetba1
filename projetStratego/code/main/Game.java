@@ -19,7 +19,7 @@ public class Game implements java.io.Serializable {
 	private static final long serialVersionUID = 8927958880942845647L;
 	private APawn[][] grid;
 	private int row, line;
-	public int view = 0, turn = 1, player = 2;
+	public int view = 1, turn = 1, player = 2;
 
 	/**
 	 * Constructor of the grid.

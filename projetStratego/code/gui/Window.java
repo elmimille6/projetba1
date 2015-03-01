@@ -43,7 +43,7 @@ public class Window extends JFrame {
 	private JLabel labPlayer = new JLabel("Nombre de joueur");
 	private JComboBox comboPlayer = new JComboBox();
 
-	private JLabel labIa1 = new JLabel("Niveau de la première ia");
+	private JLabel labIa1 = new JLabel("Niveau de la premiere ia");
 	private JComboBox comboIa1 = new JComboBox();
 
 	private JLabel labIa2 = new JLabel("Niveau de la seconde ia");

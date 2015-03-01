@@ -67,8 +67,8 @@ public class WinGame extends JFrame {
 							jop.showMessageDialog(null,
 									"Joueur "
 											+ (((grid.getTurn() + 1) % 2) + 1)
-											+ " à vous de jouer !",
-									"Tour terminé",
+											+ " a vous de jouer !",
+									"Tour termine",
 									JOptionPane.INFORMATION_MESSAGE);
 							grid.setView((((grid.getTurn() + 1) % 2) + 1));
 							repaint();

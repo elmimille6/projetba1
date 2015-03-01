@@ -85,6 +85,15 @@ public abstract class APawn implements java.io.Serializable {
 	}
 
 	/**
+	 * Get the name of the pawn.
+	 * 
+	 * @return The name of the pawn.
+	 */
+	public String getNamePawn() {
+		return namePawn;
+	}
+
+	/**
 	 * Sets the team of the pawn.
 	 * 
 	 * @param team

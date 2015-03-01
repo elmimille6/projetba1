@@ -49,6 +49,7 @@ public class Main {
 		grid.showGrid();
 		// Scout p1 = new Scout(1);
 		// grid.set(4, 0, p1);
-		WinGame fen = new WinGame(grid);
+		//WinGame fen = new WinGame(grid);
+		WinPawn fen=new WinPawn();
 	}
 }

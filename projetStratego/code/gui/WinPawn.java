@@ -43,39 +43,63 @@ public class WinPawn extends JFrame {
 
 	/**
 	 * 
+	 * @param nbPlayer
+	 *            The number of player: 1 or 2.
+	 * 
+	 * @param nbPawns
+	 *            The number of pawns: 40 for the normal game, 10 for the
+	 *            'duel'.
 	 */
 	public WinPawn(int nbPlayer, int nbPawns) {
 		this.setTitle("Initialisation grille");
-		this.setSize(700, 700);
+		this.setSize(700, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		grid1 = new GridPawn(10, 4);
-		grid2 = new GridPawn(6, 2);
 
-		grid2.set(0, 0, spyInit);
-		grid2.set(0, 1, scoutInit);
-		grid2.set(0, 2, minerInit);
-		grid2.set(0, 3, sergeantInit);
-		grid2.set(0, 4, lieutenantInit);
-		grid2.set(0, 5, captainInit);
-		grid2.set(1, 0, majorInit);
-		grid2.set(1, 1, colonelInit);
-		grid2.set(1, 2, generalInit);
-		grid2.set(1, 3, marshalInit);
-		grid2.set(1, 4, bombInit);
-		grid2.set(1, 5, flagInit);
+		int xSize = ((int) this.getWidth());
+		int ySize = ((int) this.getHeight());
+		this.setSize(xSize, ySize);
+
+		int northHeight = (int) (Math.round(ySize * 0.55)), southHeight = (int) (Math
+				.round(ySize * 0.35));
+
+		if (nbPawns == 40) {
+			grid1 = new GridPawn(10, 4);
+			grid2 = new GridPawn(6, 2);
+
+			grid2.set(0, 0, spyInit);
+			grid2.set(0, 1, scoutInit);
+			grid2.set(0, 2, minerInit);
+			grid2.set(0, 3, sergeantInit);
+			grid2.set(0, 4, lieutenantInit);
+			grid2.set(0, 5, captainInit);
+			grid2.set(1, 0, majorInit);
+			grid2.set(1, 1, colonelInit);
+			grid2.set(1, 2, generalInit);
+			grid2.set(1, 3, marshalInit);
+			grid2.set(1, 4, bombInit);
+			grid2.set(1, 5, flagInit);
+
+		} else if (nbPawns == 10) {
+			grid1 = new GridPawn(8, 3);
+			grid2 = new GridPawn(7, 1);
+
+			northHeight = (int) (Math.round(ySize * 0.65));
+			southHeight = (int) (Math.round(ySize * 0.25));
+
+			grid2.set(0, 0, spyInit);
+			grid2.set(0, 1, scoutInit);
+			grid2.set(0, 2, minerInit);
+			grid2.set(0, 3, generalInit);
+			grid2.set(0, 4, marshalInit);
+			grid2.set(0, 5, bombInit);
+			grid2.set(0, 6, flagInit);
+		}
 
 		grid1.showGrid();
 		this.setLocationRelativeTo(null);
 		// On definit le layout a utiliser sur le content pane
 		this.setLayout(new BorderLayout());
 		// On ajoute le bouton au content pane de la JFrame
-
-		int xSize = ((int) this.getWidth());
-		int ySize = ((int) this.getHeight());
-		this.setSize(xSize, ySize);
-		int northHeight = (int) (Math.round(ySize * 0.55));
-		// int centerHeight = (int) (Math.round(ySize * 0.15));
-		int southHeight = (int) (Math.round(ySize * 0.36));
 
 		pane1 = new PanePawn(grid1);
 		pane1.setPreferredSize(new Dimension(0, northHeight));

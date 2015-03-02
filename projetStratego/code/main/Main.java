@@ -54,6 +54,8 @@ public class Main {
 			WinGame fenGame = new WinGame(grid);
 		} else {
 			WinPawn fen = new WinPawn(1, 40);
+//			WinPawn fen = new WinPawn(1, 10);
+			
 //			Game grid = new Game(10);
 //			GridPawn gridPlayer = fen.createGrid();
 //			GridIA gridIA = new GridIA(2);

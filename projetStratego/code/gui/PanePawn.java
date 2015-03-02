@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import main.Game;
 import main.GridPawn;
 import pawn.APawn;
 
@@ -17,14 +18,15 @@ import pawn.APawn;
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class PanePawn extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	public Image img, imgBack;
 	public GridPawn grid;
-	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
 
+	/**
+	 * 
+	 * @param grid
+	 */
 	public PanePawn(GridPawn grid) {
 		this.grid = grid;
 
@@ -36,14 +38,15 @@ public class PanePawn extends JPanel {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void paintComponent(Graphics g) {
 
 		// dessine le quadrillage
 		int nbrLigne = grid.getLine() + 1;
 		int nbrCol = grid.getRow() + 1;
 
-		// System.out.println(nbrLigne+" ligne");
-		// System.out.println(nbrCol+" col");
 		g.drawImage(imgBack, 0, 0, this.getWidth(), this.getHeight(), this);
 
 		for (int lig = 1; lig < nbrCol; lig++) {
@@ -56,16 +59,12 @@ public class PanePawn extends JPanel {
 		}
 
 		// dessine les images des pions selon la grid
-		int i;
-		int j;
-		for (i = 0; i < (nbrLigne); i++) {
-			for (j = 0; j < (nbrCol); j++) {
+		for (int i = 0; i < (nbrLigne); i++) {
+			for (int j = 0; j < (nbrCol); j++) {
 				if (grid.get(i, j) != null) {
 					APawn pawn = grid.get(i, j);
 					String link = pawn.getURI();
 					java.net.URL uri = getClass().getResource(link);
-					// System.out.println(link);
-					// System.out.println(uri);
 					try {
 						img = ImageIO.read(uri);
 					} catch (IOException e) {
@@ -79,18 +78,4 @@ public class PanePawn extends JPanel {
 			}
 		}
 	}
-
-	/**
-	 * 
-	 * 
-	 * @param nouvGrid
-	 * 
-	 */
-	public void recupGrid(GridPawn nouvGrid) {
-		grid = nouvGrid;
-	}
-
-	// public void recupGame(AGame type){
-	// jeu = type;
-	// }
 }

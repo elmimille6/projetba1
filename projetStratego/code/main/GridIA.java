@@ -15,6 +15,10 @@ public class GridIA {
 	APawn[][] grid;
 	int val = 0;
 
+	public GridIA() {
+		
+	}
+	
 	/**
 	 * Constructor of the grid for the IA.
 	 * 
@@ -89,38 +93,39 @@ public class GridIA {
 			l2 += grid[1][i].getValue();
 			l3 += grid[2][i].getValue();
 			l4 += grid[3][i].getValue();
-			if (grid[2][i] instanceof Flag) {
+			//if (grid[2][i] instanceof Flag) {
+			if (grid[2][i].getClass() == Flag.class) {
 				if (i != 0) {
-					if (grid[2][i - 1] instanceof Bomb
-							|| grid[2][i - 1] instanceof Marshal) {
+					if (grid[2][i - 1].getClass() == Bomb.class
+							|| grid[2][i - 1].getClass() == Marshal.class) {
 						valeur += bonus;
 					}
 					if (i != 9) {
-						if (grid[2][i + 1] instanceof Bomb
-								|| grid[2][i + 1] instanceof Marshal) {
+						if (grid[2][i + 1].getClass() == Bomb.class
+								|| grid[2][i + 1].getClass() == Marshal.class) {
 							valeur += bonus;
 						}
 					}
-					if (grid[1][i] instanceof Bomb
-							|| grid[1][i] instanceof Marshal) {
+					if (grid[1][i].getClass() == Bomb.class
+							|| grid[1][i].getClass() == Marshal.class) {
 						valeur += bonus;
 					}
 				}
 			}
-			if (grid[3][i] instanceof Flag) {
+			if (grid[3][i].getClass() == Flag.class) {
 				if (i != 0) {
-					if (grid[3][i - 1] instanceof Bomb
-							|| grid[3][i - 1] instanceof Marshal) {
+					if (grid[3][i - 1].getClass() == Bomb.class
+							|| grid[3][i - 1].getClass() == Marshal.class) {
 						valeur += bonus;
 					}
 					if (i != 9) {
-						if (grid[3][i + 1] instanceof Bomb
-								|| grid[3][i + 1] instanceof Marshal) {
+						if (grid[3][i + 1].getClass() == Bomb.class
+								|| grid[3][i + 1].getClass() == Marshal.class) {
 							valeur += bonus;
 						}
 					}
-					if (grid[2][i] instanceof Bomb
-							|| grid[2][i] instanceof Marshal) {
+					if (grid[2][i].getClass() == Bomb.class
+							|| grid[2][i].getClass() == Marshal.class) {
 						valeur += bonus;
 					}
 				}

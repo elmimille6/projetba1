@@ -72,11 +72,9 @@ public class PaneGame extends JPanel {
 		}
 
 		// dessine les images des pions selon la grid
-		int i;
-		int j;
 		String link = "/image/red/hide.png";
-		for (i = 0; i < (nbrLigne); i++) {
-			for (j = 0; j < (nbrCol); j++) {
+		for (int i = 0; i < (nbrLigne); i++) {
+			for (int j = 0; j < (nbrCol); j++) {
 				if (grid.get(i, j) != null) {
 
 					APawn pawn = grid.get(i, j);

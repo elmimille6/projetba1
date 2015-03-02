@@ -53,7 +53,7 @@ public class Main {
 			// grid.set(4, 0, p1);
 			WinGame fenGame = new WinGame(grid);
 		} else {
-			WinPawn fen = new WinPawn();
+			WinPawn fen = new WinPawn(1, 40);
 //			Game grid = new Game(10);
 //			GridPawn gridPlayer = fen.createGrid();
 //			GridIA gridIA = new GridIA(2);

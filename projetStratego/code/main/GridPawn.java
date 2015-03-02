@@ -37,7 +37,7 @@ public class GridPawn {
 	 */
 	public void set(int i, int j, APawn x) {
 		grid[i][j] = x;
-		if (x instanceof APawn) {
+		if (x.getClass() == APawn.class) {
 			x.setPos(i, j);
 		}
 	}
@@ -59,32 +59,6 @@ public class GridPawn {
 		System.out.println();
 	}
 
-	// /**
-	// * Check if the pawn can move.
-	// *
-	// * @param i
-	// * Line of the pawn.
-	// *
-	// * @param j
-	// * Column of the pawn.
-	// *
-	// * @return
-	// * A boolean: true or false.
-	// */
-	// public boolean pawnCanMove(int i, int j){
-	// APawn pawn = grid[i][j];
-	// if (pawn!= null){
-	// if (pawn.canMove()){
-	// if (i!=0){
-	// if (grid[i-1][j]==null){
-	// return true;
-	// }
-	// }
-	// }
-	// }
-	// return false;
-	// }
-
 	/**
 	 * Gets the pawn at the given coordinates.
 	 * 
@@ -98,21 +72,6 @@ public class GridPawn {
 	 */
 	public APawn get(int i, int j) {
 		return grid[i][j];
-	}
-
-	/**
-	 * Places the teams on each side of the grid.
-	 * 
-	 * @param tgrid
-	 *            The grid of pawn to place in the grid.
-	 */
-	public void placeTeam(APawn[][] tgrid) {
-		for (int i = 0; i < tgrid.length; i++) {
-			for (int j = 0; j < tgrid[0].length; j++) {
-				// grid[6+i][0+j]=tgrid[i][j];
-				this.set(i, j, tgrid[i][j]);
-			}
-		}
 	}
 
 	/**

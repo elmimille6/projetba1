@@ -13,9 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 
-
-
-
 import main.Game;
 import main.GridIA;
 //import main.Game;
@@ -47,7 +44,7 @@ public class WinPawn extends JFrame {
 	/**
 	 * 
 	 */
-	public WinPawn() {
+	public WinPawn(int nbPlayer, int nbPawns) {
 		this.setTitle("Initialisation grille");
 		this.setSize(700, 700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,14 +82,14 @@ public class WinPawn extends JFrame {
 
 		JPanel Center = new JPanel();
 		// Center.setPreferredSize(new Dimension(0, centerHeight));
-		JButton play= new JButton("Play");
+		JButton play = new JButton("Play");
 		Center.add(new JButton("Save")); // Save the grid in the 'Saves' folder
-		//Center.add(new JButton("OK")); // Lauches the game with the grid
+		// Center.add(new JButton("OK")); // Lauches the game with the grid
 		Center.add(play);
 		Center.add(new JButton("Load")); // Search save in the 'Saves' folder
-		
-		final JFrame fen= this;
-		
+
+		final JFrame fen = this;
+
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Game grid = new Game(10);
@@ -135,31 +132,6 @@ public class WinPawn extends JFrame {
 		});
 
 	}
-
-	/*
-	 * public void placePawn(APawn pawnInit) { for (int i = 0; i < pawns.size();
-	 * i++) { chosen(pawnInit);
-	 */
-	/*
-	 * while (!pawns.isEmpty() && nbPawn > 0 && pawns.elementAt(i).getLevel() ==
-	 * pawnLevel) { System.out.println("Size = " + pawns.size());
-	 * System.out.println("Name = " + pawns.elementAt(i).getName());
-	 * System.out.println("Level = " + pawns.elementAt(i) + "\n"); grid1.set(y,
-	 * x, pawns.elementAt(i)); grid1.showGrid(); pawns.removeElementAt(i);
-	 * nbPawn--; if (y < 3) { y++; } else { y= 0; x++; } }
-	 */
-	/*
-	 * if (!pawns.isEmpty() && nbPawn > 0 && pawns.elementAt(i).getLevel() ==
-	 * pawnLevel) { System.out.println("Size = " + pawns.size()); System.out
-	 * .println("Name = " + pawns.elementAt(i).getNamePawn());
-	 * System.out.println("Level = " + pawns.elementAt(i) + "\n"); grid1.set(y,
-	 * x, pawns.elementAt(i)); grid1.showGrid(); pawns.removeElementAt(i);
-	 * nbPawn--; if (y < 3) { y++; } else { y = 0; x++; } break; } else if
-	 * (nbPawn == 0) {
-	 * System.out.println("The vector doesn't contain this pawn !"); } else if
-	 * (pawns.isEmpty()) { System.out.println("The vector is empty !"); } else
-	 * System.out.println("nbPawn = " + nbPawn); } }
-	 */
 
 	/**
 	 * 
@@ -259,7 +231,7 @@ public class WinPawn extends JFrame {
 	 * @param line
 	 * @param row
 	 */
-	public void /* GridPawn */placePawn(APawn pawnInit, int line, int row) {
+	public void placePawn(APawn pawnInit, int line, int row) {
 		for (int i = 0; i < pawns.size(); i++) {
 			chosen(pawnInit);
 			if (!pawns.isEmpty() && nbPawn > 0
@@ -278,9 +250,8 @@ public class WinPawn extends JFrame {
 				System.out.println("The vector is empty !");
 			}
 		}
-		// return grid1;
 	}
-	
+
 	public GridPawn createGrid() {
 		return grid1;
 	}

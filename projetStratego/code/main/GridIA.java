@@ -16,9 +16,9 @@ public class GridIA {
 	int val = 0;
 
 	public GridIA() {
-		
+
 	}
-	
+
 	/**
 	 * Constructor of the grid for the IA.
 	 * 
@@ -62,7 +62,8 @@ public class GridIA {
 	 */
 	public static APawn[][] createGrid(int team) {
 		APawn[][] grid = new APawn[4][10];
-		Vector<APawn> listPawn = APawn.createTeam(team);
+		Vector<APawn> listPawn = APawn.createTeam(team, 40); // 40 if 40 pawns,
+																// 10 if duel
 		while (!listPawn.isEmpty()) {
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 10; j++) {
@@ -93,7 +94,7 @@ public class GridIA {
 			l2 += grid[1][i].getValue();
 			l3 += grid[2][i].getValue();
 			l4 += grid[3][i].getValue();
-			//if (grid[2][i] instanceof Flag) {
+			// if (grid[2][i] instanceof Flag) {
 			if (grid[2][i].getClass() == Flag.class) {
 				if (i != 0) {
 					if (grid[2][i - 1].getClass() == Bomb.class

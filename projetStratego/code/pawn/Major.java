@@ -12,6 +12,7 @@ public class Major extends APawn {
 	 */
 	public Major() {
 		setLevelPawn(7);
+		setNbPawn(3);
 		setNamePawn("major");
 		setValue(this.levelPawn * 10);
 	}
@@ -24,6 +25,7 @@ public class Major extends APawn {
 	 */
 	public Major(int team) {
 		setLevelPawn(7);
+		setNbPawn(3);
 		setNamePawn("major");
 		setTeam(team);
 		setValue(this.levelPawn * 10);

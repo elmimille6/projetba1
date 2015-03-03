@@ -12,6 +12,7 @@ public class Sergeant extends APawn {
 	 */
 	public Sergeant() {
 		setLevelPawn(4);
+		setNbPawn(4);
 		setNamePawn("sergeant");
 		setValue(this.levelPawn * 10);
 	}
@@ -24,6 +25,7 @@ public class Sergeant extends APawn {
 	 */
 	public Sergeant(int team) {
 		setLevelPawn(4);
+		setNbPawn(4);
 		setNamePawn("sergeant");
 		setTeam(team);
 		setValue(this.levelPawn * 10);

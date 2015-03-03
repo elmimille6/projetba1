@@ -14,6 +14,7 @@ public class Scout extends APawn {
 	 */
 	public Scout() {
 		setLevelPawn(2);
+		setNbPawn(8);
 		setNamePawn("scout");
 		setValue(this.levelPawn * 10);
 	}
@@ -26,6 +27,7 @@ public class Scout extends APawn {
 	 */
 	public Scout(int team) {
 		setLevelPawn(2);
+		setNbPawn(8);
 		setNamePawn("scout");
 		setTeam(team);
 		setValue(this.levelPawn * 10);

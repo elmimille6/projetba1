@@ -12,6 +12,7 @@ public class Miner extends APawn {
 	 */
 	public Miner() {
 		setLevelPawn(3);
+		setNbPawn(5);
 		setNamePawn("miner");
 		setValue(this.levelPawn * 10);
 	}
@@ -24,6 +25,7 @@ public class Miner extends APawn {
 	 */
 	public Miner(int team) {
 		setLevelPawn(3);
+		setNbPawn(5);
 		setNamePawn("miner");
 		setTeam(team);
 		setValue(this.levelPawn * 10);

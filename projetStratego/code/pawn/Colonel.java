@@ -12,6 +12,7 @@ public class Colonel extends APawn {
 	 */
 	public Colonel() {
 		setLevelPawn(8);
+		setNbPawn(2);
 		setNamePawn("colonel");
 		setValue(this.levelPawn * 10);
 	}
@@ -24,6 +25,7 @@ public class Colonel extends APawn {
 	 */
 	public Colonel(int team) {
 		setLevelPawn(8);
+		setNbPawn(2);
 		setNamePawn("colonel");
 		setTeam(team);
 		setValue(this.levelPawn * 10);

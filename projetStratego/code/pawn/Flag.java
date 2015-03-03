@@ -14,6 +14,7 @@ public class Flag extends APawn {
 	 */
 	public Flag() {
 		setLevelPawn(-6);
+		setNbPawn(1);
 		setNamePawn("flag");
 		setValue(400);
 	}
@@ -25,7 +26,8 @@ public class Flag extends APawn {
 	 *            Team of the pawn, must be 1 or 2.
 	 */
 	public Flag(int team) {
-		setLevelPawn(12);
+		setLevelPawn(-6);
+		setNbPawn(1);
 		setNamePawn("flag");
 		setTeam(team);
 		setValue(400);

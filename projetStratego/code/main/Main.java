@@ -54,7 +54,7 @@ public class Main {
 			WinGame fenGame = new WinGame(grid);
 		} else {
 			WinPawn fen = new WinPawn(1, 40);
-//			WinPawn fen = new WinPawn(1, 10);
+//			WinPawn fen = new WinPawn(1, 10); // 10 = Stratego Duel
 			
 //			Game grid = new Game(10);
 //			GridPawn gridPlayer = fen.createGrid();

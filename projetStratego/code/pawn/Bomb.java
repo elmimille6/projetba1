@@ -14,6 +14,7 @@ public class Bomb extends APawn {
 	 */
 	public Bomb() {
 		setLevelPawn(11);
+		setNbPawn(6);
 		setNamePawn("bomb");
 		setValue(this.levelPawn * 10);
 	}
@@ -26,6 +27,7 @@ public class Bomb extends APawn {
 	 */
 	public Bomb(int team) {
 		setLevelPawn(11);
+		setNbPawn(6);
 		setNamePawn("bomb");
 		setTeam(team);
 		setValue(this.levelPawn * 10);

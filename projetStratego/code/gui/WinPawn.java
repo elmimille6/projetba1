@@ -25,7 +25,7 @@ public class WinPawn extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public GridPawn grid1, grid2;
 	public PanePawn pane1, pane2;
-	public Vector<APawn> pawns = APawn.createTeam(1);
+	public Vector<APawn> pawns = APawn.createTeam(1, 40);
 	public APawn spyInit = new Spy(1), scoutInit = new Scout(1),
 			minerInit = new Miner(1);
 	public APawn sergeantInit = new Sergeant(1),
@@ -35,13 +35,14 @@ public class WinPawn extends JFrame {
 	public APawn generalInit = new General(1), marshalInit = new Marshal(1),
 			bombInit = new Bomb(1);
 	public APawn flagInit = new Flag(1);
-	public int nbPawn = 0, pawnLevel = 0;
+	public int nbPawn;
 	public int x = 0, y = 0;
 
 	public int posX, posY;
 	public APawn focus;
 
 	/**
+	 * This method initializes the window where the player creates his grid.
 	 * 
 	 * @param nbPlayer
 	 *            The number of player: 1 or 2.
@@ -80,6 +81,7 @@ public class WinPawn extends JFrame {
 			grid2.set(1, 5, flagInit);
 
 		} else if (nbPawns == 10) {
+			pawns = APawn.createTeam(1, 10);
 			grid1 = new GridPawn(8, 3);
 			grid2 = new GridPawn(7, 1);
 
@@ -88,10 +90,13 @@ public class WinPawn extends JFrame {
 
 			grid2.set(0, 0, spyInit);
 			grid2.set(0, 1, scoutInit);
+			scoutInit.setNbPawn(2);
 			grid2.set(0, 2, minerInit);
+			minerInit.setNbPawn(2);
 			grid2.set(0, 3, generalInit);
 			grid2.set(0, 4, marshalInit);
 			grid2.set(0, 5, bombInit);
+			bombInit.setNbPawn(2);
 			grid2.set(0, 6, flagInit);
 		}
 
@@ -147,7 +152,7 @@ public class WinPawn extends JFrame {
 					int line = res[0];
 					int row = res[1];
 					APawn pawn = grid2.get(line, row);
-					System.out.println("pawn = " + pawn);
+					// System.out.println("pawn = " + pawn);
 					chooseSquare(pawn);
 					repaint();
 				}
@@ -155,50 +160,6 @@ public class WinPawn extends JFrame {
 
 		});
 
-	}
-
-	/**
-	 * 
-	 * @param pawn
-	 */
-	public void chosen(APawn pawn) {
-		if (spyInit.getLevel() == pawn.getLevel()) {
-			nbPawn = 1;
-			pawnLevel = spyInit.getLevel();
-		} else if (scoutInit.getLevel() == pawn.getLevel()) {
-			nbPawn = 8;
-			pawnLevel = scoutInit.getLevel();
-		} else if (minerInit.getLevel() == pawn.getLevel()) {
-			nbPawn = 5;
-			pawnLevel = minerInit.getLevel();
-		} else if (sergeantInit.getLevel() == pawn.getLevel()) {
-			nbPawn = 4;
-			pawnLevel = sergeantInit.getLevel();
-		} else if (lieutenantInit.getLevel() == pawn.getLevel()) {
-			nbPawn = 4;
-			pawnLevel = lieutenantInit.getLevel();
-		} else if (captainInit.getLevel() == pawn.getLevel()) {
-			nbPawn = 4;
-			pawnLevel = captainInit.getLevel();
-		} else if (majorInit.getLevel() == pawn.getLevel()) {
-			nbPawn = 3;
-			pawnLevel = majorInit.getLevel();
-		} else if (colonelInit.getLevel() == pawn.getLevel()) {
-			nbPawn = 2;
-			pawnLevel = colonelInit.getLevel();
-		} else if (generalInit.getLevel() == pawn.getLevel()) {
-			nbPawn = 1;
-			pawnLevel = generalInit.getLevel();
-		} else if (marshalInit.getLevel() == pawn.getLevel()) {
-			nbPawn = 1;
-			pawnLevel = marshalInit.getLevel();
-		} else if (bombInit.getLevel() == pawn.getLevel()) {
-			nbPawn = 6;
-			pawnLevel = bombInit.getLevel();
-		} else {
-			nbPawn = 1;
-			pawnLevel = flagInit.getLevel();
-		}
 	}
 
 	/**
@@ -238,7 +199,8 @@ public class WinPawn extends JFrame {
 					int line = res[0];
 					int row = res[1];
 					if (grid1.get(line, row) == null) {
-						System.out.println("line = " + line + " row = " + row);
+						// System.out.println("line = " + line + " row = " +
+						// row);
 						placePawn(pawnInit, line, row);
 						repaint();
 					} else {
@@ -256,22 +218,29 @@ public class WinPawn extends JFrame {
 	 * @param row
 	 */
 	public void placePawn(APawn pawnInit, int line, int row) {
+		//chosenPawn(pawnInit);
 		for (int i = 0; i < pawns.size(); i++) {
-			chosen(pawnInit);
-			if (!pawns.isEmpty() && nbPawn > 0
-					&& pawns.elementAt(i).getLevel() == pawnLevel) {
-				System.out.println("Size = " + pawns.size());
+			if (!pawns.isEmpty() && pawnInit.getNbPawn() > 0
+					&& pawns.elementAt(i).getLevel() == pawnInit.getLevel()) {
+				// System.out.println("Size = " + pawns.size());
 				System.out
 						.println("Name = " + pawns.elementAt(i).getNamePawn());
-				System.out.println("Level = " + pawns.elementAt(i) + "\n");
+				//
+				// System.out.println("Size = " + pawns.size());
 				grid1.set(line, row, pawns.elementAt(i));
 				grid1.showGrid();
 				pawns.removeElementAt(i);
-				nbPawn--;
+				nbPawn = pawnInit.getNbPawn();
+				pawnInit.setNbPawn(--nbPawn);
+				System.out.println(pawnInit.getNbPawn());
 				break;
 			}
 			if (pawns.size() == 1) {
 				System.out.println("The vector is empty !");
+				break;
+			} else if (pawnInit.getNbPawn() == 0) {
+				System.out.println("You don't have this pawn anymore !");
+				break;
 			}
 		}
 	}
@@ -279,5 +248,7 @@ public class WinPawn extends JFrame {
 	public GridPawn createGrid() {
 		return grid1;
 	}
+
+	/* regarder pour décrémenter nbPawn */
 
 }

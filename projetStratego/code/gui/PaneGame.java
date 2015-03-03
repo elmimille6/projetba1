@@ -31,7 +31,6 @@ public class PaneGame extends JPanel {
 	 */
 	public PaneGame(Game grid) {
 		this.grid = grid;
-
 	}
 
 	/**

@@ -281,7 +281,7 @@ public abstract class APawn implements java.io.Serializable {
 	 *         3 if tar is the flag.
 	 */
 	public int attack(APawn tar) {
-		if (tar.getLevel() == 12)
+		if (tar.getLevel() == -6)
 			return 3;
 		if (tar.getLevel() == this.levelPawn)
 			return 0;

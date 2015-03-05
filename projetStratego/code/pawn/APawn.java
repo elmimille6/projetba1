@@ -394,4 +394,33 @@ public abstract class APawn implements java.io.Serializable {
 		}
 		return arrow;
 	}
+	
+	/**
+	 * test if the pawn can move in the grid in any direction
+	 * @param grid the grid of the game
+	 * @return true or false
+	 */
+	public boolean canMove(Game grid){
+		if(this.posX!=0){
+			if(this.movePoss(grid, posX-1, posY)){
+				return true;
+			}
+		}
+		if(this.posX!=grid.getLine()-1){
+			if(this.movePoss(grid, posX+1, posY)){
+				return true;
+			}
+		}
+		if(this.posY!=0){
+			if(this.movePoss(grid, posX, posY-1)){
+				return true;
+			}
+		}
+		if(this.posX!=grid.getRow()-1){
+			if(this.movePoss(grid, posX, posY+1)){
+				return true;
+			}
+		}
+		return false;
+	}
 }

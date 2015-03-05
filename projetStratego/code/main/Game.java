@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import pawn.APawn;
+import pawn.Flag;
 import pawn.Lake;
 
 /**
@@ -252,5 +253,40 @@ public class Game implements java.io.Serializable {
 	 */
 	public void setPlayer(int players) {
 		this.player = players;
+	}
+	/**
+	 * check if the game is over and if so, return the number of the player who win
+	 * @return 0 if the game isnt over <br/>1 if player 1 win <br/> 2 if player 2 win
+	 */
+	public int win(){
+		boolean pla=false;
+		boolean fla1=false;
+		boolean fla2=false;
+		for(int i = 0;i<line;i++){
+			for(int j = 0; j<row;j++){
+				APawn pawn= grid[i][j];
+				if(pawn.getTeam()==((turn + 1) % 2) + 1){
+					if(pawn.canMove(this)){
+						pla=true;
+					}
+				}
+				if(pawn instanceof Flag && pawn.getTeam()==1){
+					fla1=true;
+				}
+				if(pawn instanceof Flag && pawn.getTeam()==2){
+					fla2=true;
+				}
+			}
+		}
+		if(!pla){
+			return ((turn) % 2) + 1;
+		}
+		if(!fla1){
+			return 2;
+		}
+		if(!fla2){
+			return 1;
+		}
+		return 0;
 	}
 }

@@ -37,7 +37,7 @@ public class GridPawn {
 	 */
 	public void set(int i, int j, APawn x) {
 		grid[i][j] = x;
-		if (x.getClass() == APawn.class) {
+		if (x != null && x.getClass() == APawn.class) {
 			x.setPos(i, j);
 		}
 	}

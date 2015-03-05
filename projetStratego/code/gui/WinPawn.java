@@ -203,19 +203,39 @@ public class WinPawn extends JFrame {
 					} else {
 						System.out.println("You can't play here !");
 					}
+				} else if (e.getButton() == MouseEvent.BUTTON3) {
+					posX = e.getX();
+					posY = e.getY();
+					int[] res = getRes(grid1, pane1, posX, posY);
+					int line = res[0];
+					int row = res[1];
+					if (grid1.get(line, row) == null) {
+						System.out.println("You can't delete here !");
+					} else {
+						// System.out.println("line = " + line + " row = " +
+						// row);
+						deletePawn(pawnInit, line, row);
+						repaint();
+					}
 				}
 			}
 		});
 	}
 
 	/**
+	 * Places the pawn at the given coordinates.
 	 * 
 	 * @param pawnInit
+	 *            The type of the pawn to place.
+	 * 
 	 * @param line
+	 *            The line of the pawn.
+	 * 
 	 * @param row
+	 *            The row of the pawn.
 	 */
 	public void placePawn(APawn pawnInit, int line, int row) {
-		//chosenPawn(pawnInit);
+		// chosenPawn(pawnInit);
 		for (int i = 0; i < pawns.size(); i++) {
 			if (!pawns.isEmpty() && pawnInit.getNbPawn() > 0
 					&& pawns.elementAt(i).getLevel() == pawnInit.getLevel()) {
@@ -229,7 +249,7 @@ public class WinPawn extends JFrame {
 				pawns.removeElementAt(i);
 				nbPawn = pawnInit.getNbPawn();
 				pawnInit.setNbPawn(--nbPawn);
-				System.out.println(pawnInit.getNbPawn());
+				System.out.println("NbPawn = " + pawnInit.getNbPawn());
 				break;
 			}
 			if (pawns.size() == 1) {
@@ -242,6 +262,35 @@ public class WinPawn extends JFrame {
 		}
 	}
 
+	/**
+	 * Deletes the pawn at the given coordinates.
+	 * 
+	 * @param pawnInit
+	 *            The type of the pawn to delete.
+	 * 
+	 * @param line
+	 *            The line of the pawn.
+	 * 
+	 * @param row
+	 *            The row of the pawn.
+	 */
+	public void deletePawn(APawn pawnInit, int line, int row) {
+		System.out.println("Size = " + pawns.size());
+		APawn pawn = grid1.get(line, row);
+		System.out.println("Name = " + pawn.getNamePawn());
+		System.out.println("Size = " + pawns.size());
+		grid1.set(line, row, null);
+		grid1.showGrid();
+		pawns.add(pawn);
+		nbPawn = pawnInit.getNbPawn();
+		pawnInit.setNbPawn(++nbPawn);
+		System.out.println("NbPawn = " + pawnInit.getNbPawn());
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
 	public GridPawn createGrid() {
 		return grid1;
 	}

@@ -7,7 +7,7 @@ import pawn.*;
  *
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
-public class GridPawn {
+public class GridPawn{
 	private APawn[][] grid;
 	private int row, line;
 

@@ -150,7 +150,8 @@ public class WinPawn extends JFrame {
 					int row = res[1];
 					APawn pawn = grid2.get(line, row);
 					// System.out.println("pawn = " + pawn);
-					chooseSquare(pawn);
+					// chooseSquare(pawn);
+					chooseSquare(chosenPawn(pawn));
 					repaint();
 				}
 			}
@@ -178,6 +179,39 @@ public class WinPawn extends JFrame {
 		res[0] = (posY - (posY % (pane.getHeight() / (grid.getLine() + 1))))
 				/ (pane.getHeight() / (grid.getLine() + 1));
 		return res;
+	}
+
+	/**
+	 * 
+	 * @param pawn
+	 * @return
+	 */
+	public APawn chosenPawn(APawn pawn) {
+		APawn pawnInit = spyInit;
+		if (pawn.getClass() == scoutInit.getClass()) {
+			pawnInit = scoutInit;
+		} else if (pawn.getClass() == minerInit.getClass()) {
+			pawnInit = minerInit;
+		} else if (pawn.getClass() == sergeantInit.getClass()) {
+			pawnInit = sergeantInit;
+		} else if (pawn.getClass() == lieutenantInit.getClass()) {
+			pawnInit = lieutenantInit;
+		} else if (pawn.getClass() == captainInit.getClass()) {
+			pawnInit = captainInit;
+		} else if (pawn.getClass() == majorInit.getClass()) {
+			pawnInit = majorInit;
+		} else if (pawn.getClass() == colonelInit.getClass()) {
+			pawnInit = colonelInit;
+		} else if (pawn.getClass() == generalInit.getClass()) {
+			pawnInit = generalInit;
+		} else if (pawn.getClass() == marshalInit.getClass()) {
+			pawnInit = marshalInit;
+		} else if (pawn.getClass() == bombInit.getClass()) {
+			pawnInit = bombInit;
+		} else if (pawn.getClass() == flagInit.getClass()) {
+			pawnInit = flagInit;
+		}
+		return pawnInit;
 	}
 
 	/**
@@ -214,7 +248,8 @@ public class WinPawn extends JFrame {
 					} else {
 						// System.out.println("line = " + line + " row = " +
 						// row);
-						deletePawn(pawnInit, line, row);
+						APawn pawn = grid1.get(line, row);
+						deletePawn(chosenPawn(pawn), line, row);
 						repaint();
 					}
 				}
@@ -256,6 +291,8 @@ public class WinPawn extends JFrame {
 				System.out.println("The vector is empty !");
 				break;
 			} else if (pawnInit.getNbPawn() == 0) {
+				System.out.println("Name = " + pawnInit.getNamePawn());
+				System.out.println("NbPawn = " + pawnInit.getNbPawn());
 				System.out.println("You don't have this pawn anymore !");
 				break;
 			}
@@ -274,17 +311,19 @@ public class WinPawn extends JFrame {
 	 * @param row
 	 *            The row of the pawn.
 	 */
-	public void deletePawn(APawn pawnInit, int line, int row) {
-		System.out.println("Size = " + pawns.size());
-		APawn pawn = grid1.get(line, row);
+	public void deletePawn(APawn pawn, int line, int row) {
+		// System.out.println("Size = " + pawns.size());
+		// APawn pawn = grid1.get(line, row);
+		System.out.println("line = " + line + " row = " + row);
 		System.out.println("Name = " + pawn.getNamePawn());
-		System.out.println("Size = " + pawns.size());
 		grid1.set(line, row, null);
 		grid1.showGrid();
 		pawns.add(pawn);
-		nbPawn = pawnInit.getNbPawn();
-		pawnInit.setNbPawn(++nbPawn);
-		System.out.println("NbPawn = " + pawnInit.getNbPawn());
+		nbPawn = pawn.getNbPawn();
+		pawn.setNbPawn(++nbPawn);
+		System.out.println("Name = " + pawn.getNamePawn());
+		System.out.println("NbPawn = " + pawn.getNbPawn());
+		// System.out.println("Size = " + pawns.size());
 	}
 
 	/**

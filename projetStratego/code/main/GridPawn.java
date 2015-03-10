@@ -7,21 +7,11 @@ import pawn.*;
  *
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
-public class GridPawn{
+public class GridPawn extends Game {
+
+	private static final long serialVersionUID = 1L;
 	private APawn[][] grid;
 	private int row, line;
-
-	/**
-	 * Constructor of the grid.
-	 * 
-	 * @param size
-	 *            Size of the grid.
-	 */
-	public GridPawn(int rowSize, int lineSize) {
-		row = rowSize;
-		line = lineSize;
-		grid = new APawn[line][row];
-	}
 
 	/**
 	 * Puts the pawn on the grid.
@@ -40,23 +30,6 @@ public class GridPawn{
 		if (x != null && x.getClass() == APawn.class) {
 			x.setPos(i, j);
 		}
-	}
-
-	/**
-	 * Displays the grid.
-	 */
-	public void showGrid() {
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[0].length; j++) {
-				if (grid[i][j] == null) {
-					System.out.print("n     ");
-				} else {
-					System.out.print(grid[i][j] + "    ");
-				}
-			}
-			System.out.println();
-		}
-		System.out.println();
 	}
 
 	/**
@@ -90,14 +63,5 @@ public class GridPawn{
 	 */
 	public int getLine() {
 		return line - 1;
-	}
-
-	/**
-	 * Gets the grid.
-	 * 
-	 * @return The grid.
-	 */
-	public APawn[][] getGrid() {
-		return this.grid;
 	}
 }

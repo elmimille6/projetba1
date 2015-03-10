@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import main.Game;
 import pawn.APawn;
@@ -28,6 +29,13 @@ public class WinGame extends JFrame {
 	JOptionPane jop;
 
 	/**
+	 * Main constructor of the class.
+	 */
+	public WinGame() {
+
+	}
+
+	/**
 	 * 
 	 */
 	@SuppressWarnings("static-access")
@@ -47,7 +55,7 @@ public class WinGame extends JFrame {
 						&& grid.getPlayer() == 2) {
 					posX = e.getX();
 					posY = e.getY();
-					int[] res = getRes(posX, posY);
+					int[] res = getRes(grid, pane, posX, posY);
 					int line = res[0];
 					int row = res[1];
 					grid.showGrid();
@@ -108,7 +116,7 @@ public class WinGame extends JFrame {
 	 * 
 	 * @return An array with the abscissa and the ordinate in the grid.
 	 */
-	public int[] getRes(int posX, int posY) {
+	public int[] getRes(Game grid, JPanel pane, int posX, int posY) {
 
 		int[] res = { 0, 0 };
 		res[1] = (posX - (posX % (pane.getWidth() / (grid.getRow() + 1))))

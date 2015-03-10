@@ -42,7 +42,7 @@ public class Main {
 	public static void play() {
 		int c = 2;
 		if (c == 1) {
-			Game grid = new Game(10);
+			Game grid = new Game(10, 1);
 			// grid.setView(2);
 			GridIA gridIA = new GridIA(1);
 			grid.placeTeam(gridIA.getGrid(), 1);

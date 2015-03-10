@@ -79,7 +79,7 @@ public class Window extends JFrame {
 
 		testia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Game grid = new Game(10);
+				Game grid = new Game(10, 1);
 				grid.setView(2);
 				GridIA gridIA = new GridIA(1);
 				grid.placeTeam(gridIA.getGrid(), 1);
@@ -253,7 +253,7 @@ public class Window extends JFrame {
 	}
 
 	/**
-	 * 
+	 * Enables the player(s) to move the pawns.
 	 */
 	public void tryEnable() {
 		if (game != 0) {

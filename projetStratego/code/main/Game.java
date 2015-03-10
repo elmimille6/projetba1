@@ -23,24 +23,63 @@ public class Game implements java.io.Serializable {
 	public int view = 1, turn = 1, player = 2;
 
 	/**
+	 * Main constructor of the class.
+	 */
+	public Game() {
+
+	}
+
+	/**
+	 * Constructor of the grid.
+	 * 
+	 * @param rowNumber
+	 *            The number of rows.
+	 * 
+	 * @param lineNumber
+	 *            The number of lines.
+	 * 
+	 * @param gameMode
+	 *            The mode of the current game: 0 if placement of the pawns <br/>
+	 *            1 if original Stratego <br/>
+	 *            and 2 if Stratego Duel.
+	 */
+	public Game(int rowNumber, int lineNumber, int gameMode) {
+		row = rowNumber;
+		line = lineNumber;
+		grid = new APawn[line][row];
+		if (gameMode == 1) {
+			APawn lake = new Lake();
+			grid[4][2] = lake;
+			grid[4][3] = lake;
+			grid[5][2] = lake;
+			grid[5][3] = lake;
+			grid[4][6] = lake;
+			grid[4][7] = lake;
+			grid[5][6] = lake;
+			grid[5][7] = lake;
+		} else if (gameMode == 2) {
+			APawn lake = new Lake();
+			grid[3][2] = lake;
+			grid[4][2] = lake;
+			grid[3][5] = lake;
+			grid[4][5] = lake;
+		}
+	}
+
+	/**
 	 * Constructor of the grid.
 	 * 
 	 * @param size
 	 *            Size of the grid.
+	 * 
+	 * @param gameMode
+	 *            The mode of the current game: 0 if placement of the pawns <br/>
+	 *            1 if original Stratego <br/>
+	 *            and 2 if Stratego Duel.
 	 */
-	public Game(int size) {
-		row = size;
-		line = size;
-		grid = new APawn[line][row];
-		APawn lake = new Lake();
-		grid[4][2] = lake;
-		grid[4][3] = lake;
-		grid[5][2] = lake;
-		grid[5][3] = lake;
-		grid[4][6] = lake;
-		grid[4][7] = lake;
-		grid[5][6] = lake;
-		grid[5][7] = lake;
+	public Game(int size, int gameMode) {
+		this(size, size, gameMode);
+		System.out.println("gameMode = " + gameMode);
 	}
 
 	/**
@@ -78,32 +117,6 @@ public class Game implements java.io.Serializable {
 		}
 		System.out.println();
 	}
-
-	// /**
-	// * Check if the pawn can move.
-	// *
-	// * @param i
-	// * Line of the pawn.
-	// *
-	// * @param j
-	// * Column of the pawn.
-	// *
-	// * @return
-	// * A boolean: true or false.
-	// */
-	// public boolean pawnCanMove(int i, int j){
-	// APawn pawn = grid[i][j];
-	// if (pawn!= null){
-	// if (pawn.canMove()){
-	// if (i!=0){
-	// if (grid[i-1][j]==null){
-	// return true;
-	// }
-	// }
-	// }
-	// }
-	// return false;
-	// }
 
 	/**
 	 * Places the teams on each side of the grid.
@@ -202,6 +215,15 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
+	 * Gets the grid.
+	 * 
+	 * @return The grid.
+	 */
+	public APawn[][] getGrid() {
+		return this.grid;
+	}
+
+	/**
 	 * Gets the view.
 	 * 
 	 * @return The value of view.
@@ -254,37 +276,42 @@ public class Game implements java.io.Serializable {
 	public void setPlayer(int players) {
 		this.player = players;
 	}
+
 	/**
-	 * check if the game is over and if so, return the number of the player who win
-	 * @return 0 if the game isnt over <br/>1 if player 1 win <br/> 2 if player 2 win
+	 * Checks if the game is over and if so, return the number of the player who
+	 * win.
+	 * 
+	 * @return 0 if the game isn't over <br/>
+	 *         1 if player 1 win <br/>
+	 *         2 if player 2 win.
 	 */
-	public int win(){
-		boolean pla=false;
-		boolean fla1=false;
-		boolean fla2=false;
-		for(int i = 0;i<line;i++){
-			for(int j = 0; j<row;j++){
-				APawn pawn= grid[i][j];
-				if(pawn.getTeam()==((turn + 1) % 2) + 1){
-					if(pawn.canMove(this)){
-						pla=true;
+	public int win() {
+		boolean pla = false;
+		boolean fla1 = false;
+		boolean fla2 = false;
+		for (int i = 0; i < line; i++) {
+			for (int j = 0; j < row; j++) {
+				APawn pawn = grid[i][j];
+				if (pawn.getTeam() == ((turn + 1) % 2) + 1) {
+					if (pawn.canMove(this)) {
+						pla = true;
 					}
 				}
-				if(pawn instanceof Flag && pawn.getTeam()==1){
-					fla1=true;
+				if (pawn instanceof Flag && pawn.getTeam() == 1) {
+					fla1 = true;
 				}
-				if(pawn instanceof Flag && pawn.getTeam()==2){
-					fla2=true;
+				if (pawn instanceof Flag && pawn.getTeam() == 2) {
+					fla2 = true;
 				}
 			}
 		}
-		if(!pla){
+		if (!pla) {
 			return ((turn) % 2) + 1;
 		}
-		if(!fla1){
+		if (!fla1) {
 			return 2;
 		}
-		if(!fla2){
+		if (!fla2) {
 			return 1;
 		}
 		return 0;

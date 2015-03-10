@@ -17,21 +17,18 @@ import main.GridIA;
 import main.GridPawn;
 import pawn.*;
 
-public class WinPawn extends JFrame {
+public class WinPawn extends WinGame {
 
 	private static final long serialVersionUID = 1L;
-	public GridPawn grid1, grid2;
+	public Game grid1, grid2;
 	public PanePawn pane1, pane2;
 	public Vector<APawn> pawns = APawn.createTeam(1, 40);
 	public APawn spyInit = new Spy(1), scoutInit = new Scout(1),
-			minerInit = new Miner(1);
-	public APawn sergeantInit = new Sergeant(1),
-			lieutenantInit = new Lieutenant(1);
-	public APawn captainInit = new Captain(1), majorInit = new Major(1),
-			colonelInit = new Colonel(1);
-	public APawn generalInit = new General(1), marshalInit = new Marshal(1),
-			bombInit = new Bomb(1);
-	public APawn flagInit = new Flag(1);
+			minerInit = new Miner(1), sergeantInit = new Sergeant(1),
+			lieutenantInit = new Lieutenant(1), captainInit = new Captain(1),
+			majorInit = new Major(1), colonelInit = new Colonel(1),
+			generalInit = new General(1), marshalInit = new Marshal(1),
+			bombInit = new Bomb(1), flagInit = new Flag(1);
 	public int nbPawn;
 	public int x = 0, y = 0;
 
@@ -61,8 +58,8 @@ public class WinPawn extends JFrame {
 				.round(ySize * 0.35));
 
 		if (nbPawns == 40) {
-			grid1 = new GridPawn(10, 4);
-			grid2 = new GridPawn(6, 2);
+			grid1 = new Game(10, 4, 0);
+			grid2 = new Game(6, 2, 0);
 
 			grid2.set(0, 0, spyInit);
 			grid2.set(0, 1, scoutInit);
@@ -79,8 +76,8 @@ public class WinPawn extends JFrame {
 
 		} else if (nbPawns == 10) {
 			pawns = APawn.createTeam(1, 10);
-			grid1 = new GridPawn(8, 3);
-			grid2 = new GridPawn(7, 1);
+			grid1 = new Game(8, 3, 0);
+			grid2 = new Game(7, 1, 0);
 
 			northHeight = (int) (Math.round(ySize * 0.65));
 			southHeight = (int) (Math.round(ySize * 0.25));
@@ -118,8 +115,8 @@ public class WinPawn extends JFrame {
 
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Game grid = new Game(10);
-				GridPawn gridPlayer = createGrid();
+				Game grid = new Game(10, 1);
+				Game gridPlayer = createGrid();
 				GridIA gridIA = new GridIA(2);
 				grid.placeTeam(gridPlayer.getGrid(), 1);
 				grid.placeTeam(gridIA.getGrid(), 2);
@@ -150,7 +147,6 @@ public class WinPawn extends JFrame {
 					int row = res[1];
 					APawn pawn = grid2.get(line, row);
 					// System.out.println("pawn = " + pawn);
-					// chooseSquare(pawn);
 					chooseSquare(chosenPawn(pawn));
 					repaint();
 				}
@@ -161,30 +157,13 @@ public class WinPawn extends JFrame {
 	}
 
 	/**
-	 * Transforms the coordinates of the cursor into coordinates of the grid.
-	 * 
-	 * @param posX
-	 *            The abscissa of the cursor.
-	 * 
-	 * @param posY
-	 *            The ordinate of the cursor.
-	 * 
-	 * @return An array with the abscissa and the ordinate in the grid.
-	 */
-	public int[] getRes(GridPawn grid, PanePawn pane, int posX, int posY) {
-
-		int[] res = { 0, 0 };
-		res[1] = (posX - (posX % (pane.getWidth() / (grid.getRow() + 1))))
-				/ (pane.getWidth() / (grid.getRow() + 1));
-		res[0] = (posY - (posY % (pane.getHeight() / (grid.getLine() + 1))))
-				/ (pane.getHeight() / (grid.getLine() + 1));
-		return res;
-	}
-
-	/**
+	 * Returns the chosen pawn: this pawn is used for the count of each class of
+	 * pawn.
 	 * 
 	 * @param pawn
-	 * @return
+	 *            A pawn of the class of the pawnInit expected.
+	 * 
+	 * @return The pawnInit expected.
 	 */
 	public APawn chosenPawn(APawn pawn) {
 		APawn pawnInit = spyInit;
@@ -229,13 +208,13 @@ public class WinPawn extends JFrame {
 					int[] res = getRes(grid1, pane1, posX, posY);
 					int line = res[0];
 					int row = res[1];
-					if (grid1.get(line, row) == null) {
+					if (grid1.get(line, row) != null) {
+						System.out.println("You can't play here !");
+					} else {
 						// System.out.println("line = " + line + " row = " +
 						// row);
 						placePawn(pawnInit, line, row);
 						repaint();
-					} else {
-						System.out.println("You can't play here !");
 					}
 				} else if (e.getButton() == MouseEvent.BUTTON3) {
 					posX = e.getX();
@@ -270,13 +249,21 @@ public class WinPawn extends JFrame {
 	 *            The row of the pawn.
 	 */
 	public void placePawn(APawn pawnInit, int line, int row) {
-		// chosenPawn(pawnInit);
 		for (int i = 0; i < pawns.size(); i++) {
+			if (pawns.size() == 0) {
+				System.out.println("The vector is empty !");
+				break;
+			} else if (pawnInit.getNbPawn() == 0) {
+				System.out.println("Name = " + pawnInit.getNamePawn());
+				System.out.println("NbPawn = " + pawnInit.getNbPawn());
+				System.out.println("You don't have this pawn anymore !");
+				break;
+			}
 			if (!pawns.isEmpty() && pawnInit.getNbPawn() > 0
 					&& pawns.elementAt(i).getLevel() == pawnInit.getLevel()) {
 				// System.out.println("Size = " + pawns.size());
-				System.out
-						.println("Name = " + pawns.elementAt(i).getNamePawn());
+				// System.out
+				// .println("Name = " + pawns.elementAt(i).getNamePawn());
 				//
 				// System.out.println("Size = " + pawns.size());
 				grid1.set(line, row, pawns.elementAt(i));
@@ -284,16 +271,7 @@ public class WinPawn extends JFrame {
 				pawns.removeElementAt(i);
 				nbPawn = pawnInit.getNbPawn();
 				pawnInit.setNbPawn(--nbPawn);
-				System.out.println("NbPawn = " + pawnInit.getNbPawn());
-				break;
-			}
-			if (pawns.size() == 1) {
-				System.out.println("The vector is empty !");
-				break;
-			} else if (pawnInit.getNbPawn() == 0) {
-				System.out.println("Name = " + pawnInit.getNamePawn());
-				System.out.println("NbPawn = " + pawnInit.getNbPawn());
-				System.out.println("You don't have this pawn anymore !");
+				// System.out.println("NbPawn = " + pawnInit.getNbPawn());
 				break;
 			}
 		}
@@ -321,19 +299,17 @@ public class WinPawn extends JFrame {
 		pawns.add(pawn);
 		nbPawn = pawn.getNbPawn();
 		pawn.setNbPawn(++nbPawn);
-		System.out.println("Name = " + pawn.getNamePawn());
-		System.out.println("NbPawn = " + pawn.getNbPawn());
-		// System.out.println("Size = " + pawns.size());
+		// System.out.println("Name = " + pawn.getNamePawn());
+		// System.out.println("NbPawn = " + pawn.getNbPawn());
+		// // System.out.println("Size = " + pawns.size());
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public GridPawn createGrid() {
+	public Game createGrid() {
 		return grid1;
 	}
-
-	/* regarder pour décrémenter nbPawn */
 
 }

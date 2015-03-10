@@ -24,7 +24,7 @@ public class PaneGame extends JPanel {
 	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
 
 	/**
-	 * 
+	 * Constructor of the class.
 	 * 
 	 * @param grid
 	 *            The grid.

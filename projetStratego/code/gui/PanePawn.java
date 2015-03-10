@@ -21,13 +21,15 @@ public class PanePawn extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public Image img, imgBack;
-	public GridPawn grid;
+	public Game grid;
 
 	/**
+	 * Constructor of the class.
 	 * 
 	 * @param grid
+	 *            The grid.
 	 */
-	public PanePawn(GridPawn grid) {
+	public PanePawn(Game grid) {
 		this.grid = grid;
 
 		try {

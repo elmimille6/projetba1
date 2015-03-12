@@ -333,7 +333,7 @@ public abstract class APawn implements java.io.Serializable {
 	}
 
 	/**
-	 * Focus a pawn and check if move is available for him, store the result
+	 * Focus a pawn and checks if move is available for him, stores the result
 	 * into the array 'arrow'
 	 * 
 	 * @param line

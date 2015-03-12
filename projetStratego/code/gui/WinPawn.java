@@ -9,12 +9,13 @@ import java.awt.Dimension;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 
 import main.Game;
 import main.GridIA;
-import main.GridPawn;
+//import main.GridPawn;
 import pawn.*;
 
 public class WinPawn extends WinGame {
@@ -34,6 +35,7 @@ public class WinPawn extends WinGame {
 
 	public int posX, posY;
 	public APawn focus;
+	JOptionPane jop1, jop2;
 
 	/**
 	 * This method initializes the window where the player creates his grid.
@@ -45,6 +47,7 @@ public class WinPawn extends WinGame {
 	 *            The number of pawns: 40 for the normal game, 10 for the
 	 *            'duel'.
 	 */
+	@SuppressWarnings("static-access")
 	public WinPawn(int nbPlayer, int nbPawns) {
 		this.setTitle("Initialisation grille");
 		this.setSize(700, 600);
@@ -115,13 +118,29 @@ public class WinPawn extends WinGame {
 
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Game grid = new Game(10, 1);
-				Game gridPlayer = createGrid();
-				GridIA gridIA = new GridIA(2);
-				grid.placeTeam(gridPlayer.getGrid(), 1);
-				grid.placeTeam(gridIA.getGrid(), 2);
-				fen.dispose();
-				WinGame fenGame = new WinGame(grid);
+				if (!pawns.isEmpty()) {
+					// System.out
+					// .println("You don't have positioned all your pawns.");
+					jop1 = new JOptionPane();
+					jop1.showMessageDialog(null,
+							"You don't have positioned all your pawns.",
+							"Warning", JOptionPane.WARNING_MESSAGE);
+				} else if (!canPlay()) {
+					// System.out
+					// .println("Make sure you can move at least one pawn.");
+					jop2 = new JOptionPane();
+					jop2.showMessageDialog(null,
+							"Make sure you can move at least one pawn.",
+							"Warning", JOptionPane.WARNING_MESSAGE);
+				} else {
+					Game grid = new Game(10, 1);
+					Game gridPlayer = createGrid();
+					GridIA gridIA = new GridIA(2);
+					grid.placeTeam(gridPlayer.getGrid(), 1);
+					grid.placeTeam(gridIA.getGrid(), 2);
+					fen.dispose();
+					WinGame fenGame = new WinGame(grid);
+				}
 			}
 		});
 
@@ -154,6 +173,27 @@ public class WinPawn extends WinGame {
 
 		});
 
+	}
+
+	/**
+	 * Verifies if the player can move at least one pawn at the beginning of the
+	 * game.
+	 * 
+	 * @return true if the player can move, <br/>
+	 *         false otherwise.
+	 */
+	public boolean canPlay() {
+		int i = 0, j = 0;
+		while (i < 10) {
+			if (i != 0 && (i % 2 == 0)) {
+				i += 2;
+			}
+			if (grid1.get(0, i).getClass() == bombInit.getClass()) {
+				j++;
+			}
+			i++;
+		}
+		return j != 6;
 	}
 
 	/**

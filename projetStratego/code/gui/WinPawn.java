@@ -34,7 +34,7 @@ public class WinPawn extends WinGame {
 	public int x = 0, y = 0;
 
 	public int posX, posY;
-	public APawn focus;
+	public APawn currentPawn;
 	JOptionPane jop1, jop2;
 
 	/**
@@ -166,6 +166,7 @@ public class WinPawn extends WinGame {
 					int row = res[1];
 					APawn pawn = grid2.get(line, row);
 					// System.out.println("pawn = " + pawn);
+					currentPawn = pawn;
 					chooseSquare(chosenPawn(pawn));
 					repaint();
 				}
@@ -242,34 +243,36 @@ public class WinPawn extends WinGame {
 	public void chooseSquare(final APawn pawnInit) {
 		pane1.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
-				if (e.getButton() == MouseEvent.BUTTON1) {
-					posX = e.getX();
-					posY = e.getY();
-					int[] res = getRes(grid1, pane1, posX, posY);
-					int line = res[0];
-					int row = res[1];
-					if (grid1.get(line, row) != null) {
-						System.out.println("You can't play here !");
-					} else {
-						// System.out.println("line = " + line + " row = " +
-						// row);
-						placePawn(pawnInit, line, row);
-						repaint();
-					}
-				} else if (e.getButton() == MouseEvent.BUTTON3) {
-					posX = e.getX();
-					posY = e.getY();
-					int[] res = getRes(grid1, pane1, posX, posY);
-					int line = res[0];
-					int row = res[1];
-					if (grid1.get(line, row) == null) {
-						System.out.println("You can't delete here !");
-					} else {
-						// System.out.println("line = " + line + " row = " +
-						// row);
-						APawn pawn = grid1.get(line, row);
-						deletePawn(chosenPawn(pawn), line, row);
-						repaint();
+				if (pawnInit.getClass() == currentPawn.getClass()) {
+					if (e.getButton() == MouseEvent.BUTTON1) {
+						posX = e.getX();
+						posY = e.getY();
+						int[] res = getRes(grid1, pane1, posX, posY);
+						int line = res[0];
+						int row = res[1];
+						if (grid1.get(line, row) != null) {
+							System.out.println("You can't play here !");
+						} else {
+							// System.out.println("line = " + line + " row = " +
+							// row);
+							placePawn(pawnInit, line, row);
+							repaint();
+						}
+					} else if (e.getButton() == MouseEvent.BUTTON3) {
+						posX = e.getX();
+						posY = e.getY();
+						int[] res = getRes(grid1, pane1, posX, posY);
+						int line = res[0];
+						int row = res[1];
+						if (grid1.get(line, row) == null) {
+							System.out.println("You can't delete here !");
+						} else {
+							// System.out.println("line = " + line + " row = " +
+							// row);
+							APawn pawn = grid1.get(line, row);
+							deletePawn(chosenPawn(pawn), line, row);
+							repaint();
+						}
 					}
 				}
 			}

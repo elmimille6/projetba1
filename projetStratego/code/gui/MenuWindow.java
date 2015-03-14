@@ -21,13 +21,12 @@ import main.Game;
 import main.GridIA;
 import main.Main;
 
-@SuppressWarnings("rawtypes")
 /**
- * This class creates a window.
+ * This class creates a menu window.
  *
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
-public class Window extends JFrame {
+public class MenuWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar = new JMenuBar();
@@ -40,20 +39,30 @@ public class Window extends JFrame {
 	private JLabel labJeu = new JLabel("Jeu");
 
 	private JComboBox comboJeu = new JComboBox();
+
 	private JLabel labPlayer = new JLabel("Nombre de joueur");
 	private JComboBox comboPlayer = new JComboBox();
+
+	private JLabel labInit = new JLabel("Initialiser pions");
+	private JComboBox comboInit = new JComboBox();
+
+	private JLabel labType = new JLabel("Type de jeu");
+	private JComboBox comboType = new JComboBox();
 
 	private JLabel labIa1 = new JLabel("Niveau de la premiere ia");
 	private JComboBox comboIa1 = new JComboBox();
 
 	private JLabel labIa2 = new JLabel("Niveau de la seconde ia");
 	private JComboBox comboIa2 = new JComboBox();
+
 	private JButton goBtn = new JButton("Lancer la partie!");
 
 	private JPanel container = new JPanel();
 
-	public int game = 1, nbrPlayer = 2, lvl1 = 0, lvl2 = 0, test = 1,
-			modifGrid = 0;
+	public int game = 1, nbrPlayer = 1, lvl1 = 0, lvl2 = 0, test = 1,
+			modifGrid = 0, typeOfGame = 40;
+
+	public boolean initGridGame = true;
 
 	private JCheckBoxMenuItem changeGrid = new JCheckBoxMenuItem(
 			"modifier la taille de la grille");
@@ -61,13 +70,12 @@ public class Window extends JFrame {
 	/**
 	 * Creates the 'Menu' window.
 	 */
-	@SuppressWarnings("unchecked")
-	public Window() {
+	public MenuWindow() {
 		this.setResizable(true);
 		this.setSize(500, 554);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.setTitle("Projet");
+		this.setTitle("Menu");
 		this.setBackground(Color.GREEN);
 		this.setContentPane(container);
 
@@ -107,7 +115,7 @@ public class Window extends JFrame {
 		this.setJMenuBar(menuBar);
 
 		container.setBackground(Color.white);
-		container.setLayout(new GridLayout(5, 1));
+		container.setLayout(new GridLayout(6, 1));
 
 		comboJeu.setPreferredSize(new Dimension(100, 20));
 
@@ -124,17 +132,34 @@ public class Window extends JFrame {
 		JPanel panPlayer = new JPanel();
 		panPlayer.add(labPlayer);
 		panPlayer.add(comboPlayer);
-		comboPlayer.addItem("2 Joueur");
 		comboPlayer.addItem("1 Joueur");
+		comboPlayer.addItem("2 Joueur");
 		comboPlayer.addItem("0 Joueur");
 		comboPlayer.addActionListener(new ItemActionPlayer());
 		comboPlayer.setPreferredSize(new Dimension(100, 20));
 		comboPlayer.setEnabled(true);
 
-		JPanel panSlide1 = new JPanel();
+		JPanel panInit = new JPanel();
+		panInit.add(labInit);
+		panInit.add(comboInit);
+		comboInit.addItem("Oui");
+		comboInit.addItem("Non");
+		comboInit.addActionListener(new ItemActionInit());
+		comboInit.setPreferredSize(new Dimension(100, 20));
+		comboInit.setEnabled(true);
 
-		panSlide1.add(labIa1);
-		panSlide1.add(comboIa1);
+		JPanel panType = new JPanel();
+		panType.add(labType);
+		panType.add(comboType);
+		comboType.addItem("Normal");
+		comboType.addItem("Duel");
+		comboType.addActionListener(new ItemActionType());
+		comboType.setPreferredSize(new Dimension(100, 20));
+		comboType.setEnabled(true);
+
+		JPanel panIA1 = new JPanel();
+		panIA1.add(labIa1);
+		panIA1.add(comboIa1);
 		comboIa1.addItem("niveau facile");
 		comboIa1.addItem("niveau moyen");
 		comboIa1.addItem("niveau difficile");
@@ -142,9 +167,9 @@ public class Window extends JFrame {
 		comboIa1.setPreferredSize(new Dimension(100, 20));
 		comboIa1.setEnabled(false);
 
-		JPanel panSlide2 = new JPanel();
-		panSlide2.add(labIa2);
-		panSlide2.add(comboIa2);
+		JPanel panIA2 = new JPanel();
+		panIA2.add(labIa2);
+		panIA2.add(comboIa2);
 		comboIa2.addItem("niveau facile");
 		comboIa2.addItem("niveau moyen");
 		comboIa2.addItem("niveau difficile");
@@ -180,31 +205,33 @@ public class Window extends JFrame {
 
 		// container.add(panGame);
 		container.add(panPlayer);
-		container.add(panSlide1);
-		container.add(panSlide2);
+		container.add(panInit);
+		container.add(panType);
+		container.add(panIA1);
+		container.add(panIA2);
 		container.add(panBtn);
 
 		this.setVisible(true);
 	}
 
-	class ItemActionGame implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			if (comboJeu.getSelectedItem() == "Tic Tac Toe") {
-				game = 1;
-				changeGrid.setEnabled(false);
-			} else if (comboJeu.getSelectedItem() == "Puissance 4") {
-				game = 2;
-				changeGrid.setEnabled(true);
-			} else if (comboJeu.getSelectedItem() == "Othello") {
-				game = 3;
-				changeGrid.setEnabled(true);
-			} else {
-				game = 0;
-				changeGrid.setEnabled(false);
-			}
-			tryEnable();
-		}
-	}
+	// class ItemActionGame implements ActionListener {
+	// public void actionPerformed(ActionEvent e) {
+	// if (comboJeu.getSelectedItem() == "Tic Tac Toe") {
+	// game = 1;
+	// changeGrid.setEnabled(false);
+	// } else if (comboJeu.getSelectedItem() == "Puissance 4") {
+	// game = 2;
+	// changeGrid.setEnabled(true);
+	// } else if (comboJeu.getSelectedItem() == "Othello") {
+	// game = 3;
+	// changeGrid.setEnabled(true);
+	// } else {
+	// game = 0;
+	// changeGrid.setEnabled(false);
+	// }
+	// tryEnable();
+	// }
+	// }
 
 	class ItemActionPlayer implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -215,7 +242,29 @@ public class Window extends JFrame {
 			} else if (comboPlayer.getSelectedItem() == "0 Joueur") {
 				nbrPlayer = 0;
 			} else {
-				nbrPlayer = 2;
+				nbrPlayer = 1;
+			}
+			tryEnable();
+		}
+	}
+
+	class ItemActionInit implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (comboInit.getSelectedItem() == "Oui") {
+				initGridGame = true;
+			} else {
+				initGridGame = false;
+			}
+			tryEnable();
+		}
+	}
+
+	class ItemActionType implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (comboType.getSelectedItem() == "Normal") {
+				typeOfGame = 40;
+			} else {
+				typeOfGame = 10;
 			}
 			tryEnable();
 		}
@@ -266,5 +315,32 @@ public class Window extends JFrame {
 		if (nbrPlayer == 1 || nbrPlayer == 0) {
 			comboIa1.setEnabled(true);
 		}
+	}
+
+	/**
+	 * Gets the number of players.
+	 * 
+	 * @return The number of players.
+	 */
+	public int getNbrPlayer() {
+		return nbrPlayer;
+	}
+
+	/**
+	 * Gets the number of players.
+	 * 
+	 * @return The number of players.
+	 */
+	public boolean getInitGridGame() {
+		return initGridGame;
+	}
+
+	/**
+	 * Gets the type of the game.
+	 * 
+	 * @return The type of the game.
+	 */
+	public int getTypeOfGame() {
+		return typeOfGame;
 	}
 }

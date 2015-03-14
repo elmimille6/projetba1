@@ -8,6 +8,11 @@ package pawn;
 public class Sergeant extends APawn {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Main constructor of the sergeant pawn.
 	 */
 	public Sergeant() {

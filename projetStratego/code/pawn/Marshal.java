@@ -8,6 +8,11 @@ package pawn;
 public class Marshal extends APawn {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Main constructor of the marshal pawn.
 	 */
 	public Marshal() {

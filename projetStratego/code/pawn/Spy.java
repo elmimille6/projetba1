@@ -8,6 +8,11 @@ package pawn;
 public class Spy extends APawn {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Main constructor of the spy pawn.
 	 */
 	public Spy() {

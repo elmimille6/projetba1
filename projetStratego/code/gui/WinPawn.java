@@ -48,7 +48,7 @@ public class WinPawn extends WinGame {
 	 *            'duel'.
 	 */
 	@SuppressWarnings("static-access")
-	public WinPawn(int nbPlayer, int nbPawns) {
+	public WinPawn(int nbPlayer, final int nbPawns) {
 		this.setTitle("Initialisation grille");
 		this.setSize(700, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -125,7 +125,7 @@ public class WinPawn extends WinGame {
 					jop1.showMessageDialog(null,
 							"You don't have positioned all your pawns.",
 							"Warning", JOptionPane.WARNING_MESSAGE);
-				} else if (!canPlay()) {
+				} else if (nbPawns != 10 && !canPlay()) {
 					// System.out
 					// .println("Make sure you can move at least one pawn.");
 					jop2 = new JOptionPane();

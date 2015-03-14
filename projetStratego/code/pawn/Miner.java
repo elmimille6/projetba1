@@ -8,6 +8,11 @@ package pawn;
 public class Miner extends APawn {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Main constructor of the miner pawn.
 	 */
 	public Miner() {

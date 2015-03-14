@@ -10,6 +10,11 @@ import main.Game;
 public class Scout extends APawn {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Main Constructor of the scout pawn.
 	 */
 	public Scout() {

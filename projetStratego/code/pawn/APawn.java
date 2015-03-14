@@ -426,14 +426,15 @@ public abstract class APawn implements java.io.Serializable {
 		for (int j = 0; j < grid.getLine() + 1; j++) {
 			for (int i = 0; i < grid.getRow() + 1; i++) {
 				currentPawn = grid.getPawn(i, j);
-				if (currentPawn != null
-						&& currentPawn.getClass() != Flag.getClass()
-						&& currentPawn.getClass() != Bomb.getClass()
-						&& currentPawn.getClass() != Lake.getClass()) {
-					if (currentPawn.getTeam() == 1) {
-						nbPawn1++;
-					} else {
-						nbPawn2++;
+				if (currentPawn != null) {
+					if (currentPawn.getClass() != Flag.getClass()
+							&& currentPawn.getClass() != Bomb.getClass()
+							&& currentPawn.getClass() != Lake.getClass()) {
+						if (currentPawn.getTeam() == 1) {
+							nbPawn1++;
+						} else {
+							nbPawn2++;
+						}
 					}
 				}
 			}

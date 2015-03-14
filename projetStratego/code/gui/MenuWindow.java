@@ -43,16 +43,16 @@ public class MenuWindow extends JFrame {
 	private JLabel labPlayer = new JLabel("Nombre de joueur");
 	private JComboBox comboPlayer = new JComboBox();
 
-	private JLabel labInit = new JLabel("Initialiser des pions");
+	private JLabel labInit = new JLabel("Initialisation des pions");
 	private JComboBox comboInit = new JComboBox();
 
 	private JLabel labType = new JLabel("Type de jeu");
 	private JComboBox comboType = new JComboBox();
 
-	private JLabel labIa1 = new JLabel("Niveau de la premiere ia");
+	private JLabel labIa1 = new JLabel("Niveau de la premiere IA");
 	private JComboBox comboIa1 = new JComboBox();
 
-	private JLabel labIa2 = new JLabel("Niveau de la seconde ia");
+	private JLabel labIa2 = new JLabel("Niveau de la seconde IA");
 	private JComboBox comboIa2 = new JComboBox();
 
 	private JButton goBtn = new JButton("Lancer la partie!");
@@ -133,10 +133,10 @@ public class MenuWindow extends JFrame {
 		panPlayer.add(labPlayer);
 		panPlayer.add(comboPlayer);
 		comboPlayer.addItem("1 Joueur");
-		comboPlayer.addItem("2 Joueur");
+		comboPlayer.addItem("2 Joueurs");
 		comboPlayer.addItem("0 Joueur");
 		comboPlayer.addActionListener(new ItemActionPlayer());
-		comboPlayer.setPreferredSize(new Dimension(100, 20));
+		comboPlayer.setPreferredSize(new Dimension(130, 20));
 		comboPlayer.setEnabled(true);
 
 		JPanel panInit = new JPanel();
@@ -145,7 +145,7 @@ public class MenuWindow extends JFrame {
 		comboInit.addItem("Automatique");
 		comboInit.addItem("Manuelle");
 		comboInit.addActionListener(new ItemActionInit());
-		comboInit.setPreferredSize(new Dimension(100, 20));
+		comboInit.setPreferredSize(new Dimension(140, 20));
 		comboInit.setEnabled(true);
 
 		JPanel panType = new JPanel();
@@ -160,21 +160,21 @@ public class MenuWindow extends JFrame {
 		JPanel panIA1 = new JPanel();
 		panIA1.add(labIa1);
 		panIA1.add(comboIa1);
-		comboIa1.addItem("niveau facile");
-		comboIa1.addItem("niveau moyen");
-		comboIa1.addItem("niveau difficile");
+		comboIa1.addItem("Niveau facile");
+		comboIa1.addItem("Niveau moyen");
+		comboIa1.addItem("Niveau difficile");
 		comboIa1.addActionListener(new ItemActionIa1());
-		comboIa1.setPreferredSize(new Dimension(100, 20));
+		comboIa1.setPreferredSize(new Dimension(150, 20));
 		comboIa1.setEnabled(false);
 
 		JPanel panIA2 = new JPanel();
 		panIA2.add(labIa2);
 		panIA2.add(comboIa2);
-		comboIa2.addItem("niveau facile");
-		comboIa2.addItem("niveau moyen");
-		comboIa2.addItem("niveau difficile");
+		comboIa2.addItem("Niveau facile");
+		comboIa2.addItem("Niveau moyen");
+		comboIa2.addItem("Niveau difficile");
 		comboIa2.addActionListener(new ItemActionIa2());
-		comboIa2.setPreferredSize(new Dimension(100, 20));
+		comboIa2.setPreferredSize(new Dimension(150, 20));
 		comboIa2.setEnabled(false);
 
 		JPanel panBtn = new JPanel();
@@ -235,7 +235,7 @@ public class MenuWindow extends JFrame {
 
 	class ItemActionPlayer implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (comboPlayer.getSelectedItem() == "2 Joueur") {
+			if (comboPlayer.getSelectedItem() == "2 Joueurs") {
 				nbrPlayer = 2;
 			} else if (comboPlayer.getSelectedItem() == "1 Joueur") {
 				nbrPlayer = 1;

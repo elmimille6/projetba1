@@ -155,7 +155,7 @@ public class WinGame extends JFrame {
 						winner = pawn.canMove(grid, pawn);
 						canPlay = false;
 					}
-					System.out.println("winnerddd = "+ pawn.canMove(grid, pawn));
+					//System.out.println("winnerddd = "+ pawn.canMove(grid, pawn));
 					if (pawn.getClass() == Flag.getClass()
 							&& pawn.getTeam() == 1) {
 						System.out.println("Flag 1");

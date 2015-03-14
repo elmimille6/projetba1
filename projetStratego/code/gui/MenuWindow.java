@@ -43,7 +43,7 @@ public class MenuWindow extends JFrame {
 	private JLabel labPlayer = new JLabel("Nombre de joueur");
 	private JComboBox comboPlayer = new JComboBox();
 
-	private JLabel labInit = new JLabel("Initialiser pions");
+	private JLabel labInit = new JLabel("Initialiser des pions");
 	private JComboBox comboInit = new JComboBox();
 
 	private JLabel labType = new JLabel("Type de jeu");
@@ -62,7 +62,7 @@ public class MenuWindow extends JFrame {
 	public int game = 1, nbrPlayer = 1, lvl1 = 0, lvl2 = 0, test = 1,
 			modifGrid = 0, typeOfGame = 40;
 
-	public boolean initGridGame = true;
+	public boolean initGridGame = false;
 
 	private JCheckBoxMenuItem changeGrid = new JCheckBoxMenuItem(
 			"modifier la taille de la grille");
@@ -142,8 +142,8 @@ public class MenuWindow extends JFrame {
 		JPanel panInit = new JPanel();
 		panInit.add(labInit);
 		panInit.add(comboInit);
-		comboInit.addItem("Oui");
-		comboInit.addItem("Non");
+		comboInit.addItem("Automatique");
+		comboInit.addItem("Manuelle");
 		comboInit.addActionListener(new ItemActionInit());
 		comboInit.setPreferredSize(new Dimension(100, 20));
 		comboInit.setEnabled(true);
@@ -250,7 +250,7 @@ public class MenuWindow extends JFrame {
 
 	class ItemActionInit implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (comboInit.getSelectedItem() == "Oui") {
+			if (comboInit.getSelectedItem() == "Manuelle") {
 				initGridGame = true;
 			} else {
 				initGridGame = false;

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import main.Game;
 import pawn.APawn;
+import pawn.Flag;
 
 /**
  * 
@@ -26,7 +27,7 @@ public class WinGame extends JFrame {
 	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
 	public final int[] arrowN = { -1, -1, -1, -1, -1, -1 };
 	public boolean att = false;
-	JOptionPane jop;
+	JOptionPane jop, jopWin;
 
 	/**
 	 * Main constructor of the class.
@@ -59,7 +60,7 @@ public class WinGame extends JFrame {
 					int line = res[0];
 					int row = res[1];
 					grid.showGrid();
-					APawn pawn = grid.get(line, row);
+					APawn pawn = grid.getPawn(line, row);
 					System.out.println("pawn= " + pawn);
 					System.out.println("focus= " + focus);
 					if (focus != null) {
@@ -67,19 +68,31 @@ public class WinGame extends JFrame {
 							grid = focus.move(grid, line, row);
 							att = true;
 							grid.addTurn();
-							grid.setView(3);
 							pane.recupArrow(arrowN);
 							focus = null;
 							repaint();
-							jop = new JOptionPane();
-							jop.showMessageDialog(null,
-									"Joueur "
-											+ (((grid.getTurn() + 1) % 2) + 1)
-											+ " a vous de jouer !",
-									"Tour termine",
-									JOptionPane.INFORMATION_MESSAGE);
-							grid.setView((((grid.getTurn() + 1) % 2) + 1));
-							repaint();
+							System.out.println("Result = " + win());
+							if (win() != 0) {
+								grid.setView(0);
+								repaint();
+								jopWin = new JOptionPane();
+								jopWin.showMessageDialog(null, "Le joueur "
+										+ win() + " gagne !", "Resultat",
+										JOptionPane.INFORMATION_MESSAGE);
+							} else {
+								grid.setView(3);
+
+								jop = new JOptionPane();
+								jop.showMessageDialog(
+										null,
+										"Joueur "
+												+ (((grid.getTurn() + 1) % 2) + 1)
+												+ " a vous de jouer !",
+										"Tour termine",
+										JOptionPane.INFORMATION_MESSAGE);
+								grid.setView((((grid.getTurn() + 1) % 2) + 1));
+								repaint();
+							}
 						}
 					}
 					if (pawn != null) {
@@ -125,6 +138,51 @@ public class WinGame extends JFrame {
 				/ (pane.getHeight() / (grid.getLine() + 1));
 		return res;
 
+	}
+
+	public int win() {
+		boolean canPlay = true;
+		boolean flag1 = false;
+		boolean flag2 = false;
+		int winner = 0;
+		APawn Flag = new Flag(1);
+		for (int j = 0; j < grid.getLine() + 1; j++) {
+			for (int i = 0; i < grid.getRow() + 1; i++) {
+				APawn pawn = grid.getPawn(i, j);
+
+				if (pawn != null) {
+					if (pawn.canMove(grid, pawn) != 0) {
+						winner = pawn.canMove(grid, pawn);
+						canPlay = false;
+					}
+					System.out.println("winnerddd = "+ pawn.canMove(grid, pawn));
+					if (pawn.getClass() == Flag.getClass()
+							&& pawn.getTeam() == 1) {
+						System.out.println("Flag 1");
+						flag1 = true;
+					}
+					if (pawn.getClass() == Flag.getClass()
+							&& pawn.getTeam() == 2) {
+						System.out.println("Flag 2");
+						flag2 = true;
+					}
+				}
+			}
+		}
+
+		if (!canPlay) {
+			//return ((turn) % 2) + 1;
+			System.out.println("winner = " + winner);
+			return winner;
+		}
+
+		if (!flag1) {
+			return 2;
+		}
+		if (!flag2) {
+			return 1;
+		}
+		return 0;
 	}
 
 }

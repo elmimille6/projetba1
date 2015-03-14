@@ -192,7 +192,7 @@ public class Game implements java.io.Serializable {
 	 * 
 	 * @return Pawn at the given coordinates.
 	 */
-	public APawn get(int i, int j) {
+	public APawn getPawn(int i, int j) {
 		return grid[i][j];
 	}
 
@@ -287,31 +287,31 @@ public class Game implements java.io.Serializable {
 	 */
 	public int win() {
 		boolean pla = false;
-		boolean fla1 = false;
-		boolean fla2 = false;
+		boolean flag1 = false;
+		boolean flag2 = false;
 		for (int i = 0; i < line; i++) {
 			for (int j = 0; j < row; j++) {
 				APawn pawn = grid[i][j];
 				if (pawn.getTeam() == ((turn + 1) % 2) + 1) {
-					if (pawn.canMove(this)) {
-						pla = true;
-					}
+//					if (pawn.canMove(this)) {
+//						pla = true;
+//					}
 				}
 				if (pawn instanceof Flag && pawn.getTeam() == 1) {
-					fla1 = true;
+					flag1 = true;
 				}
 				if (pawn instanceof Flag && pawn.getTeam() == 2) {
-					fla2 = true;
+					flag2 = true;
 				}
 			}
 		}
 		if (!pla) {
 			return ((turn) % 2) + 1;
 		}
-		if (!fla1) {
+		if (!flag1) {
 			return 2;
 		}
-		if (!fla2) {
+		if (!flag2) {
 			return 1;
 		}
 		return 0;

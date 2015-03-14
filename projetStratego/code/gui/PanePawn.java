@@ -63,8 +63,8 @@ public class PanePawn extends JPanel {
 		// dessine les images des pions selon la grid
 		for (int i = 0; i < (nbrLigne); i++) {
 			for (int j = 0; j < (nbrCol); j++) {
-				if (grid.get(i, j) != null) {
-					APawn pawn = grid.get(i, j);
+				if (grid.getPawn(i, j) != null) {
+					APawn pawn = grid.getPawn(i, j);
 					String link = pawn.getURI();
 					java.net.URL uri = getClass().getResource(link);
 					try {

@@ -237,7 +237,7 @@ public abstract class APawn implements java.io.Serializable {
 	 * @return true or false
 	 */
 	public boolean movePoss(Game grid, int x, int y) {
-		APawn target = grid.get(x, y);
+		APawn target = grid.getPawn(x, y);
 		if (target instanceof Lake) { // test if the target isn't a lake
 			System.out.println(1);
 			return false;
@@ -281,11 +281,9 @@ public abstract class APawn implements java.io.Serializable {
 	 *         3 if tar is the flag.
 	 */
 	public int attack(APawn tar) {
-		if (tar.getLevel() == -6)
-			return 3;
 		if (tar.getLevel() == this.levelPawn)
 			return 0;
-		if (tar.getLevel() < this.levelPawn)
+		if (tar.getLevel() < this.levelPawn || tar.getLevel() == -6)
 			return 1;
 		if (tar.getLevel() > this.levelPawn)
 			return 2;
@@ -309,7 +307,7 @@ public abstract class APawn implements java.io.Serializable {
 	 * @return The grid after the move.
 	 */
 	public Game move(Game grid, int x, int y) {
-		APawn tar = grid.get(x, y);
+		APawn tar = grid.getPawn(x, y);
 		if (tar == null) {// no pawn on the coordinates targeted
 			grid.set(this.posX, this.posY, null);// delete the old coordinates
 													// of the pawn
@@ -327,8 +325,6 @@ public abstract class APawn implements java.io.Serializable {
 			grid.set(x, y, this);// set the new coordinates of the pawn
 		} else if (res == 2)// the pawn who attack loose
 			grid.set(this.posX, this.posY, null);// delete the pawn who attack
-		else if (res == 3)
-			System.out.println("Victory !");
 		return grid;
 	}
 
@@ -394,33 +390,60 @@ public abstract class APawn implements java.io.Serializable {
 		}
 		return arrow;
 	}
-	
+
 	/**
-	 * test if the pawn can move in the grid in any direction
-	 * @param grid the grid of the game
-	 * @return true or false
+	 * Tests if the pawn can move in the grid in any direction.
+	 * 
+	 * @param grid
+	 *            The grid of the game.
+	 * 
+	 * @return true or false.
 	 */
-	public boolean canMove(Game grid){
-		if(this.posX!=0){
-			if(this.movePoss(grid, posX-1, posY)){
-				return true;
+	public int canMove(Game grid, APawn pawn) {
+		// if (this.posY != 0) {
+		// if (this.movePoss(grid, posY - 1, posX)) {
+		// return true;
+		// }
+		// }
+		// if (this.posY != grid.getLine()) {
+		// if (this.movePoss(grid, posY + 1, posX)) {
+		// return true;
+		// }
+		// }
+		// if (this.posX != 0) {
+		// if (this.movePoss(grid, posY, posX - 1)) {
+		// return true;
+		// }
+		// }
+		// if (this.posX != grid.getRow()) {
+		// if (this.movePoss(grid, posY, posX + 1)) {
+		// return true;
+		// }
+		// }
+
+		APawn currentPawn, Flag = new Flag(1), Bomb = new Bomb(1), Lake = new Lake();
+		int nbPawn1 = 0, nbPawn2 = 0;
+		for (int j = 0; j < grid.getLine() + 1; j++) {
+			for (int i = 0; i < grid.getRow() + 1; i++) {
+				currentPawn = grid.getPawn(i, j);
+				if (currentPawn != null
+						&& currentPawn.getClass() != Flag.getClass()
+						&& currentPawn.getClass() != Bomb.getClass()
+						&& currentPawn.getClass() != Lake.getClass()) {
+					if (currentPawn.getTeam() == 1) {
+						nbPawn1++;
+					} else {
+						nbPawn2++;
+					}
+				}
 			}
 		}
-		if(this.posX!=grid.getLine()-1){
-			if(this.movePoss(grid, posX+1, posY)){
-				return true;
-			}
+		if (nbPawn1 == 0) {
+			return 1;
+		} else if (nbPawn2 == 0) {
+			return 2;
 		}
-		if(this.posY!=0){
-			if(this.movePoss(grid, posX, posY-1)){
-				return true;
-			}
-		}
-		if(this.posX!=grid.getRow()-1){
-			if(this.movePoss(grid, posX, posY+1)){
-				return true;
-			}
-		}
-		return false;
+
+		return 0;
 	}
 }

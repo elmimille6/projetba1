@@ -66,7 +66,7 @@ public class Scout extends APawn {
 			// System.out.println("2");
 			return false;
 		}
-		APawn target = grid.get(x, y);
+		APawn target = grid.getPawn(x, y);
 		if (target instanceof Lake) { // test if the target isnt a lake
 		// System.out.println("3");
 			return false;
@@ -91,7 +91,7 @@ public class Scout extends APawn {
 		if (x - this.posX != 0) {// check if the lane X is empty
 			if (x < this.posX) {
 				for (int i = 1; posX - i != x && posX - i >= 0; i++) {
-					if (grid.get(posX - i, posY) != null) {
+					if (grid.getPawn(posX - i, posY) != null) {
 						System.out.println("1");
 						return false;
 					}
@@ -99,7 +99,7 @@ public class Scout extends APawn {
 			}
 			if (x > this.posX) {
 				for (int i = 1; posX + i != x && posX + i < grid.getLine(); i++) {
-					if (grid.get(posX + i, posY) != null) {
+					if (grid.getPawn(posX + i, posY) != null) {
 						System.out.println("2");
 						return false;
 					}
@@ -109,7 +109,7 @@ public class Scout extends APawn {
 		if (y - this.posY != 0) {// check if the lane X is empty
 			if (y < this.posY) {
 				for (int i = 1; posY - i != y && posY - i >= 0; i++) {
-					if (grid.get(posX, posY - i) != null) {
+					if (grid.getPawn(posX, posY - i) != null) {
 						System.out.println("3");
 						return false;
 					}
@@ -117,7 +117,7 @@ public class Scout extends APawn {
 			}
 			if (y > this.posY) {
 				for (int i = 1; posY + i != y && posY + i < grid.getRow(); i++) {
-					if (grid.get(posX, posY + i) != null) {
+					if (grid.getPawn(posX, posY + i) != null) {
 						System.out.println("4");
 						return false;
 					}

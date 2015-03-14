@@ -74,9 +74,9 @@ public class PaneGame extends JPanel {
 		String link = "/image/red/hide.png";
 		for (int i = 0; i < (nbrLigne); i++) {
 			for (int j = 0; j < (nbrCol); j++) {
-				if (grid.get(i, j) != null) {
+				if (grid.getPawn(i, j) != null) {
 
-					APawn pawn = grid.get(i, j);
+					APawn pawn = grid.getPawn(i, j);
 					if (pawn.getTeam() == view || view == 0
 							|| pawn.getTeam() == 0) {
 						link = pawn.getURI();

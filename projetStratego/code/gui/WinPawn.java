@@ -164,7 +164,7 @@ public class WinPawn extends WinGame {
 					int[] res = getRes(grid2, pane2, posX, posY);
 					int line = res[0];
 					int row = res[1];
-					APawn pawn = grid2.get(line, row);
+					APawn pawn = grid2.getPawn(line, row);
 					// System.out.println("pawn = " + pawn);
 					currentPawn = pawn;
 					chooseSquare(chosenPawn(pawn));
@@ -189,7 +189,7 @@ public class WinPawn extends WinGame {
 			if (i != 0 && (i % 2 == 0)) {
 				i += 2;
 			}
-			if (grid1.get(0, i).getClass() == bombInit.getClass()) {
+			if (grid1.getPawn(0, i).getClass() == bombInit.getClass()) {
 				j++;
 			}
 			i++;
@@ -250,7 +250,7 @@ public class WinPawn extends WinGame {
 						int[] res = getRes(grid1, pane1, posX, posY);
 						int line = res[0];
 						int row = res[1];
-						if (grid1.get(line, row) != null) {
+						if (grid1.getPawn(line, row) != null) {
 							System.out.println("You can't play here !");
 						} else {
 							// System.out.println("line = " + line + " row = " +
@@ -264,12 +264,12 @@ public class WinPawn extends WinGame {
 						int[] res = getRes(grid1, pane1, posX, posY);
 						int line = res[0];
 						int row = res[1];
-						if (grid1.get(line, row) == null) {
+						if (grid1.getPawn(line, row) == null) {
 							System.out.println("You can't delete here !");
 						} else {
 							// System.out.println("line = " + line + " row = " +
 							// row);
-							APawn pawn = grid1.get(line, row);
+							APawn pawn = grid1.getPawn(line, row);
 							deletePawn(chosenPawn(pawn), line, row);
 							repaint();
 						}

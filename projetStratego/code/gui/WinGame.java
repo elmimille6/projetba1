@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import main.Game;
 import pawn.APawn;
 import pawn.Flag;
+import util.Dic;
 
 /**
  * 
@@ -21,6 +22,7 @@ public class WinGame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	public PaneGame pane;
+	public PaneGamePawn paneRed,paneBlue;
 	public int posX, posY;
 	public Game grid;
 	public APawn focus;
@@ -28,13 +30,9 @@ public class WinGame extends JFrame {
 	public final int[] arrowN = { -1, -1, -1, -1, -1, -1 };
 	public boolean att = false;
 	JOptionPane jop, jopWin;
+	Dic startTeam;
 
-	/**
-	 * Main constructor of the class.
-	 */
-	public WinGame() {
-
-	}
+	
 
 	/**
 	 * 
@@ -43,9 +41,11 @@ public class WinGame extends JFrame {
 	public WinGame(Game ngrid) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.grid = ngrid;
-
+		startTeam=grid.getStartTeam();
+		paneRed= new PaneGamePawn(startTeam, grid, 1);
 		pane = new PaneGame(grid);
 		pane.setLayout(new BorderLayout());
+		this.add(paneRed,BorderLayout.WEST);
 		this.setSize(700, 700);
 		this.setResizable(true);
 		this.setContentPane(pane);
@@ -117,7 +117,7 @@ public class WinGame extends JFrame {
 			}
 		});
 	}
-
+	
 	/**
 	 * Transforms the coordinates of the cursor into coordinates of the grid.
 	 * 

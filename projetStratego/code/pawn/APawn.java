@@ -391,6 +391,15 @@ public abstract class APawn implements java.io.Serializable {
 		return arrow;
 	}
 
+	 public boolean equals(Object obj) {
+		 if(obj instanceof APawn){
+			 if(((APawn) obj).getLevel()==this.getLevel()){
+				 return true;
+			 }
+		 }
+		 return false;
+	 }
+	
 	/**
 	 * Tests if the pawn can move in the grid in any direction.
 	 * 

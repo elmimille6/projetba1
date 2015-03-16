@@ -5,10 +5,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Vector;
 
 import pawn.APawn;
 import pawn.Flag;
 import pawn.Lake;
+import util.Dic;
 
 /**
  * Grid is the class that creates a "grid" object.
@@ -20,14 +22,10 @@ public class Game implements java.io.Serializable {
 	private static final long serialVersionUID = 8927958880942845647L;
 	private APawn[][] grid;
 	private int row, line;
-	public int view = 1, turn = 1, player = 2;
+	public int view = 1, turn = 1, player = 2,nbPawn=40;
+	public Dic startTeam;
 
-	/**
-	 * Main constructor of the class.
-	 */
-	public Game() {
-
-	}
+	
 
 	/**
 	 * Constructor of the grid.
@@ -58,12 +56,14 @@ public class Game implements java.io.Serializable {
 			grid[5][6] = lake;
 			grid[5][7] = lake;
 		} else if (gameMode == 2) {
+			nbPawn=10;
 			APawn lake = new Lake();
 			grid[3][2] = lake;
 			grid[4][2] = lake;
 			grid[3][5] = lake;
 			grid[4][5] = lake;
 		}
+		startTeam=startTeam();
 	}
 
 	/**
@@ -315,5 +315,22 @@ public class Game implements java.io.Serializable {
 			return 1;
 		}
 		return 0;
+	}
+	
+	private Dic startTeam(){
+		Dic team = new Dic();
+		Vector<APawn> liste =APawn.createTeam(1, nbPawn);
+		for(int i=0;i<liste.size();i++){
+			if(team.isIn(liste.get(i))){
+				team.set(liste.get(i), team.get(i)+1);
+			}
+			else{
+				team.set(liste.get(i),1);
+			}
+		}
+		return team;
+	}
+	public Dic getStartTeam(){
+		return startTeam;
 	}
 }

@@ -276,44 +276,4 @@ public class Game implements java.io.Serializable {
 	public void setPlayer(int players) {
 		this.player = players;
 	}
-
-	/**
-	 * Checks if the game is over and if so, return the number of the player who
-	 * win.
-	 * 
-	 * @return 0 if the game isn't over <br/>
-	 *         1 if player 1 win <br/>
-	 *         2 if player 2 win.
-	 */
-	public int win() {
-		boolean pla = false;
-		boolean flag1 = false;
-		boolean flag2 = false;
-		for (int i = 0; i < line; i++) {
-			for (int j = 0; j < row; j++) {
-				APawn pawn = grid[i][j];
-				if (pawn.getTeam() == ((turn + 1) % 2) + 1) {
-//					if (pawn.canMove(this)) {
-//						pla = true;
-//					}
-				}
-				if (pawn instanceof Flag && pawn.getTeam() == 1) {
-					flag1 = true;
-				}
-				if (pawn instanceof Flag && pawn.getTeam() == 2) {
-					flag2 = true;
-				}
-			}
-		}
-		if (!pla) {
-			return ((turn) % 2) + 1;
-		}
-		if (!flag1) {
-			return 2;
-		}
-		if (!flag2) {
-			return 1;
-		}
-		return 0;
-	}
 }

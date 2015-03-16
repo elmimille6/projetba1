@@ -10,7 +10,11 @@ import javax.swing.JPanel;
 
 import main.Game;
 import pawn.APawn;
+import pawn.Bomb;
 import pawn.Flag;
+import pawn.Lake;
+
+import pawn.*;
 
 /**
  * 
@@ -24,10 +28,15 @@ public class WinGame extends JFrame {
 	public int posX, posY;
 	public Game grid;
 	public APawn focus;
+	public APawn Flag = new Flag(1), Bomb = new Bomb(1), Lake = new Lake();
 	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
 	public final int[] arrowN = { -1, -1, -1, -1, -1, -1 };
 	public boolean att = false;
 	JOptionPane jop, jopWin;
+
+	public final String[] resultName = { "Draw", "Red", "Blue" };
+
+	public int[] array = { -1, -1, -1, -1, -1, -1 };
 
 	/**
 	 * Main constructor of the class.
@@ -48,6 +57,7 @@ public class WinGame extends JFrame {
 		pane.setLayout(new BorderLayout());
 		this.setSize(700, 700);
 		this.setResizable(true);
+		this.setLocationRelativeTo(null); // Fenetre centree
 		this.setContentPane(pane);
 		this.setVisible(true);
 		pane.addMouseListener(new MouseAdapter() {
@@ -71,24 +81,26 @@ public class WinGame extends JFrame {
 							pane.recupArrow(arrowN);
 							focus = null;
 							repaint();
-							System.out.println("Result = " + win());
-							if (win() != 0) {
+							int result = win();
+							System.out.println("Result = " + result);
+							if (result != 0) {
 								grid.setView(0);
 								repaint();
 								jopWin = new JOptionPane();
-								jopWin.showMessageDialog(null, "Le joueur "
-										+ win() + " gagne !", "Resultat",
+								jopWin.showMessageDialog(null,
+										"The " + resultName[result]
+												+ " player wins !", "Result",
 										JOptionPane.INFORMATION_MESSAGE);
 							} else {
 								grid.setView(3);
+								repaint();
 
 								jop = new JOptionPane();
 								jop.showMessageDialog(
 										null,
-										"Joueur "
-												+ (((grid.getTurn() + 1) % 2) + 1)
-												+ " a vous de jouer !",
-										"Tour termine",
+										"It's your turn, "
+												+ resultName[((grid.getTurn() + 1) % 2) + 1]
+												+ " player !", "Turn finished",
 										JOptionPane.INFORMATION_MESSAGE);
 								grid.setView((((grid.getTurn() + 1) % 2) + 1));
 								repaint();
@@ -140,42 +152,53 @@ public class WinGame extends JFrame {
 
 	}
 
+	/**
+	 * Checks if the game is over and if so, return the number of the player who
+	 * win.
+	 * 
+	 * @return 0 if the game isn't over <br/>
+	 *         1 if player 1 win <br/>
+	 *         2 if player 2 win.
+	 */
 	public int win() {
 		boolean canPlay = true;
 		boolean flag1 = false;
 		boolean flag2 = false;
-		int winner = 0;
-		APawn Flag = new Flag(1);
+		int winner = 0, test = 0;
+
 		for (int j = 0; j < grid.getLine() + 1; j++) {
 			for (int i = 0; i < grid.getRow() + 1; i++) {
 				APawn pawn = grid.getPawn(i, j);
 
 				if (pawn != null) {
-					if (pawn.canMove(grid, pawn) != 0) {
-						winner = pawn.canMove(grid, pawn);
-						canPlay = false;
-					}
-					//System.out.println("winnerddd = "+ pawn.canMove(grid, pawn));
-					if (pawn.getClass() == Flag.getClass()
-							&& pawn.getTeam() == 1) {
-						System.out.println("Flag 1");
-						flag1 = true;
-					}
-					if (pawn.getClass() == Flag.getClass()
-							&& pawn.getTeam() == 2) {
-						System.out.println("Flag 2");
-						flag2 = true;
+					array = pawn.focus(grid);
+					if (pawn.getTeam() == 1) {
+						test = canMove(1);
+						if (test != 0) {
+							canPlay = false;
+							winner = test;
+						} else if (pawn.getClass() == Flag.getClass()) {
+							System.out.println("Flag 1");
+							flag1 = true;
+						}
+					} else if (pawn.getTeam() == 2) {
+						test = canMove(1);
+						if (test != 0) {
+							canPlay = false;
+							winner = test;
+						} else if (pawn.getClass() == Flag.getClass()) {
+							System.out.println("Flag 2");
+							flag2 = true;
+						}
 					}
 				}
 			}
 		}
 
 		if (!canPlay) {
-			//return ((turn) % 2) + 1;
 			System.out.println("winner = " + winner);
 			return winner;
 		}
-
 		if (!flag1) {
 			return 2;
 		}
@@ -185,4 +208,28 @@ public class WinGame extends JFrame {
 		return 0;
 	}
 
+	/**
+	 * Returns the team of the winner or 0 if the game isn't over.
+	 * 
+	 * @param team
+	 *            The team of the current pawn: - 1 for Red <br />
+	 *            - 2 for Blue.
+	 * 
+	 * @return The team of the winner or 0 if there's none.
+	 */
+	public int canMove(int team) {
+		for (int j = 0; j < grid.getLine() + 1; j++) {
+			for (int i = 0; i < grid.getRow() + 1; i++) {
+				APawn currentPawn = grid.getPawn(i, j);
+
+				if (currentPawn != null && currentPawn.getTeam() == team
+						&& currentPawn.getClass() != Flag.getClass()
+						&& currentPawn.getClass() != Bomb.getClass()
+						&& currentPawn.getClass() != Lake.getClass()) {
+					return 0;
+				}
+			}
+		}
+		return (team % 2) + 1;
+	}
 }

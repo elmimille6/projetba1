@@ -51,6 +51,7 @@ public class WinPawn extends WinGame {
 	public WinPawn(int nbPlayer, final int nbPawns) {
 		this.setTitle("Initialisation grille");
 		this.setSize(700, 600);
+		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		int xSize = ((int) this.getWidth());

@@ -239,7 +239,7 @@ public abstract class APawn implements java.io.Serializable {
 	public boolean movePoss(Game grid, int x, int y) {
 		APawn target = grid.getPawn(x, y);
 		if (target instanceof Lake) { // test if the target isn't a lake
-			System.out.println(1);
+			// System.out.println(1);
 			return false;
 		}
 		if (target instanceof APawn) { // test if the target isn't a pawn of the
@@ -408,52 +408,95 @@ public abstract class APawn implements java.io.Serializable {
 	 * 
 	 * @return true or false.
 	 */
-	public int canMove(Game grid, APawn pawn) {
-		// if (this.posY != 0) {
-		// if (this.movePoss(grid, posY - 1, posX)) {
-		// return true;
-		// }
-		// }
-		// if (this.posY != grid.getLine()) {
-		// if (this.movePoss(grid, posY + 1, posX)) {
-		// return true;
-		// }
-		// }
-		// if (this.posX != 0) {
-		// if (this.movePoss(grid, posY, posX - 1)) {
-		// return true;
-		// }
-		// }
-		// if (this.posX != grid.getRow()) {
-		// if (this.movePoss(grid, posY, posX + 1)) {
-		// return true;
-		// }
-		// }
-
-		APawn currentPawn, Flag = new Flag(1), Bomb = new Bomb(1), Lake = new Lake();
-		int nbPawn1 = 0, nbPawn2 = 0;
-		for (int j = 0; j < grid.getLine() + 1; j++) {
-			for (int i = 0; i < grid.getRow() + 1; i++) {
-				currentPawn = grid.getPawn(i, j);
-				if (currentPawn != null) {
-					if (currentPawn.getClass() != Flag.getClass()
-							&& currentPawn.getClass() != Bomb.getClass()
-							&& currentPawn.getClass() != Lake.getClass()) {
-						if (currentPawn.getTeam() == 1) {
-							nbPawn1++;
-						} else {
-							nbPawn2++;
-						}
-					}
-				}
-			}
-		}
-		if (nbPawn1 == 0) {
-			return 1;
-		} else if (nbPawn2 == 0) {
-			return 2;
-		}
-
-		return 0;
-	}
+//	public int canMove(Game grid) {
+//		// if (this.posY != 0) {
+//		// if (this.movePoss(grid, posY - 1, posX)) {
+//		// return true;
+//		// }
+//		// }
+//		// if (this.posY != grid.getLine()) {
+//		// if (this.movePoss(grid, posY + 1, posX)) {
+//		// return true;
+//		// }
+//		// }
+//		// if (this.posX != 0) {
+//		// if (this.movePoss(grid, posY, posX - 1)) {
+//		// return true;
+//		// }
+//		// }
+//		// if (this.posX != grid.getRow()) {
+//		// if (this.movePoss(grid, posY, posX + 1)) {
+//		// return true;
+//		// }
+//		// }
+//
+//		int player1 = 2, player2 = 1;
+//		APawn currentPawn, Flag = new Flag(1), Bomb = new Bomb(1), Lake = new Lake();
+//		int nbPawn1 = 0, nbPawn2 = 0;
+//		// int player1 = 0, player2 = 0;
+//		for (int j = 0; j <= grid.getLine(); j++) {
+//			for (int i = 0; i <= grid.getRow(); i++) {
+//				currentPawn = grid.getPawn(i, j);
+//				if (currentPawn != null) {
+//					if (currentPawn.getClass() != Flag.getClass()
+//							&& currentPawn.getClass() != Bomb.getClass()
+//							&& currentPawn.getClass() != Lake.getClass()) {
+//						
+//						
+//						if (currentPawn.getTeam() == 1) {
+//							nbPawn1++;
+//							System.out.println("(" + currentPawn.posX + ", " + currentPawn.posY + ")");
+//							test(grid, currentPawn, i, j, player1);
+//						} else {
+//							nbPawn2++;
+//							System.out.println("(" + currentPawn.posX + ", " + currentPawn.posY + ")");
+//							test(grid, currentPawn, i, j, player2);
+//						}
+//						
+//						
+//					}
+//				}
+//			}
+//		}
+//		if (nbPawn1 == 0) {
+//			return 1;
+//		} else if (nbPawn2 == 0) {
+//			return 2;
+//		} else if (nbPawn1 != 0 && nbPawn2 != 0) {
+//			if (player1 != 0) {
+//				// System.out.println("ICI 1");
+//				return player1;
+//			} else/* if (player2 != 0) */ {
+//				// System.out.println("ICI 2");
+//				return player2;
+//			}
+//		}
+//
+//		return 0;
+//	}
+//	
+//	public void test(Game grid, APawn currentPawn, int i, int j, int player) {
+//		if (currentPawn.posY != grid.getLine()
+//				&& currentPawn.posX != 0
+//				&& currentPawn.movePoss(grid, i - 1, j + 1)) {
+//			System.out.println("1");
+//			player = 0;
+//		} else if (currentPawn.posY != 0
+//				&& currentPawn.posX != grid.getRow()
+//				&& currentPawn.movePoss(grid, i + 1, j - 1)) {
+//			System.out.println("2");
+//			player = 0;
+//		} else if (currentPawn.posY != grid.getLine()
+//				&& currentPawn.posX != grid.getRow()
+//				&& currentPawn.movePoss(grid, i + 1, j + 1)) {
+//			System.out.println("3");
+//			player = 0;
+//		} else if (currentPawn.posY != 0
+//				&& currentPawn.posX != 0
+//				&& currentPawn.movePoss(grid, i - 1, j - 1)) {
+//			System.out.println("4");
+//			player = 0;
+//		}
+//	}
+	
 }

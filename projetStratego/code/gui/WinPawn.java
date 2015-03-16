@@ -49,7 +49,7 @@ public class WinPawn extends WinGame {
 	 */
 	@SuppressWarnings("static-access")
 	public WinPawn(int nbPlayer, final int nbPawns) {
-		this.setTitle("Initialisation grille");
+		this.setTitle("Initialization of the grid");
 		this.setSize(700, 600);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

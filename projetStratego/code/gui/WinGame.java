@@ -12,7 +12,6 @@ import main.Game;
 import pawn.APawn;
 import pawn.Bomb;
 import pawn.Flag;
-import pawn.Lake;
 
 import pawn.*;
 
@@ -28,15 +27,13 @@ public class WinGame extends JFrame {
 	public int posX, posY;
 	public Game grid;
 	public APawn focus;
-	public APawn Flag = new Flag(1), Bomb = new Bomb(1), Lake = new Lake();
+	public APawn Flag = new Flag(1), Bomb = new Bomb(1);
 	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
 	public final int[] arrowN = { -1, -1, -1, -1, -1, -1 };
 	public boolean att = false;
 	JOptionPane jop, jopWin;
 
 	public final String[] resultName = { "Draw", "Red", "Blue" };
-
-	public int[] array = { -1, -1, -1, -1, -1, -1 };
 
 	/**
 	 * Main constructor of the class.
@@ -57,6 +54,7 @@ public class WinGame extends JFrame {
 		pane.setLayout(new BorderLayout());
 		this.setSize(700, 700);
 		this.setResizable(true);
+		this.setTitle("Game");
 		this.setLocationRelativeTo(null); // Fenetre centree
 		this.setContentPane(pane);
 		this.setVisible(true);
@@ -171,7 +169,6 @@ public class WinGame extends JFrame {
 				APawn pawn = grid.getPawn(i, j);
 
 				if (pawn != null) {
-					array = pawn.focus(grid);
 					if (pawn.getTeam() == 1) {
 						test = canMove(1);
 						if (test != 0) {
@@ -218,18 +215,32 @@ public class WinGame extends JFrame {
 	 * @return The team of the winner or 0 if there's none.
 	 */
 	public int canMove(int team) {
+		int nbPawnofTeam = 0, nbPawnBloked = 0, nbMoves;
 		for (int j = 0; j < grid.getLine() + 1; j++) {
 			for (int i = 0; i < grid.getRow() + 1; i++) {
+				int[] arrayFocus = null;
+				nbMoves = 0;
 				APawn currentPawn = grid.getPawn(i, j);
 
-				if (currentPawn != null && currentPawn.getTeam() == team
-						&& currentPawn.getClass() != Flag.getClass()
-						&& currentPawn.getClass() != Bomb.getClass()
-						&& currentPawn.getClass() != Lake.getClass()) {
-					return 0;
+				if (currentPawn != null && currentPawn.getTeam() == team) {
+					
+					nbPawnofTeam++;
+					
+					arrayFocus = currentPawn.focus(grid);
+					for (int elem = 0; elem < 4; elem++) {
+						if (arrayFocus[elem] == -1) {
+							nbMoves++;
+						}
+					}
+					if (nbMoves == 4) {
+						nbPawnBloked++;
+					}
 				}
 			}
 		}
-		return (team % 2) + 1;
+		if (nbPawnofTeam == nbPawnBloked) {
+			return (team % 2) + 1;
+		}
+		return 0;
 	}
 }

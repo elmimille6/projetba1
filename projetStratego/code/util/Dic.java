@@ -50,11 +50,27 @@ public class Dic {
 	public void set(Object obj,int j){
 		tab[this.getIndex(obj)][1]=j;
 	}
+	public void ser(int i, int j){
+		tab[i][1]=j;
+	}
 	public boolean isIn(Object obj){
 		int a=this.getIndex(obj);
 		if (a==-1){
 			return false;
 		}
 		return true;
+	}
+	public void increase(Object obj){
+		if(tab[this.getIndex(obj)][1] instanceof Integer){
+			tab[this.getIndex(obj)][1]=(Integer)tab[this.getIndex(obj)][1]+1;
+		}
+	}
+	public String toString() {
+		String line="{";
+		for(int i=0;i<this.size;i++){
+			line+="["+tab[i][0]+":"+tab[i][1]+"]";
+		}
+		line+="}";
+		return line;
 	}
 }

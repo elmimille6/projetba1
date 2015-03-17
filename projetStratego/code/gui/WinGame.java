@@ -37,7 +37,10 @@ public class WinGame extends JFrame {
 	Dic startTeam;
 
 	public final String[] resultName = { "Draw", "Red", "Blue" };
-
+	
+	public WinGame(){
+		
+	}
 	
 
 	/**
@@ -49,14 +52,18 @@ public class WinGame extends JFrame {
 		this.grid = ngrid;
 		startTeam=grid.getStartTeam();
 		paneRed= new PaneGamePawn(startTeam, grid, 1);
+		paneBlue= new PaneGamePawn(startTeam, grid, 2);
 		pane = new PaneGame(grid);
 		pane.setLayout(new BorderLayout());
+//		paneRed.fixSize(this.getWidth()/12, this.getHeight());
 		this.add(paneRed,BorderLayout.WEST);
-		this.setSize(700, 700);
+		this.add(paneBlue,BorderLayout.EAST);
+		this.setSize(900, 700);
 		this.setResizable(true);
 		this.setTitle("Game");
 		this.setLocationRelativeTo(null); // Fenetre centree
-		this.setContentPane(pane);
+//		this.setContentPane(pane);
+		this.add(pane,BorderLayout.CENTER);
 		this.setVisible(true);
 		pane.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
@@ -123,6 +130,10 @@ public class WinGame extends JFrame {
 						}
 					}
 					att = false;
+				paneRed.upGame(grid);
+				paneBlue.upGame(grid);
+				paneRed.repaint();
+				paneBlue.repaint();
 				}
 			}
 		});

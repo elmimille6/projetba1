@@ -24,8 +24,14 @@ public class Game implements java.io.Serializable {
 	private int row, line;
 	public int view = 1, turn = 1, player = 2,nbPawn=40;
 	public Dic startTeam;
-
 	
+
+	/**
+	 * Main constructor of the class.
+	 */
+	public Game() {
+
+	}
 
 	/**
 	 * Constructor of the grid.
@@ -280,13 +286,14 @@ public class Game implements java.io.Serializable {
 	private Dic startTeam(){
 		Dic team = new Dic();
 		Vector<APawn> liste =APawn.createTeam(1, nbPawn);
-		for(int i=0;i<liste.size();i++){
-			if(team.isIn(liste.get(i))){
-				team.set(liste.get(i), team.get(i)+1);
+		while (!liste.isEmpty()){
+			if(team.isIn(liste.get(0))){
+				team.increase(liste.get(0));
 			}
 			else{
-				team.set(liste.get(i),1);
+				team.add(liste.get(0),1);
 			}
+			liste.remove(0);
 		}
 		return team;
 	}

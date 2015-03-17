@@ -135,7 +135,7 @@ public abstract class APawn implements java.io.Serializable {
 			for (int i = 0; i < 6; i++) {
 				listPawn.add(new Bomb(team));
 			}
-
+			listPawn.add(new Spy(team));
 			for (int i = 0; i < 8; i++) {
 				listPawn.add(new Scout(team));
 			}
@@ -178,9 +178,9 @@ public abstract class APawn implements java.io.Serializable {
 			}
 
 		}
-		listPawn.add(new Spy(team));
-		listPawn.add(new Marshal(team));
 		listPawn.add(new General(team));
+		listPawn.add(new Marshal(team));
+		
 		listPawn.add(new Flag(team));
 
 		return listPawn;

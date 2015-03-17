@@ -70,7 +70,10 @@ public class WinGame extends JFrame {
 				if (e.getButton() == MouseEvent.BUTTON1
 						&& grid.getPlayer() == 2) {
 					posX = e.getX();
-					posY = e.getY();
+					posY = e.getY(); 
+					new Thread(new Runnable() {
+					      public void run() {
+					
 					int[] res = getRes(grid, pane, posX, posY);
 					int line = res[0];
 					int row = res[1];
@@ -86,6 +89,9 @@ public class WinGame extends JFrame {
 							pane.recupArrow(arrowN);
 							focus = null;
 							repaint();
+							paneRed.upGame(grid);
+							paneBlue.upGame(grid);
+							
 							int result = win();
 							System.out.println("Result = " + result);
 							if (result != 0) {
@@ -109,6 +115,9 @@ public class WinGame extends JFrame {
 										JOptionPane.INFORMATION_MESSAGE);
 								grid.setView((((grid.getTurn() + 1) % 2) + 1));
 								repaint();
+								paneRed.upGame(grid);
+								paneBlue.upGame(grid);
+								
 							}
 						}
 					}
@@ -130,11 +139,10 @@ public class WinGame extends JFrame {
 						}
 					}
 					att = false;
-				paneRed.upGame(grid);
-				paneBlue.upGame(grid);
-				paneRed.repaint();
-				paneBlue.repaint();
 				}
+			  }).start();
+				}
+				
 			}
 		});
 	}

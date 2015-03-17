@@ -23,9 +23,8 @@ public class PaneGamePawn extends JPanel {
 		startTeam=dic;
 		this.side=side;
 		upGame(game);
-		pane=new JPanel();
-		this.add(pane);
-		System.out.println(startTeam.getSize()+"here");
+		
+//		System.out.println(startTeam.getSize()+"here");
 //		this.setSize(10, 10);
 		
 	}
@@ -38,7 +37,9 @@ public class PaneGamePawn extends JPanel {
 		grid=game;
 		count=count();
 		this.removeAll();
-		this.repaint();
+		System.out.println("DELETE");
+		this.affichage();
+		this.validate();;
 	}
 	
 	public Dic count(){
@@ -62,9 +63,8 @@ public class PaneGamePawn extends JPanel {
 		return dic;
 	}
 	
-	public void paintComponent(Graphics g) {
-		if (move) {
-			
+	public void affichage() {
+//		if (move) 
 			JLabel lTeam;
 			if (side == 1) {
 				lTeam = new JLabel("  Pion rouge");
@@ -78,8 +78,12 @@ public class PaneGamePawn extends JPanel {
 								+ count.get(startTeam.getObject(i)) + "/"
 								+ startTeam.get(i)+"  ");
 				this.add(label);
+				System.out.println("affichage");
 			}
-		}
+			System.out.println("fin affichage");
+//		}
 		move=false;
+//		this.repaint();
+		
 	}
 }

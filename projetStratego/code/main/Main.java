@@ -48,10 +48,10 @@ public class Main {
 		Game grid;
 		GridIA gridIA, gridIA2;
 		if (initGridGame) {
-			System.out.println("Not init");
-			WinPawn fen = new WinPawn(nbrPlayer, typeOfGame);
-		} else {
 			System.out.println("Init");
+			WinPawn initPawn = new WinPawn(nbrPlayer, typeOfGame);
+		} else {
+			System.out.println("Not init");
 			if (typeOfGame == 40) {
 				/*grid = new Game(10, 1);
 				// grid.setView(2);

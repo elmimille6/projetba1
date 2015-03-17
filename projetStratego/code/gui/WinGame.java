@@ -25,7 +25,7 @@ public class WinGame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	public PaneGame pane;
-	public PaneGamePawn paneRed,paneBlue;
+	public PaneGamePawn paneRed, paneBlue;
 	public int posX, posY;
 	public Game grid;
 	public APawn focus;
@@ -37,11 +37,11 @@ public class WinGame extends JFrame {
 	Dic startTeam;
 
 	public final String[] resultName = { "Draw", "Red", "Blue" };
-	
-	public WinGame(){
-		
+	public boolean playGame = true;
+
+	public WinGame() {
+
 	}
-	
 
 	/**
 	 * 
@@ -50,103 +50,110 @@ public class WinGame extends JFrame {
 	public WinGame(Game ngrid) {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.grid = ngrid;
-		startTeam=grid.getStartTeam();
-		paneRed= new PaneGamePawn(startTeam, grid, 1);
-		paneBlue= new PaneGamePawn(startTeam, grid, 2);
+		startTeam = grid.getStartTeam();
+		paneRed = new PaneGamePawn(startTeam, grid, 1);
+		paneBlue = new PaneGamePawn(startTeam, grid, 2);
 		pane = new PaneGame(grid);
 		pane.setLayout(new BorderLayout());
-//		paneRed.fixSize(this.getWidth()/12, this.getHeight());
-		this.add(paneRed,BorderLayout.WEST);
-		this.add(paneBlue,BorderLayout.EAST);
+		// paneRed.fixSize(this.getWidth()/12, this.getHeight());
+		this.add(paneRed, BorderLayout.WEST);
+		this.add(paneBlue, BorderLayout.EAST);
 		this.setSize(900, 700);
 		this.setResizable(true);
 		this.setTitle("Game");
 		this.setLocationRelativeTo(null); // Fenetre centree
-//		this.setContentPane(pane);
-		this.add(pane,BorderLayout.CENTER);
+		// this.setContentPane(pane);
+		this.add(pane, BorderLayout.CENTER);
 		this.setVisible(true);
 		pane.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
-				if (e.getButton() == MouseEvent.BUTTON1
-						&& grid.getPlayer() == 2) {
-					posX = e.getX();
-					posY = e.getY(); 
-					new Thread(new Runnable() {
-					      public void run() {
-					
-					int[] res = getRes(grid, pane, posX, posY);
-					int line = res[0];
-					int row = res[1];
-					grid.showGrid();
-					APawn pawn = grid.getPawn(line, row);
-					System.out.println("pawn= " + pawn);
-					System.out.println("focus= " + focus);
-					if (focus != null) {
-						if (focus.movePoss(grid, line, row)) {
-							grid = focus.move(grid, line, row);
-							att = true;
-							grid.addTurn();
-							pane.recupArrow(arrowN);
-							focus = null;
-							repaint();
-							paneRed.upGame(grid);
-							paneBlue.upGame(grid);
-							
-							int result = win();
-							System.out.println("Result = " + result);
-							if (result != 0) {
-								grid.setView(0);
-								repaint();
-								jopWin = new JOptionPane();
-								jopWin.showMessageDialog(null,
-										"The " + resultName[result]
-												+ " player wins !", "Result",
-										JOptionPane.INFORMATION_MESSAGE);
-							} else {
-								grid.setView(3);
-								repaint();
+				if (playGame) {
+					if (e.getButton() == MouseEvent.BUTTON1
+							&& grid.getPlayer() == 2) {
+						posX = e.getX();
+						posY = e.getY();
+						new Thread(new Runnable() {
+							public void run() {
 
-								jop = new JOptionPane();
-								jop.showMessageDialog(
-										null,
-										"It's your turn, "
-												+ resultName[((grid.getTurn() + 1) % 2) + 1]
-												+ " player !", "Turn finished",
-										JOptionPane.INFORMATION_MESSAGE);
-								grid.setView((((grid.getTurn() + 1) % 2) + 1));
-								repaint();
-								paneRed.upGame(grid);
-								paneBlue.upGame(grid);
-								
-							}
-						}
-					}
-					if (pawn != null) {
-						if (pawn.getTeam() == ((grid.getTurn() + 1) % 2) + 1) {
+								int[] res = getRes(grid, pane, posX, posY);
+								int line = res[0];
+								int row = res[1];
+								grid.showGrid();
+								APawn pawn = grid.getPawn(line, row);
+								System.out.println("pawn= " + pawn);
+								System.out.println("focus= " + focus);
+								if (focus != null) {
+									if (focus.movePoss(grid, line, row)) {
+										grid = focus.move(grid, line, row);
+										att = true;
+										grid.addTurn();
+										pane.recupArrow(arrowN);
+										focus = null;
+										repaint();
+										paneRed.upGame(grid);
+										paneBlue.upGame(grid);
 
-							if (pawn != null && !att) {
-								focus = pawn;
-								arrow = pawn.focus(grid);
-								pane.recupArrow(arrow);
-								repaint();
-							} else {
-								pane.recupArrow(arrowN);
-								focus = null;
-								repaint();
+										int result = win();
+										System.out
+												.println("Result = " + result);
+										if (result != 0) {
+											grid.setView(0);
+											playGame = false;
+											repaint();
+											jopWin = new JOptionPane();
+											jopWin.showMessageDialog(
+													null,
+													"The " + resultName[result]
+															+ " player wins !",
+													"Result",
+													JOptionPane.INFORMATION_MESSAGE);
+										} else {
+											grid.setView(3);
+											repaint();
+
+											jop = new JOptionPane();
+											jop.showMessageDialog(
+													null,
+													"It's your turn, "
+															+ resultName[((grid
+																	.getTurn() + 1) % 2) + 1]
+															+ " player !",
+													"Turn finished",
+													JOptionPane.INFORMATION_MESSAGE);
+											grid.setView((((grid.getTurn() + 1) % 2) + 1));
+											repaint();
+											paneRed.upGame(grid);
+											paneBlue.upGame(grid);
+
+										}
+									}
+								}
+								if (pawn != null) {
+									if (pawn.getTeam() == ((grid.getTurn() + 1) % 2) + 1) {
+
+										if (pawn != null && !att) {
+											focus = pawn;
+											arrow = pawn.focus(grid);
+											pane.recupArrow(arrow);
+											repaint();
+										} else {
+											pane.recupArrow(arrowN);
+											focus = null;
+											repaint();
+										}
+										att = false;
+										repaint();
+									}
+								}
+								att = false;
 							}
-							att = false;
-							repaint();
-						}
+						}).start();
 					}
-					att = false;
 				}
-			  }).start();
-				}
-				
 			}
 		});
 	}
-	
+
 	/**
 	 * Transforms the coordinates of the cursor into coordinates of the grid.
 	 * 
@@ -212,7 +219,7 @@ public class WinGame extends JFrame {
 		}
 
 		if (!canPlay) {
-			System.out.println("winner = " + winner);
+			// System.out.println("winner = " + winner);
 			return winner;
 		}
 		if (!flag1) {
@@ -242,9 +249,9 @@ public class WinGame extends JFrame {
 				APawn currentPawn = grid.getPawn(i, j);
 
 				if (currentPawn != null && currentPawn.getTeam() == team) {
-					
+
 					nbPawnofTeam++;
-					
+
 					arrayFocus = currentPawn.focus(grid);
 					for (int elem = 0; elem < 4; elem++) {
 						if (arrayFocus[elem] == -1) {

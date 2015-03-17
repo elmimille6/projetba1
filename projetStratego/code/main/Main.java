@@ -34,7 +34,7 @@ public class Main {
 		// p2.move(test, 2, 2);
 		// test.showGrid();
 		// Window fen = new Window();
-		 Main.play();
+//		 Main.play();
 
 	}
 

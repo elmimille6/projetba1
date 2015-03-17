@@ -165,7 +165,7 @@ public class MenuWindow extends JFrame {
 		comboIa1.addItem("Niveau difficile");
 		comboIa1.addActionListener(new ItemActionIa1());
 		comboIa1.setPreferredSize(new Dimension(150, 20));
-		comboIa1.setEnabled(false);
+		comboIa1.setEnabled(true);
 
 		JPanel panIA2 = new JPanel();
 		panIA2.add(labIa2);
@@ -237,10 +237,16 @@ public class MenuWindow extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if (comboPlayer.getSelectedItem() == "2 Joueurs") {
 				nbrPlayer = 2;
+				comboIa1.setEnabled(false);
+				comboIa2.setEnabled(false);
 			} else if (comboPlayer.getSelectedItem() == "1 Joueur") {
 				nbrPlayer = 1;
+				comboIa1.setEnabled(true);
+				comboIa2.setEnabled(false);
 			} else if (comboPlayer.getSelectedItem() == "0 Joueur") {
 				nbrPlayer = 0;
+				comboIa1.setEnabled(true);
+				comboIa2.setEnabled(true);
 			} else {
 				nbrPlayer = 1;
 			}

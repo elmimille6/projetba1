@@ -12,8 +12,9 @@ import main.Game;
 import pawn.APawn;
 
 /**
- * This class
- *
+ * This class creates the pane for the initialization of the grid by the
+ * player.
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class PanePawn extends JPanel {

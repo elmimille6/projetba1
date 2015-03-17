@@ -17,9 +17,9 @@ import util.Dic;
 import pawn.*;
 
 /**
+ * This class creates the window of the game.
  * 
- * @author giuliano
- * 
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class WinGame extends JFrame {
 
@@ -36,7 +36,7 @@ public class WinGame extends JFrame {
 	JOptionPane jop, jopWin;
 	Dic startTeam;
 
-	public final String[] resultName = { "Draw", "Red", "Blue" };
+	public final String[] resultName = { "Red", "Blue" };
 	public boolean playGame = true;
 
 	public WinGame() {
@@ -103,7 +103,8 @@ public class WinGame extends JFrame {
 											jopWin = new JOptionPane();
 											jopWin.showMessageDialog(
 													null,
-													"The " + resultName[result]
+													"The "
+															+ resultName[result - 1]
 															+ " player wins !",
 													"Result",
 													JOptionPane.INFORMATION_MESSAGE);
@@ -116,7 +117,7 @@ public class WinGame extends JFrame {
 													null,
 													"It's your turn, "
 															+ resultName[((grid
-																	.getTurn() + 1) % 2) + 1]
+																	.getTurn() + 1) % 2)]
 															+ " player !",
 													"Turn finished",
 													JOptionPane.INFORMATION_MESSAGE);

@@ -18,6 +18,12 @@ import main.GridIA;
 //import main.GridPawn;
 import pawn.*;
 
+/**
+ * This class creates the window for the initialization of the grid by the
+ * player.
+ * 
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
+ */
 public class WinPawn extends WinGame {
 
 	private static final long serialVersionUID = 1L;

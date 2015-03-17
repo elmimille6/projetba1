@@ -12,7 +12,7 @@ import main.Game;
 import pawn.APawn;
 
 /**
- * This class creates the window of the game.
+ * This class creates the pane of the game.
  * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */

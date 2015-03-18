@@ -1,5 +1,7 @@
 package pawn;
 
+import gui.WinGame;
+
 import java.util.Vector;
 
 import main.Game;
@@ -19,6 +21,7 @@ public abstract class APawn implements java.io.Serializable {
 	public int posX;
 	public int posY;
 	protected String URI;
+	public boolean show = false;
 
 	/**
 	 * Returns a string representation of a 'APawn' object.
@@ -219,6 +222,22 @@ public abstract class APawn implements java.io.Serializable {
 	 */
 	public String getURI() {
 		return this.URI;
+	}
+
+	/**
+	 * Gets the show value of the pawn.
+	 * 
+	 * @return The show value of the pawn..
+	 */
+	public boolean getShow() {
+		return this.show;
+	}
+
+	/**
+	 * Sets the show value of the pawn.
+	 */
+	public void setShow(boolean show) {
+		this.show = show;
 	}
 
 	/**

@@ -78,7 +78,7 @@ public class PaneGame extends JPanel {
 
 					APawn pawn = grid.getPawn(i, j);
 					if (pawn.getTeam() == view || view == 0
-							|| pawn.getTeam() == 0) {
+							|| pawn.getTeam() == 0 || pawn.getShow()) {
 						link = pawn.getURI();
 					} else {
 						if (pawn.getTeam() == 1) {

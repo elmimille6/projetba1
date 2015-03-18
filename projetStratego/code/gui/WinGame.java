@@ -84,6 +84,18 @@ public class WinGame extends JFrame {
 								System.out.println("focus= " + focus);
 								if (focus != null) {
 									if (focus.movePoss(grid, line, row)) {
+										if (grid.getPawn(line, row) != null) {
+											grid.getPawn(line, row).setShow(
+													true);
+											pane.recupArrow(arrowN);
+											repaint();
+											try {
+												Thread.sleep(1000);
+											} catch (InterruptedException e) {
+											}
+											grid.getPawn(line, row).setShow(
+													false);
+										}
 										grid = focus.move(grid, line, row);
 										att = true;
 										grid.addTurn();

@@ -37,7 +37,7 @@ public class WinPawn extends WinGame {
 			generalInit = new General(1), marshalInit = new Marshal(1),
 			bombInit = new Bomb(1), flagInit = new Flag(1);
 	public int nbPawn;
-	public int x = 0, y = 0;
+	public int x = 0, y = 0, nbPawns = 40;
 
 	public int posX, posY;
 	public APawn currentPawn;
@@ -59,6 +59,7 @@ public class WinPawn extends WinGame {
 		this.setSize(700, 600);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.nbPawns = nbPawns;
 
 		int xSize = ((int) this.getWidth());
 		int ySize = ((int) this.getHeight());
@@ -303,14 +304,16 @@ public class WinPawn extends WinGame {
 			if (pawns.size() == 0) {
 				System.out.println("The vector is empty !");
 				break;
-			} else if (pawnInit.getNbPawn() == 0) {
-				System.out.println("Name = " + pawnInit.getNamePawn());
-				System.out.println("NbPawn = " + pawnInit.getNbPawn());
-				System.out.println("You don't have this pawn anymore !");
-				break;
-			}
+			} /*
+			 * else if (pawnInit.getNbPawn() == 0) {
+			 * System.out.println("Name = " + pawnInit.getNamePawn());
+			 * System.out.println("NbPawn = " + pawnInit.getNbPawn());
+			 * System.out.println("You don't have this pawn anymore !"); break;
+			 * }
+			 */
 			if (!pawns.isEmpty() && pawnInit.getNbPawn() > 0
 					&& pawns.elementAt(i).getLevel() == pawnInit.getLevel()) {
+				APawn pawn;
 				// System.out.println("Size = " + pawns.size());
 				// System.out
 				// .println("Name = " + pawns.elementAt(i).getNamePawn());
@@ -322,6 +325,30 @@ public class WinPawn extends WinGame {
 				nbPawn = pawnInit.getNbPawn();
 				pawnInit.setNbPawn(--nbPawn);
 				// System.out.println("NbPawn = " + pawnInit.getNbPawn());
+				if (pawnInit.getNbPawn() == 0) {
+					if (nbPawns == 40) {
+						for (int x = 0; x < 2; x++) {
+							for (int y = 0; y < 6; y++) {
+								pawn = grid2.getPawn(x, y);
+								if (pawn.getClass() == pawnInit.getClass()) {
+									pawn.setURI("/image/no_"
+											+ pawn.getNamePawn()
+											+ ".png");
+									pane2.repaint();
+								}
+							}
+						}
+					} else if (nbPawns == 10) {
+						for (int y = 0; y < 7; y++) {
+							pawn = grid2.getPawn(0, y);
+							if (pawn.getClass() == pawnInit.getClass()) {
+								pawn.setURI("/image/no_"
+										+ pawn.getNamePawn() + ".png");
+								pane2.repaint();
+							}
+						}
+					}
+				}
 				break;
 			}
 		}

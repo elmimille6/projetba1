@@ -21,7 +21,7 @@ public abstract class APawn implements java.io.Serializable {
 	public int posX;
 	public int posY;
 	protected String URI;
-	public boolean show = false;
+	public boolean show = false, isEmpty = false;
 
 	/**
 	 * Returns a string representation of a 'APawn' object.
@@ -63,7 +63,7 @@ public abstract class APawn implements java.io.Serializable {
 	 * @param URI
 	 *            The URI of the image of the pawn.
 	 */
-	protected void setURI(String URI) {
+	public void setURI(String URI) {
 		this.URI = URI;
 	}
 

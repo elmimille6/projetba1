@@ -36,6 +36,7 @@ public class Spy extends APawn {
 		setValue(200);
 		if (team == 1)
 			setURI("/image/red/spy.png");
+
 		if (team == 2)
 			setURI("/image/blue/spy.png");
 	}

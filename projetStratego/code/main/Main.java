@@ -34,7 +34,7 @@ public class Main {
 		// p2.move(test, 2, 2);
 		// test.showGrid();
 		// Window fen = new Window();
-//		 Main.play();
+		// Main.play();
 
 	}
 
@@ -43,35 +43,44 @@ public class Main {
 	 */
 	public static void play() {
 		int nbrPlayer = menu.getNbrPlayer();
-		boolean initGridGame = menu.getInitGridGame();
+		int initGridGame = menu.getInitGridGame();
 		int typeOfGame = menu.getTypeOfGame();
+		WindowInitPawn initPawn;
 		Game grid;
 		GridIA gridIA, gridIA2;
-		if (initGridGame) {
-			System.out.println("Init");
-			WinPawn initPawn = new WinPawn(nbrPlayer, typeOfGame);
-		} else {
+		if (initGridGame == 0) {
 			System.out.println("Not init");
 			if (typeOfGame == 40) {
-				/*grid = new Game(10, 1);
-				// grid.setView(2);
-				gridIA = new GridIA(1);
-				gridIA2 = new GridIA(2);*/
+				/*
+				 * grid = new Game(10, 1); // grid.setView(2); gridIA = new
+				 * GridIA(1); gridIA2 = new GridIA(2);
+				 */
 				System.out.println("Stratego");
 			} else {
-				/*grid = new Game(8, 1);
-				// grid.setView(2);
-				gridIA = new GridIA(1);
-				gridIA2 = new GridIA(2);*/
+				/*
+				 * grid = new Game(8, 1); // grid.setView(2); gridIA = new
+				 * GridIA(1); gridIA2 = new GridIA(2);
+				 */
 				System.out.println("Stratego Duel");
 			}
+
 			grid = new Game(10, 1);
 			gridIA = new GridIA(1);
 			gridIA2 = new GridIA(2);
 			grid.placeTeam(gridIA.getGrid(), 1);
 			grid.placeTeam(gridIA2.getGrid(), 2);
 			grid.showGrid();
-			WinGame fenGame = new WinGame(grid);
+			WindowGame fenGame = new WindowGame(grid);
+			
+		} else if (initGridGame == 1) {
+			System.out.println("Init 1");
+			initPawn = new WindowInitPawn(nbrPlayer, typeOfGame, 1);
+		} else if (initGridGame == 2) {
+			System.out.println("Init 2");
+			initPawn = new WindowInitPawn(nbrPlayer, typeOfGame, 2);
+		} else {
+			System.out.println("Init 3");
+			initPawn = new WindowInitPawn(nbrPlayer, typeOfGame, 0);
 		}
 	}
 }

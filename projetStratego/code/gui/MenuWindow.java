@@ -62,7 +62,7 @@ public class MenuWindow extends JFrame {
 	public int game = 1, nbrPlayer = 1, lvl1 = 0, lvl2 = 0, test = 1,
 			modifGrid = 0, typeOfGame = 40;
 
-	public boolean initGridGame = false;
+	public int initGridGame = 0;
 
 	private JCheckBoxMenuItem changeGrid = new JCheckBoxMenuItem(
 			"modifier la taille de la grille");
@@ -95,7 +95,6 @@ public class MenuWindow extends JFrame {
 				grid.placeTeam(gridIA2.getGrid(), 2);
 				grid.showGrid();
 				grid.save();
-
 			}
 		});
 		startSave.addActionListener(new ActionListener() {
@@ -143,9 +142,9 @@ public class MenuWindow extends JFrame {
 		panInit.add(labInit);
 		panInit.add(comboInit);
 		comboInit.addItem("Automatique");
-		comboInit.addItem("Manuelle");
+		comboInit.addItem("Manuelle Joueur Rouge");
 		comboInit.addActionListener(new ItemActionInit());
-		comboInit.setPreferredSize(new Dimension(140, 20));
+		comboInit.setPreferredSize(new Dimension(200, 20));
 		comboInit.setEnabled(true);
 
 		JPanel panType = new JPanel();
@@ -239,6 +238,8 @@ public class MenuWindow extends JFrame {
 				nbrPlayer = 2;
 				comboIa1.setEnabled(false);
 				comboIa2.setEnabled(false);
+				comboInit.addItem("Manuelle Joueur Bleu");
+				comboInit.addItem("Manuelle");
 			} else if (comboPlayer.getSelectedItem() == "1 Joueur") {
 				nbrPlayer = 1;
 				comboIa1.setEnabled(true);
@@ -256,10 +257,14 @@ public class MenuWindow extends JFrame {
 
 	class ItemActionInit implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (comboInit.getSelectedItem() == "Manuelle") {
-				initGridGame = true;
+			if (comboInit.getSelectedItem() == "Manuelle Joueur Rouge") {
+				initGridGame = 1;
+			} else if (comboInit.getSelectedItem() == "Manuelle Joueur Bleu") {
+				initGridGame = 2;
+			} else if (comboInit.getSelectedItem() == "Manuelle") {
+				initGridGame = 3;
 			} else {
-				initGridGame = false;
+				initGridGame = 0;
 			}
 			tryEnable();
 		}
@@ -337,7 +342,7 @@ public class MenuWindow extends JFrame {
 	 * 
 	 * @return The number of players.
 	 */
-	public boolean getInitGridGame() {
+	public int getInitGridGame() {
 		return initGridGame;
 	}
 

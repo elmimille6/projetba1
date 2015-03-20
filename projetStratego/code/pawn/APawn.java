@@ -1,6 +1,6 @@
 package pawn;
 
-import gui.WinGame;
+import gui.WindowGame;
 
 import java.util.Vector;
 
@@ -63,7 +63,7 @@ public abstract class APawn implements java.io.Serializable {
 	 * @param URI
 	 *            The URI of the image of the pawn.
 	 */
-	public void setURI(String URI) {
+	protected void setURI(String URI) {
 		this.URI = URI;
 	}
 

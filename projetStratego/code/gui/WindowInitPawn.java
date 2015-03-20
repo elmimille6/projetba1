@@ -206,7 +206,6 @@ public class WindowInitPawn extends WindowGame {
 		marshalInit = new Marshal(team);
 		bombInit = new Bomb(team);
 		flagInit = new Flag(team);
-		// noPawn = new Lake(true);//TODO
 	}
 
 	/**
@@ -331,26 +330,17 @@ public class WindowInitPawn extends WindowGame {
 			if (pawns.size() == 0) {
 				System.out.println("The vector is empty !");
 				break;
-			} /*
-			 * else if (pawnInit.getNbPawn() == 0) {
-			 * System.out.println("Name = " + pawnInit.getNamePawn());
-			 * System.out.println("NbPawn = " + pawnInit.getNbPawn());
-			 * System.out.println("You don't have this pawn anymore !"); break;
-			 * }
-			 */
+			}
 			if (!pawns.isEmpty() && pawnInit.getNbPawn() > 0
 					&& pawns.elementAt(i).getLevel() == pawnInit.getLevel()) {
-				// System.out.println("Size = " + pawns.size());
-				// System.out
-				// .println("Name = " + pawns.elementAt(i).getNamePawn());
-				//
-				// System.out.println("Size = " + pawns.size());
 				grid1.set(line, row, pawns.elementAt(i));
+//				System.out.println("Add");
+//				System.out.println("line = " + line + " row = " + row);
 				// grid1.showGrid();
 				pawns.removeElementAt(i);
 				nbPawn = pawnInit.getNbPawn();
 				pawnInit.setNbPawn(--nbPawn);
-				System.out.println("NbPawn = " + pawnInit.getNbPawn());
+				// System.out.println("NbPawnd = " + pawnInit.getNbPawn());
 				if (pawnInit.getNbPawn() == 0) {
 					if (nbPawns == 40) {
 						for (int x = 0; x < 2; x++) {
@@ -388,10 +378,8 @@ public class WindowInitPawn extends WindowGame {
 	 *            The row of the pawn.
 	 */
 	public void deletePawn(APawn pawn, int line, int row) {
-		// System.out.println("Size = " + pawns.size());
-		// APawn pawn = grid1.get(line, row);
-		System.out.println("line = " + line + " row = " + row);
-		System.out.println("Name = " + pawn.getNamePawn());
+//		System.out.println("Pop");
+//		System.out.println("line = " + line + " row = " + row);
 
 		if (pawn.getNbPawn() == 0) {
 			if (nbPawns == 40) {
@@ -399,7 +387,6 @@ public class WindowInitPawn extends WindowGame {
 					for (int y = 0; y < 6; y++) {
 						pawnShow = grid2.getPawn(x, y);
 						if (pawnShow.getNamePawn() == pawn.getNamePawn()) {
-							System.out.println(x + "; " + y);
 							showPawn(x, y, pawnShow, false);
 						}
 					}
@@ -416,12 +403,111 @@ public class WindowInitPawn extends WindowGame {
 
 		grid1.set(line, row, null);
 		// grid1.showGrid();
-		pawns.add(pawn);
+		pawns.add(newPawn(pawn));
 		nbPawn = pawn.getNbPawn();
 		pawn.setNbPawn(++nbPawn);
-		// System.out.println("Name = " + pawn.getNamePawn());
 		// System.out.println("NbPawn = " + pawn.getNbPawn());
-		// // System.out.println("Size = " + pawns.size());
+	}
+
+	/**
+	 * This method shows or hides the pawn given in parameter in the grid2.
+	 * 
+	 * @param x
+	 *            The row of the grid.
+	 * 
+	 * @param y
+	 *            The line of the grid.
+	 * 
+	 * @param pawnShow
+	 *            The pawn who will be show or won't be.
+	 * 
+	 * @param show
+	 *            The boolean who says if the pawn is shown or isn't.
+	 */
+	public void showPawn(int x, int y, APawn pawnShow, boolean show) {
+		if (show) {
+			grid2.set(x, y, noPawn = new NoPawn(pawnShow.getNamePawn()));
+		} else {
+			grid2.set(x, y, initPawnIs(pawnShow));
+		}
+		repaint();
+	}
+
+	/**
+	 * Returns the initPawn that fits with the one given.
+	 * 
+	 * @param pawn
+	 *            The pawn of the same class of the wanted initPawn.
+	 * 
+	 * @return The wanted initPawn.
+	 */
+	public APawn initPawnIs(APawn pawn) {
+
+		if (pawn.getNamePawn() == spyInit.getNamePawn()) {
+			return spyInit;
+		} else if (pawn.getNamePawn() == scoutInit.getNamePawn()) {
+			return scoutInit;
+		} else if (pawn.getNamePawn() == minerInit.getNamePawn()) {
+			return minerInit;
+		} else if (pawn.getNamePawn() == generalInit.getNamePawn()) {
+			return generalInit;
+		} else if (pawn.getNamePawn() == marshalInit.getNamePawn()) {
+			return marshalInit;
+		} else if (pawn.getNamePawn() == bombInit.getNamePawn()) {
+			return bombInit;
+		} else if (pawn.getNamePawn() == flagInit.getNamePawn()) {
+			return flagInit;
+		} else if (pawn.getNamePawn() == sergeantInit.getNamePawn()) {
+			return sergeantInit;
+		} else if (pawn.getNamePawn() == lieutenantInit.getNamePawn()) {
+			return lieutenantInit;
+		} else if (pawn.getNamePawn() == captainInit.getNamePawn()) {
+			return captainInit;
+		} else if (pawn.getNamePawn() == majorInit.getNamePawn()) {
+			return majorInit;
+		} else {
+			return colonelInit;
+		}
+	}
+
+	/**
+	 * Returns a new instance of the given pawn.
+	 * 
+	 * @param pawn
+	 *            The pawn which we want a new instance.
+	 * 
+	 * @return The new instance of the pawn.
+	 */
+	public APawn newPawn(APawn pawn) {
+		APawn newPawn;
+
+		if (pawn.getClass() == spyInit.getClass()) {
+			newPawn = new Spy(team);
+		} else if (pawn.getClass() == scoutInit.getClass()) {
+			newPawn = new Scout(team);
+		} else if (pawn.getClass() == minerInit.getClass()) {
+			newPawn = new Miner(team);
+		} else if (pawn.getClass() == generalInit.getClass()) {
+			newPawn = new General(team);
+		} else if (pawn.getClass() == marshalInit.getClass()) {
+			newPawn = new Marshal(team);
+		} else if (pawn.getClass() == bombInit.getClass()) {
+			newPawn = new Bomb(team);
+		} else if (pawn.getClass() == flagInit.getClass()) {
+			newPawn = new Flag(team);
+		} else if (pawn.getClass() == sergeantInit.getClass()) {
+			newPawn = new Sergeant(team);
+		} else if (pawn.getClass() == lieutenantInit.getClass()) {
+			newPawn = new Lieutenant(team);
+		} else if (pawn.getClass() == captainInit.getClass()) {
+			newPawn = new Captain(team);
+		} else if (pawn.getClass() == majorInit.getClass()) {
+			newPawn = new Major(team);
+		} else {
+			newPawn = new Colonel(team);
+		}
+
+		return newPawn;
 	}
 
 	/**
@@ -431,55 +517,4 @@ public class WindowInitPawn extends WindowGame {
 	public Game createGrid() {
 		return grid1;
 	}
-
-	/**
-	 * 
-	 * @param x
-	 * @param y
-	 * @param pawnShow
-	 * @param show
-	 */
-	public void showPawn(int x, int y, APawn pawnShow, boolean show) {
-		if (show) {
-			grid2.set(x, y, noPawn = new NoPawn(pawnShow.getNamePawn()));
-		} else {
-			grid2.set(x, y, initPawnIs(pawnShow));// TODO pawnInit
-		}
-		repaint();
-	}
-
-	/**
-	 * 
-	 * @param pawn
-	 * @return
-	 */
-	public APawn initPawnIs(APawn pawn) {
-
-		if (pawn.getNamePawn() == scoutInit.getNamePawn()) {
-			return scoutInit;
-		} else if (pawn.getNamePawn() == minerInit.getNamePawn()) {
-			return minerInit;
-		} else if (nbPawns == 40 && pawn.getNamePawn() == sergeantInit.getNamePawn()) {
-			return sergeantInit;
-		} else if (nbPawns == 40 && pawn.getNamePawn() == lieutenantInit.getNamePawn()) {
-			return lieutenantInit;
-		} else if (nbPawns == 40 && pawn.getNamePawn() == captainInit.getNamePawn()) {
-			return captainInit;
-		} else if (nbPawns == 40 && pawn.getNamePawn() == majorInit.getNamePawn()) {
-			return majorInit;
-		} else if (nbPawns == 40 && pawn.getNamePawn() == colonelInit.getNamePawn()) {
-			return colonelInit;
-		} else if (pawn.getNamePawn() == generalInit.getNamePawn()) {
-			return generalInit;
-		} else if (pawn.getNamePawn() == marshalInit.getNamePawn()) {
-			return marshalInit;
-		} else if (pawn.getNamePawn() == bombInit.getNamePawn()) {
-			return bombInit;
-		} else if (pawn.getNamePawn() == flagInit.getNamePawn()) {
-			return flagInit;
-		}
-
-		return spyInit;
-	}
-
 }

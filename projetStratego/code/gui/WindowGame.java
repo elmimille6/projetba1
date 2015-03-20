@@ -13,7 +13,6 @@ import pawn.APawn;
 import pawn.Bomb;
 import pawn.Flag;
 import util.Dic;
-
 import pawn.*;
 
 /**
@@ -279,7 +278,8 @@ public class WindowGame extends JFrame {
 		}
 		if (nbPawnofTeam == nbPawnBloked) {
 			return (team % 2) + 1;
+		} else {
+			return 0;
 		}
-		return 0;
 	}
 }

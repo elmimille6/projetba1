@@ -1,13 +1,85 @@
 package gui;
 
-import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.Vector;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import main.GridStart;
 
 public class WinManager extends JFrame{
 	
+	private Vector<GridStart> list;
+	private JComboBox<GridStart> combo = new JComboBox<GridStart>();
+	private JButton nouv,modif,supp;
+	private GridStart focus;
 	
 	public WinManager(){
-		this.setLayout(new BorderLayout());
+		this.setLayout(new GridLayout(3,1));
+		this.setTitle("Gestionnaire de grille de depart ");
+	    this.setSize(500, 500);
+	    this.setLocationRelativeTo(null);
+//	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);             
+	    this.setVisible(true);
+	    load();
+	    JPanel paneNorth = new JPanel();
+	    JPanel paneCenter = new JPanel();
+	    JPanel paneSouth = new JPanel();
+	    paneNorth.setLayout(new GridLayout(1,3));
+	    paneSouth.setLayout(new GridLayout(1,2));
+	    for(int i=0;i<list.size();i++){
+	    	combo.addItem(list.get(i));
+	    }
+	    combo.addActionListener(new ChoixCombo());
+	    JPanel paneCombo = new JPanel();
+	    JPanel paneNouv = new JPanel();
+	    JLabel lab= new JLabel("Selectionnez une grille");
+	    JLabel lab2= new JLabel("ou creer une ");
+	    paneCombo.add(lab);
+	    paneCombo.add(combo);
+	    paneNorth.add(paneCombo);
+	    nouv=new JButton("nouvelle grille");
+	    paneNouv.add(lab2);
+	    paneNouv.add(nouv);
+	    paneNorth.add(paneNouv);
+	    
+	    this.add(paneNorth);
+	    this.add(paneCenter);
+	    this.add(paneSouth);
 	}
+	public void load(){
+		ObjectInputStream in;
+		try {
+			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
+			Vector<GridStart> vector = (Vector<GridStart>) in.readObject();
+			this.list=vector;
+			in.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	class ChoixCombo implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	      focus=(GridStart) combo.getSelectedItem();
+	    }               
+	  }
 }

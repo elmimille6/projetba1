@@ -177,6 +177,7 @@ public class Game implements java.io.Serializable {
 					"grid.save"));
 			Game grid = (Game) in.readObject();
 			in.close();
+			System.out.println("HERE+   "+grid);
 			return grid;
 		} catch (ClassNotFoundException e1) {
 

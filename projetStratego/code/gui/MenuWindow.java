@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import main.Game;
@@ -35,6 +36,7 @@ public class MenuWindow extends JFrame {
 	private JMenuItem quit = new JMenuItem("Quitter");
 	private JMenuItem testia = new JMenuItem("Tester l'IA");
 	private JMenuItem startSave = new JMenuItem("Utiliser la sauvegarde");
+	private JMenuItem manager = new JMenuItem("Gestionnaire de grille de depart");
 
 	private JLabel labJeu = new JLabel("Jeu");
 
@@ -97,15 +99,28 @@ public class MenuWindow extends JFrame {
 				grid.save();
 			}
 		});
+		manager.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				WinManager managerWin=new WinManager();
+			}
+		});
 		startSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Game grid = Game.load();
-				grid.showGrid();
+				if(grid!=null){
+					//TODO ce que dois faire le bouton quand il existe une save
+					grid.showGrid();
+				}
+				else{
+					JOptionPane jop1 = new JOptionPane();
+					jop1.showMessageDialog(null, "Aucune sauvegarde n'est disponible", "Information", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 
 		this.menu1.add(testia);
 		this.menu1.addSeparator();
+		this.menu1.add(manager);
 		this.menu1.add(startSave);
 		this.menu1.addSeparator();
 		this.menu1.add(quit);

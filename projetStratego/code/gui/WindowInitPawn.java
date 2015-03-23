@@ -1,22 +1,36 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Dimension;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JFrame;
 
 import main.Game;
 import main.GridIA;
+import main.GridStart;
 //import main.GridPawn;
-import pawn.*;
+import pawn.APawn;
+import pawn.Bomb;
+import pawn.Captain;
+import pawn.Colonel;
+import pawn.Flag;
+import pawn.General;
+import pawn.Lieutenant;
+import pawn.Major;
+import pawn.Marshal;
+import pawn.Miner;
+import pawn.NoPawn;
+import pawn.Scout;
+import pawn.Sergeant;
+import pawn.Spy;
 
 /**
  * This class creates the window for the initialization of the grid by the
@@ -120,13 +134,22 @@ public class WindowInitPawn extends WindowGame {
 		JPanel Center = new JPanel();
 		// Center.setPreferredSize(new Dimension(0, centerHeight));
 		JButton play = new JButton("Play");
-		Center.add(new JButton("Save")); // Save the grid in the 'Saves' folder
+		JButton save = new JButton("Save");
+		Center.add(save); // Save the grid in the 'Saves' folder
 		// Center.add(new JButton("OK")); // Lauches the game with the grid
 		Center.add(play);
 		Center.add(new JButton("Load")); // Search save in the 'Saves' folder
 
 		final JFrame fen = this;
 
+		save.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				GridStart ngrid = new GridStart();
+				ngrid.setGrid(grid1.getGrid());
+				ngrid.setName("test");
+				ngrid.save();
+			}});
+		
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!pawns.isEmpty()) {

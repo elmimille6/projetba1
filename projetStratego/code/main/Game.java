@@ -32,7 +32,13 @@ public class Game implements java.io.Serializable {
 	public Game() {
 
 	}
-
+	
+	public Game(APawn[][] ngrid) {
+		grid=ngrid;
+		row=grid[0].length;
+		line=grid.length;
+	}
+	
 	/**
 	 * Constructor of the grid.
 	 * 

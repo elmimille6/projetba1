@@ -39,6 +39,10 @@ public class PaneInitPawn extends JPanel {
 		}
 	}
 
+	public PaneInitPawn() {
+		this.grid=new Game(new APawn[4][10]);
+	}
+
 	/**
 	 * 
 	 */
@@ -79,5 +83,10 @@ public class PaneInitPawn extends JPanel {
 				}
 			}
 		}
+	}
+	public void setGrid(APawn[][] ngrid){
+		Game game = new Game(ngrid);
+		this.grid=game;
+		
 	}
 }

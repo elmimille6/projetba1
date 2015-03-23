@@ -1,5 +1,8 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,18 +26,20 @@ public class WinManager extends JFrame{
 	private JComboBox<GridStart> combo = new JComboBox<GridStart>();
 	private JButton nouv,modif,supp;
 	private GridStart focus;
+	public PaneInitPawn panelCenter;
 	
 	public WinManager(){
-		this.setLayout(new GridLayout(3,1));
+		this.setLayout(new BorderLayout());
 		this.setTitle("Gestionnaire de grille de depart ");
-	    this.setSize(500, 500);
+	    this.setSize(800, 400);
 	    this.setLocationRelativeTo(null);
-//	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);             
+	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);             
 	    this.setVisible(true);
 	    load();
 	    JPanel paneNorth = new JPanel();
-	    JPanel paneCenter = new JPanel();
 	    JPanel paneSouth = new JPanel();
+	    paneSouth.setBackground(Color.BLUE);
+	    
 	    paneNorth.setLayout(new GridLayout(1,3));
 	    paneSouth.setLayout(new GridLayout(1,2));
 	    for(int i=0;i<list.size();i++){
@@ -49,13 +54,22 @@ public class WinManager extends JFrame{
 	    paneCombo.add(combo);
 	    paneNorth.add(paneCombo);
 	    nouv=new JButton("nouvelle grille");
+	    modif=new JButton("modifier");
+	    supp=new JButton("supprimer");
+	    paneSouth.add(modif);
+	    paneSouth.add(supp);
 	    paneNouv.add(lab2);
 	    paneNouv.add(nouv);
 	    paneNorth.add(paneNouv);
 	    
-	    this.add(paneNorth);
-	    this.add(paneCenter);
-	    this.add(paneSouth);
+	    panelCenter=new PaneInitPawn();
+//	    panelCenter.setMinimumSize(new Dimension(this.getWidth(),300));
+//	    paneSouth.setSize(50, 50);
+	    
+	    this.add(paneNorth,BorderLayout.NORTH);
+	    this.add(panelCenter,BorderLayout.CENTER);
+	    this.add(paneSouth,BorderLayout.SOUTH);
+	    this.validate();
 	}
 	public void load(){
 		ObjectInputStream in;
@@ -80,6 +94,8 @@ public class WinManager extends JFrame{
 	class ChoixCombo implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
 	      focus=(GridStart) combo.getSelectedItem();
+	      panelCenter.setGrid(focus.getGrid());
+	      panelCenter.repaint();
 	    }               
 	  }
 }

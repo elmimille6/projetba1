@@ -71,7 +71,7 @@ public class WindowInitPawn extends WindowGame {
 	@SuppressWarnings("static-access")
 	public WindowInitPawn(int nbPlayer, final int nbPawns, final int team) {
 		this.setTitle("Initialization of the grid");
-		this.setSize(700, 600);
+		this.setSize(700, 650);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.nbPawns = nbPawns;
@@ -146,8 +146,11 @@ public class WindowInitPawn extends WindowGame {
 			public void actionPerformed(ActionEvent arg0) {
 				GridStart ngrid = new GridStart();
 				ngrid.setGrid(grid1.getGrid());
-				ngrid.setName("test");
+				JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
+				String nom = jop.showInputDialog(null, "Veuillez entrer un nom pour cette grille", "Sauvegarde", JOptionPane.QUESTION_MESSAGE);
+				ngrid.setName(nom);
 				ngrid.save();
+				jop2.showMessageDialog(null, "Votre grille est bien sauvegardé au nom de " + nom, "sauvé", JOptionPane.INFORMATION_MESSAGE);
 			}});
 		
 		play.addActionListener(new ActionListener() {

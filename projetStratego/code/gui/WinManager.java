@@ -1,11 +1,11 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,8 +20,13 @@ import javax.swing.JPanel;
 
 import main.GridStart;
 
+
 public class WinManager extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6421255455563013157L;
 	private Vector<GridStart> list;
 	private JComboBox<GridStart> combo = new JComboBox<GridStart>();
 	private JButton nouv,modif,supp;
@@ -38,8 +43,7 @@ public class WinManager extends JFrame{
 	    load();
 	    JPanel paneNorth = new JPanel();
 	    JPanel paneSouth = new JPanel();
-	    paneSouth.setBackground(Color.BLUE);
-	    
+	    focus=list.get(0);
 	    paneNorth.setLayout(new GridLayout(1,3));
 	    paneSouth.setLayout(new GridLayout(1,2));
 	    for(int i=0;i<list.size();i++){
@@ -56,6 +60,7 @@ public class WinManager extends JFrame{
 	    nouv=new JButton("nouvelle grille");
 	    modif=new JButton("modifier");
 	    supp=new JButton("supprimer");
+	    supp.addActionListener(new actionSupp());
 	    paneSouth.add(modif);
 	    paneSouth.add(supp);
 	    paneNouv.add(lab2);
@@ -70,6 +75,7 @@ public class WinManager extends JFrame{
 	    this.add(panelCenter,BorderLayout.CENTER);
 	    this.add(paneSouth,BorderLayout.SOUTH);
 	    this.validate();
+	    
 	}
 	public void load(){
 		ObjectInputStream in;
@@ -91,11 +97,27 @@ public class WinManager extends JFrame{
 		
 		
 	}
+	public void close(){
+		this.dispose();
+	}
 	class ChoixCombo implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
 	      focus=(GridStart) combo.getSelectedItem();
+	      System.out.println(focus+" focus");
 	      panelCenter.setGrid(focus.getGrid());
 	      panelCenter.repaint();
 	    }               
 	  }
+	class actionSupp implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	      focus.delete();
+	      WinManager fen = new WinManager();
+	      close();
+	    }               
+	  }
+	 class ItemState implements ItemListener{
+		    public void itemStateChanged(ItemEvent e) {
+		      System.out.println("événement déclenché sur : " + e.getItem());
+		    }               
+		  }
 }

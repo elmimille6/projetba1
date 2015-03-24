@@ -47,7 +47,7 @@ public class WindowGame extends JFrame {
 	 */
 	@SuppressWarnings("static-access")
 	public WindowGame(Game ngrid) {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.grid = ngrid;
 		startTeam = grid.getStartTeam();
 		paneRed = new PaneGamePawn(startTeam, grid, 1);

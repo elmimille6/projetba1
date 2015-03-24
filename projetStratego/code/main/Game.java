@@ -8,7 +8,6 @@ import java.io.ObjectOutputStream;
 import java.util.Vector;
 
 import pawn.APawn;
-import pawn.Flag;
 import pawn.Lake;
 import util.Dic;
 
@@ -154,10 +153,15 @@ public class Game implements java.io.Serializable {
 				for (int j = 0; j < tgrid[0].length; j++) {
 					// grid[3-i][9-j]=tgrid[i][j];
 					// tgrid[i][j].setPos(3-i, 9-j);
+					tgrid[i][j].setTeam(2);
 					this.set(3 - i, 9 - j, tgrid[i][j]);
 				}
 			}
 		}
+	}
+	
+	public void placeTeam(GridStart grid,int side){
+		placeTeam(grid.getGrid(),side);
 	}
 
 	/**

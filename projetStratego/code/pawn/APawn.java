@@ -22,6 +22,7 @@ public abstract class APawn implements java.io.Serializable {
 	public int posY;
 	protected String URI;
 	public boolean show = false, isEmpty = false;
+	protected Vector<int[]> place= new Vector<int[]>();
 
 	/**
 	 * Returns a string representation of a 'APawn' object.
@@ -45,6 +46,9 @@ public abstract class APawn implements java.io.Serializable {
 	public void setPos(int posX, int posY) {
 		this.posY = posY;
 		this.posX = posX;
+		int[] pla = {posY,posX};
+		System.out.println(pla+" pla");
+		place.addElement(pla);
 	}
 
 	/**
@@ -102,7 +106,7 @@ public abstract class APawn implements java.io.Serializable {
 	 * @param team
 	 *            The number of the team, 0 for neutral, 1 for red, 2 for blue.
 	 */
-	protected void setTeam(int team) {
+	public void setTeam(int team) {
 		this.team = team;
 	}
 
@@ -256,6 +260,14 @@ public abstract class APawn implements java.io.Serializable {
 	 */
 	public boolean movePoss(Game grid, int x, int y) {
 		APawn target = grid.getPawn(x, y);
+		if ( place.size()>=4){
+			int[] tab1=place.get(place.size()-2);
+			int[] tab2=place.get(place.size()-4);
+			if(tab1[0]==x&&x==tab2[0]&&tab1[1]==y&&tab2[1]==y){
+				return false;
+			}
+			
+		}
 		if (target instanceof Lake) { // test if the target isn't a lake
 			// System.out.println(1);
 			return false;

@@ -58,6 +58,15 @@ public class Scout extends APawn {
 	 */
 	public boolean movePoss(Game grid, int x, int y) {
 
+		if ( place.size()>=4){
+			int[] tab1=place.get(place.size()-2);
+			int[] tab2=place.get(place.size()-4);
+			if(tab1[0]==x&&x==tab2[0]&&tab1[1]==y&&tab2[1]==y){
+				return false;
+			}
+			
+		}
+		
 		if (x > grid.getLine()) {
 			// System.out.println("1");
 			return false;

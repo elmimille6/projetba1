@@ -23,6 +23,7 @@ public class Game implements java.io.Serializable {
 	private int row, line;
 	public int view = 1, turn = 1, player = 2,nbPawn=40;
 	public Dic startTeam;
+	public int[] lastMove={-1,-1,-1};
 	
 
 	/**
@@ -310,5 +311,13 @@ public class Game implements java.io.Serializable {
 	}
 	public Dic getStartTeam(){
 		return startTeam;
+	}
+
+	public int[] getLastMove() {
+		System.out.println("MOVE!!!!!!!!!!!!!!!!!");
+		return lastMove;
+	}
+	public void setLastMove(int[] move){
+		this.lastMove=move;
 	}
 }

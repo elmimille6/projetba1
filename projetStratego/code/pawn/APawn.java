@@ -334,6 +334,21 @@ public abstract class APawn implements java.io.Serializable {
 	 * @return The grid after the move.
 	 */
 	public Game move(Game grid, int x, int y) {
+		int[] move={this.posX,this.posY,-1};
+		
+		if(this.posX>x){
+			move[2]=0;
+		}
+		if(this.posX<x){
+			move[2]=2;
+		}
+		if(this.posY>y){
+			move[2]=3;
+		}
+		if(this.posY<y){
+			move[2]=1;
+		}
+		grid.setLastMove(move);
 		APawn tar = grid.getPawn(x, y);
 		if (tar == null) {// no pawn on the coordinates targeted
 			grid.set(this.posX, this.posY, null);// delete the old coordinates

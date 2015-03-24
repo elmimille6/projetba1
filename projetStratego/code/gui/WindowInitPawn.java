@@ -70,7 +70,7 @@ public class WindowInitPawn extends WindowGame {
 	 */
 	@SuppressWarnings("static-access")
 	public WindowInitPawn(int nbPlayer, final int nbPawns, final int team) {
-		this.setTitle("Initialization of the grid");
+		this.setTitle("Initialisation de la grille");
 		this.setSize(700, 650);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -133,12 +133,12 @@ public class WindowInitPawn extends WindowGame {
 
 		JPanel Center = new JPanel();
 		// Center.setPreferredSize(new Dimension(0, centerHeight));
-		JButton play = new JButton("Play");
-		JButton save = new JButton("Save");
+		JButton play = new JButton("Jouer");
+		JButton save = new JButton("Sauvegarder");
 		Center.add(save); // Save the grid in the 'Saves' folder
 		// Center.add(new JButton("OK")); // Lauches the game with the grid
 		Center.add(play);
-		Center.add(new JButton("Load")); // Search save in the 'Saves' folder
+		Center.add(new JButton("Charger")); // Search save in the 'Saves' folder
 
 		final JFrame fen = this;
 
@@ -147,28 +147,35 @@ public class WindowInitPawn extends WindowGame {
 				GridStart ngrid = new GridStart();
 				ngrid.setGrid(grid1.getGrid());
 				JOptionPane jop = new JOptionPane(), jop2 = new JOptionPane();
-				String nom = jop.showInputDialog(null, "Veuillez entrer un nom pour cette grille", "Sauvegarde", JOptionPane.QUESTION_MESSAGE);
+				String nom = jop.showInputDialog(null,
+						"Veuillez entrer un nom pour cette grille",
+						"Sauvegarde", JOptionPane.QUESTION_MESSAGE);
 				ngrid.setName(nom);
 				ngrid.save();
-				jop2.showMessageDialog(null, "Votre grille est bien sauvegardé au nom de " + nom, "sauvé", JOptionPane.INFORMATION_MESSAGE);
-			}});
-		
+				jop2.showMessageDialog(null,
+						"Votre grille est bien sauvegardee au nom de " + nom,
+						"Grille sauvee", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!pawns.isEmpty()) {
 					// System.out
 					// .println("You don't have positioned all your pawns.");
 					jop1 = new JOptionPane();
-					jop1.showMessageDialog(null,
-							"You don't have positioned all your pawns.",
-							"Warning", JOptionPane.WARNING_MESSAGE);
+					jop1.showMessageDialog(
+							null,
+							"Tous les pions ne sont pas dans la grille.",
+							"Attention", JOptionPane.WARNING_MESSAGE);
 				} else if (nbPawns != 10 && !canPlay()) {
 					// System.out
 					// .println("Make sure you can move at least one pawn.");
 					jop2 = new JOptionPane();
-					jop2.showMessageDialog(null,
-							"Make sure you can move at least one pawn.",
-							"Warning", JOptionPane.WARNING_MESSAGE);
+					jop2.showMessageDialog(
+							null,
+							"Assurez-vous que vous pouvez au moins dÃ©placer un pion.",
+							"Attention", JOptionPane.WARNING_MESSAGE);
 				} else {
 					Game grid = new Game(10, 1);
 					Game gridPlayer = createGrid();
@@ -360,8 +367,8 @@ public class WindowInitPawn extends WindowGame {
 			if (!pawns.isEmpty() && pawnInit.getNbPawn() > 0
 					&& pawns.elementAt(i).getLevel() == pawnInit.getLevel()) {
 				grid1.set(line, row, pawns.elementAt(i));
-//				System.out.println("Add");
-//				System.out.println("line = " + line + " row = " + row);
+				// System.out.println("Add");
+				// System.out.println("line = " + line + " row = " + row);
 				// grid1.showGrid();
 				pawns.removeElementAt(i);
 				nbPawn = pawnInit.getNbPawn();
@@ -404,8 +411,8 @@ public class WindowInitPawn extends WindowGame {
 	 *            The row of the pawn.
 	 */
 	public void deletePawn(APawn pawn, int line, int row) {
-//		System.out.println("Pop");
-//		System.out.println("line = " + line + " row = " + row);
+		// System.out.println("Pop");
+		// System.out.println("line = " + line + " row = " + row);
 
 		if (pawn.getNbPawn() == 0) {
 			if (nbPawns == 40) {

@@ -28,7 +28,7 @@ public class WinManager extends JFrame{
 	 */
 	private static final long serialVersionUID = -6421255455563013157L;
 	private Vector<GridStart> list;
-	private JComboBox<GridStart> combo = new JComboBox<GridStart>();
+	private JComboBox/*<GridStart>*/ combo = new JComboBox/*<GridStart>*/();
 	private JButton nouv,modif,supp;
 	private GridStart focus;
 	public PaneInitPawn panelCenter;
@@ -117,7 +117,7 @@ public class WinManager extends JFrame{
 	  }
 	 class ItemState implements ItemListener{
 		    public void itemStateChanged(ItemEvent e) {
-		      System.out.println("événement déclenché sur : " + e.getItem());
+		      System.out.println("ï¿½vï¿½nement dï¿½clenchï¿½ sur : " + e.getItem());
 		    }               
 		  }
 }

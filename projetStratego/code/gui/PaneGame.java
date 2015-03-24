@@ -22,7 +22,7 @@ public class PaneGame extends JPanel {
 	public Image img, imgBack;
 	public Game grid;
 	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
-	public int[] lastMove = {-1,-1,-1};
+	public int[] lastMove = { -1, -1, -1 };
 
 	/**
 	 * Constructor of the class.
@@ -169,7 +169,7 @@ public class PaneGame extends JPanel {
 		}
 		System.out.println("LM " + lastMove[0] + "  " + lastMove[1] + "  "
 				+ lastMove[2]);
-		lastMove=grid.getLastMove();
+		lastMove = grid.getLastMove();
 		if (lastMove[0] != -1) {
 			String linkLM = "/image/up.png";
 			if (lastMove[2] == 0) {
@@ -190,13 +190,11 @@ public class PaneGame extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			g.drawImage(
-					img,
-					((lastMove[1]) * (this.getWidth() / nbrCol)) + 10,
+			g.drawImage(img, ((lastMove[1]) * (this.getWidth() / nbrCol)) + 10,
 					(lastMove[0] * (this.getHeight() / nbrLigne)) + 10,
 					this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne
 							- 20, this);
-			
+
 		}
 	}
 
@@ -218,7 +216,7 @@ public class PaneGame extends JPanel {
 	 */
 	public void recupGrid(Game nouvGrid) {
 		grid = nouvGrid;
-		lastMove=nouvGrid.getLastMove();
+		lastMove = nouvGrid.getLastMove();
 	}
 
 	// public void recupGame(AGame type){

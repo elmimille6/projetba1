@@ -47,7 +47,7 @@ public class WindowGame extends JFrame {
 	 */
 	@SuppressWarnings("static-access")
 	public WindowGame(Game ngrid) {
-//		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.grid = ngrid;
 		startTeam = grid.getStartTeam();
 		paneRed = new PaneGamePawn(startTeam, grid, 1);
@@ -104,7 +104,7 @@ public class WindowGame extends JFrame {
 										paneRed.upGame(grid);
 										paneBlue.upGame(grid);
 
-										int result = win();
+										int result = grid.win();
 										System.out
 												.println("Result = " + result);
 										if (result != 0) {
@@ -186,100 +186,5 @@ public class WindowGame extends JFrame {
 				/ (pane.getHeight() / (grid.getLine() + 1));
 		return res;
 
-	}
-
-	/**
-	 * Checks if the game is over and if so, return the number of the player who
-	 * win.
-	 * 
-	 * @return 0 if the game isn't over <br/>
-	 *         1 if player 1 win <br/>
-	 *         2 if player 2 win.
-	 */
-	public int win() {
-		boolean canPlay = true;
-		boolean flag1 = false;
-		boolean flag2 = false;
-		int winner = 0, test = 0;
-
-		for (int j = 0; j < grid.getLine() + 1; j++) {
-			for (int i = 0; i < grid.getRow() + 1; i++) {
-				APawn pawn = grid.getPawn(i, j);
-
-				if (pawn != null) {
-					if (pawn.getTeam() == 1) {
-						test = canMove(1);
-						if (test != 0) {
-							canPlay = false;
-							winner = test;
-						} else if (pawn.getClass() == Flag.getClass()) {
-							System.out.println("Flag 1");
-							flag1 = true;
-						}
-					} else if (pawn.getTeam() == 2) {
-						test = canMove(1);
-						if (test != 0) {
-							canPlay = false;
-							winner = test;
-						} else if (pawn.getClass() == Flag.getClass()) {
-							System.out.println("Flag 2");
-							flag2 = true;
-						}
-					}
-				}
-			}
-		}
-
-		if (!canPlay) {
-			// System.out.println("winner = " + winner);
-			return winner;
-		}
-		if (!flag1) {
-			return 2;
-		}
-		if (!flag2) {
-			return 1;
-		}
-		return 0;
-	}
-
-	/**
-	 * Returns the team of the winner or 0 if the game isn't over.
-	 * 
-	 * @param team
-	 *            The team of the current pawn: - 1 for Red <br />
-	 *            - 2 for Blue.
-	 * 
-	 * @return The team of the winner or 0 if there's none.
-	 */
-	public int canMove(int team) {
-		int nbPawnofTeam = 0, nbPawnBloked = 0, nbMoves;
-		for (int j = 0; j < grid.getLine() + 1; j++) {
-			for (int i = 0; i < grid.getRow() + 1; i++) {
-				int[] arrayFocus = null;
-				nbMoves = 0;
-				APawn currentPawn = grid.getPawn(i, j);
-
-				if (currentPawn != null && currentPawn.getTeam() == team) {
-
-					nbPawnofTeam++;
-
-					arrayFocus = currentPawn.focus(grid);
-					for (int elem = 0; elem < 4; elem++) {
-						if (arrayFocus[elem] == -1) {
-							nbMoves++;
-						}
-					}
-					if (nbMoves == 4) {
-						nbPawnBloked++;
-					}
-				}
-			}
-		}
-		if (nbPawnofTeam == nbPawnBloked) {
-			return (team % 2) + 1;
-		} else {
-			return 0;
-		}
 	}
 }

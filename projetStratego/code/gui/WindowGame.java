@@ -13,7 +13,8 @@ import pawn.APawn;
 import pawn.Bomb;
 import pawn.Flag;
 import util.Dic;
-import pawn.*;
+
+//import pawn.*;
 
 /**
  * This class creates the window of the game.
@@ -77,10 +78,10 @@ public class WindowGame extends JFrame {
 								int[] res = getRes(grid, pane, posX, posY);
 								int line = res[0];
 								int row = res[1];
-//								grid.showGrid();
+								// grid.showGrid();
 								APawn pawn = grid.getPawn(line, row);
-//								System.out.println("pawn= " + pawn);
-//								System.out.println("focus= " + focus);
+								// System.out.println("pawn= " + pawn);
+								// System.out.println("focus= " + focus);
 								if (focus != null) {
 									if (focus.movePoss(grid, line, row)) {
 										if (grid.getPawn(line, row) != null) {
@@ -105,8 +106,8 @@ public class WindowGame extends JFrame {
 										paneBlue.upGame(grid);
 
 										int result = grid.win();
-//										System.out
-//												.println("Result = " + result);
+										// System.out
+										// .println("Result = " + result);
 										if (result != 0) {
 											grid.setView(0);
 											playGame = false;

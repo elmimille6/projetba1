@@ -36,7 +36,8 @@ public class MenuWindow extends JFrame {
 	private JMenuItem quit = new JMenuItem("Quitter");
 	private JMenuItem testia = new JMenuItem("Tester l'IA");
 	private JMenuItem startSave = new JMenuItem("Utiliser la sauvegarde");
-	private JMenuItem manager = new JMenuItem("Gestionnaire de grille de depart");
+	private JMenuItem manager = new JMenuItem(
+			"Gestionnaire de grille de depart");
 
 	private JLabel labJeu = new JLabel("Jeu");
 
@@ -78,7 +79,7 @@ public class MenuWindow extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setTitle("Menu");
-		this.setBackground(Color.GREEN);
+		// this.setBackground(Color.GREEN);
 		this.setContentPane(container);
 
 		quit.addActionListener(new ActionListener() {
@@ -95,25 +96,25 @@ public class MenuWindow extends JFrame {
 				grid.placeTeam(gridIA.getGrid(), 1);
 				GridIA gridIA2 = new GridIA(2);
 				grid.placeTeam(gridIA2.getGrid(), 2);
-//				grid.showGrid();
+				// grid.showGrid();
 				grid.save();
 			}
 		});
 		manager.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				WinManager managerWin=new WinManager();
+				/* WinManager managerWin = */new WinManager();
 			}
 		});
 		startSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Game grid = Game.load();
-				if(grid!=null){
-					//TODO ce que dois faire le bouton quand il existe une save
-//					grid.showGrid();
-				}
-				else{
-					JOptionPane jop1 = new JOptionPane();
-					jop1.showMessageDialog(null, "Aucune sauvegarde n'est disponible", "Information", JOptionPane.INFORMATION_MESSAGE);
+				if (grid != null) {
+					// TODO ce que dois faire le bouton quand il existe une save
+					// grid.showGrid();
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Aucune sauvegarde n'est disponible",
+							"Information", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});

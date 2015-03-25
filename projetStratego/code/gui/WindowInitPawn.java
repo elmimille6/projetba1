@@ -167,8 +167,7 @@ public class WindowInitPawn extends WindowGame {
 					// System.out
 					// .println("You don't have positioned all your pawns.");
 					jop1 = new JOptionPane();
-					jop1.showMessageDialog(
-							null,
+					jop1.showMessageDialog(null,
 							"Tous les pions ne sont pas dans la grille.",
 							"Attention", JOptionPane.WARNING_MESSAGE);
 				} else if (nbPawns != 10 && !canPlay()) {
@@ -177,7 +176,7 @@ public class WindowInitPawn extends WindowGame {
 					jop2 = new JOptionPane();
 					jop2.showMessageDialog(
 							null,
-							"Assurez-vous que vous pouvez au moins déplacer un pion.",
+							"Assurez-vous que vous pouvez au moins dï¿½placer un pion.",
 							"Attention", JOptionPane.WARNING_MESSAGE);
 				} else {
 					Game grid = new Game(10, 1);
@@ -186,7 +185,7 @@ public class WindowInitPawn extends WindowGame {
 					grid.placeTeam(gridPlayer.getGrid(), 1);
 					grid.placeTeam(gridIA.getGrid(), 2);
 					fen.dispose();
-					WindowGame fenGame = new WindowGame(grid);
+					/* WindowGame fenGame = */new WindowGame(grid);
 				}
 			}
 		});
@@ -194,13 +193,11 @@ public class WindowInitPawn extends WindowGame {
 		pane2 = new PaneInitPawn(grid2);
 		pane2.setPreferredSize(new Dimension(0, southHeight));
 
-
 		pane1.setBorder(BorderFactory.createLineBorder(Color.black));
 		pane2.setBorder(BorderFactory.createLineBorder(Color.black));
 		add(pane1, BorderLayout.CENTER);
-		
 
-	add(Center, BorderLayout.NORTH);
+		add(Center, BorderLayout.NORTH);
 
 		add(pane2, BorderLayout.SOUTH);
 

@@ -1,6 +1,6 @@
 package pawn;
 
-import gui.WindowGame;
+//import gui.WindowGame;
 
 import java.util.Vector;
 
@@ -47,10 +47,10 @@ public abstract class APawn implements java.io.Serializable {
 		this.posY = posY;
 		this.posX = posX;
 		int[] pla = { posX, posY };
-//		System.out.println(posY + " posY");
-//		System.out.println(posX + " posX");
+		// System.out.println(posY + " posY");
+		// System.out.println(posX + " posX");
 		place.addElement(pla);
-//		System.out.println("placesize  "+place.size());
+		// System.out.println("placesize  "+place.size());
 	}
 
 	/**
@@ -266,12 +266,13 @@ public abstract class APawn implements java.io.Serializable {
 			int[] tab1 = place.get(place.size() - 4);
 			int[] tab2 = place.get(place.size() - 6);
 			int[] tab3 = place.get(place.size() - 2);
-			
-			System.out.println(tab1[0]+" "+tab1[1]);
-			System.out.println(tab2[0]+" "+tab2[1]);
-			
+
+			System.out.println(tab1[0] + " " + tab1[1]);
+			System.out.println(tab2[0] + " " + tab2[1]);
+
 			System.out.println();
-			if (tab1[0] == x && x == tab2[0] && tab1[1] == y && tab2[1] == y && tab3[0] == x && tab3[1]==y) {
+			if (tab1[0] == x && x == tab2[0] && tab1[1] == y && tab2[1] == y
+					&& tab3[0] == x && tab3[1] == y) {
 				return false;
 			}
 

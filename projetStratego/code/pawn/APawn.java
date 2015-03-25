@@ -46,10 +46,11 @@ public abstract class APawn implements java.io.Serializable {
 	public void setPos(int posX, int posY) {
 		this.posY = posY;
 		this.posX = posX;
-		int[] pla = { posY, posX };
-		System.out.println(posY + " posY");
-		System.out.println(posX + " posX");
+		int[] pla = { posX, posY };
+//		System.out.println(posY + " posY");
+//		System.out.println(posX + " posX");
 		place.addElement(pla);
+//		System.out.println("placesize  "+place.size());
 	}
 
 	/**
@@ -261,10 +262,14 @@ public abstract class APawn implements java.io.Serializable {
 	 */
 	public boolean movePoss(Game grid, int x, int y) {
 		APawn target = grid.getPawn(x, y);
-		System.out.println("place.size() = " + place.size());
 		if (place.size() >= 4) {
 			int[] tab1 = place.get(place.size() - 2);
 			int[] tab2 = place.get(place.size() - 4);
+			
+			System.out.println(tab1[0]+" "+tab1[1]);
+			System.out.println(tab2[0]+" "+tab2[1]);
+			
+			System.out.println();
 			if (tab1[0] == x && x == tab2[0] && tab1[1] == y && tab2[1] == y) {
 				return false;
 			}

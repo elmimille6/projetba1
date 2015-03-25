@@ -47,7 +47,6 @@ public class PaneInitPawn extends JPanel {
 	 * 
 	 */
 	public void paintComponent(Graphics g) {
-
 		// dessine le quadrillage
 		int nbrLigne = grid.getLine() + 1;
 		int nbrCol = grid.getRow() + 1;

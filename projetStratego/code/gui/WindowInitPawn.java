@@ -71,12 +71,13 @@ public class WindowInitPawn extends WindowGame {
 	@SuppressWarnings("static-access")
 	public WindowInitPawn(int nbPlayer, final int nbPawns, final int team) {
 		this.setTitle("Initialisation de la grille");
-		this.setSize(700, 650);
+		this.setSize(1024, 650);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.nbPawns = nbPawns;
 		this.team = team;
 		initialize();
+		this.setResizable(false);
 
 		int xSize = ((int) this.getWidth());
 		int ySize = ((int) this.getHeight());
@@ -191,11 +192,11 @@ public class WindowInitPawn extends WindowGame {
 		pane2 = new PaneInitPawn(grid2);
 		pane2.setPreferredSize(new Dimension(0, southHeight));
 
-		this.getContentPane().add(pane1, BorderLayout.NORTH);
+		add(pane1, BorderLayout.NORTH);
 
-		this.getContentPane().add(Center, BorderLayout.CENTER);
+		add(Center, BorderLayout.CENTER);
 
-		this.getContentPane().add(pane2, BorderLayout.SOUTH);
+		add(pane2, BorderLayout.SOUTH);
 
 		this.setVisible(true);
 
@@ -317,7 +318,7 @@ public class WindowInitPawn extends WindowGame {
 						int line = res[0];
 						int row = res[1];
 						if (grid1.getPawn(line, row) != null) {
-							System.out.println("You can't play here !");
+//							System.out.println("You can't play here !");
 						} else {
 							// System.out.println("line = " + line + " row = " +
 							// row);
@@ -332,7 +333,7 @@ public class WindowInitPawn extends WindowGame {
 						int line = res[0];
 						int row = res[1];
 						if (grid1.getPawn(line, row) == null) {
-							System.out.println("You can't delete here !");
+//							System.out.println("You can't delete here !");
 						} else {
 							// System.out.println("line = " + line + " row = " +
 							// row);
@@ -361,7 +362,7 @@ public class WindowInitPawn extends WindowGame {
 	public void placePawn(APawn pawnInit, int line, int row) {
 		for (int i = 0; i < pawns.size(); i++) {
 			if (pawns.size() == 0) {
-				System.out.println("The vector is empty !");
+//				System.out.println("The vector is empty !");
 				break;
 			}
 			if (!pawns.isEmpty() && pawnInit.getNbPawn() > 0

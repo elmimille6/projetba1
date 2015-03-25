@@ -167,8 +167,8 @@ public class PaneGame extends JPanel {
 					this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne
 							- 20, this);
 		}
-		System.out.println("LM " + lastMove[0] + "  " + lastMove[1] + "  "
-				+ lastMove[2]);
+//		System.out.println("LM " + lastMove[0] + "  " + lastMove[1] + "  "
+//				+ lastMove[2]);
 		lastMove = grid.getLastMove();
 		if (lastMove[0] != -1) {
 			String linkLM = "/image/up.png";

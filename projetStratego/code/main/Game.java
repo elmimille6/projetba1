@@ -93,7 +93,7 @@ public class Game implements java.io.Serializable {
 	 */
 	public Game(int size, int gameMode) {
 		this(size, size, gameMode);
-		System.out.println("gameMode = " + gameMode);
+//		System.out.println("gameMode = " + gameMode);
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class Game implements java.io.Serializable {
 					"grid.save"));
 			Game grid = (Game) in.readObject();
 			in.close();
-			System.out.println("HERE+   " + grid);
+//			System.out.println("HERE+   " + grid);
 			return grid;
 		} catch (ClassNotFoundException e1) {
 
@@ -316,7 +316,7 @@ public class Game implements java.io.Serializable {
 	}
 
 	public int[] getLastMove() {
-		System.out.println("MOVE!!!!!!!!!!!!!!!!!");
+//		System.out.println("MOVE!!!!!!!!!!!!!!!!!");
 		return lastMove;
 	}
 
@@ -349,7 +349,7 @@ public class Game implements java.io.Serializable {
 							canPlay = false;
 							winner = test;
 						} else if (pawn.getClass() == Flag.getClass()) {
-							System.out.println("Flag 1");
+//							System.out.println("Flag 1");
 							flag1 = true;
 						}
 					} else if (pawn.getTeam() == 2) {
@@ -358,7 +358,7 @@ public class Game implements java.io.Serializable {
 							canPlay = false;
 							winner = test;
 						} else if (pawn.getClass() == Flag.getClass()) {
-							System.out.println("Flag 2");
+//							System.out.println("Flag 2");
 							flag2 = true;
 						}
 					}

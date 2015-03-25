@@ -95,7 +95,7 @@ public class MenuWindow extends JFrame {
 				grid.placeTeam(gridIA.getGrid(), 1);
 				GridIA gridIA2 = new GridIA(2);
 				grid.placeTeam(gridIA2.getGrid(), 2);
-				grid.showGrid();
+//				grid.showGrid();
 				grid.save();
 			}
 		});
@@ -109,7 +109,7 @@ public class MenuWindow extends JFrame {
 				Game grid = Game.load();
 				if(grid!=null){
 					//TODO ce que dois faire le bouton quand il existe une save
-					grid.showGrid();
+//					grid.showGrid();
 				}
 				else{
 					JOptionPane jop1 = new JOptionPane();

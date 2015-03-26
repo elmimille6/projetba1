@@ -79,7 +79,6 @@ public class MenuWindow extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setTitle("Menu");
-		// this.setBackground(Color.GREEN);
 		this.setContentPane(container);
 
 		quit.addActionListener(new ActionListener() {

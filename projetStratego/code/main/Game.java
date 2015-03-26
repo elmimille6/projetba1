@@ -27,6 +27,7 @@ public class Game implements java.io.Serializable {
 	public Dic startTeam;
 	public int[] lastMove = { -1, -1, -1 };
 	public APawn Flag = new Flag(1), Bomb = new Bomb(1);
+	public int nbPawns=40,complete=0;
 
 	/**
 	 * Main constructor of the class.
@@ -417,5 +418,20 @@ public class Game implements java.io.Serializable {
 		} else {
 			return 0;
 		}
+	}
+
+	public int getNbPawns() {
+		return nbPawns;
+	}
+	public void setNbPawns(int nb){
+		this.nbPawns=nb;
+	}
+
+	public int getComplete() {
+		
+		return complete;
+	}
+	public void addComplete(){
+		complete++;
 	}
 }

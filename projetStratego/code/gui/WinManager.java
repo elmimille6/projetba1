@@ -32,6 +32,11 @@ public class WinManager extends JFrame {
 	private GridStart focus;
 	public PaneInitPawn panelCenter;
 
+	public WinManager(int i){
+		this.setLayout(new GridLayout());
+		
+	}
+	
 	public WinManager() {
 		this.setLayout(new BorderLayout());
 		this.setTitle("Gestionnaire de grille de depart ");

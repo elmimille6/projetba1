@@ -103,10 +103,25 @@ public class GridIA {
 							valeur += bonus;
 						}
 					}
+					else{
+						valeur+=bonus;
+					}
 					if (grid[1][i].getClass() == Bomb.class
 							|| grid[1][i].getClass() == Marshal.class) {
 						valeur += bonus;
 					}
+				}
+				else{
+					valeur+=bonus;
+					if (grid[2][i + 1].getClass() == Bomb.class
+							|| grid[2][i + 1].getClass() == Marshal.class) {
+						valeur += bonus;
+					}
+					if (grid[1][i].getClass() == Bomb.class
+							|| grid[1][i].getClass() == Marshal.class) {
+						valeur += bonus;
+					}
+				
 				}
 			}
 			if (grid[3][i].getClass() == Flag.class) {
@@ -115,6 +130,19 @@ public class GridIA {
 							|| grid[3][i - 1].getClass() == Marshal.class) {
 						valeur += bonus;
 					}
+					if (i != 9) {
+						if (grid[3][i + 1].getClass() == Bomb.class
+								|| grid[3][i + 1].getClass() == Marshal.class) {
+							valeur += bonus;
+						}
+					}
+					if (grid[2][i].getClass() == Bomb.class
+							|| grid[2][i].getClass() == Marshal.class) {
+						valeur += bonus;
+					}
+				}
+				else{
+					valeur+=bonus;
 					if (i != 9) {
 						if (grid[3][i + 1].getClass() == Bomb.class
 								|| grid[3][i + 1].getClass() == Marshal.class) {

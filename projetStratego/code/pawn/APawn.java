@@ -50,7 +50,7 @@ public abstract class APawn implements java.io.Serializable {
 		// System.out.println(posY + " posY");
 		// System.out.println(posX + " posX");
 		place.addElement(pla);
-		// System.out.println("placesize  "+place.size());
+		// System.out.println("placesize  " + place.size());
 	}
 
 	/**
@@ -136,60 +136,64 @@ public abstract class APawn implements java.io.Serializable {
 	 * 
 	 * @return The vector of 40 pawn.
 	 */
-	public static Vector<APawn> createTeam(int team, int nbPawns) {
+	public static Vector<APawn> createTeam(boolean toInit, int team, int nbPawns) {
 		Vector<APawn> listPawn = new Vector<APawn>();
 
-		if (nbPawns == 40) {
+		if (!toInit) {
 
-			for (int i = 0; i < 6; i++) {
-				listPawn.add(new Bomb(team));
-			}
-			for (int i = 0; i < 8; i++) {
-				listPawn.add(new Scout(team));
-			}
+		} else {
+			if (nbPawns == 40) {
 
-			for (int i = 0; i < 5; i++) {
-				listPawn.add(new Miner(team));
-			}
+				for (int i = 0; i < 6; i++) {
+					listPawn.add(new Bomb(team));
+				}
+				for (int i = 0; i < 8; i++) {
+					listPawn.add(new Scout(team));
+				}
 
-			for (int i = 0; i < 4; i++) {
-				listPawn.add(new Sergeant(team));
-			}
+				for (int i = 0; i < 5; i++) {
+					listPawn.add(new Miner(team));
+				}
 
-			for (int i = 0; i < 4; i++) {
-				listPawn.add(new Captain(team));
-			}
+				for (int i = 0; i < 4; i++) {
+					listPawn.add(new Sergeant(team));
+				}
 
-			for (int i = 0; i < 4; i++) {
-				listPawn.add(new Lieutenant(team));
-			}
+				for (int i = 0; i < 4; i++) {
+					listPawn.add(new Captain(team));
+				}
 
-			for (int i = 0; i < 3; i++) {
-				listPawn.add(new Major(team));
-			}
+				for (int i = 0; i < 4; i++) {
+					listPawn.add(new Lieutenant(team));
+				}
 
-			for (int i = 0; i < 2; i++) {
-				listPawn.add(new Colonel(team));
-			}
-		} else if (nbPawns == 10) {
+				for (int i = 0; i < 3; i++) {
+					listPawn.add(new Major(team));
+				}
 
-			for (int i = 0; i < 2; i++) {
-				listPawn.add(new Bomb(team));
-			}
+				for (int i = 0; i < 2; i++) {
+					listPawn.add(new Colonel(team));
+				}
+			} else if (nbPawns == 10) {
 
-			for (int i = 0; i < 2; i++) {
-				listPawn.add(new Scout(team));
-			}
+				for (int i = 0; i < 2; i++) {
+					listPawn.add(new Bomb(team));
+				}
 
-			for (int i = 0; i < 2; i++) {
-				listPawn.add(new Miner(team));
-			}
+				for (int i = 0; i < 2; i++) {
+					listPawn.add(new Scout(team));
+				}
 
+				for (int i = 0; i < 2; i++) {
+					listPawn.add(new Miner(team));
+				}
+
+			}
+			listPawn.add(new Spy(team));
+			listPawn.add(new Marshal(team));
+			listPawn.add(new General(team));
+			listPawn.add(new Flag(team));
 		}
-		listPawn.add(new Spy(team));
-		listPawn.add(new Marshal(team));
-		listPawn.add(new General(team));
-		listPawn.add(new Flag(team));
 
 		return listPawn;
 	}

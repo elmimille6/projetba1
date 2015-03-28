@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import main.Game;
 import main.GridStart;
 
 public class WinManager extends JFrame {
@@ -32,11 +33,11 @@ public class WinManager extends JFrame {
 	private GridStart focus;
 	public PaneInitPawn panelCenter;
 
-	public WinManager(int i){
+	public WinManager(int i) {
 		this.setLayout(new GridLayout());
-		
+
 	}
-	
+
 	public WinManager() {
 		this.setLayout(new BorderLayout());
 		this.setTitle("Gestionnaire de grille de depart ");
@@ -65,6 +66,7 @@ public class WinManager extends JFrame {
 		modif = new JButton("modifier");
 		supp = new JButton("supprimer");
 		supp.addActionListener(new actionSupp());
+		modif.addActionListener(new actionModif());
 		paneSouth.add(modif);
 		paneSouth.add(supp);
 		paneNouv.add(lab2);
@@ -123,9 +125,17 @@ public class WinManager extends JFrame {
 		}
 	}
 
+	class actionModif implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Modif");
+			new WindowInitPawn(focus.getGrid());
+			close();
+		}
+	}
+
 	class ItemState implements ItemListener {
 		public void itemStateChanged(ItemEvent e) {
-			System.out.println("�v�nement d�clench� sur : " + e.getItem());
+			System.out.println("Evenement declenche sur : " + e.getItem());
 		}
 	}
 }

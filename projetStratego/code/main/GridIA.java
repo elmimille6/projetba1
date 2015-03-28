@@ -58,8 +58,10 @@ public class GridIA {
 	 */
 	public static APawn[][] createGrid(int team) {
 		APawn[][] grid = new APawn[4][10];
-		Vector<APawn> listPawn = APawn.createTeam(team, 40); // 40 if 40 pawns,
-																// 10 if duel
+		Vector<APawn> listPawn = APawn.createTeam(true, team, 40); // 40 if 40
+																	// pawns,
+																	// 10 if
+																	// duel
 		while (!listPawn.isEmpty()) {
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 10; j++) {
@@ -102,17 +104,15 @@ public class GridIA {
 								|| grid[2][i + 1].getClass() == Marshal.class) {
 							valeur += bonus;
 						}
-					}
-					else{
-						valeur+=bonus;
+					} else {
+						valeur += bonus;
 					}
 					if (grid[1][i].getClass() == Bomb.class
 							|| grid[1][i].getClass() == Marshal.class) {
 						valeur += bonus;
 					}
-				}
-				else{
-					valeur+=bonus;
+				} else {
+					valeur += bonus;
 					if (grid[2][i + 1].getClass() == Bomb.class
 							|| grid[2][i + 1].getClass() == Marshal.class) {
 						valeur += bonus;
@@ -121,7 +121,7 @@ public class GridIA {
 							|| grid[1][i].getClass() == Marshal.class) {
 						valeur += bonus;
 					}
-				
+
 				}
 			}
 			if (grid[3][i].getClass() == Flag.class) {
@@ -140,9 +140,8 @@ public class GridIA {
 							|| grid[2][i].getClass() == Marshal.class) {
 						valeur += bonus;
 					}
-				}
-				else{
-					valeur+=bonus;
+				} else {
+					valeur += bonus;
 					if (i != 9) {
 						if (grid[3][i + 1].getClass() == Bomb.class
 								|| grid[3][i + 1].getClass() == Marshal.class) {

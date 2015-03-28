@@ -27,7 +27,7 @@ public class Game implements java.io.Serializable {
 	public Dic startTeam;
 	public int[] lastMove = { -1, -1, -1 };
 	public APawn Flag = new Flag(1), Bomb = new Bomb(1);
-	public int nbPawns=40,complete=0;
+	public int nbPawns = 40, complete = 0;
 
 	/**
 	 * Main constructor of the class.
@@ -94,7 +94,7 @@ public class Game implements java.io.Serializable {
 	 */
 	public Game(int size, int gameMode) {
 		this(size, size, gameMode);
-//		System.out.println("gameMode = " + gameMode);
+		// System.out.println("gameMode = " + gameMode);
 	}
 
 	/**
@@ -144,6 +144,7 @@ public class Game implements java.io.Serializable {
 	 *            top of the grid.
 	 */
 	public void placeTeam(APawn[][] tgrid, int side) {
+
 		if (side == 1) {
 			for (int i = 0; i < tgrid.length; i++) {
 				for (int j = 0; j < tgrid[0].length; j++) {
@@ -191,7 +192,7 @@ public class Game implements java.io.Serializable {
 					"grid.save"));
 			Game grid = (Game) in.readObject();
 			in.close();
-//			System.out.println("HERE+   " + grid);
+			// System.out.println("HERE+   " + grid);
 			return grid;
 		} catch (ClassNotFoundException e1) {
 
@@ -300,7 +301,7 @@ public class Game implements java.io.Serializable {
 
 	private Dic startTeam() {
 		Dic team = new Dic();
-		Vector<APawn> liste = APawn.createTeam(1, nbPawn);
+		Vector<APawn> liste = APawn.createTeam(true, 1, nbPawn);
 		while (!liste.isEmpty()) {
 			if (team.isIn(liste.get(0))) {
 				team.increase(liste.get(0));
@@ -317,7 +318,7 @@ public class Game implements java.io.Serializable {
 	}
 
 	public int[] getLastMove() {
-//		System.out.println("MOVE!!!!!!!!!!!!!!!!!");
+		// System.out.println("MOVE!!!!!!!!!!!!!!!!!");
 		return lastMove;
 	}
 
@@ -350,7 +351,7 @@ public class Game implements java.io.Serializable {
 							canPlay = false;
 							winner = test;
 						} else if (pawn.getClass() == Flag.getClass()) {
-//							System.out.println("Flag 1");
+							// System.out.println("Flag 1");
 							flag1 = true;
 						}
 					} else if (pawn.getTeam() == 2) {
@@ -359,7 +360,7 @@ public class Game implements java.io.Serializable {
 							canPlay = false;
 							winner = test;
 						} else if (pawn.getClass() == Flag.getClass()) {
-//							System.out.println("Flag 2");
+							// System.out.println("Flag 2");
 							flag2 = true;
 						}
 					}
@@ -423,15 +424,16 @@ public class Game implements java.io.Serializable {
 	public int getNbPawns() {
 		return nbPawns;
 	}
-	public void setNbPawns(int nb){
-		this.nbPawns=nb;
+
+	public void setNbPawns(int nb) {
+		this.nbPawns = nb;
 	}
 
 	public int getComplete() {
-		
 		return complete;
 	}
-	public void addComplete(){
+
+	public void addComplete() {
 		complete++;
 	}
 }

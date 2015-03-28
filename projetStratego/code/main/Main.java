@@ -70,17 +70,25 @@ public class Main {
 			grid.placeTeam(gridIA.getGrid(), 1);
 			grid.placeTeam(gridIA2.getGrid(), 2);
 			grid.showGrid();
-			WindowGame fenGame = new WindowGame(grid);
-			
-		} else if (initGridGame == 1) {
+			/* WindowGame fenGame = */new WindowGame(grid);
+
+		} else if (initGridGame == 1) { //TODO
 			System.out.println("Init 1");
-			initPawn = new WindowInitPawn(nbrPlayer, typeOfGame, 1);
+			initPawn = new WindowInitPawn(chosenSize(typeOfGame), nbrPlayer, typeOfGame, 1);
 		} else if (initGridGame == 2) {
 			System.out.println("Init 2");
-			initPawn = new WindowInitPawn(nbrPlayer, typeOfGame, 2);
+			initPawn = new WindowInitPawn(chosenSize(typeOfGame), nbrPlayer, typeOfGame, 2);
 		} else {
 			System.out.println("Init 3");
-			initPawn = new WindowInitPawn(nbrPlayer, typeOfGame, 0);
+			initPawn = new WindowInitPawn(chosenSize(typeOfGame), nbrPlayer, typeOfGame, 0);
+		}
+	}
+	
+	public static Game chosenSize(int typeOfGame) {
+		if (typeOfGame == 40) {
+			return new Game(10, 4, 0);
+		} else {
+			return new Game(8, 3, 0);
 		}
 	}
 }

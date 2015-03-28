@@ -18,31 +18,35 @@ public class GridStart implements java.io.Serializable {
 	private static final long serialVersionUID = -4344347610962103007L;
 	public APawn[][] grid;
 	public String name;
-	
-	public GridStart(){
-		
+
+	public GridStart() {
+
 	}
-	public void setGrid(APawn[][] ngrid){
-		this.grid=ngrid;
+
+	public void setGrid(APawn[][] ngrid) {
+		this.grid = ngrid;
 	}
-	public APawn[][] getGrid(){
+
+	public APawn[][] getGrid() {
 		return grid;
 	}
-	public void setName(String str){
-		this.name=str;
+
+	public void setName(String str) {
+		this.name = str;
 	}
-	public String getName(){
+
+	public String getName() {
 		return name;
 	}
-	public void save(){
+
+	public void save() {
 		ObjectInputStream in;
-		Vector<GridStart> vector=new Vector<GridStart>();
+		Vector<GridStart> vector = new Vector<GridStart>();
 		try {
 			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
 			vector = (Vector) in.readObject();
 			in.close();
-			
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,8 +60,7 @@ public class GridStart implements java.io.Serializable {
 		ObjectOutputStream out;
 		vector.add(this);
 		try {
-			out = new ObjectOutputStream(
-					new FileOutputStream("gridStart.save"));
+			out = new ObjectOutputStream(new FileOutputStream("gridStart.save"));
 			out.writeObject(vector);
 			out.close();
 		} catch (FileNotFoundException e) {
@@ -67,18 +70,17 @@ public class GridStart implements java.io.Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	public void delete(){
+
+	public void delete() {
 		ObjectInputStream in;
-		Vector<GridStart> vector=new Vector<GridStart>();
+		Vector<GridStart> vector = new Vector<GridStart>();
 		try {
 			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
 			vector = (Vector) in.readObject();
 			in.close();
-			
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -90,22 +92,20 @@ public class GridStart implements java.io.Serializable {
 			e.printStackTrace();
 		}
 		ObjectOutputStream out;
-		int ind=-1;
-//		System.out.println(vector.size());
-//		System.out.println(this.name.equals(vector.elementAt(3).getName()));
-		for(int i =0;i<vector.size();i++){
+		int ind = -1;
+		// System.out.println(vector.size());
+		// System.out.println(this.name.equals(vector.elementAt(3).getName()));
+		for (int i = 0; i < vector.size(); i++) {
 			System.out.println(vector.elementAt(i));
-			if(this.equals(vector.elementAt(i))){
-				ind=i;
-				System.out.println("get index "+i);
+			if (this.equals(vector.elementAt(i))) {
+				ind = i;
+				// System.out.println("get index " + i);
 			}
 		}
-		
-		
+
 		vector.removeElementAt(ind);
 		try {
-			out = new ObjectOutputStream(
-					new FileOutputStream("gridStart.save"));
+			out = new ObjectOutputStream(new FileOutputStream("gridStart.save"));
 			out.writeObject(vector);
 			out.close();
 		} catch (FileNotFoundException e) {
@@ -115,9 +115,9 @@ public class GridStart implements java.io.Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public String toString() {
 		return name;
 	}
@@ -125,11 +125,11 @@ public class GridStart implements java.io.Serializable {
 	public boolean equals(Object obj) {
 		if (obj instanceof GridStart) {
 			GridStart gri = (GridStart) obj;
-			if (this.name.equals(gri.getName()) ) {
-				for(int i=0;i<this.grid.length;i++){
-					for(int j=0;j<this.grid[0].length;j++){
-						if(!this.grid[i][j].equals(gri.getGrid()[i][j])){
-//							System.out.println("false");
+			if (this.name.equals(gri.getName())) {
+				for (int i = 0; i < this.grid.length; i++) {
+					for (int j = 0; j < this.grid[0].length; j++) {
+						if (!this.grid[i][j].equals(gri.getGrid()[i][j])) {
+							// System.out.println("false");
 							return false;
 						}
 					}

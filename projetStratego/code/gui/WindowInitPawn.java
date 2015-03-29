@@ -46,7 +46,7 @@ import pawn.Spy;
 public class WindowInitPawn extends WindowGame {
 
 	private static final long serialVersionUID = 1L;
-	public Game gridPane1, gridPane2 = new Game(6, 2, 0), game;
+	public Game gridPane1 = new Game(10, 4, 0), gridPane2 = new Game(6, 2, 0), game;
 	public PaneInitPawn pane1, pane2;
 	public int team = 1;
 	public Vector<APawn> pawns;
@@ -94,7 +94,11 @@ public class WindowInitPawn extends WindowGame {
 	}
 
 	/**
-	 * This method initializes the window where the player creates his grid.
+	 * This method initializes the parameters and launches the 'initWindow'
+	 * method.
+	 * 
+	 * @param gridPane1
+	 *            The 'gridPane1' used.
 	 * 
 	 * @param nbPlayer
 	 *            The number of player: 1 or 2.
@@ -117,11 +121,10 @@ public class WindowInitPawn extends WindowGame {
 		this.team = team;
 		toInit = true;
 		initWindow();
-
 	}
 
 	/**
-	 * 
+	 * This method initializes the window where the player creates his grid.
 	 */
 	@SuppressWarnings("static-access")
 	public void initWindow() {
@@ -153,10 +156,13 @@ public class WindowInitPawn extends WindowGame {
 		JButton play = new JButton("Jouer");
 		JButton save = new JButton("Sauvegarder");
 		JButton load = new JButton("Charger");
-		Center.add(save); // Save the grid in the 'Saves' folder
+
 		Center.add(play);// Launches the game with the grid
-		if (toInit)
-			Center.add(load); // Search save in the 'Saves' folder
+		if (nbPawns == 40) {
+			Center.add(save); // Save the grid in the 'Saves' folder
+			if (toInit)
+				Center.add(load); // Search save in the 'Saves' folder
+		}
 
 		final JFrame fen = this;
 
@@ -230,10 +236,9 @@ public class WindowInitPawn extends WindowGame {
 	}
 
 	/**
-	 * Initializes the 'GridPane1' and 'GridPane2' panels.
+	 * Initializes the gridPane1 and gridPane2.
 	 */
 	public void initPane2() {
-		gridPane1 = Game.chosenSize(nbPawns);
 		if (nbPawns == 40) {
 			gridPane2 = new Game(6, 2, 0);
 			if (toInit) {
@@ -264,29 +269,20 @@ public class WindowInitPawn extends WindowGame {
 				gridPane2.set(1, 5, new NoPawn("flag"));
 			}
 		} else if (nbPawns == 10) {
+			gridPane1 = new Game(8, 3, 0);
 			gridPane2 = new Game(7, 1, 0);
 			northHeight = (int) (Math.round(ySize * 0.65));
 			southHeight = (int) (Math.round(ySize * 0.25));
-			if (toInit) {
-				gridPane2.set(0, 0, spyInit);
-				gridPane2.set(0, 1, scoutInit);
-				scoutInit.setNbPawn(2);
-				gridPane2.set(0, 2, minerInit);
-				minerInit.setNbPawn(2);
-				gridPane2.set(0, 3, generalInit);
-				gridPane2.set(0, 4, marshalInit);
-				gridPane2.set(0, 5, bombInit);
-				bombInit.setNbPawn(2);
-				gridPane2.set(0, 6, flagInit);
-			} else {
-				gridPane2.set(0, 0, new NoPawn("spy"));
-				gridPane2.set(0, 1, new NoPawn("scout"));
-				gridPane2.set(0, 2, new NoPawn("miner"));
-				gridPane2.set(0, 3, new NoPawn("general"));
-				gridPane2.set(0, 4, new NoPawn("marshal"));
-				gridPane2.set(0, 5, new NoPawn("bomb"));
-				gridPane2.set(0, 6, new NoPawn("flag"));
-			}
+			gridPane2.set(0, 0, spyInit);
+			gridPane2.set(0, 1, scoutInit);
+			scoutInit.setNbPawn(2);
+			gridPane2.set(0, 2, minerInit);
+			minerInit.setNbPawn(2);
+			gridPane2.set(0, 3, generalInit);
+			gridPane2.set(0, 4, marshalInit);
+			gridPane2.set(0, 5, bombInit);
+			bombInit.setNbPawn(2);
+			gridPane2.set(0, 6, flagInit);
 		}
 	}
 
@@ -301,13 +297,6 @@ public class WindowInitPawn extends WindowGame {
 			captainInit = new Captain(team);
 			majorInit = new Major(team);
 			colonelInit = new Colonel(team);
-			if (!toInit) {
-				sergeantInit.setNbPawn(0);
-				lieutenantInit.setNbPawn(0);
-				captainInit.setNbPawn(0);
-				majorInit.setNbPawn(0);
-				colonelInit.setNbPawn(0);
-			}
 		}
 		spyInit = new Spy(team);
 		scoutInit = new Scout(team);
@@ -320,6 +309,11 @@ public class WindowInitPawn extends WindowGame {
 			spyInit.setNbPawn(0);
 			scoutInit.setNbPawn(0);
 			minerInit.setNbPawn(0);
+			sergeantInit.setNbPawn(0);
+			lieutenantInit.setNbPawn(0);
+			captainInit.setNbPawn(0);
+			majorInit.setNbPawn(0);
+			colonelInit.setNbPawn(0);
 			generalInit.setNbPawn(0);
 			marshalInit.setNbPawn(0);
 			bombInit.setNbPawn(0);
@@ -415,7 +409,7 @@ public class WindowInitPawn extends WindowGame {
 	}
 
 	/**
-	 * Deletes the chosen pawn of the 'GridPane1' panel.
+	 * Deletes the chosen pawn of the gridPane1.
 	 */
 	public void deletePawnOfGrid() {
 		pane1.addMouseListener(new MouseAdapter() {
@@ -441,7 +435,7 @@ public class WindowInitPawn extends WindowGame {
 	}
 
 	/**
-	 * Adds the chosen pawn of the 'GridPane2' panel to the 'GridPane1' panel.
+	 * Adds the chosen pawn of the gridPane2 to the gridPane1.
 	 */
 	public void addPawnOfGrid() {
 		pane2.addMouseListener(new MouseAdapter() {
@@ -651,7 +645,7 @@ public class WindowInitPawn extends WindowGame {
 	/**
 	 * Returns the created grid.
 	 * 
-	 * @return The created grid from 'gridPane1'.
+	 * @return The created grid from gridPane1.
 	 */
 	public Game createGrid() {
 		return gridPane1;

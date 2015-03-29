@@ -39,12 +39,16 @@ public class WindowGame extends JFrame {
 	public final String[] resultName = { "Red", "Blue" };
 	public boolean playGame = true;
 
+	/**
+	 * 
+	 */
 	public WindowGame() {
 
 	}
 
 	/**
 	 * 
+	 * @param ngrid
 	 */
 	@SuppressWarnings("static-access")
 	public WindowGame(Game ngrid) {
@@ -169,6 +173,12 @@ public class WindowGame extends JFrame {
 
 	/**
 	 * Transforms the coordinates of the cursor into coordinates of the grid.
+	 * 
+	 * @param grid
+	 *            The chosen grid.
+	 * 
+	 * @param pane
+	 *            The panel containing the grid.
 	 * 
 	 * @param posX
 	 *            The abscissa of the cursor.

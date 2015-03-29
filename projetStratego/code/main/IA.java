@@ -16,14 +16,14 @@ si c est eclaireur, il attaque que si le pion n est pas connu, ia differente pou
 
 si c est espion, n attaque que si c est le marechal connu
 A VOIR si demineur va chercher bombe plus proche connue
-mettre valeursur  les pions qui ont bougé comme ca on sait que c est pas une bombe
+mettre valeursur  les pions qui ont bouge comme ca on sait que c est pas une bombe
 mettre valeur sur le pion pour savoir ssi il est connu ou pas
 
 pour tous(sauf eclaireur):attaque que si il connait la valeur de l autre pion et <= a lui
-n attaque jamais un pion qui n as pas bougé(sauf demineur)
+n attaque jamais un pion qui n as pas bouge (sauf demineur)
 quand il trouve un pion avec 1/4 que cela soit un flag il l attaque
 
-1 verifier si un de ses pions et collé a un pion adverse
+1 verifier si un de ses pions et colle a un pion adverse
 	
 	si oui
 		si plusieurs
@@ -49,7 +49,7 @@ doitonattaquer():
 					attaque
 					return true
 			else
-				si victime a bougé
+				si victime a bouge
 					calcul proba que la victime soit le flag
 					calcul proba du niveau de la victime
 					si proba flag <=4
@@ -61,11 +61,11 @@ doitonattaquer():
 					
 					
 proba flag:
-	return compte les pions qui non pas bougé - les bombes connu/detruite
+	return compte les pions qui non pas bouge - les bombes connu/detruite
 					
-proba(bool abougé:
+proba(bool abouge:
 	parcours tableau
-		si pion team adverse et pion inconnu et abougé:
+		si pion team adverse et pion inconnu et abouge:
 			si pion !=bombe et pion != flag
 				nbrpion++
 				sommelevel+=leveldupion

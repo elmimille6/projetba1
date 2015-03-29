@@ -28,8 +28,8 @@ public class WinManager extends JFrame {
 	 */
 	private static final long serialVersionUID = -6421255455563013157L;
 	private Vector<GridStart> list;
-	private JComboBox/* <GridStart> */combo = new JComboBox/* <GridStart> */();
-	private JButton nouv, modif, supp;
+	private JComboBox combo = new JComboBox();
+	private JButton newGrid, modif, supp;
 	private GridStart focus;
 	public PaneInitPawn panelCenter;
 
@@ -62,15 +62,16 @@ public class WinManager extends JFrame {
 		paneCombo.add(lab);
 		paneCombo.add(combo);
 		paneNorth.add(paneCombo);
-		nouv = new JButton("nouvelle grille");
+		newGrid = new JButton("nouvelle grille");
 		modif = new JButton("modifier");
 		supp = new JButton("supprimer");
+		newGrid.addActionListener(new actionNewGrid());
 		supp.addActionListener(new actionSupp());
 		modif.addActionListener(new actionModif());
 		paneSouth.add(modif);
 		paneSouth.add(supp);
 		paneNouv.add(lab2);
-		paneNouv.add(nouv);
+		paneNouv.add(newGrid);
 		paneNorth.add(paneNouv);
 
 		panelCenter = new PaneInitPawn();
@@ -88,6 +89,7 @@ public class WinManager extends JFrame {
 		ObjectInputStream in;
 		try {
 			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
+			@SuppressWarnings("unchecked")
 			Vector<GridStart> vector = (Vector<GridStart>) in.readObject();
 			this.list = vector;
 			in.close();
@@ -117,10 +119,18 @@ public class WinManager extends JFrame {
 		}
 	}
 
+	class actionNewGrid implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("NewGrid");
+			new WindowInitPawn(new Game(10, 4, 0), true);
+			close();
+		}
+	}
+
 	class actionSupp implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			focus.delete();
-			/* WinManager fen = */new WinManager();
+			new WinManager();
 			close();
 		}
 	}
@@ -128,7 +138,7 @@ public class WinManager extends JFrame {
 	class actionModif implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Modif");
-			new WindowInitPawn(focus.getGrid());
+			new WindowInitPawn(new Game(focus.getGrid()), false);
 			close();
 		}
 	}

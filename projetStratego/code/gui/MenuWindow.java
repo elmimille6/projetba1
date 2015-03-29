@@ -58,7 +58,7 @@ public class MenuWindow extends JFrame {
 	private JLabel labIa2 = new JLabel("Niveau de la seconde IA");
 	private JComboBox comboIa2 = new JComboBox();
 
-	private JButton goBtn = new JButton("Lancer la partie!");
+	private JButton goBtn = new JButton("Lancer la partie !");
 
 	private JPanel container = new JPanel();
 

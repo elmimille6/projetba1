@@ -36,6 +36,10 @@ public class Game implements java.io.Serializable {
 
 	}
 
+	/**
+	 * 
+	 * @param ngrid
+	 */
 	public Game(APawn[][] ngrid) {
 		grid = ngrid;
 		row = grid[0].length;
@@ -52,8 +56,9 @@ public class Game implements java.io.Serializable {
 	 *            The number of lines.
 	 * 
 	 * @param gameMode
-	 *            The mode of the current game: 0 if placement of the pawns <br/>
-	 *            1 if original Stratego <br/>
+	 *            The mode of the current game:<br/>
+	 *            0 if placement of the pawns,<br/>
+	 *            1 if original Stratego,<br/>
 	 *            and 2 if Stratego Duel.
 	 */
 	public Game(int rowNumber, int lineNumber, int gameMode) {
@@ -88,13 +93,13 @@ public class Game implements java.io.Serializable {
 	 *            Size of the grid.
 	 * 
 	 * @param gameMode
-	 *            The mode of the current game: 0 if placement of the pawns <br/>
-	 *            1 if original Stratego <br/>
+	 *            The mode of the current game:<br/>
+	 *            0 if placement of the pawns,<br/>
+	 *            1 if original Stratego,<br/>
 	 *            and 2 if Stratego Duel.
 	 */
 	public Game(int size, int gameMode) {
 		this(size, size, gameMode);
-		// System.out.println("gameMode = " + gameMode);
 	}
 
 	/**
@@ -140,8 +145,9 @@ public class Game implements java.io.Serializable {
 	 *            The grid of pawn to place in the grid.
 	 * 
 	 * @param side
-	 *            The side of the grid: 1 in the bottom of the grid and 2 on the
-	 *            top of the grid.
+	 *            The side of the grid:<br/>
+	 *            1 in the bottom of the grid,<br/>
+	 *            2 on the top of the grid.
 	 */
 	public void placeTeam(APawn[][] tgrid, int side) {
 
@@ -201,6 +207,140 @@ public class Game implements java.io.Serializable {
 		}
 		return null;
 
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private Dic startTeam() {
+		Dic team = new Dic();
+		Vector<APawn> liste = APawn.createTeam(true, 1, nbPawn);
+		while (!liste.isEmpty()) {
+			if (team.isIn(liste.get(0))) {
+				team.increase(liste.get(0));
+			} else {
+				team.add(liste.get(0), 1);
+			}
+			liste.remove(0);
+		}
+		return team;
+	}
+
+	/**
+	 * Checks if the game is over and if so, return the number of the player who
+	 * win.
+	 * 
+	 * @return 0 if the game isn't over,<br/>
+	 *         1 if player 1 win,<br/>
+	 *         2 if player 2 win.
+	 */
+	public int win() {
+		boolean canPlay = true;
+		boolean flag1 = false;
+		boolean flag2 = false;
+		int winner = 0, test = 0;
+
+		for (int j = 0; j < this.getLine() + 1; j++) {
+			for (int i = 0; i < this.getRow() + 1; i++) {
+				APawn pawn = this.getPawn(i, j);
+
+				if (pawn != null) {
+					if (pawn.getTeam() == 1) {
+						test = this.canMove(1);
+						if (test != 0) {
+							canPlay = false;
+							winner = test;
+						} else if (pawn.getClass() == Flag.getClass()) {
+							// System.out.println("Flag 1");
+							flag1 = true;
+						}
+					} else if (pawn.getTeam() == 2) {
+						test = this.canMove(1);
+						if (test != 0) {
+							canPlay = false;
+							winner = test;
+						} else if (pawn.getClass() == Flag.getClass()) {
+							// System.out.println("Flag 2");
+							flag2 = true;
+						}
+					}
+				}
+			}
+		}
+
+		if (!canPlay) {
+			// System.out.println("winner = " + winner);
+			return winner;
+		}
+		if (!flag1) {
+			return 2;
+		}
+		if (!flag2) {
+			return 1;
+		}
+		return 0;
+	}
+
+	/**
+	 * Returns the team of the winner or 0 if the game isn't over.
+	 * 
+	 * @param team
+	 *            The team of the current pawn:<br/>
+	 *            - 1 for Red <br/>
+	 *            - 2 for Blue.
+	 * 
+	 * @return The team of the winner or 0 if there's none.
+	 */
+	public int canMove(int team) {
+		int nbPawnofTeam = 0, nbPawnBloked = 0, nbMoves;
+		for (int j = 0; j < this.getLine() + 1; j++) {
+			for (int i = 0; i < this.getRow() + 1; i++) {
+				int[] arrayFocus = null;
+				nbMoves = 0;
+				APawn currentPawn = this.getPawn(i, j);
+
+				if (currentPawn != null && currentPawn.getTeam() == team) {
+
+					nbPawnofTeam++;
+
+					arrayFocus = currentPawn.focus(this);
+					for (int elem = 0; elem < 4; elem++) {
+						if (arrayFocus[elem] == -1) {
+							nbMoves++;
+						}
+					}
+					if (nbMoves == 4) {
+						nbPawnBloked++;
+					}
+				}
+			}
+		}
+		if (nbPawnofTeam == nbPawnBloked) {
+			return (team % 2) + 1;
+		} else {
+			return 0;
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void addComplete() {
+		complete++;
+	}
+
+	/**
+	 * 
+	 * @param typeOfGame
+	 * @return
+	 */
+	public static Game chosenSize(int typeOfGame) {
+		if (typeOfGame == 40) {
+			return new Game(10, 4, 0);
+		} else {
+			return new Game(8, 3, 0);
+		}
 	}
 
 	/**
@@ -299,141 +439,51 @@ public class Game implements java.io.Serializable {
 		this.player = players;
 	}
 
-	private Dic startTeam() {
-		Dic team = new Dic();
-		Vector<APawn> liste = APawn.createTeam(true, 1, nbPawn);
-		while (!liste.isEmpty()) {
-			if (team.isIn(liste.get(0))) {
-				team.increase(liste.get(0));
-			} else {
-				team.add(liste.get(0), 1);
-			}
-			liste.remove(0);
-		}
-		return team;
-	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public Dic getStartTeam() {
 		return startTeam;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int[] getLastMove() {
-		// System.out.println("MOVE!!!!!!!!!!!!!!!!!");
 		return lastMove;
 	}
 
+	/**
+	 * 
+	 * @param move
+	 */
 	public void setLastMove(int[] move) {
 		this.lastMove = move;
 	}
 
 	/**
-	 * Checks if the game is over and if so, return the number of the player who
-	 * win.
 	 * 
-	 * @return 0 if the game isn't over <br/>
-	 *         1 if player 1 win <br/>
-	 *         2 if player 2 win.
+	 * @return
 	 */
-	public int win() {
-		boolean canPlay = true;
-		boolean flag1 = false;
-		boolean flag2 = false;
-		int winner = 0, test = 0;
-
-		for (int j = 0; j < this.getLine() + 1; j++) {
-			for (int i = 0; i < this.getRow() + 1; i++) {
-				APawn pawn = this.getPawn(i, j);
-
-				if (pawn != null) {
-					if (pawn.getTeam() == 1) {
-						test = this.canMove(1);
-						if (test != 0) {
-							canPlay = false;
-							winner = test;
-						} else if (pawn.getClass() == Flag.getClass()) {
-							// System.out.println("Flag 1");
-							flag1 = true;
-						}
-					} else if (pawn.getTeam() == 2) {
-						test = this.canMove(1);
-						if (test != 0) {
-							canPlay = false;
-							winner = test;
-						} else if (pawn.getClass() == Flag.getClass()) {
-							// System.out.println("Flag 2");
-							flag2 = true;
-						}
-					}
-				}
-			}
-		}
-
-		if (!canPlay) {
-			// System.out.println("winner = " + winner);
-			return winner;
-		}
-		if (!flag1) {
-			return 2;
-		}
-		if (!flag2) {
-			return 1;
-		}
-		return 0;
-	}
-
-	/**
-	 * Returns the team of the winner or 0 if the game isn't over.
-	 * 
-	 * @param team
-	 *            The team of the current pawn: - 1 for Red <br />
-	 *            - 2 for Blue.
-	 * 
-	 * @return The team of the winner or 0 if there's none.
-	 */
-	public int canMove(int team) {
-		int nbPawnofTeam = 0, nbPawnBloked = 0, nbMoves;
-		for (int j = 0; j < this.getLine() + 1; j++) {
-			for (int i = 0; i < this.getRow() + 1; i++) {
-				int[] arrayFocus = null;
-				nbMoves = 0;
-				APawn currentPawn = this.getPawn(i, j);
-
-				if (currentPawn != null && currentPawn.getTeam() == team) {
-
-					nbPawnofTeam++;
-
-					arrayFocus = currentPawn.focus(this);
-					for (int elem = 0; elem < 4; elem++) {
-						if (arrayFocus[elem] == -1) {
-							nbMoves++;
-						}
-					}
-					if (nbMoves == 4) {
-						nbPawnBloked++;
-					}
-				}
-			}
-		}
-		if (nbPawnofTeam == nbPawnBloked) {
-			return (team % 2) + 1;
-		} else {
-			return 0;
-		}
-	}
-
 	public int getNbPawns() {
 		return nbPawns;
 	}
 
+	/**
+	 * 
+	 * @param nb
+	 */
 	public void setNbPawns(int nb) {
 		this.nbPawns = nb;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getComplete() {
 		return complete;
-	}
-
-	public void addComplete() {
-		complete++;
 	}
 }

@@ -106,7 +106,10 @@ public abstract class APawn implements java.io.Serializable {
 	 * Sets the team of the pawn.
 	 * 
 	 * @param team
-	 *            The number of the team, 0 for neutral, 1 for red, 2 for blue.
+	 *            The number of the team:<br/>
+	 *            0 for neutral,<br/>
+	 *            1 for red,<br/>
+	 *            2 for blue.
 	 */
 	public void setTeam(int team) {
 		this.team = team;
@@ -237,7 +240,7 @@ public abstract class APawn implements java.io.Serializable {
 	/**
 	 * Gets the show value of the pawn.
 	 * 
-	 * @return The show value of the pawn..
+	 * @return The show value of the pawn.
 	 */
 	public boolean getShow() {
 		return this.show;

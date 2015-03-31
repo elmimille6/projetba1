@@ -39,7 +39,7 @@ public class Main {
 		nbrPlayer = menu.getNbrPlayer();
 		initGridGame = menu.getInitGridGame();
 		typeOfGame = menu.getTypeOfGame();
-		if (initGridGame == 0) {
+		if (initGridGame == 0) {//check the menu.comboinit
 			System.out.println("Automatic");
 			if (typeOfGame == 40) {
 				System.out.println("Stratego");

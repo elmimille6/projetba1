@@ -12,6 +12,9 @@ public class IA {
 		this.lvl=level;
 		this.team=tea;
 	}
+	public IA(int level){
+		this(level,2);
+	}
 	
 	private int[][] iaL0(Game game){
 		int[][] move={{-1,-1},{-1,-1}};

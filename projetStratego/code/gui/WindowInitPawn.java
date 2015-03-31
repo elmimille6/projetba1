@@ -68,7 +68,7 @@ public class WindowInitPawn extends WindowGame {
 	public WindowInitPawn(Game game) {// TODO
 		nbPlayer = game.getPlayer();
 		nbPawns = game.getNbPawns();
-		if (grid.getComplete() == 0) {
+		if (game.getComplete() == 0) {
 			team = 1;
 		} else {
 			team = 2;

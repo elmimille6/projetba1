@@ -55,8 +55,6 @@ public class MenuWindow extends JFrame {
 	private JLabel labIa1 = new JLabel("Niveau de la premiere IA");
 	private JComboBox comboIa1 = new JComboBox();
 
-	private JLabel labIa2 = new JLabel("Niveau de la seconde IA");
-	private JComboBox comboIa2 = new JComboBox();
 
 	private JButton goBtn = new JButton("Lancer la partie !");
 
@@ -128,7 +126,7 @@ public class MenuWindow extends JFrame {
 		this.setJMenuBar(menuBar);
 
 		container.setBackground(Color.white);
-		container.setLayout(new GridLayout(6, 1));
+		container.setLayout(new GridLayout(5, 1));
 
 		comboJeu.setPreferredSize(new Dimension(100, 20));
 
@@ -176,20 +174,10 @@ public class MenuWindow extends JFrame {
 		panIA1.add(comboIa1);
 		comboIa1.addItem("Niveau facile");
 		comboIa1.addItem("Niveau moyen");
-		comboIa1.addItem("Niveau difficile");
 		comboIa1.addActionListener(new ItemActionIa1());
 		comboIa1.setPreferredSize(new Dimension(150, 20));
 		comboIa1.setEnabled(true);
 
-		JPanel panIA2 = new JPanel();
-		panIA2.add(labIa2);
-		panIA2.add(comboIa2);
-		comboIa2.addItem("Niveau facile");
-		comboIa2.addItem("Niveau moyen");
-		comboIa2.addItem("Niveau difficile");
-		comboIa2.addActionListener(new ItemActionIa2());
-		comboIa2.setPreferredSize(new Dimension(150, 20));
-		comboIa2.setEnabled(false);
 
 		JPanel panBtn = new JPanel();
 		JPanel panBtn2 = new JPanel();
@@ -222,7 +210,6 @@ public class MenuWindow extends JFrame {
 		container.add(panInit);
 		container.add(panType);
 		container.add(panIA1);
-		container.add(panIA2);
 		container.add(panBtn);
 
 		this.setVisible(true);
@@ -252,17 +239,14 @@ public class MenuWindow extends JFrame {
 			if (comboPlayer.getSelectedItem() == "2 Joueurs") {
 				nbrPlayer = 2;
 				comboIa1.setEnabled(false);
-				comboIa2.setEnabled(false);
 				comboInit.addItem("Manuelle Joueur Bleu");
 				comboInit.addItem("Manuelle");
 			} else if (comboPlayer.getSelectedItem() == "1 Joueur") {
 				nbrPlayer = 1;
 				comboIa1.setEnabled(true);
-				comboIa2.setEnabled(false);
 			} else if (comboPlayer.getSelectedItem() == "0 Joueur") {
 				nbrPlayer = 0;
 				comboIa1.setEnabled(true);
-				comboIa2.setEnabled(true);
 			} else {
 				nbrPlayer = 1;
 			}
@@ -300,32 +284,19 @@ public class MenuWindow extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if (comboIa1.getSelectedItem() == "niveau facile") {
 				lvl1 = 0;
-			} else if (comboIa2.getSelectedItem() == "niveau moyen") {
-				lvl1 = 3;
-			} else if (comboIa2.getSelectedItem() == "niveau difficile") {
-				lvl1 = 7;
-			} else {
+			} else if (comboIa1.getSelectedItem() == "niveau moyen") {
+				lvl1 = 1;
+			}
+//			else if (comboIa1.getSelectedItem() == "niveau difficile") {
+//				lvl1 = 2;
+//			}
+			else {
 				lvl1 = 0;
 			}
 			tryEnable();
 		}
 	}
 
-	class ItemActionIa2 implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			if (comboIa2.getSelectedItem() == "niveau facile") {
-				lvl2 = 0;
-			} else if (comboIa2.getSelectedItem() == "niveau moyen") {
-				lvl2 = 3;
-				changeGrid.setEnabled(true);
-			} else if (comboIa2.getSelectedItem() == "niveau difficile") {
-				lvl2 = 7;
-			} else {
-				lvl2 = 0;
-			}
-			tryEnable();
-		}
-	}
 
 	/**
 	 * Enables the player(s) to move the pawns.

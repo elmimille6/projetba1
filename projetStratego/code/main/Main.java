@@ -1,7 +1,11 @@
 package main;
 
 //import pawn.*;
-import gui.*;
+import gui.MenuWindow;
+import gui.WindowGame;
+import gui.WindowInitPawn;
+
+import java.util.Random;
 
 /**
  * This is the main class of this project.
@@ -24,6 +28,8 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		menu = new MenuWindow();
+//		Random rand = new Random();
+//		rand.nextInt(10);
 	}
 
 	/**

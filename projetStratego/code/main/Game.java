@@ -184,7 +184,6 @@ public class Game implements java.io.Serializable {
 					new FileOutputStream("grid.save"));
 			out.writeObject(this);
 			out.close();
-			System.out.println("save");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -486,5 +485,21 @@ public class Game implements java.io.Serializable {
 	 */
 	public int getComplete() {
 		return complete;
+	}
+
+	public void resetMove(APawn pawn) {
+		for(int i =0;i<grid.length;i++){
+			for(int j=0;j<grid[0].length;j++){
+				APawn pa=grid[i][j];
+				if(pa!=null){
+					if(pa.getTeam()==pawn.getTeam()){
+						if(pawn.posX!=i ||pawn.posY!=j){
+							pa.resetMove();
+						}
+					}
+				}
+			}
+		}
+		
 	}
 }

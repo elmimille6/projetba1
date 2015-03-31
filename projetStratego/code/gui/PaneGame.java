@@ -196,7 +196,6 @@ public class PaneGame extends JPanel {
 
 		}
 		grid.save();
-		System.out.println("SAVEEEEE");
 	}
 
 	/**

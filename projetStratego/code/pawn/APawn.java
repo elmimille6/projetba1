@@ -269,6 +269,9 @@ public abstract class APawn implements java.io.Serializable {
 	 */
 	public boolean movePoss(Game grid, int x, int y) {
 		APawn target = grid.getPawn(x, y);
+		if(x<0||y<0||x>grid.getLine()||y>grid.getRow()){
+			return false;
+		}
 		if (place.size() >= 6) {
 			int[] tab1 = place.get(place.size() - 4);
 			int[] tab2 = place.get(place.size() - 6);
@@ -365,11 +368,13 @@ public abstract class APawn implements java.io.Serializable {
 			move[2] = 1;
 		}
 		grid.setLastMove(move);
+		
 		APawn tar = grid.getPawn(x, y);
 		if (tar == null) {// no pawn on the coordinates targeted
 			grid.set(this.posX, this.posY, null);// delete the old coordinates
 													// of the pawn
 			grid.set(x, y, this);// set the new coordinates of the pawn
+			grid.resetMove(this);
 			return grid;
 		}
 
@@ -383,6 +388,7 @@ public abstract class APawn implements java.io.Serializable {
 			grid.set(x, y, this);// set the new coordinates of the pawn
 		} else if (res == 2)// the pawn who attack loose
 			grid.set(this.posX, this.posY, null);// delete the pawn who attack
+		grid.resetMove(this);
 		return grid;
 	}
 
@@ -458,6 +464,10 @@ public abstract class APawn implements java.io.Serializable {
 		return false;
 	}
 
+	public void resetMove(){
+		place.removeAllElements();
+	}
+	
 	/**
 	 * Tests if the pawn can move in the grid in any direction.
 	 * 

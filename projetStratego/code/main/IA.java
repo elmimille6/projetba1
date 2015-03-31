@@ -1,13 +1,80 @@
 package main;
 
+import java.util.Random;
+
+import pawn.APawn;
+import pawn.Scout;
+
 public class IA {
-	public static int[] IA(Game game,int lvl){
-		int[] res = {-1,-1};
-		if(lvl==1){
-			
-		}
-		return res;
+	int lvl=0,team=0;
+	
+	public IA(int level,int tea){
+		this.lvl=level;
+		this.team=tea;
 	}
+	
+	private int[][] iaL0(Game game){
+		int[][] move={{-1,-1},{-1,-1}};
+		if (team==((game.getTurn() + 1) % 2) + 1){
+			boolean moved = false;
+			Random rand = new Random();
+			while(!moved){
+				int row = rand.nextInt(game.getRow());
+				int line = rand.nextInt(game.getLine());
+				APawn pawn = game.getPawn(line, row);
+				if(pawn!=null){
+					if(pawn.getTeam()==team){
+						int dir=rand.nextInt(4);
+						int max=1;
+						if(pawn instanceof Scout){
+							max= rand.nextInt(3)+1;
+						}
+						if(dir==0){
+							if(pawn.movePoss(game, line+max, row)){
+								int[][] m={{line,row},{line+max,row}};
+								move=m;
+								return move;
+							}
+							
+						}
+						if(dir==1){
+							if(pawn.movePoss(game, line-max, row)){
+								int[][] m={{line,row},{line-max,row}};
+								move=m;
+								return move;
+							}
+						}
+						if(dir==2){
+							if(pawn.movePoss(game, line, row+max)){
+								int[][] m={{line,row},{line,row+max}};
+								move=m;
+								return move;
+							}
+						}
+						if(dir==3){
+							if(pawn.movePoss(game, line, row-max)){
+								int[][] m={{line,row},{line,row-max}};
+								move=m;
+								return move;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		
+		return move;
+	}
+	public int[][] getNext(Game game){
+		if(lvl==1){
+
+		}
+		return iaL0(game);
+	}
+	
+	
+	
 }
 
 

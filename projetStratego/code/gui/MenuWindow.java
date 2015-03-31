@@ -147,7 +147,8 @@ public class MenuWindow extends JFrame {
 		panPlayer.add(comboPlayer);
 		comboPlayer.addItem("1 Joueur");
 		comboPlayer.addItem("2 Joueurs");
-		comboPlayer.addItem("0 Joueur");
+//		comboPlayer.addItem("0 Joueur");
+		comboPlayer.setSelectedItem("2 Joueurs");
 		comboPlayer.addActionListener(new ItemActionPlayer());
 		comboPlayer.setPreferredSize(new Dimension(130, 20));
 		comboPlayer.setEnabled(true);

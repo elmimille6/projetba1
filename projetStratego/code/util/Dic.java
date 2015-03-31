@@ -1,6 +1,6 @@
 package util;
 
-public class Dic {
+public class Dic implements java.io.Serializable {
 	Object[][] tab;
 	int size=0;
 	

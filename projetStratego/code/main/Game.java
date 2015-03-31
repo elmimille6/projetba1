@@ -184,8 +184,9 @@ public class Game implements java.io.Serializable {
 					new FileOutputStream("grid.save"));
 			out.writeObject(this);
 			out.close();
+			System.out.println("save");
 		} catch (IOException e) {
-
+			e.printStackTrace();
 		}
 	}
 

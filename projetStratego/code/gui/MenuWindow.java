@@ -108,8 +108,7 @@ public class MenuWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Game grid = Game.load();
 				if (grid != null) {
-					// TODO ce que dois faire le bouton quand il existe une save
-					// grid.showGrid();
+					new WindowGame(grid);
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Aucune sauvegarde n'est disponible",

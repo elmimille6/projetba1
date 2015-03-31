@@ -38,7 +38,6 @@ public class PaneGame extends JPanel {
 	 * 
 	 */
 	public void paintComponent(Graphics g) {
-
 		try {
 			java.net.URL urlBack = getClass().getResource("/image/back.jpg");
 			// java.net.URL urlO = getClass().getResource(jeu.recupImg1());
@@ -196,6 +195,8 @@ public class PaneGame extends JPanel {
 							- 20, this);
 
 		}
+		grid.save();
+		System.out.println("SAVEEEEE");
 	}
 
 	/**

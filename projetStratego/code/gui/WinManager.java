@@ -45,47 +45,52 @@ public class WinManager extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-		load();
-		JPanel paneNorth = new JPanel();
-		JPanel paneSouth = new JPanel();
-		focus = list.get(0);
-		paneNorth.setLayout(new GridLayout(1, 3));
-		paneSouth.setLayout(new GridLayout(1, 2));
-		for (int i = 0; i < list.size(); i++) {
-			combo.addItem(list.get(i));
+		if (load()) {
+			JPanel paneNorth = new JPanel();
+			JPanel paneSouth = new JPanel();
+			focus = list.get(0);
+			paneNorth.setLayout(new GridLayout(1, 3));
+			paneSouth.setLayout(new GridLayout(1, 2));
+			for (int i = 0; i < list.size(); i++) {
+				combo.addItem(list.get(i));
+			}
+			combo.addActionListener(new ChoixCombo());
+			JPanel paneCombo = new JPanel();
+			JPanel paneNouv = new JPanel();
+			JLabel lab = new JLabel("Selectionnez une grille");
+			JLabel lab2 = new JLabel("ou creer une ");
+			paneCombo.add(lab);
+			paneCombo.add(combo);
+			paneNorth.add(paneCombo);
+			newGrid = new JButton("nouvelle grille");
+			modif = new JButton("modifier");
+			supp = new JButton("supprimer");
+			newGrid.addActionListener(new actionNewGrid());
+			supp.addActionListener(new actionSupp());
+			modif.addActionListener(new actionModif());
+			paneSouth.add(modif);
+			paneSouth.add(supp);
+			paneNouv.add(lab2);
+			paneNouv.add(newGrid);
+			paneNorth.add(paneNouv);
+
+			panelCenter = new PaneInitPawn();
+			// panelCenter.setMinimumSize(new Dimension(this.getWidth(),300));
+			// paneSouth.setSize(50, 50);
+
+			this.add(paneNorth, BorderLayout.NORTH);
+			this.add(panelCenter, BorderLayout.CENTER);
+			this.add(paneSouth, BorderLayout.SOUTH);
+			this.validate();
 		}
-		combo.addActionListener(new ChoixCombo());
-		JPanel paneCombo = new JPanel();
-		JPanel paneNouv = new JPanel();
-		JLabel lab = new JLabel("Selectionnez une grille");
-		JLabel lab2 = new JLabel("ou creer une ");
-		paneCombo.add(lab);
-		paneCombo.add(combo);
-		paneNorth.add(paneCombo);
-		newGrid = new JButton("nouvelle grille");
-		modif = new JButton("modifier");
-		supp = new JButton("supprimer");
-		newGrid.addActionListener(new actionNewGrid());
-		supp.addActionListener(new actionSupp());
-		modif.addActionListener(new actionModif());
-		paneSouth.add(modif);
-		paneSouth.add(supp);
-		paneNouv.add(lab2);
-		paneNouv.add(newGrid);
-		paneNorth.add(paneNouv);
-
-		panelCenter = new PaneInitPawn();
-		// panelCenter.setMinimumSize(new Dimension(this.getWidth(),300));
-		// paneSouth.setSize(50, 50);
-
-		this.add(paneNorth, BorderLayout.NORTH);
-		this.add(panelCenter, BorderLayout.CENTER);
-		this.add(paneSouth, BorderLayout.SOUTH);
-		this.validate();
+		else{
+			WindowInitPawn fen=new WindowInitPawn(new Game(10, 4, 0), true);
+			close();
+		}
 
 	}
 
-	public void load() {
+	public boolean load() {
 		ObjectInputStream in;
 		try {
 			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
@@ -93,15 +98,19 @@ public class WinManager extends JFrame {
 			Vector<GridStart> vector = (Vector<GridStart>) in.readObject();
 			this.list = vector;
 			in.close();
+			return true;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("here");
+			return false;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 
 	}

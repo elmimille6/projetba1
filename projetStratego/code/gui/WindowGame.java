@@ -106,6 +106,7 @@ public class WindowGame extends JFrame {
 										pane.recupArrow(arrowN);
 										focus = null;
 										repaint();
+										grid.save();
 										paneRed.upGame(grid);
 										paneBlue.upGame(grid);
 
@@ -116,6 +117,7 @@ public class WindowGame extends JFrame {
 											grid.setView(0);
 											playGame = false;
 											repaint();
+											
 											jopWin = new JOptionPane();
 											jopWin.showMessageDialog(
 													null,
@@ -127,6 +129,7 @@ public class WindowGame extends JFrame {
 										} else {
 											grid.setView(3);
 											repaint();
+											
 
 											jop = new JOptionPane();
 											jop.showMessageDialog(
@@ -139,6 +142,8 @@ public class WindowGame extends JFrame {
 													JOptionPane.INFORMATION_MESSAGE);
 											grid.setView((((grid.getTurn() + 1) % 2) + 1));
 											repaint();
+											
+
 											paneRed.upGame(grid);
 											paneBlue.upGame(grid);
 
@@ -160,6 +165,7 @@ public class WindowGame extends JFrame {
 										}
 										att = false;
 										repaint();
+										
 									}
 								}
 								att = false;

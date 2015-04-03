@@ -283,9 +283,9 @@ public class MenuWindow extends JFrame {
 
 	class ItemActionIa1 implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (comboIa1.getSelectedItem() == "niveau facile") {
+			if (comboIa1.getSelectedItem() == "Niveau facile") {
 				lvl1 = 0;
-			} else if (comboIa1.getSelectedItem() == "niveau moyen") {
+			} else if (comboIa1.getSelectedItem() == "Niveau moyen") {
 				lvl1 = 1;
 			}
 			// else if (comboIa1.getSelectedItem() == "niveau difficile") {

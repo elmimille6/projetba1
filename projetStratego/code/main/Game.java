@@ -21,7 +21,7 @@ import util.Dic;
 public class Game implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8927958880942845647L;
-	private APawn[][] grid;
+	private APawn[][] grid=new APawn[10][10];
 	private int row, line;
 	public int view = 1, turn = 1, player = 2, nbPawn = 40, level = 0;
 	public Dic startTeam;
@@ -34,7 +34,7 @@ public class Game implements java.io.Serializable {
 	 * Main constructor of the class.
 	 */
 	public Game() {
-
+		
 	}
 
 	/**
@@ -512,7 +512,7 @@ public class Game implements java.io.Serializable {
 		return level;
 	}
 
-	public void setLeve(int level) {
+	public void setLevel(int level) {
 		this.level = level;
 	}
 

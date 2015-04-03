@@ -55,7 +55,9 @@ public class WindowGame extends JFrame {
 	@SuppressWarnings("static-access")
 	public WindowGame(Game ngame) {
 		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		this.game = ngame;
+		System.out.println(game.level+" LEVEL WindowGame");
 		startTeam = game.getStartTeam();
 		paneRed = new PaneGamePawn(startTeam, game, 1);
 		paneBlue = new PaneGamePawn(startTeam, game, 2);
@@ -262,13 +264,24 @@ public class WindowGame extends JFrame {
 											JOptionPane.INFORMATION_MESSAGE);
 								} else {
 									try {
-										Thread.sleep(2000);
+										Thread.sleep(1000);
 									} catch (InterruptedException e) {
 									}
 									int[][] next = ia.getNext(game);
 									APawn pa = game.getPawn(next[0][0],
 											next[0][1]);
+									if (game.getPawn(next[1][0], next[1][1]) != null) {
+										game.getPawn(next[0][0], next[0][1])
+												.setShow(true);
+										repaint();
+										try {
+											Thread.sleep(3000);
+										} catch (InterruptedException e) {
+										}
+										game.getPawn(line, row).setShow(false);
+									}
 									pa.move(game, next[1][0], next[1][1]);
+									game.addTurn();
 									repaint();
 									paneRed.upGame(game);
 									paneBlue.upGame(game);

@@ -15,7 +15,7 @@ import java.util.Random;
 public class Main {
 
 	public static MenuWindow menu;
-	public static int nbrPlayer, initGridGame, typeOfGame;
+	public static int nbrPlayer, initGridGame, typeOfGame,level;
 	public static WindowInitPawn initPawn;
 	public static Game game;
 	public static GridIA gridIA, gridIA2;
@@ -37,6 +37,7 @@ public class Main {
 		nbrPlayer = menu.getNbrPlayer();
 		initGridGame = menu.getInitGridGame();
 		typeOfGame = menu.getTypeOfGame();
+		level=menu.lvl1;
 		// if (typeOfGame == 40) {
 		// System.out.println("Stratego");
 		// game = new Game(10, 1);
@@ -57,6 +58,7 @@ public class Main {
 		 */
 		game.setPlayer(nbrPlayer);
 		game.setInitGridGame(initGridGame);
+		game.setLevel(level);
 		new WindowInitPawn(game);
 	}
 }

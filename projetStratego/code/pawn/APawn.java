@@ -274,10 +274,11 @@ public abstract class APawn implements java.io.Serializable {
 	 * @return true or false
 	 */
 	public boolean movePoss(Game grid, int x, int y) {
-		APawn target = grid.getPawn(x, y);
+		
 		if(x<0||y<0||x>grid.getLine()||y>grid.getRow()){
 			return false;
 		}
+		APawn target = grid.getPawn(x, y);
 		if (place.size() >= 6) {
 			int[] tab1 = place.get(place.size() - 4);
 			int[] tab2 = place.get(place.size() - 6);

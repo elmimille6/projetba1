@@ -97,41 +97,34 @@ public class InitWindow extends WindowInitPawn {
 
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GridStart ngrid = new GridStart();
-				ngrid.setGrid(gridPane1.getGrid());
+				if (verifTheGrid()) {
+					GridStart ngrid = new GridStart();
+					ngrid.setGrid(gridPane1.getGrid());
 
-				Date myDate = new Date();
-				DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
-						DateFormat.SHORT, DateFormat.SHORT);
-				nom = (String) JOptionPane.showInputDialog(null,
-						"Veuillez entrer un nom pour cette grille",
-						"Sauvegarde", JOptionPane.QUESTION_MESSAGE, null, null,
-						shortDateFormat.format(myDate));
-				
-				if (nom != null) {
-					ngrid.setName(nom);
-					ngrid.save();
-					JOptionPane.showMessageDialog(null,
-							"Votre grille est bien sauvegardee au nom de "
-									+ nom, "Grille sauvee",
-							JOptionPane.INFORMATION_MESSAGE);
+					Date myDate = new Date(); // Default name
+					DateFormat shortDateFormat = DateFormat
+							.getDateTimeInstance(DateFormat.SHORT,
+									DateFormat.SHORT);
+					nom = (String) JOptionPane.showInputDialog(null,
+							"Veuillez entrer un nom pour cette grille",
+							"Sauvegarde", JOptionPane.QUESTION_MESSAGE, null,
+							null, shortDateFormat.format(myDate));
+
+					if (nom != null) { // null if cancel
+						ngrid.setName(nom);
+						ngrid.save();
+						JOptionPane.showMessageDialog(null,
+								"Votre grille est bien sauvegardee au nom de "
+										+ nom, "Grille sauvee",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 			}
 		});
 
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (!pawns.isEmpty()) {
-					JOptionPane.showMessageDialog(null,
-							"Tous les pions ne sont pas dans la grille.",
-							"Attention", JOptionPane.WARNING_MESSAGE);
-				} else if (nbPawns != 10 && !canPlay()) {
-					JOptionPane
-							.showMessageDialog(
-									null,
-									"Assurez-vous que vous pouvez au moins deplacer un pion.",
-									"Attention", JOptionPane.WARNING_MESSAGE);
-				} else {
+				if (verifTheGrid()) {
 					if (toInit == 2) {
 						toInit = 0;
 					}
@@ -176,6 +169,29 @@ public class InitWindow extends WindowInitPawn {
 		} else {
 			deletePawnOfGrid();
 		}
+	}
+
+	/**
+	 * Verifies if the grid is complete and if the player can move at least one
+	 * pawn.
+	 * 
+	 * @return true if the grid is complete and if the player can move at least
+	 *         one pawn, <br/ >
+	 *         false otherwise.
+	 */
+	private boolean verifTheGrid() {
+		if (!pawns.isEmpty()) {
+			JOptionPane.showMessageDialog(null,
+					"Tous les pions ne sont pas dans la grille.", "Attention",
+					JOptionPane.WARNING_MESSAGE);
+		} else if (nbPawns != 10 && !canPlay()) {
+			JOptionPane.showMessageDialog(null,
+					"Assurez-vous que vous pouvez au moins deplacer un pion.",
+					"Attention", JOptionPane.WARNING_MESSAGE);
+		} else {
+			return true;
+		}
+		return false;
 	}
 
 	/**

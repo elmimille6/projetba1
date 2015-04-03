@@ -81,7 +81,7 @@ public class InitWindow extends WindowInitPawn {
 		JButton auto = new JButton("Automatique");
 
 		if (nbPawns == 40) {
-			Center.add(auto); // Add an auto init.
+			// Center.add(auto); // Add an auto init.
 			Center.add(save); // Save the grid in the 'Saves' folder
 			if (toInit == 0) {
 				Center.add(load); // Search save in the 'Saves' folder
@@ -127,8 +127,10 @@ public class InitWindow extends WindowInitPawn {
 				if (verifTheGrid()) {
 					if (toInit == 2) {
 						toInit = 0;
+					} else if (toInit == 1) {
+						System.out.println("toInit = " + toInit);
 					}
-					game.setComplete(game.getComplete() + 1);// TODO
+					game.setComplete(game.getComplete() + 1);
 					Game gridPlayer = createGrid();
 					gridPlayer.showGrid();
 					game.placeTeam(gridPlayer.getGrid(), side);
@@ -145,9 +147,19 @@ public class InitWindow extends WindowInitPawn {
 			}
 		});
 
-		// auto.addActionListener(new ActionListener() {//TODO //AUTO button
+		// auto.addActionListener(new ActionListener() {// TODO //AUTO button
 		// public void actionPerformed(ActionEvent arg0) {
-		// GridIA gridIA = new GridIA(1);
+		// GridIA gridIA = new GridIA(team);
+		// for (int i = 0; i < 4; i++) {
+		// for (int j = 0; j < 10; j++) {
+		// gridPane1.set(i, j, gridIA.getPawn(i, j));
+		// }
+		// }
+		// toInit = 1;
+		// gridPane2.showGrid();
+		// initPane2();
+		// gridPane2.showGrid();
+		// fen.repaint();
 		// }
 		// });
 
@@ -198,9 +210,11 @@ public class InitWindow extends WindowInitPawn {
 	 * Initializes the gridPane1 and gridPane2.
 	 */
 	public void initPane2() {
+		System.out.println("ini");
 		if (nbPawns == 40) {
 			gridPane2 = new Game(6, 2, 0);
 			if (toInit != 1) {
+				System.out.println("init1");
 				gridPane2.set(0, 0, spyInit);
 				gridPane2.set(0, 1, scoutInit);
 				gridPane2.set(0, 2, minerInit);
@@ -214,6 +228,7 @@ public class InitWindow extends WindowInitPawn {
 				gridPane2.set(1, 4, bombInit);
 				gridPane2.set(1, 5, flagInit);
 			} else {
+				System.out.println("init2");
 				gridPane2.set(0, 0, new NoPawn("spy"));
 				gridPane2.set(0, 1, new NoPawn("scout"));
 				gridPane2.set(0, 2, new NoPawn("miner"));

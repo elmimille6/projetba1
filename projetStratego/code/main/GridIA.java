@@ -34,6 +34,10 @@ public class GridIA {
 		}
 		System.out.println(i);
 	}
+	
+	public APawn getPawn(int i, int j) {
+		return grid[i][j];
+	}
 
 	/**
 	 * Displays the grid.

@@ -43,14 +43,14 @@ public class MenuWindow extends JFrame {
 
 	private JComboBox comboJeu = new JComboBox();
 
+	private JLabel labType = new JLabel("Type de jeu");
+	private JComboBox comboType = new JComboBox();
+
 	private JLabel labPlayer = new JLabel("Nombre de joueur");
 	private JComboBox comboPlayer = new JComboBox();
 
 	private JLabel labInit = new JLabel("Initialisation des pions");
 	private JComboBox comboInit = new JComboBox();
-
-	private JLabel labType = new JLabel("Type de jeu");
-	private JComboBox comboType = new JComboBox();
 
 	private JLabel labIa1 = new JLabel("Niveau de la premiere IA");
 	private JComboBox comboIa1 = new JComboBox();
@@ -129,16 +129,6 @@ public class MenuWindow extends JFrame {
 
 		comboJeu.setPreferredSize(new Dimension(100, 20));
 
-		// JPanel panGame = new JPanel();
-		// panGame.add(labJeu);
-		// panGame.add(comboJeu);
-		// comboJeu.addItem("");
-		// comboJeu.addItem("Tic Tac Toe");
-		// comboJeu.addItem("Puissance 4");
-		// comboJeu.addItem("Othello");
-		// comboJeu.addActionListener(new ItemActionGame());
-		// comboJeu.setPreferredSize(new Dimension(100, 20));
-
 		JPanel panPlayer = new JPanel();
 		panPlayer.add(labPlayer);
 		panPlayer.add(comboPlayer);
@@ -150,15 +140,6 @@ public class MenuWindow extends JFrame {
 		comboPlayer.setPreferredSize(new Dimension(130, 20));
 		comboPlayer.setEnabled(true);
 
-		JPanel panInit = new JPanel();
-		panInit.add(labInit);
-		panInit.add(comboInit);
-		comboInit.addItem("Automatique");
-		comboInit.addItem("Manuelle Joueur Rouge");
-		comboInit.addActionListener(new ItemActionInit());
-		comboInit.setPreferredSize(new Dimension(200, 20));
-		comboInit.setEnabled(true);
-
 		JPanel panType = new JPanel();
 		panType.add(labType);
 		panType.add(comboType);
@@ -167,6 +148,15 @@ public class MenuWindow extends JFrame {
 		comboType.addActionListener(new ItemActionType());
 		comboType.setPreferredSize(new Dimension(100, 20));
 		comboType.setEnabled(true);
+
+		JPanel panInit = new JPanel(); // TODO
+		panInit.add(labInit);
+		panInit.add(comboInit);
+		comboInit.addItem("Automatique");
+		comboInit.addItem("Manuelle Joueur Rouge");
+		comboInit.addActionListener(new ItemActionInit());
+		comboInit.setPreferredSize(new Dimension(200, 20));
+		comboInit.setEnabled(true);
 
 		JPanel panIA1 = new JPanel();
 		panIA1.add(labIa1);
@@ -203,34 +193,27 @@ public class MenuWindow extends JFrame {
 		});
 		goBtn.setEnabled(true);
 
-		// container.add(panGame);
+		container.add(panType);
 		container.add(panPlayer);
 		container.add(panInit);
-		container.add(panType);
 		container.add(panIA1);
 		container.add(panBtn);
 
 		this.setVisible(true);
 	}
 
-	// class ItemActionGame implements ActionListener {
-	// public void actionPerformed(ActionEvent e) {
-	// if (comboJeu.getSelectedItem() == "Tic Tac Toe") {
-	// game = 1;
-	// changeGrid.setEnabled(false);
-	// } else if (comboJeu.getSelectedItem() == "Puissance 4") {
-	// game = 2;
-	// changeGrid.setEnabled(true);
-	// } else if (comboJeu.getSelectedItem() == "Othello") {
-	// game = 3;
-	// changeGrid.setEnabled(true);
-	// } else {
-	// game = 0;
-	// changeGrid.setEnabled(false);
-	// }
-	// tryEnable();
-	// }
-	// }
+	class ItemActionType implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (comboType.getSelectedItem() == "Normal") {
+				typeOfGame = 40;
+			} else {
+				typeOfGame = 10;
+				nbrPlayer = 2;
+				initGridGame = 3;
+			}
+			tryEnable();
+		}
+	}
 
 	class ItemActionPlayer implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -270,22 +253,11 @@ public class MenuWindow extends JFrame {
 		}
 	}
 
-	class ItemActionType implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			if (comboType.getSelectedItem() == "Normal") {
-				typeOfGame = 40;
-			} else {
-				typeOfGame = 10;
-			}
-			tryEnable();
-		}
-	}
-
 	class ItemActionIa1 implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (comboIa1.getSelectedItem() == "Niveau facile") {
+			if (comboIa1.getSelectedItem() == "niveau facile") {
 				lvl1 = 0;
-			} else if (comboIa1.getSelectedItem() == "Niveau moyen") {
+			} else if (comboIa1.getSelectedItem() == "niveau moyen") {
 				lvl1 = 1;
 			}
 			// else if (comboIa1.getSelectedItem() == "niveau difficile") {
@@ -304,13 +276,19 @@ public class MenuWindow extends JFrame {
 	public void tryEnable() {
 		if (game != 0) {
 			comboPlayer.setEnabled(true);
+			comboInit.setEnabled(true);
 			goBtn.setEnabled(true);
-		} else {
+		} else if (game == 0 || typeOfGame == 10) {
 			comboPlayer.setEnabled(false);
 			goBtn.setEnabled(false);
 		}
 		if (nbrPlayer == 1 || nbrPlayer == 0) {
 			comboIa1.setEnabled(true);
+		}
+		if (typeOfGame == 10) {
+			comboPlayer.setEnabled(false);
+			comboInit.setEnabled(false);
+			comboIa1.setEnabled(false);
 		}
 	}
 

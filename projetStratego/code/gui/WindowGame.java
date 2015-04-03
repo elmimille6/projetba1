@@ -223,6 +223,8 @@ public class WindowGame extends JFrame {
 				@SuppressWarnings("static-access")
 				public void run() {
 
+					System.out.println("tht: "
+							+ (((game.getTurn() + 1) % 2) + 1));
 					if ((((game.getTurn() + 1) % 2) + 1) == 1) {
 						int[] res = getRes(game, pane, posX, posY);
 						int line = res[0];

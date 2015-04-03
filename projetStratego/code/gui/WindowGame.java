@@ -71,8 +71,8 @@ public class WindowGame extends JFrame {
 		// this.setContentPane(pane);
 		this.add(pane, BorderLayout.CENTER);
 		this.setVisible(true);
-		if(game.getPlayer()==1){
-			ia=new IA(game.getLevel());
+		if (game.getPlayer() == 1) {
+			ia = new IA(game.getLevel());
 		}
 		pane.addMouseListener(new MouseGame());
 	}
@@ -104,9 +104,10 @@ public class WindowGame extends JFrame {
 		return res;
 
 	}
-	
-	class MouseGame implements MouseListener{
-		int posX,posY;
+
+	class MouseGame implements MouseListener {
+		int posX, posY;
+
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			if (playGame) {
@@ -115,7 +116,7 @@ public class WindowGame extends JFrame {
 				if (e.getButton() == MouseEvent.BUTTON1
 						&& game.getPlayer() == 2) {
 					click2player();
-					
+
 				}
 				if (e.getButton() == MouseEvent.BUTTON1
 						&& game.getPlayer() == 1) {
@@ -124,7 +125,7 @@ public class WindowGame extends JFrame {
 			}
 		}
 
-		private void click2player(){
+		private void click2player() {
 			new Thread(new Runnable() {
 				@SuppressWarnings("static-access")
 				public void run() {
@@ -134,21 +135,20 @@ public class WindowGame extends JFrame {
 					int row = res[1];
 					// game.showGrid();
 					APawn pawn = game.getPawn(line, row);
+					System.out.println(game.getPlayer());
 					// System.out.println("pawn= " + pawn);
 					// System.out.println("focus= " + focus);
 					if (focus != null) {
 						if (focus.movePoss(game, line, row)) {
 							if (game.getPawn(line, row) != null) {
-								game.getPawn(line, row).setShow(
-										true);
+								game.getPawn(line, row).setShow(true);
 								pane.recupArrow(arrowN);
 								repaint();
 								try {
 									Thread.sleep(2000);
 								} catch (InterruptedException e) {
 								}
-								game.getPawn(line, row).setShow(
-										false);
+								game.getPawn(line, row).setShow(false);
 							}
 							game = focus.move(game, line, row);
 							att = true;
@@ -167,32 +167,25 @@ public class WindowGame extends JFrame {
 								game.setView(0);
 								playGame = false;
 								repaint();
-								
+
 								jopWin = new JOptionPane();
-								jopWin.showMessageDialog(
-										null,
-										"The "
-												+ resultName[result - 1]
-												+ " player wins !",
-										"Result",
+								jopWin.showMessageDialog(null, "The "
+										+ resultName[result - 1]
+										+ " player wins !", "Result",
 										JOptionPane.INFORMATION_MESSAGE);
 							} else {
 								game.setView(3);
 								repaint();
-								
 
 								jop = new JOptionPane();
 								jop.showMessageDialog(
 										null,
 										"It's your turn, "
-												+ resultName[((game
-														.getTurn() + 1) % 2)]
-												+ " player !",
-										"Turn finished",
+												+ resultName[((game.getTurn() + 1) % 2)]
+												+ " player !", "Turn finished",
 										JOptionPane.INFORMATION_MESSAGE);
 								game.setView((((game.getTurn() + 1) % 2) + 1));
 								repaint();
-								
 
 								paneRed.upGame(game);
 								paneBlue.upGame(game);
@@ -215,14 +208,14 @@ public class WindowGame extends JFrame {
 							}
 							att = false;
 							repaint();
-							
+
 						}
 					}
 					att = false;
 				}
 			}).start();
 		}
-		
+
 		private void click1player() {
 			new Thread(new Runnable() {
 				@SuppressWarnings("static-access")
@@ -272,8 +265,9 @@ public class WindowGame extends JFrame {
 										Thread.sleep(2000);
 									} catch (InterruptedException e) {
 									}
-									int[][] next=ia.getNext(game);
-									APawn pa=game.getPawn(next[0][0], next[0][1]);
+									int[][] next = ia.getNext(game);
+									APawn pa = game.getPawn(next[0][0],
+											next[0][1]);
 									pa.move(game, next[1][0], next[1][1]);
 									repaint();
 									paneRed.upGame(game);
@@ -310,31 +304,27 @@ public class WindowGame extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
-			
-		
 
 	}
 
-
 }
-

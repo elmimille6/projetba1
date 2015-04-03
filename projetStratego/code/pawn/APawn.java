@@ -137,14 +137,20 @@ public abstract class APawn implements java.io.Serializable {
 	/**
 	 * Makes a vector of the 40 pawn in a team at the begin of the game.
 	 * 
+	 * @param toInit
+	 * 
+	 * 
+	 * @param team
+	 * 
+	 * 
+	 * @param nbPawns
+	 * 
 	 * @return The vector of 40 pawn.
 	 */
-	public static Vector<APawn> createTeam(boolean toInit, int team, int nbPawns) {
+	public static Vector<APawn> createTeam(int toInit, int team, int nbPawns) {
 		Vector<APawn> listPawn = new Vector<APawn>();
 
-		if (!toInit) {
-
-		} else {
+		if (toInit != 1) {
 			if (nbPawns == 40) {
 
 				for (int i = 0; i < 6; i++) {

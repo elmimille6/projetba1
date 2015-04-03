@@ -23,11 +23,12 @@ public class Game implements java.io.Serializable {
 	private static final long serialVersionUID = 8927958880942845647L;
 	private APawn[][] grid;
 	private int row, line;
-	public int view = 1, turn = 1, player = 2, nbPawn = 40,level=0;
+	public int view = 1, turn = 1, player = 2, nbPawn = 40, level = 0;
 	public Dic startTeam;
 	public int[] lastMove = { -1, -1, -1 };
 	public APawn Flag = new Flag(1), Bomb = new Bomb(1);
 	public int nbPawns = 40, complete = 0;
+	private int initGridGame = 0;
 
 	/**
 	 * Main constructor of the class.
@@ -215,7 +216,7 @@ public class Game implements java.io.Serializable {
 	 */
 	private Dic startTeam() {
 		Dic team = new Dic();
-		Vector<APawn> liste = APawn.createTeam(true, 1, nbPawn);
+		Vector<APawn> liste = APawn.createTeam(0, 1, nbPawn);
 		while (!liste.isEmpty()) {
 			if (team.isIn(liste.get(0))) {
 				team.increase(liste.get(0));
@@ -487,25 +488,39 @@ public class Game implements java.io.Serializable {
 		return complete;
 	}
 
+	public void setComplete(int complete) {
+		this.complete = complete;
+	}
+
 	public void resetMove(APawn pawn) {
-		for(int i =0;i<grid.length;i++){
-			for(int j=0;j<grid[0].length;j++){
-				APawn pa=grid[i][j];
-				if(pa!=null){
-					if(pa.getTeam()==pawn.getTeam()){
-						if(pawn.posX!=i ||pawn.posY!=j){
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				APawn pa = grid[i][j];
+				if (pa != null) {
+					if (pa.getTeam() == pawn.getTeam()) {
+						if (pawn.posX != i || pawn.posY != j) {
 							pa.resetMove();
 						}
 					}
 				}
 			}
 		}
-		
+
 	}
-	public int getLevel(){
+
+	public int getLevel() {
 		return level;
 	}
-	public void setLeve(int lvl){
-		this.level=lvl;
+
+	public void setLeve(int level) {
+		this.level = level;
+	}
+
+	public int getInitGridGame() {
+		return initGridGame;
+	}
+
+	public void setInitGridGame(int initGridGame) {
+		this.initGridGame  = initGridGame;
 	}
 }

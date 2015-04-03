@@ -55,7 +55,6 @@ public class MenuWindow extends JFrame {
 	private JLabel labIa1 = new JLabel("Niveau de la premiere IA");
 	private JComboBox comboIa1 = new JComboBox();
 
-
 	private JButton goBtn = new JButton("Lancer la partie !");
 
 	private JPanel container = new JPanel();
@@ -145,8 +144,8 @@ public class MenuWindow extends JFrame {
 		panPlayer.add(comboPlayer);
 		comboPlayer.addItem("1 Joueur");
 		comboPlayer.addItem("2 Joueurs");
-//		comboPlayer.addItem("0 Joueur");
-		comboPlayer.setSelectedItem("2 Joueurs");
+		// comboPlayer.addItem("0 Joueur");
+		// comboPlayer.setSelectedItem("2 Joueurs");
 		comboPlayer.addActionListener(new ItemActionPlayer());
 		comboPlayer.setPreferredSize(new Dimension(130, 20));
 		comboPlayer.setEnabled(true);
@@ -177,7 +176,6 @@ public class MenuWindow extends JFrame {
 		comboIa1.addActionListener(new ItemActionIa1());
 		comboIa1.setPreferredSize(new Dimension(150, 20));
 		comboIa1.setEnabled(true);
-
 
 		JPanel panBtn = new JPanel();
 		JPanel panBtn2 = new JPanel();
@@ -239,13 +237,16 @@ public class MenuWindow extends JFrame {
 			if (comboPlayer.getSelectedItem() == "2 Joueurs") {
 				nbrPlayer = 2;
 				comboIa1.setEnabled(false);
-				comboInit.addItem("Manuelle Joueur Bleu");
-				comboInit.addItem("Manuelle");
+				if (comboInit.getItemCount() == 2) {
+					comboInit.addItem("Manuelle Joueur Bleu");
+					comboInit.addItem("Manuelle");
+				}
 			} else if (comboPlayer.getSelectedItem() == "1 Joueur") {
 				nbrPlayer = 1;
-				comboIa1.setEnabled(true);
-			} else if (comboPlayer.getSelectedItem() == "0 Joueur") {
-				nbrPlayer = 0;
+				if (comboInit.getItemCount() == 4) {
+					comboInit.removeItem("Manuelle Joueur Bleu");
+					comboInit.removeItem("Manuelle");
+				}
 				comboIa1.setEnabled(true);
 			} else {
 				nbrPlayer = 1;
@@ -287,16 +288,15 @@ public class MenuWindow extends JFrame {
 			} else if (comboIa1.getSelectedItem() == "niveau moyen") {
 				lvl1 = 1;
 			}
-//			else if (comboIa1.getSelectedItem() == "niveau difficile") {
-//				lvl1 = 2;
-//			}
+			// else if (comboIa1.getSelectedItem() == "niveau difficile") {
+			// lvl1 = 2;
+			// }
 			else {
 				lvl1 = 0;
 			}
 			tryEnable();
 		}
 	}
-
 
 	/**
 	 * Enables the player(s) to move the pawns.

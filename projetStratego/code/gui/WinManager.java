@@ -82,9 +82,8 @@ public class WinManager extends JFrame {
 			this.add(panelCenter, BorderLayout.CENTER);
 			this.add(paneSouth, BorderLayout.SOUTH);
 			this.validate();
-		}
-		else{
-			WindowInitPawn fen=new WindowInitPawn(new Game(10, 4, 0), true);
+		} else {
+			new WindowInitPawn(new Game(10, 4, 0), 0);
 			close();
 		}
 
@@ -131,7 +130,7 @@ public class WinManager extends JFrame {
 	class actionNewGrid implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("NewGrid");
-			new WindowInitPawn(new Game(10, 4, 0), true);
+			new WindowInitPawn(new Game(10, 4, 0), 2);
 			close();
 		}
 	}
@@ -147,7 +146,7 @@ public class WinManager extends JFrame {
 	class actionModif implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Modif");
-			new WindowInitPawn(new Game(focus.getGrid()), false);
+			new WindowInitPawn(new Game(focus.getGrid()), 1);
 			close();
 		}
 	}

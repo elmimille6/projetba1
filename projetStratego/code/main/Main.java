@@ -15,10 +15,11 @@ import java.util.Random;
 public class Main {
 
 	public static MenuWindow menu;
-	public static int nbrPlayer, initGridGame, typeOfGame,level;
+	public static int nbrPlayer, initGridGame, typeOfGame;
 	public static WindowInitPawn initPawn;
 	public static Game game;
 	public static GridIA gridIA, gridIA2;
+	public static String level;
 
 	/**
 	 * Method that launches the menu of the program.

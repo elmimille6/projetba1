@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 
 import main.Game;
 import main.GridIA;
+import main.IA;
 import main.Main;
 
 /**
@@ -59,8 +60,9 @@ public class MenuWindow extends JFrame {
 
 	private JPanel container = new JPanel();
 
-	public int game = 1, nbrPlayer = 1, lvl1 = 0, lvl2 = 0, test = 1,
+	public int game = 1, nbrPlayer = 1, lvl2 = 0, test = 1,
 			modifGrid = 0, typeOfGame = 40;
+	public String lvl1="";
 
 	public int initGridGame = 0;
 
@@ -86,14 +88,7 @@ public class MenuWindow extends JFrame {
 
 		testia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Game grid = new Game(10, 1);
-				grid.setView(2);
-				GridIA gridIA = new GridIA(1);
-				grid.placeTeam(gridIA.getGrid(), 1);
-				GridIA gridIA2 = new GridIA(2);
-				grid.placeTeam(gridIA2.getGrid(), 2);
-				// grid.showGrid();
-				grid.save();
+				new TestIa();
 			}
 		});
 		manager.addActionListener(new ActionListener() {
@@ -161,8 +156,10 @@ public class MenuWindow extends JFrame {
 		JPanel panIA1 = new JPanel();
 		panIA1.add(labIa1);
 		panIA1.add(comboIa1);
-		comboIa1.addItem("Niveau facile");
-		comboIa1.addItem("Niveau moyen");
+		String[] listLvl=IA.getListLvl();
+		for(int i=0;i<listLvl.length;i++){
+			comboIa1.addItem(listLvl[i]);
+		}
 		comboIa1.addActionListener(new ItemActionIa1());
 		comboIa1.setPreferredSize(new Dimension(150, 20));
 		comboIa1.setEnabled(true);
@@ -255,17 +252,7 @@ public class MenuWindow extends JFrame {
 
 	class ItemActionIa1 implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (comboIa1.getSelectedItem() == "niveau facile") {
-				lvl1 = 0;
-			} else if (comboIa1.getSelectedItem() == "niveau moyen") {
-				lvl1 = 1;
-			}
-			// else if (comboIa1.getSelectedItem() == "niveau difficile") {
-			// lvl1 = 2;
-			// }
-			else {
-				lvl1 = 0;
-			}
+			lvl1=(String) comboIa1.getSelectedItem();
 			tryEnable();
 		}
 	}

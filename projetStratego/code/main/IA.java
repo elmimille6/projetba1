@@ -7,14 +7,19 @@ import pawn.Scout;
 
 public class IA {
 	int level = 0, team = 0;
+	final static String[] listLvl={"Niveau facile","Niveau moyen"};
 
-	public IA(int level, int team) {
-		this.level = level;
+	public IA(String lvl, int team) {
+		for(int i=0;i<listLvl.length;i++){
+			if(lvl==listLvl[i]){
+				this.level=i;
+			}
+		}
 		this.team = team;
 	}
 
-	public IA(int level) {
-		this(level, 2);
+	public IA(String lvl) {
+		this(lvl, 2);
 	}
 
 	private int[][] iaL0(Game game) {
@@ -79,6 +84,9 @@ public class IA {
 
 		}
 		return iaL0(game);
+	}
+	public static String[] getListLvl(){
+		return listLvl;
 	}
 
 }

@@ -23,7 +23,8 @@ public class Game implements java.io.Serializable {
 	private static final long serialVersionUID = 8927958880942845647L;
 	private APawn[][] grid=new APawn[10][10];
 	private int row, line;
-	public int view = 1, turn = 1, player = 2, nbPawn = 40, level = 0;
+	public int view = 1, turn = 1, player = 2, nbPawn = 40;
+	public String level;
 	public Dic startTeam;
 	public int[] lastMove = { -1, -1, -1 };
 	public APawn Flag = new Flag(1), Bomb = new Bomb(1);
@@ -508,11 +509,11 @@ public class Game implements java.io.Serializable {
 
 	}
 
-	public int getLevel() {
+	public String getLevel() {
 		return level;
 	}
 
-	public void setLevel(int level) {
+	public void setLevel(String level) {
 		this.level = level;
 	}
 

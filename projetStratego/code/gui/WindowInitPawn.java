@@ -62,6 +62,10 @@ public class WindowInitPawn extends WindowGame {
 					new InitWindow();
 				} else if (game.getInitGridGame() == 1 || game.getPlayer() == 2) { 
 					// 1 player (RED)
+					nbPlayer = 1;
+					nbPawns = 40;
+					side = 1;
+					team = 1;
 					gridPane1 = Game.chosenSize(40);
 					new InitWindow();
 				}

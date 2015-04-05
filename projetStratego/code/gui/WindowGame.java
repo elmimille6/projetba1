@@ -223,8 +223,7 @@ public class WindowGame extends JFrame {
 				@SuppressWarnings("static-access")
 				public void run() {
 
-					System.out.println("tht: "
-							+ (((game.getTurn() + 1) % 2) + 1));
+					System.out.println(game.win()+" win");
 					if ((((game.getTurn() + 1) % 2) + 1) == 1) {
 						int[] res = getRes(game, pane, posX, posY);
 						int line = res[0];
@@ -287,6 +286,20 @@ public class WindowGame extends JFrame {
 									repaint();
 									paneRed.upGame(game);
 									paneBlue.upGame(game);
+									result = game.win();
+									// System.out
+									// .println("Result = " + result);
+									if (result != 0) {
+										game.setView(0);
+										playGame = false;
+										repaint();
+
+										jopWin = new JOptionPane();
+										jopWin.showMessageDialog(null, "The "
+												+ resultName[result - 1]
+												+ " player wins !", "Result",
+												JOptionPane.INFORMATION_MESSAGE);
+									}
 								}
 							}
 						}

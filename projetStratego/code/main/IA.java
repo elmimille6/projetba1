@@ -28,6 +28,8 @@ public class IA {
 			boolean moved = false;
 			Random rand = new Random();
 			while (!moved) {
+				
+				System.out.println("boucle ia");
 				int row = rand.nextInt(game.getRow());
 				int line = rand.nextInt(game.getLine());
 				APawn pawn = game.getPawn(line, row);

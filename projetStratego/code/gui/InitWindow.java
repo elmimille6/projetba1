@@ -83,7 +83,8 @@ public class InitWindow extends WindowInitPawn {
 		if (nbPawns == 40) {
 			// Center.add(auto); // Add an auto init.
 			Center.add(save); // Save the grid in the 'Saves' folder
-			if (toInit == 0) {
+			if (toInit == 0 && game.getPlayer() != 2) {
+				// If 2 players or grid loaded
 				Center.add(load); // Search save in the 'Saves' folder
 			}
 			if (toInit != 2) {

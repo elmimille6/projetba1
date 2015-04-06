@@ -402,8 +402,8 @@ public class Game implements java.io.Serializable {
 	 * @param vie
 	 *            Changes the view.
 	 */
-	public void setView(int vie) {
-		this.view = vie;
+	public void setView(int view) {
+		this.view = view;
 	}
 
 	/**

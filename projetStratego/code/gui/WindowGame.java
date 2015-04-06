@@ -55,9 +55,9 @@ public class WindowGame extends JFrame {
 	@SuppressWarnings("static-access")
 	public WindowGame(Game ngame) {
 		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		this.game = ngame;
-		System.out.println(game.level+" LEVEL WindowGame");
+		System.out.println(game.level + " LEVEL WindowGame");
 		startTeam = game.getStartTeam();
 		paneRed = new PaneGamePawn(startTeam, game, 1);
 		paneBlue = new PaneGamePawn(startTeam, game, 2);
@@ -223,7 +223,7 @@ public class WindowGame extends JFrame {
 				@SuppressWarnings("static-access")
 				public void run() {
 
-					System.out.println(game.win()+" win");
+					System.out.println(game.win() + " : win");
 					if ((((game.getTurn() + 1) % 2) + 1) == 1) {
 						int[] res = getRes(game, pane, posX, posY);
 						int line = res[0];
@@ -269,19 +269,19 @@ public class WindowGame extends JFrame {
 									} catch (InterruptedException e) {
 									}
 									int[][] next = ia.getNext(game);
-									APawn pa = game.getPawn(next[0][0],
+									APawn currentPawn = game.getPawn(next[0][0],
 											next[0][1]);
 									if (game.getPawn(next[1][0], next[1][1]) != null) {
-										game.getPawn(next[0][0], next[0][1])
-												.setShow(true);
+										currentPawn.setShow(true);
 										repaint();
 										try {
 											Thread.sleep(3000);
 										} catch (InterruptedException e) {
 										}
-										game.getPawn(line, row).setShow(false);
+										currentPawn.setShow(false);
+										repaint();
 									}
-									pa.move(game, next[1][0], next[1][1]);
+									currentPawn.move(game, next[1][0], next[1][1]);
 									game.addTurn();
 									repaint();
 									paneRed.upGame(game);
@@ -323,10 +323,8 @@ public class WindowGame extends JFrame {
 						}
 						att = false;
 					}
-
 				}
 			}).start();
-
 		}
 
 		@Override

@@ -7,12 +7,12 @@ import pawn.Scout;
 
 public class IA {
 	int level = 0, team = 0;
-	final static String[] listLvl={"Niveau facile","Niveau moyen"};
+	final static String[] listLvl = { "Niveau facile", "Niveau moyen" };
 
 	public IA(String lvl, int team) {
-		for(int i=0;i<listLvl.length;i++){
-			if(lvl==listLvl[i]){
-				this.level=i;
+		for (int i = 0; i < listLvl.length; i++) {
+			if (lvl == listLvl[i]) {
+				this.level = i;
 			}
 		}
 		this.team = team;
@@ -28,7 +28,7 @@ public class IA {
 			boolean moved = false;
 			Random rand = new Random();
 			while (!moved) {
-				
+
 				System.out.println("boucle ia");
 				int row = rand.nextInt(game.getRow());
 				int line = rand.nextInt(game.getLine());
@@ -87,7 +87,8 @@ public class IA {
 		}
 		return iaL0(game);
 	}
-	public static String[] getListLvl(){
+
+	public static String[] getListLvl() {
 		return listLvl;
 	}
 

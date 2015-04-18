@@ -30,8 +30,8 @@ public class IA {
 			while (!moved) {
 
 				System.out.println("boucle ia");
-				int row = rand.nextInt(game.getRow());
-				int line = rand.nextInt(game.getLine());
+				int row = rand.nextInt(game.getRow()+1);
+				int line = rand.nextInt(game.getLine()+1);
 				APawn pawn = game.getPawn(line, row);
 				if (pawn != null) {
 					if (pawn.getTeam() == team) {

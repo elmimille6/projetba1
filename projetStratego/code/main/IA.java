@@ -1,6 +1,7 @@
 package main;
 
 import java.util.Random;
+import java.util.Vector;
 
 import pawn.APawn;
 import pawn.Scout;
@@ -83,9 +84,107 @@ public class IA {
 
 	public int[][] getNext(Game game) {
 		if (level == 1) {
-
+			return iaL1(game);
 		}
 		return iaL0(game);
+	}
+
+	private int[][] iaL1(Game game) {
+		int[][] move = { { -1, -1 }, { -1, -1 } };
+		if (team == ((game.getTurn() + 1) % 2) + 1) {
+			Vector<APawn> pawnSide = getSidedPawn(game);
+			if(pawnSide.size()!=0){
+				Random rand = new Random();
+				int ind = rand.nextInt(pawnSide.size());
+				APawn pawn = pawnSide.get(ind);
+				if(pawn.getLevel()==2){
+					APawn pawnside=game.getPawn(pawn.posX-1, pawn.posY);
+					if(pawnside!=null){
+						if(pawnside.getTeam()==(team%2)+1 && !pawnside.getKnow()){
+							int[][] moveI = {{pawn.posX,pawn.posY},{pawn.posX-1,pawn.posY}};
+							move=moveI;
+							return move;
+						}
+					}
+					pawnside=game.getPawn(pawn.posX+1, pawn.posY);
+					if(pawnside!=null){
+						if(pawnside.getTeam()==(team%2)+1 && !pawnside.getKnow()){
+							int[][] moveI = {{pawn.posX,pawn.posY},{pawn.posX+1,pawn.posY}};
+							move=moveI;
+							return move;
+						}
+					}
+					pawnside=game.getPawn(pawn.posX, pawn.posY-1);
+					if(pawnside!=null){
+						if(pawnside.getTeam()==(team%2)+1 && !pawnside.getKnow()){
+							int[][] moveI = {{pawn.posX,pawn.posY},{pawn.posX,pawn.posY-1}};
+							move=moveI;
+							return move;
+						}
+					}
+					pawnside=game.getPawn(pawn.posX, pawn.posY+1);
+					if(pawnside!=null){
+						if(pawnside.getTeam()==(team%2)+1 && !pawnside.getKnow()){
+							int[][] moveI = {{pawn.posX,pawn.posY},{pawn.posX,pawn.posY+1}};
+							move=moveI;
+							return move;
+						}
+					}
+				}
+				
+				//TODO quand pion collé et diff d eclaireur
+				
+			}
+			
+			//TODO quand aucun pion n est collé
+		}
+		return move;
+	}
+
+	private Vector<APawn> getSidedPawn(Game game) {
+		Vector<APawn> pawnSide = null;
+		for(int i=0;i<=game.getLine();i++){
+			for(int j = 0;j<=game.getRow();j++){
+				boolean added=false;
+				APawn pawn = game.getPawn(i, j);
+				APawn pawnside;
+				if(pawn!=null){
+					if(pawn.getTeam()==team){
+						pawnside=game.getPawn(i-1, j);
+						if(isPawnSide(pawn) && !added){
+							pawnSide.add(pawn);
+							added=true;
+						}
+						pawnside=game.getPawn(i+1, j);
+						if(isPawnSide(pawn) && !added){
+							added=true;
+							pawnSide.add(pawn);
+						}
+						pawnside=game.getPawn(i, j-1);
+						if(isPawnSide(pawn) && !added){
+							pawnSide.add(pawn);
+							added=true;
+						}
+						pawnside=game.getPawn(i, j+1);
+						if(isPawnSide(pawn) && !added){
+							pawnSide.add(pawn);
+							added=true;
+						}
+						
+					}
+				}
+			}
+		}
+		return pawnSide;
+	}
+
+	private boolean isPawnSide(APawn pawnside) {
+		if(pawnside!=null){
+			if(pawnside.getTeam()==(team%2)+1){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static String[] getListLvl() {

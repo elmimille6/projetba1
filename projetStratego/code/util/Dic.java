@@ -60,10 +60,20 @@ public class Dic implements java.io.Serializable {
 		}
 		return true;
 	}
-	public void increase(Object obj){
-		if(tab[this.getIndex(obj)][1] instanceof Integer){
-			tab[this.getIndex(obj)][1]=(Integer)tab[this.getIndex(obj)][1]+1;
+
+	public void increase(Object obj) {
+		if (this.isIn(obj)) {
+			if (tab[this.getIndex(obj)][1] instanceof Integer) {
+				tab[this.getIndex(obj)][1] = (Integer) tab[this.getIndex(obj)][1] + 1;
+			}
 		}
+		else{
+			this.add(obj, 1);
+		}
+	}
+	
+	public Object[][] getTab(){
+		return tab;
 	}
 	public String toString() {
 		String line="{";

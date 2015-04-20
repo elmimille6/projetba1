@@ -401,7 +401,7 @@ public class Game implements java.io.Serializable {
 	 * @return Pawn at the given coordinates.
 	 */
 	public APawn getPawn(int i, int j) {
-		if(i>=0 && i<=line && j>=0 && j<=row){
+		if(i>=0 && i<line && j>=0 && j<row){
 			return grid[i][j];
 		}
 		return null;

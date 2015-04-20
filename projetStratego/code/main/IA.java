@@ -90,8 +90,11 @@ public class IA {
 		int[][] move = { { -1, -1 }, { -1, -1 } };
 		if (team == ((game.getTurn() + 1) % 2) + 1) {
 			Vector<APawn> pawnSide = getSidedPawn(game);
-			if (pawnSide.size() != 0) {
-				iaL1Side(game,pawnSide);
+			if (pawnSide != null) { //verifie tout les pions qui sont collé a un ennemi
+				int[][] res = iaL1Side(game,pawnSide);
+				if(res!=null){
+					return res;
+				}
 			}
 
 			// TODO quand aucun pion n est collé
@@ -139,7 +142,7 @@ public class IA {
 					return move;
 				}
 			}
-			// TODO mouvement pour se "sauver"
+			// TODO mouvement pour se "sauver" (si on veut les sauver....)
 
 		} // fin pion eclaireur
 		else if (pawn.getLevel() == -6 && pawn.getLevel() == 11) { // debut pion n est pas eclaireur,flag ou bomb
@@ -174,10 +177,12 @@ public class IA {
 			
 		}
 		if (pawnSide.size() > 1) {
-			return iaL1(game);
+			pawnSide.remove(ind);
+			return iaL1Side(game,pawnSide);
 		}
-		return move;
+		return null;
 	}
+	
 	/**
 	 * 
 	 * @param game
@@ -189,8 +194,6 @@ public class IA {
 	 * @param y2 coord final si !attack
 	 * @return
 	 */
-	
-	
 	private int[][] iaL1SideM(Game game,APawn pawn,APawn pawnside,int x1,int y1, int x2,int y2 ){
 		int[][] move = { { -1, -1 }, { -1, -1 } };
 		if (pawnside.getTeam() == (team % 2) + 1) {

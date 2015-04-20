@@ -29,7 +29,7 @@ public class TestIa extends JFrame{
 	public TestIa(){
 		this.setResizable(true);
 		this.setSize(300, 320);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setTitle("Tester l'IA");
 		this.setLayout(new GridLayout(4,1));
@@ -126,7 +126,9 @@ public class TestIa extends JFrame{
 							pa.move(game, next[1][0], next[1][1]);
 							game.addTurn();
 						}
+						game.showGrid();
 					}
+					game.showGrid();
 					System.out.println("sortie");
 					if(game.win()==1){
 						w1++;

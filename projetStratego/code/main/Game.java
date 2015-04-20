@@ -238,51 +238,95 @@ public class Game implements java.io.Serializable {
 	 *         2 if player 2 win.
 	 */
 	public int win() {
-		boolean canPlay = true;
+		boolean canPlay = false;
 		boolean flag1 = false;
 		boolean flag2 = false;
-		int winner = 0, test = 0;
-
+//		int winner = 0, test = 0;
+		System.out.println("LINE  "+this.getLine());
+		System.out.println("ROW  "+this.getRow());
 		for (int j = 0; j < this.getLine() + 1; j++) {
 			for (int i = 0; i < this.getRow() + 1; i++) {
-				APawn pawn = this.getPawn(i, j);
+				System.out.println("for");
+				if (this.getPawn(i, j) != null) {
+					APawn pawn = this.getPawn(i, j);
+					System.out.println(pawn.getTeam()+"  "+pawn.getLevel());
+					if (pawn.getTeam() == 1 && pawn.getLevel() == -6) {
+						flag1 = true;
+					}
+					if (pawn.getTeam() == 2 && pawn.getLevel() == -6) {
+						flag2 = true;
+					}
+					if (pawn.getTeam() == ((turn + 1) % 2) + 1
+							&& canPlay == false) {
+						if (pawn.movePoss(this, j, i - 1)) {
+							canPlay = true;
+						} else if (pawn.movePoss(this, i, j + 1)) {
+							canPlay = true;
+						} else if (pawn.movePoss(this, i - 1, j)) {
+							canPlay = true;
+						} else if (pawn.movePoss(this, i + 1, j)) {
+							canPlay = true;
+						}
 
-				if (pawn != null) {
-					if (pawn.getTeam() == 1) {
-						test = this.canMove(1);
-						if (test != 0) {
-							canPlay = false;
-							winner = test;
-						} else if (pawn.getClass() == Flag.getClass()) {
-							// System.out.println("Flag 1");
-							flag1 = true;
-						}
-					} else if (pawn.getTeam() == 2) {
-						test = this.canMove(1);
-						if (test != 0) {
-							canPlay = false;
-							winner = test;
-						} else if (pawn.getClass() == Flag.getClass()) {
-							// System.out.println("Flag 2");
-							flag2 = true;
-						}
 					}
 				}
-			}
-		}
+				
 
-		if (!canPlay) {
-			// System.out.println("winner = " + winner);
-			return winner;
+			}
+
 		}
 		if (!flag1) {
+			this.showGrid();
 			return 2;
 		}
 		if (!flag2) {
+			this.showGrid();
 			return 1;
+		}
+		if (!canPlay) {
+			this.showGrid();
+			return (turn % 2) + 1;
 		}
 		return 0;
 	}
+				
+//				
+//				if (pawn != null) {
+//					if (pawn.getTeam() == 1) {
+//						test = this.canMove(1);
+//						if (test != 0) {
+//							canPlay = false;
+//							winner = test;
+//						} else if (pawn.getClass() == Flag.getClass()) {
+//							// System.out.println("Flag 1");
+//							flag1 = true;
+//						}
+//					} else if (pawn.getTeam() == 2) {
+//						test = this.canMove(1);
+//						if (test != 0) {
+//							canPlay = false;
+//							winner = test;
+//						} else if (pawn.getClass() == Flag.getClass()) {
+//							// System.out.println("Flag 2");
+//							flag2 = true;
+//						}
+//					}
+//				}
+//			}
+//		}
+//
+//		if (!canPlay) {
+//			// System.out.println("winner = " + winner);
+//			return winner;
+//		}
+//		if (!flag1) {
+//			return 2;
+//		}
+//		if (!flag2) {
+//			return 1;
+//		}
+//		return 0;
+//	}
 
 	/**
 	 * Returns the team of the winner or 0 if the game isn't over.

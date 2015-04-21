@@ -11,11 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-import pawn.APawn;
 import main.Game;
 import main.GridIA;
 import main.IA;
+import pawn.APawn;
 
 public class TestIa extends JFrame{
 
@@ -23,6 +25,7 @@ public class TestIa extends JFrame{
 	public JSlider nbr = new JSlider();
 	public JButton goBtn=new JButton("Lancer les tests");
 	public String[] listLvl;
+	JLabel lab1;
 	
 	
 	@SuppressWarnings("unchecked")
@@ -48,7 +51,7 @@ public class TestIa extends JFrame{
 	    nbr.setMinorTickSpacing(10);
 	    nbr.setMajorTickSpacing(20);
 		
-		JLabel lab1=new JLabel("Nombre de test à effectuer");
+		lab1=new JLabel("Nombre de test à effectuer: "+nbr.getValue());
 		panel1.add(lab1);
 		panel1.add(nbr);
 		this.add(panel1);
@@ -74,6 +77,11 @@ public class TestIa extends JFrame{
 		 this.add(panel3);
 		 this.add(panel4);
 		 
+		 nbr.addChangeListener(new ChangeListener(){
+		      public void stateChanged(ChangeEvent event){
+		        lab1.setText("Nombre de test à effectuer: " + ((JSlider)event.getSource()).getValue());
+		      }
+		    });    
 		 
 		 goBtn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {

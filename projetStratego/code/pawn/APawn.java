@@ -28,10 +28,13 @@ public abstract class APawn implements java.io.Serializable {
 	 * Returns a string representation of a 'APawn' object.
 	 */
 	public String toString() {
-		if (levelPawn < 10) {
-			return String.valueOf(levelPawn) + " ";
+		if (levelPawn ==-6) {
+			return String.valueOf(team)+"."+String.valueOf(levelPawn);
 		}
-		return String.valueOf(levelPawn);
+		if (levelPawn < 10) {
+			return String.valueOf(team)+"."+String.valueOf(levelPawn) + " ";
+		}
+		return String.valueOf(team)+"."+String.valueOf(levelPawn);
 	}
 
 	/**
@@ -156,6 +159,7 @@ public abstract class APawn implements java.io.Serializable {
 				for (int i = 0; i < 6; i++) {
 					listPawn.add(new Bomb(team));
 				}
+				listPawn.add(new Spy(team));
 				for (int i = 0; i < 8; i++) {
 					listPawn.add(new Scout(team));
 				}
@@ -188,7 +192,7 @@ public abstract class APawn implements java.io.Serializable {
 				for (int i = 0; i < 2; i++) {
 					listPawn.add(new Bomb(team));
 				}
-
+				listPawn.add(new Spy(team));
 				for (int i = 0; i < 2; i++) {
 					listPawn.add(new Scout(team));
 				}
@@ -198,9 +202,9 @@ public abstract class APawn implements java.io.Serializable {
 				}
 
 			}
-			listPawn.add(new Spy(team));
-			listPawn.add(new Marshal(team));
 			listPawn.add(new General(team));
+			listPawn.add(new Marshal(team));
+			
 			listPawn.add(new Flag(team));
 		}
 

@@ -130,7 +130,7 @@ public class Game implements java.io.Serializable {
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
 				if (grid[i][j] == null) {
-					System.out.print("n     ");
+					System.out.print("n       ");
 				} else {
 					System.out.print(grid[i][j] + "    ");
 				}
@@ -244,8 +244,8 @@ public class Game implements java.io.Serializable {
 //		int winner = 0, test = 0;
 //		System.out.println("LINE  "+this.getLine());
 //		System.out.println("ROW  "+this.getRow());
-		for (int j = 0; j < this.getLine() + 1; j++) {
-			for (int i = 0; i < this.getRow() + 1; i++) {
+		for (int j = 0; j < this.getRow() + 1; j++) {
+			for (int i = 0; i < this.getLine() + 1; i++) {
 				if (this.getPawn(i, j) != null) {
 					APawn pawn = this.getPawn(i, j);
 //					System.out.println(pawn.getTeam()+"  "+pawn.getLevel());
@@ -572,5 +572,45 @@ public class Game implements java.io.Serializable {
 
 	public void setInitGridGame(int initGridGame) {
 		this.initGridGame  = initGridGame;
+	}
+	
+	public void showMoved(int te){
+		Vector<APawn> vect = new Vector<APawn>();
+		for(int i = 0; i<line;i++){
+			for(int j = 0;j <row;j++){
+				APawn pawn =grid[i][j]; 
+				if(pawn!=null){
+					 if(pawn.getTeam()!=0){
+						 if(te==0 && pawn.getMoved()){
+							 vect.addElement(pawn);
+						 }
+						 if(te==pawn.getTeam() && pawn.getMoved()){
+							 vect.addElement(pawn);
+						 }
+					 }
+				}
+			}
+		}
+		System.out.println(vect);
+	}
+	
+	public void showKnow(int te){
+		Vector<APawn> vect = new Vector<APawn>();
+		for(int i = 0; i<line;i++){
+			for(int j = 0;j <row;j++){
+				APawn pawn =grid[i][j]; 
+				if(pawn!=null){
+					 if(pawn.getTeam()!=0){
+						 if(te==0 && pawn.getKnow()){
+							 vect.addElement(pawn);
+						 }
+						 if(te==pawn.getTeam() && pawn.getKnow()){
+							 vect.addElement(pawn);
+						 }
+					 }
+				}
+			}
+		}
+		System.out.println(vect);
 	}
 }

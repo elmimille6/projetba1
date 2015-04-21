@@ -214,6 +214,7 @@ public class WindowGame extends JFrame {
 						}
 					}
 					att = false;
+					
 				}
 			}).start();
 		}
@@ -323,6 +324,10 @@ public class WindowGame extends JFrame {
 						}
 						att = false;
 					}
+					System.out.println("KNOW");
+					game.showKnow(2);
+					System.out.println("MOVED");
+					game.showMoved(2);
 				}
 			}).start();
 		}

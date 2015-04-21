@@ -151,11 +151,11 @@ public class TestIa extends JFrame{
 						gameWin=game.win();
 					}
 					game.showGrid();
-//					System.out.println("sortie");
+					System.out.println("WIN GAME  "+gameWin);
 					if(gameWin==1){
 						w1++;
 					}
-					if(gameWin==2){
+					else if(gameWin==2){
 						w2++;
 					}
 					

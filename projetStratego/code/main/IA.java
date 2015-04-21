@@ -92,8 +92,9 @@ public class IA {
 			Vector<APawn> pawnSide = getSidedPawn(game);
 			System.out.println(pawnSide.toString());
 			if (pawnSide.size()!=0) { //verifie tout les pions qui sont collé a un ennemi
-				int[][] res = iaL1Side(game,pawnSide);
-				if(res!=null){
+				int[][] move = { { -1, -1 }, { -1, -1 } ,{0}};
+				int[][] res = iaL1Side(game,pawnSide,move);
+				if(res[2][0]!=0){
 					return res;
 				}
 			}
@@ -105,42 +106,36 @@ public class IA {
 	}
 
 	
-	private int[][] iaL1Side(Game game, Vector<APawn> pawnSide){
-		int[][] move = { { -1, -1 }, { -1, -1 } };
-		Random rand = new Random();
-		int ind = rand.nextInt(pawnSide.size());
-		APawn pawn = pawnSide.get(ind);
+	private int[][] iaL1Side(Game game, Vector<APawn> pawnSide,int[][] move){
+		int[][] res = { { -1, -1 }, { -1, -1 } ,{0}};
+		APawn pawn = pawnSide.get(0);
 		if (pawn.getLevel() == 2) { // si notre pion est un eclaireur
 			APawn pawnside = game.getPawn(pawn.posX - 1, pawn.posY);
 			if (pawnside != null) {
 				if (pawnside.getTeam() == (team % 2) + 1 && !pawnside.getKnow()) {
-					int[][] moveI = { { pawn.posX, pawn.posY }, { pawn.posX - 1, pawn.posY } };
-					move = moveI;
-					return move;
+					int[][] moveI = { { pawn.posX, pawn.posY }, { pawn.posX - 1, pawn.posY },{1} };
+					res = moveI;
 				}
 			}
 			pawnside = game.getPawn(pawn.posX + 1, pawn.posY);
 			if (pawnside != null) {
 				if (pawnside.getTeam() == (team % 2) + 1 && !pawnside.getKnow()) {
-					int[][] moveI = { { pawn.posX, pawn.posY }, { pawn.posX + 1, pawn.posY } };
-					move = moveI;
-					return move;
+					int[][] moveI = { { pawn.posX, pawn.posY }, { pawn.posX + 1, pawn.posY } ,{1}};
+					res = moveI;
 				}
 			}
 			pawnside = game.getPawn(pawn.posX, pawn.posY - 1);
 			if (pawnside != null) {
 				if (pawnside.getTeam() == (team % 2) + 1 && !pawnside.getKnow()) {
-					int[][] moveI = { { pawn.posX, pawn.posY }, { pawn.posX, pawn.posY - 1 } };
-					move = moveI;
-					return move;
+					int[][] moveI = { { pawn.posX, pawn.posY }, { pawn.posX, pawn.posY - 1 } ,{1}};
+					res = moveI;
 				}
 			}
 			pawnside = game.getPawn(pawn.posX, pawn.posY + 1);
 			if (pawnside != null) {
 				if (pawnside.getTeam() == (team % 2) + 1 && !pawnside.getKnow()) {
-					int[][] moveI = { { pawn.posX, pawn.posY }, { pawn.posX, pawn.posY + 1 } };
-					move = moveI;
-					return move;
+					int[][] moveI = { { pawn.posX, pawn.posY }, { pawn.posX, pawn.posY + 1 },{1} };
+					res = moveI;
 				}
 			}
 			// TODO mouvement pour se "sauver" (si on veut les sauver....)
@@ -149,39 +144,37 @@ public class IA {
 		else if (pawn.getLevel() == -6 && pawn.getLevel() == 11) { // debut pion n est pas eclaireur,flag ou bomb
 			APawn pawnside = game.getPawn(pawn.posX - 1, pawn.posY);
 			if (pawnside != null) {
-				int[][] res = iaL1SideM(game,pawn,pawnside,pawn.posX - 1, pawn.posY,pawn.posX + 1, pawn.posY);
-				if(res!=null){
-					return res;
-				}
+				res = iaL1SideM(game,pawn,pawnside,pawn.posX - 1, pawn.posY,pawn.posX + 1, pawn.posY);
+				
 			}
 			pawnside = game.getPawn(pawn.posX + 1, pawn.posY);
 			if (pawnside != null) {
-				int[][] res = iaL1SideM(game,pawn,pawnside,pawn.posX + 1, pawn.posY,pawn.posX - 1, pawn.posY);
-				if(res!=null){
-					return res;
-				}
+				res = iaL1SideM(game,pawn,pawnside,pawn.posX + 1, pawn.posY,pawn.posX - 1, pawn.posY);
+				
 			}
 			pawnside = game.getPawn(pawn.posX , pawn.posY-1);
 			if (pawnside != null) {
-				int[][] res = iaL1SideM(game,pawn,pawnside,pawn.posX , pawn.posY-1,pawn.posX , pawn.posY+1);
-				if(res!=null){
-					return res;
-				}
+				res = iaL1SideM(game,pawn,pawnside,pawn.posX , pawn.posY-1,pawn.posX , pawn.posY+1);
+				
 			}
 			pawnside = game.getPawn(pawn.posX , pawn.posY+1);
 			if (pawnside != null) {
-				int[][] res = iaL1SideM(game,pawn,pawnside,pawn.posX , pawn.posY+1,pawn.posX , pawn.posY-1);
-				if(res!=null){
-					return res;
-				}
+				 res = iaL1SideM(game,pawn,pawnside,pawn.posX , pawn.posY+1,pawn.posX , pawn.posY-1);
+				
 			}
 			
 		}
-		if (pawnSide.size() > 1) {
-			pawnSide.remove(ind);
-			return iaL1Side(game,pawnSide);
+		
+		if(res[2][0]>move[2][0]){
+			move=res;
 		}
-		return null;
+		
+		
+		if (pawnSide.size() > 1) {
+			pawnSide.remove(0);
+			return iaL1Side(game,pawnSide,move);
+		}
+		return move;
 	}
 	
 	/**
@@ -196,16 +189,16 @@ public class IA {
 	 * @return
 	 */
 	private int[][] iaL1SideM(Game game,APawn pawn,APawn pawnside,int x1,int y1, int x2,int y2 ){
-		int[][] move = { { -1, -1 }, { -1, -1 } };
+		int[][] move = { { -1, -1 }, { -1, -1 } ,{0}};
 		if (pawnside.getTeam() == (team % 2) + 1) {
 			if (pawnside.getKnow()) {
 				if (pawn.attack(pawnside)==1) {
-					int[][] moveI = { { pawn.posX, pawn.posY }, { x1, y1 } };
+					int[][] moveI = { { pawn.posX, pawn.posY }, { x1, y1 } ,{pawnside.getLevel()*4}};
 					move = moveI;
 					return move;
 				} else {
 					if (game.getPawn(x2, y2) == null && x2 <= game.getLine() && x2 >=0 && y2 <= game.getRow() && y2 >=0) {
-						int[][] moveI = { { pawn.posX, pawn.posY }, { x2, y2 } };
+						int[][] moveI = { { pawn.posX, pawn.posY }, { x2, y2 },{pawn.getLevel()*3} };
 						move = moveI;
 						return move;
 					}
@@ -219,18 +212,18 @@ public class IA {
 				} else { // si pion ennemi n as pas encore bougé
 					probLvl = probUnmoved(game);
 					if(probFlag(game)<4){
-						int[][] moveI = { { pawn.posX, pawn.posY }, { x1, y1 } };
+						int[][] moveI = { { pawn.posX, pawn.posY }, { x1, y1 },{20} };
 						move = moveI;
 						return move;
 					}
 				}
 				if (pawn.getLevel() > probLvl) {
-					int[][] moveI = { { pawn.posX, pawn.posY }, { x1, y1 } };
+					int[][] moveI = { { pawn.posX, pawn.posY }, { x1, y1 } ,{15}};
 					move = moveI;
 					return move;
 				} else {
 					if (game.getPawn(x2, y2) == null && x2 <= game.getLine() && x2 >=0 && y2 <= game.getRow() && y2 >=0) {
-						int[][] moveI = { { pawn.posX, pawn.posY }, { x2, y2 } };
+						int[][] moveI = { { pawn.posX, pawn.posY }, { x2, y2 },{15} };
 						move = moveI;
 						return move;
 					}
@@ -240,7 +233,7 @@ public class IA {
 			}
 		}
 		
-		return null;
+		return move;
 		
 	}
 	

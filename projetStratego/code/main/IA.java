@@ -211,7 +211,7 @@ public class IA {
 					probLvl = probMoved(game);
 				} else { // si pion ennemi n as pas encore bougé
 					probLvl = probUnmoved(game);
-					if(probFlag(game)<4){
+					if(probFlag(game)<3){
 						int[][] moveI = { { pawn.posX, pawn.posY }, { x1, y1 },{20} };
 						move = moveI;
 						return move;

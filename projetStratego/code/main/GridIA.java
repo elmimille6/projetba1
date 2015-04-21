@@ -22,6 +22,19 @@ public class GridIA {
 	 *            The team of the IA.
 	 */
 	public GridIA(int team) {
+		eval(team);
+	}
+	
+	public GridIA(int team, int lvl){
+		if(lvl==1){
+			eval(team);
+		}
+		else if (lvl==0){
+			grid=createGrid(team);
+		}
+	}
+	
+	public void eval(int team){
 		int i = 0;
 		while (val < 17000) {
 			APawn[][] gridEval = createGrid(team);
@@ -32,7 +45,6 @@ public class GridIA {
 			}
 			i++;
 		}
-		System.out.println(i);
 	}
 	
 	public APawn getPawn(int i, int j) {

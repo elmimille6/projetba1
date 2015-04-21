@@ -2,10 +2,9 @@ package main;
 
 //import pawn.*;
 import gui.MenuWindow;
-import gui.WindowGame;
 import gui.WindowInitPawn;
 
-import java.util.Random;
+import java.util.Vector;
 
 /**
  * This is the main class of this project.

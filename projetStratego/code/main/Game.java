@@ -242,14 +242,13 @@ public class Game implements java.io.Serializable {
 		boolean flag1 = false;
 		boolean flag2 = false;
 //		int winner = 0, test = 0;
-		System.out.println("LINE  "+this.getLine());
-		System.out.println("ROW  "+this.getRow());
+//		System.out.println("LINE  "+this.getLine());
+//		System.out.println("ROW  "+this.getRow());
 		for (int j = 0; j < this.getLine() + 1; j++) {
 			for (int i = 0; i < this.getRow() + 1; i++) {
-				System.out.println("for");
 				if (this.getPawn(i, j) != null) {
 					APawn pawn = this.getPawn(i, j);
-					System.out.println(pawn.getTeam()+"  "+pawn.getLevel());
+//					System.out.println(pawn.getTeam()+"  "+pawn.getLevel());
 					if (pawn.getTeam() == 1 && pawn.getLevel() == -6) {
 						flag1 = true;
 					}
@@ -277,14 +276,17 @@ public class Game implements java.io.Serializable {
 		}
 		if (!flag1) {
 			this.showGrid();
+			System.out.println("win falg 2");
 			return 2;
 		}
 		if (!flag2) {
 			this.showGrid();
+			System.out.println("win flag 1");
 			return 1;
 		}
 		if (!canPlay) {
 			this.showGrid();
+			System.out.println("win canplay "+(turn % 2) + 1);
 			return (turn % 2) + 1;
 		}
 		return 0;

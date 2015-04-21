@@ -222,7 +222,7 @@ public class WindowGame extends JFrame {
 			new Thread(new Runnable() {
 				@SuppressWarnings("static-access")
 				public void run() {
-
+					game.setView(0);
 					System.out.println(game.win() + " : win");
 					if ((((game.getTurn() + 1) % 2) + 1) == 1) {
 						int[] res = getRes(game, pane, posX, posY);

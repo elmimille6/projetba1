@@ -87,10 +87,11 @@ public class IA {
 	}
 
 	private int[][] iaL1(Game game) {
-		int[][] move = { { -1, -1 }, { -1, -1 } };
+		System.out.println("mouvement ia lvl2");
 		if (team == ((game.getTurn() + 1) % 2) + 1) {
 			Vector<APawn> pawnSide = getSidedPawn(game);
-			if (pawnSide != null) { //verifie tout les pions qui sont collé a un ennemi
+			System.out.println(pawnSide.toString());
+			if (pawnSide.size()!=0) { //verifie tout les pions qui sont collé a un ennemi
 				int[][] res = iaL1Side(game,pawnSide);
 				if(res!=null){
 					return res;
@@ -217,6 +218,11 @@ public class IA {
 					probLvl = probMoved(game);
 				} else { // si pion ennemi n as pas encore bougé
 					probLvl = probUnmoved(game);
+					if(probFlag(game)<4){
+						int[][] moveI = { { pawn.posX, pawn.posY }, { x1, y1 } };
+						move = moveI;
+						return move;
+					}
 				}
 				if (pawn.getLevel() > probLvl) {
 					int[][] moveI = { { pawn.posX, pawn.posY }, { x1, y1 } };
@@ -238,8 +244,23 @@ public class IA {
 		
 	}
 	
+	private int probFlag(Game game) {
+		int nbpawn=0;
+		for (int i = 0; i <= game.getLine(); i++) {
+			for (int j = 0; j <= game.getRow(); j++) {
+				APawn pawn = game.getPawn(i, j);
+				if(pawn!=null){
+					if(pawn.getTeam()==(team % 2) + 1 && !pawn.getKnow() && !pawn.getMoved()){
+						nbpawn++;
+					}
+				}
+			}
+			}
+		return nbpawn;
+	}
+
 	private Vector<APawn> getSidedPawn(Game game) {
-		Vector<APawn> pawnSide = null;
+		Vector<APawn> pawnSide= new Vector<APawn>();
 		for (int i = 0; i <= game.getLine(); i++) {
 			for (int j = 0; j <= game.getRow(); j++) {
 				boolean added = false;
@@ -248,23 +269,23 @@ public class IA {
 				if (pawn != null) {
 					if (pawn.getTeam() == team) {
 						pawnside = game.getPawn(i - 1, j);
-						if (isPawnSide(pawn) && !added) {
-							pawnSide.add(pawn);
+						if (isPawnSide(pawnside) && !added) {
+							pawnSide.addElement(pawn);
 							added = true;
 						}
 						pawnside = game.getPawn(i + 1, j);
-						if (isPawnSide(pawn) && !added) {
+						if (isPawnSide(pawnside) && !added) {
 							added = true;
-							pawnSide.add(pawn);
+							pawnSide.addElement(pawn);
 						}
 						pawnside = game.getPawn(i, j - 1);
-						if (isPawnSide(pawn) && !added) {
-							pawnSide.add(pawn);
+						if (isPawnSide(pawnside) && !added) {
+							pawnSide.addElement(pawn);
 							added = true;
 						}
 						pawnside = game.getPawn(i, j + 1);
-						if (isPawnSide(pawn) && !added) {
-							pawnSide.add(pawn);
+						if (isPawnSide(pawnside) && !added) {
+							pawnSide.addElement(pawn);
 							added = true;
 						}
 

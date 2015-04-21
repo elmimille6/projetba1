@@ -60,7 +60,6 @@ public class TestIa extends JFrame{
 		for(int i=0;i<listLvl.length;i++){
 			ia1.addItem(listLvl[i]);
 			ia2.addItem(listLvl[i]);
-			System.out.println(listLvl[i]);
 		}
 		 JLabel lab2=new JLabel("Niveau de l'IA 1");
 		 JLabel lab3=new JLabel("Niveau de l'IA 2");
@@ -104,44 +103,59 @@ public class TestIa extends JFrame{
 			@Override
 			public void run() {
 				int w1=0,w2=0;
-				
+				System.out.println(lvl1+"   "+lvl2);
+				GridIA grid1=new GridIA(1,0);
+				GridIA grid2=new GridIA(2,0);
 				for(int i=0;i<nbr;i++){
-					System.out.println("debut");
+//					System.out.println("debut");
 					IA ia1=new IA(lvl1, 1);
 					IA ia2=new IA(lvl2, 2);
 					Game game = new Game(10,1);
-					GridIA grid1 = new GridIA(1);
-					GridIA grid2 = new GridIA(2);
+					if(lvl1==IA.getListLvl()[0]){
+						grid1=new GridIA(1,0);
+					}
+					else if(lvl1==IA.getListLvl()[1]){
+						grid1=new GridIA(1,1);
+					}
+					if(lvl2==IA.getListLvl()[0]){
+						grid2=new GridIA(2,0);
+					}
+					else if(lvl2==IA.getListLvl()[1]){
+						grid2=new GridIA(2,1);
+					}
+					
 					game.placeTeam(grid1.getGrid(), 1);
 					game.placeTeam(grid2.getGrid(), 2);
-					while(game.win()==0){
-						System.out.println("boucle");
+					game.showGrid();
+					int gameWin = 0;
+					while(gameWin==0){
+//						System.out.println("boucle");
 						if((((game.getTurn() + 1) % 2) + 1) == 1){
-							System.out.println("1if");
+//							System.out.println("1if");
 							int[][] next =ia1.getNext(game);
-							System.out.println("afternext1");
+//							System.out.println("afternext1");
 							APawn pa = game.getPawn(next[0][0],
 									next[0][1]);
 							pa.move(game, next[1][0], next[1][1]);
 							game.addTurn();
-							System.out.println("fin if1");
+//							System.out.println("fin if1");
 						}
 						else if((((game.getTurn() + 1) % 2) + 1) == 2){
-							System.out.println("2if");
+//							System.out.println("2if");
 							int[][] next =ia2.getNext(game);
 							APawn pa = game.getPawn(next[0][0],
 									next[0][1]);
 							pa.move(game, next[1][0], next[1][1]);
 							game.addTurn();
 						}
-						game.showGrid();
+						gameWin=game.win();
 					}
 					game.showGrid();
-					System.out.println("sortie");
-					if(game.win()==1){
+//					System.out.println("sortie");
+					if(gameWin==1){
 						w1++;
 					}
-					if(game.win()==2){
+					if(gameWin==2){
 						w2++;
 					}
 					

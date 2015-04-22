@@ -325,9 +325,9 @@ public class WindowGame extends JFrame {
 						att = false;
 					}
 					System.out.println("KNOW");
-					game.showKnow(2);
+					game.showKnow(0);
 					System.out.println("MOVED");
-					game.showMoved(2);
+					game.showMoved(0);
 				}
 			}).start();
 		}

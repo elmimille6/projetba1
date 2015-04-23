@@ -44,7 +44,7 @@ public class TestIa extends JFrame{
 		JPanel panel3=new JPanel();
 		JPanel panel4=new JPanel();
 		
-		nbr.setMaximum(100);
+		nbr.setMaximum(1000);
 	    nbr.setMinimum(0);
 	    nbr.setPaintTicks(true);
 	    nbr.setPaintLabels(true);

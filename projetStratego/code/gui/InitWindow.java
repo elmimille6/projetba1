@@ -416,12 +416,19 @@ public class InitWindow extends WindowInitPawn {
 			public void mouseReleased(MouseEvent e) {
 
 				if (e.getButton() == MouseEvent.BUTTON1) {
+					for (int i = 0; i < 2; i++) {
+						for (int j = 0; j < 6; j++) {
+							gridPane2.getPawn(i, j).setSelected(false);
+						}
+					}
+					repaint();
 					posX = e.getX();
 					posY = e.getY();
 					int[] res = getRes(gridPane2, pane2, posX, posY);
 					int line = res[0];
 					int row = res[1];
 					APawn pawn = gridPane2.getPawn(line, row);
+					pawn.setSelected(true);
 					currentPawn = pawn;
 					chooseSquare(chosenPawn(pawn));
 					repaint();
@@ -533,6 +540,7 @@ public class InitWindow extends WindowInitPawn {
 	public void showPawn(int x, int y, APawn pawnShow, boolean show) {
 		if (show) {
 			gridPane2.set(x, y, noPawn = new NoPawn(pawnShow.getNamePawn()));
+			pawnShow.setSelected(false);
 		} else {
 			gridPane2.set(x, y, initPawnIs(pawnShow));
 		}

@@ -21,20 +21,21 @@ public abstract class APawn implements java.io.Serializable {
 	public int posX;
 	public int posY;
 	protected String URI;
-	public boolean show = false, isEmpty = false, know=false,moved=false;
+	public boolean show = false, isEmpty = false, know = false, moved = false,
+			selected = false;
 	protected Vector<int[]> place = new Vector<int[]>();
 
 	/**
 	 * Returns a string representation of a 'APawn' object.
 	 */
 	public String toString() {
-		if (levelPawn ==-6) {
-			return String.valueOf(team)+"."+String.valueOf(levelPawn);
+		if (levelPawn == -6) {
+			return String.valueOf(team) + "." + String.valueOf(levelPawn);
 		}
 		if (levelPawn < 10) {
-			return String.valueOf(team)+"."+String.valueOf(levelPawn) + " ";
+			return String.valueOf(team) + "." + String.valueOf(levelPawn) + " ";
 		}
-		return String.valueOf(team)+"."+String.valueOf(levelPawn);
+		return String.valueOf(team) + "." + String.valueOf(levelPawn);
 	}
 
 	/**
@@ -204,7 +205,7 @@ public abstract class APawn implements java.io.Serializable {
 			}
 			listPawn.add(new General(team));
 			listPawn.add(new Marshal(team));
-			
+
 			listPawn.add(new Flag(team));
 		}
 
@@ -278,8 +279,8 @@ public abstract class APawn implements java.io.Serializable {
 	 * @return true or false
 	 */
 	public boolean movePoss(Game grid, int x, int y) {
-		
-		if(x<0||y<0||x>grid.getLine()||y>grid.getRow()){
+
+		if (x < 0 || y < 0 || x > grid.getLine() || y > grid.getRow()) {
 			return false;
 		}
 		APawn target = grid.getPawn(x, y);
@@ -288,10 +289,10 @@ public abstract class APawn implements java.io.Serializable {
 			int[] tab2 = place.get(place.size() - 6);
 			int[] tab3 = place.get(place.size() - 2);
 
-//			System.out.println(tab1[0] + " " + tab1[1]);
-//			System.out.println(tab2[0] + " " + tab2[1]);
-//
-//			System.out.println();
+			// System.out.println(tab1[0] + " " + tab1[1]);
+			// System.out.println(tab2[0] + " " + tab2[1]);
+			//
+			// System.out.println();
 			if (tab1[0] == x && x == tab2[0] && tab1[1] == y && tab2[1] == y
 					&& tab3[0] == x && tab3[1] == y) {
 				return false;
@@ -340,11 +341,13 @@ public abstract class APawn implements java.io.Serializable {
 	 *         2 if this pawn loose.
 	 */
 	public int attack(APawn tar) {
-		if (tar.getLevel() == this.levelPawn){
-			return 0;}
-		if (tar.getLevel() < this.levelPawn){
+		if (tar.getLevel() == this.levelPawn) {
+			return 0;
+		}
+		if (tar.getLevel() < this.levelPawn) {
 			this.setKnow();
-			return 1;}
+			return 1;
+		}
 		tar.setKnow();
 		return 2;
 	}
@@ -367,7 +370,7 @@ public abstract class APawn implements java.io.Serializable {
 	 */
 	public Game move(Game grid, int x, int y) {
 		int[] move = { this.posX, this.posY, -1 };
-		moved=true;
+		moved = true;
 		if (this.posX > x) {
 			move[2] = 0;
 		}
@@ -381,7 +384,7 @@ public abstract class APawn implements java.io.Serializable {
 			move[2] = 1;
 		}
 		grid.setLastMove(move);
-		
+
 		APawn tar = grid.getPawn(x, y);
 		if (tar == null) {// no pawn on the coordinates targeted
 			grid.set(this.posX, this.posY, null);// delete the old coordinates
@@ -477,19 +480,27 @@ public abstract class APawn implements java.io.Serializable {
 		return false;
 	}
 
-	public void resetMove(){
+	public void resetMove() {
 		place.removeAllElements();
 	}
-	
-	public boolean getMoved(){
+
+	public boolean getMoved() {
 		return moved;
 	}
-	
-	public boolean getKnow(){
+
+	public boolean getKnow() {
 		return know;
 	}
-	
-	public void setKnow(){
-		know=true;
+
+	public void setKnow() {
+		know = true;
+	}
+
+	public boolean getSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 }

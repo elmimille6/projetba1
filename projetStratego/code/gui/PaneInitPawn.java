@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 
 import main.Game;
 import pawn.APawn;
+import pawn.NoPawn;
 
 /**
  * This class creates the pane for the initialization of the grid by the player.
@@ -40,7 +42,7 @@ public class PaneInitPawn extends JPanel {
 	}
 
 	public PaneInitPawn() {
-		this.grid=new Game(new APawn[4][10]);
+		this.grid = new Game(new APawn[4][10]);
 	}
 
 	/**
@@ -79,13 +81,26 @@ public class PaneInitPawn extends JPanel {
 							(i * (this.getHeight() / (nbrLigne))) + 10,
 							this.getWidth() / nbrCol - 20, this.getHeight()
 									/ nbrLigne - 20, this);
+					if (pawn.getSelected()
+							&& !pawn.getClass().equals(NoPawn.class)) { // Border
+																		// image
+						g.setColor(Color.green);
+
+						g.drawRect((j * (this.getWidth() / (nbrCol))) + 10,
+								(i * (this.getHeight() / (nbrLigne))) + 10,
+								this.getWidth() / nbrCol - 20, this.getHeight()
+										/ nbrLigne - 20);
+
+						g.setColor(Color.black);
+					}
 				}
 			}
 		}
 	}
-	public void setGrid(APawn[][] ngrid){
+
+	public void setGrid(APawn[][] ngrid) {
 		Game game = new Game(ngrid);
-		this.grid=game;
-		
+		this.grid = game;
+
 	}
 }

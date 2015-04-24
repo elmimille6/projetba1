@@ -19,6 +19,6 @@ public class NoPawn extends APawn {
 		setLevelPawn(0);
 		setTeam(0);
 		setNamePawn(name);
-		setURI("/image/no_" + name + ".png");
+		setURI("/image/no_pawn/no_" + name + ".png");
 	}
 }

@@ -216,7 +216,12 @@ public class IA {
 				if (pawn.attack(pawnside)==1 && team%2+1==pawnside.getTeam()) {
 					int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 } ,{pawnside.getLevel()*4}};
 					return move;
-				} else {
+				} 
+				if (pawn.attack(pawnside)==2 && team%2+1==pawnside.getTeam()) {
+					int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 } ,{-400}};
+					return move;
+				}
+				else {
 					if (game.getPawn(x2, y2) == null && x2 <= game.getLine() && x2 >=0 && y2 <= game.getRow() && y2 >=0&& team%2+1==pawnside.getTeam()) {
 						int[][] move = { { pawn.posX, pawn.posY }, { x2, y2 },{pawn.getLevel()*3} };
 						return move;

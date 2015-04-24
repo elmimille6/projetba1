@@ -44,7 +44,7 @@ public class TestIa extends JFrame{
 		JPanel panel3=new JPanel();
 		JPanel panel4=new JPanel();
 		
-		nbr.setMaximum(1000);
+		nbr.setMaximum(100);
 	    nbr.setMinimum(0);
 	    nbr.setPaintTicks(true);
 	    nbr.setPaintLabels(true);
@@ -86,7 +86,7 @@ public class TestIa extends JFrame{
 				public void actionPerformed(ActionEvent arg0) {
 //					System.out.println(nbr.getText()+"  herer");
 					if(nbr.getValue()!=0){
-						doTest(nbr.getValue(),(String)ia1.getSelectedItem(),(String)ia2.getSelectedItem());
+						new ProgressTestIa(nbr.getValue(),(String)ia1.getSelectedItem(),(String)ia2.getSelectedItem());
 					}
 					else{
 						JOptionPane jop1 = new JOptionPane();
@@ -97,73 +97,73 @@ public class TestIa extends JFrame{
 		
 	}
 	
-	public void doTest(final int nbr, final String lvl1,final String lvl2){
-		new Thread(new Runnable(){
-			
-			@Override
-			public void run() {
-				int w1=0,w2=0;
-				System.out.println(lvl1+"   "+lvl2);
-				GridIA grid1=new GridIA(1,0);
-				GridIA grid2=new GridIA(2,0);
-				for(int i=0;i<nbr;i++){
-//					System.out.println("debut");
-					IA ia1=new IA(lvl1, 1);
-					IA ia2=new IA(lvl2, 2);
-					Game game = new Game(10,1);
-					if(lvl1==IA.getListLvl()[0]){
-						grid1=new GridIA(1,0);
-					}
-					else if(lvl1==IA.getListLvl()[1]){
-						grid1=new GridIA(1,1);
-					}
-					if(lvl2==IA.getListLvl()[0]){
-						grid2=new GridIA(2,0);
-					}
-					else if(lvl2==IA.getListLvl()[1]){
-						grid2=new GridIA(2,1);
-					}
-					
-					game.placeTeam(grid1.getGrid(), 1);
-					game.placeTeam(grid2.getGrid(), 2);
-					game.showGrid();
-					int gameWin = 0;
-					while(gameWin==0){
-//						System.out.println("boucle");
-						if((((game.getTurn() + 1) % 2) + 1) == 1){
-//							System.out.println("1if");
-							int[][] next =ia1.getNext(game);
-//							System.out.println("afternext1");
-							APawn pa = game.getPawn(next[0][0],
-									next[0][1]);
-							pa.move(game, next[1][0], next[1][1]);
-							game.addTurn();
-//							System.out.println("fin if1");
-						}
-						else if((((game.getTurn() + 1) % 2) + 1) == 2){
-//							System.out.println("2if");
-							int[][] next =ia2.getNext(game);
-							APawn pa = game.getPawn(next[0][0],
-									next[0][1]);
-							pa.move(game, next[1][0], next[1][1]);
-							game.addTurn();
-						}
-						gameWin=game.win();
-					}
-					game.showGrid();
-					System.out.println("WIN GAME  "+gameWin);
-					if(gameWin==1){
-						w1++;
-					}
-					else if(gameWin==2){
-						w2++;
-					}
-					
-					
-				}
-				System.out.println("ia1= "+w1+"  ia2= "+w2);
-			}
-			
-		}).start();
-	}
+//	public void doTest(final int nbr, final String lvl1,final String lvl2){
+//		new Thread(new Runnable(){
+//			
+//			@Override
+//			public void run() {
+//				int w1=0,w2=0;
+//				System.out.println(lvl1+"   "+lvl2);
+//				GridIA grid1=new GridIA(1,0);
+//				GridIA grid2=new GridIA(2,0);
+//				for(int i=0;i<nbr;i++){
+////					System.out.println("debut");
+//					IA ia1=new IA(lvl1, 1);
+//					IA ia2=new IA(lvl2, 2);
+//					Game game = new Game(10,1);
+//					if(lvl1==IA.getListLvl()[0]){
+//						grid1=new GridIA(1,0);
+//					}
+//					else if(lvl1==IA.getListLvl()[1]){
+//						grid1=new GridIA(1,1);
+//					}
+//					if(lvl2==IA.getListLvl()[0]){
+//						grid2=new GridIA(2,0);
+//					}
+//					else if(lvl2==IA.getListLvl()[1]){
+//						grid2=new GridIA(2,1);
+//					}
+//					
+//					game.placeTeam(grid1.getGrid(), 1);
+//					game.placeTeam(grid2.getGrid(), 2);
+//					game.showGrid();
+//					int gameWin = 0;
+//					while(gameWin==0){
+////						System.out.println("boucle");
+//						if((((game.getTurn() + 1) % 2) + 1) == 1){
+////							System.out.println("1if");
+//							int[][] next =ia1.getNext(game);
+////							System.out.println("afternext1");
+//							APawn pa = game.getPawn(next[0][0],
+//									next[0][1]);
+//							pa.move(game, next[1][0], next[1][1]);
+//							game.addTurn();
+////							System.out.println("fin if1");
+//						}
+//						else if((((game.getTurn() + 1) % 2) + 1) == 2){
+////							System.out.println("2if");
+//							int[][] next =ia2.getNext(game);
+//							APawn pa = game.getPawn(next[0][0],
+//									next[0][1]);
+//							pa.move(game, next[1][0], next[1][1]);
+//							game.addTurn();
+//						}
+//						gameWin=game.win();
+//					}
+//					game.showGrid();
+//					System.out.println("WIN GAME  "+gameWin);
+//					if(gameWin==1){
+//						w1++;
+//					}
+//					else if(gameWin==2){
+//						w2++;
+//					}
+//					
+//					
+//				}
+//				System.out.println("ia1= "+w1+"  ia2= "+w2);
+//			}
+//			
+//		}).start();
+//	}
 }

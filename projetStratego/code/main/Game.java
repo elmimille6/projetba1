@@ -22,7 +22,7 @@ public class Game implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8927958880942845647L;
 	private APawn[][] grid=new APawn[10][10];
-	private int row, line;
+	private int row=10, line=10;
 	public int view = 1, turn = 1, player = 2, nbPawn = 40;
 	public String level;
 	public Dic startTeam;
@@ -612,5 +612,9 @@ public class Game implements java.io.Serializable {
 			}
 		}
 		System.out.println(vect);
+	}
+	
+	public int getNextTeam(){
+		return ((turn+1)%2)+1;
 	}
 }

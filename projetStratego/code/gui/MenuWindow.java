@@ -19,9 +19,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import main.Game;
-import main.GridIA;
 import main.IA;
 import main.Main;
+import main.StratClient;
 
 /**
  * This class creates a menu window.
@@ -33,12 +33,14 @@ public class MenuWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menu1 = new JMenu("Fichier");
+	private JMenu menu2= new JMenu("En ligne");
 
 	private JMenuItem quit = new JMenuItem("Quitter");
 	private JMenuItem testia = new JMenuItem("Tester l'IA");
 	private JMenuItem startSave = new JMenuItem("Utiliser la sauvegarde");
 	private JMenuItem manager = new JMenuItem(
 			"Gestionnaire de grille de depart");
+	private JMenuItem serveur = new JMenuItem("via serveur");
 
 	private JLabel labJeu = new JLabel("Jeu");
 
@@ -108,6 +110,12 @@ public class MenuWindow extends JFrame {
 				}
 			}
 		});
+		
+		serveur.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				new StratClient();
+			}
+		});
 
 		this.menu1.add(testia);
 		this.menu1.addSeparator();
@@ -116,8 +124,12 @@ public class MenuWindow extends JFrame {
 		this.menu1.addSeparator();
 		this.menu1.add(quit);
 		this.menuBar.add(menu1);
+		
+		this.menu2.add(serveur);
+		this.menuBar.add(menu2);
 
 		this.setJMenuBar(menuBar);
+		
 
 		container.setBackground(Color.white);
 		container.setLayout(new GridLayout(5, 1));

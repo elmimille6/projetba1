@@ -3,8 +3,7 @@ package main;
 //import pawn.*;
 import gui.MenuWindow;
 import gui.WindowInitPawn;
-
-import java.util.Vector;
+import main.Game;
 
 /**
  * This is the main class of this project.

@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.Listener;
 
 public class StratClient extends JFrame{
 	Client client;
@@ -14,14 +16,26 @@ public class StratClient extends JFrame{
 	
 	
 	public StratClient(){
+		
+		
 		askIp();
 		connect();
 		System.out.println("connect "+client.isConnected());
+		
+		
+		
 	}
 	
 	private void connect() {
 		client =new Client();// crée l'objet
-	    client.start();
+		client.addListener(new Listener(){
+			public void received(Connection connection,Object object){
+				if(object instanceof String){
+					System.out.println(object);
+				}
+			}
+		});
+		client.start();
 	    try {
 			client.connect(5000,adIp,54555,54777);
 		} catch (IOException e) {

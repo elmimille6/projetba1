@@ -15,6 +15,8 @@ import pawn.Bomb;
 import pawn.Flag;
 import util.Dic;
 
+import com.esotericsoftware.kryonet.Client;
+
 //import pawn.*;
 
 /**
@@ -40,13 +42,15 @@ public class WindowGame extends JFrame {
 	public final String[] resultName = { "Red", "Blue" };
 	public boolean playGame = true;
 	public IA ia;
+	public Client client;
 
 	/**
 	 * 
 	 */
 	public WindowGame() {
-
+		
 	}
+	
 
 	/**
 	 * 

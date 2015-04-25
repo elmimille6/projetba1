@@ -81,6 +81,8 @@ public class MenuWindow extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setTitle("Menu");
 		this.setContentPane(container);
+		
+		this.
 
 		quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

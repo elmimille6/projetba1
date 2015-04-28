@@ -16,6 +16,8 @@ import pawn.Flag;
 import util.Dic;
 
 import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.Listener;
 
 //import pawn.*;
 
@@ -43,6 +45,7 @@ public class WindowGame extends JFrame {
 	public boolean playGame = true;
 	public IA ia;
 	public Client client;
+	public int Oplayer;
 
 	/**
 	 * 
@@ -51,6 +54,18 @@ public class WindowGame extends JFrame {
 		
 	}
 	
+	public WindowGame(Game ngame, Client client,int Oplayer){
+		this(ngame);
+		this.client = client;
+		this.Oplayer=Oplayer;
+		client.addListener(new Listener(){
+			public void received(Connection connection,Object object){
+				if(object instanceof Game){
+					game=(Game) object;
+				}
+				}
+			});
+	}
 
 	/**
 	 * 
@@ -128,6 +143,10 @@ public class WindowGame extends JFrame {
 						&& game.getPlayer() == 1) {
 					click1player();
 				}
+				if (e.getButton() == MouseEvent.BUTTON1
+						&& game.getPlayer() == 3) {
+					clickOnline();
+				}
 			}
 		}
 
@@ -160,9 +179,9 @@ public class WindowGame extends JFrame {
 							att = true;
 							game.addTurn();
 							pane.recupArrow(arrowN);
+							game.save();
 							focus = null;
 							repaint();
-							game.save();
 							paneRed.upGame(game);
 							paneBlue.upGame(game);
 
@@ -288,6 +307,7 @@ public class WindowGame extends JFrame {
 									}
 									currentPawn.move(game, next[1][0], next[1][1]);
 									game.addTurn();
+									game.save();
 									repaint();
 									paneRed.upGame(game);
 									paneBlue.upGame(game);
@@ -336,6 +356,84 @@ public class WindowGame extends JFrame {
 			}).start();
 		}
 
+		private void clickOnline(){
+			new Thread(new Runnable() {
+				@SuppressWarnings("static-access")
+				public void run() {
+					if (game.getNextTeam() == Oplayer) {
+						int[] res = getRes(game, pane, posX, posY);
+						int line = res[0];
+						int row = res[1];
+						APawn pawn = game.getPawn(line, row);
+						if (focus != null) {
+							if (focus.movePoss(game, line, row)) {
+								if (game.getPawn(line, row) != null) {
+									game.getPawn(line, row).setShow(true);
+									pane.recupArrow(arrowN);
+									repaint();
+									try {
+										Thread.sleep(2000);
+									} catch (InterruptedException e) {
+									}
+									game.getPawn(line, row).setShow(false);
+								}
+								game = focus.move(game, line, row);
+								att = true;
+								game.addTurn();
+								pane.recupArrow(arrowN);
+								focus = null;
+								repaint();
+								paneRed.upGame(game);
+								paneBlue.upGame(game);
+								
+								
+								client.sendTCP(game);
+
+								
+								int result = game.win();
+								// System.out
+								// .println("Result = " + result);
+								if (result != 0) {
+									game.setView(0);
+									playGame = false;
+									repaint();
+
+									jopWin = new JOptionPane();
+									jopWin.showMessageDialog(null, "The "
+											+ resultName[result - 1]
+											+ " player wins !", "Result",
+											JOptionPane.INFORMATION_MESSAGE);
+								} 
+							}
+						}
+						if (pawn != null) {
+							if (pawn.getTeam() == ((game.getTurn() + 1) % 2) + 1) {
+
+								if (pawn != null && !att) {
+									focus = pawn;
+									arrow = pawn.focus(game);
+									pane.recupArrow(arrow);
+									repaint();
+								} else {
+									pane.recupArrow(arrowN);
+									focus = null;
+									repaint();
+								}
+								att = false;
+								repaint();
+
+							}
+						}
+						att = false;
+					}
+					System.out.println("KNOW");
+					game.showKnow(0);
+					System.out.println("MOVED");
+					game.showMoved(0);
+				}
+			}).start();
+		}
+		
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub

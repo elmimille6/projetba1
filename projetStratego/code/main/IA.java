@@ -95,7 +95,7 @@ public class IA {
 				int[][] move = { { -1, -1 }, { -1, -1 } ,{0}};
 				int[][] res = iaL1Side(game,pawnSide,move);
 				System.out.println("RES  "+res[0][0]+" "+res[1][0]+" "+res[2][0]);
-				if(res[2][0]!=0){
+				if(res[2][0]>0){
 					return res;
 				}
 			}
@@ -156,6 +156,7 @@ public class IA {
 			// TODO mouvement pour se "sauver" (si on veut les sauver....)
 
 		} // fin pion eclaireur
+
 		else if (pawn.getLevel() != -6 && pawn.getLevel() != 11) { // debut pion n est pas eclaireur,flag ou bomb
 			
 			APawn pawnside = game.getPawn(pawn.posX - 1, pawn.posY);
@@ -218,16 +219,25 @@ public class IA {
 					return move;
 				} 
 				if (pawn.attack(pawnside)==2 && team%2+1==pawnside.getTeam()) {
+					if (game.getPawn(x2, y2) == null && x2 <= game.getLine() && x2 >=0 && y2 <= game.getRow() && y2 >=0&& team%2+1==pawnside.getTeam()) {
+						int[][] move = { { pawn.posX, pawn.posY }, { x2, y2 },{pawn.getLevel()*2} };
+						return move;
+					}
 					int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 } ,{-400}};
 					return move;
 				}
-				else {
-					if (game.getPawn(x2, y2) == null && x2 <= game.getLine() && x2 >=0 && y2 <= game.getRow() && y2 >=0&& team%2+1==pawnside.getTeam()) {
-						int[][] move = { { pawn.posX, pawn.posY }, { x2, y2 },{pawn.getLevel()*3} };
-						return move;
-					}
+				
+			}
+		else if(pawn.getLevel()==3){
+			if(!pawnside.getMoved()){
+				int prob = probFlagBomb(game);
+				if(prob<10){
+					int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 } ,{20}};
+					return move;
 				}
-			} else {
+			}
+		}
+		else {
 				// si pion ennemi inconnu
 				int probLvl;
 				if (pawnside.getMoved()) { // si pion ennemi a
@@ -235,7 +245,7 @@ public class IA {
 					probLvl = probMoved(game);
 				} else { // si pion ennemi n as pas encore bougé
 					probLvl = probUnmoved(game);
-					if(probFlag(game)<3 && team%2+1==pawnside.getTeam()){
+					if(probFlagBomb(game)<3 && team%2+1==pawnside.getTeam()){
 						int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 },{20} };
 						return move;
 					}
@@ -252,12 +262,12 @@ public class IA {
 				}
 
 			}
-		int[][] moveNull = { { -1, -1 }, { -1, -1 } ,{0}};
+		int[][] moveNull = { { -1, -1 }, { -1, -1 } ,{-15}};
 		return moveNull;
 		
 	}
 	
-	private int probFlag(Game game) {
+	private int probFlagBomb(Game game) {
 		int nbpawn=0;
 		for (int i = 0; i <= game.getLine(); i++) {
 			for (int j = 0; j <= game.getRow(); j++) {
@@ -271,6 +281,7 @@ public class IA {
 			}
 		return nbpawn;
 	}
+	
 
 	private Vector<APawn> getSidedPawn(Game game) {
 		Vector<APawn> pawnSide= new Vector<APawn>();
@@ -377,6 +388,14 @@ public class IA {
 
 	public static String[] getListLvl() {
 		return listLvl;
+	}
+	public static int getIntLvl(String lvl){
+		for (int i = 0; i < listLvl.length; i++) {
+			if (lvl == listLvl[i]) {
+				return i;
+			}
+		}
+		return 0;
 	}
 
 }

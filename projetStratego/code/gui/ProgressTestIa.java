@@ -68,12 +68,14 @@ public class ProgressTestIa extends JFrame {
 	class Traitement implements Runnable {
 		@SuppressWarnings("static-access")
 		public void run() {
+			win1=0;
+			win2=0;
 			dispose = 1;
 			changeClose();
 			launch.setEnabled(false);
 			System.out.println(lvl1+"   "+lvl2);
-			GridIA grid1=new GridIA(1,0);
-			GridIA grid2=new GridIA(2,0);
+			GridIA grid1=new GridIA(1,1);
+			GridIA grid2=new GridIA(2,1);
 			for(int i=0;i<nbr;i++){
 //				System.out.println("debut");
 				try {
@@ -85,19 +87,8 @@ public class ProgressTestIa extends JFrame {
 				IA ia1=new IA(lvl1, 1);
 				IA ia2=new IA(lvl2, 2);
 				Game game = new Game(10,1);
-				if(lvl1==IA.getListLvl()[0]){
-					grid1=new GridIA(1,0);
-				}
-				else if(lvl1==IA.getListLvl()[1]){
-					grid1=new GridIA(1,1);
-				}
-				if(lvl2==IA.getListLvl()[0]){
-					grid2=new GridIA(2,0);
-				}
-				else if(lvl2==IA.getListLvl()[1]){
-					grid2=new GridIA(2,1);
-				}
-				
+				grid1=new GridIA(1,IA.getIntLvl(lvl1));
+				grid2=new GridIA(2,IA.getIntLvl(lvl2));
 				game.placeTeam(grid1.getGrid(), 1);
 				game.placeTeam(grid2.getGrid(), 2);
 				game.showGrid();
@@ -140,8 +131,8 @@ public class ProgressTestIa extends JFrame {
 			int moy1 = (int) imoy1;
 			int moy2 = (int) imoy2;
 			JOptionPane jop1 = new JOptionPane();
-			jop1.showMessageDialog(null, "Victoire de l'ia 1: " + win1
-					+" soit "+moy1+ " %\nVictoire de l'ia 2 : " + win2 +" soit "+moy2+" %",
+			jop1.showMessageDialog(null, "Victoire de l'ia 1: "+lvl1+": "  + win1
+					+" soit "+moy1+ " %\nVictoire de l'ia 2 : "+lvl2+": "  + win2 +" soit "+moy2+" %",
 					"Resultat", JOptionPane.INFORMATION_MESSAGE);
 			System.out.println("ia1= "+win1+"  ia2= "+win2);
 			launch.setEnabled(true);

@@ -53,6 +53,8 @@ public class PaneInitPawn extends JPanel {
 		int nbrLigne = grid.getLine() + 1;
 		int nbrCol = grid.getRow() + 1;
 
+		
+		
 		g.drawImage(imgBack, 0, 0, this.getWidth(), this.getHeight(), this);
 
 		for (int lig = 1; lig < nbrCol; lig++) {
@@ -85,7 +87,7 @@ public class PaneInitPawn extends JPanel {
 							&& !pawn.getClass().equals(NoPawn.class)) { // Border
 																		// image
 						g.setColor(Color.green);
-
+						
 						g.drawRect((j * (this.getWidth() / (nbrCol))) + 10,
 								(i * (this.getHeight() / (nbrLigne))) + 10,
 								this.getWidth() / nbrCol - 20, this.getHeight()

@@ -22,21 +22,21 @@ public class GridIA {
 	 *            The team of the IA.
 	 */
 	public GridIA(int team) {
-		eval(team);
+		eval(team,17000);
 	}
 	
 	public GridIA(int team, int lvl){
 		if(lvl==1){
-			eval(team);
+			eval(team,17000);
 		}
 		else if (lvl==0){
-			grid=createGrid(team);
+			eval(team,10000);
 		}
 	}
 	
-	public void eval(int team){
+	public void eval(int team,int valeur){
 		int i = 0;
-		while (val < 17000) {
+		while (val < valeur) {
 			APawn[][] gridEval = createGrid(team);
 			int value = evalGrid(gridEval);
 			if (value > val) {

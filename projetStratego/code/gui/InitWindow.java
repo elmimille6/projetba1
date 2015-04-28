@@ -54,7 +54,7 @@ public class InitWindow extends WindowInitPawn {
 		this.setSize(1024, 650);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		initialize();
 
 		xSize = ((int) this.getWidth());

@@ -2,6 +2,7 @@ package gui;
 
 import main.Game;
 import main.GridIA;
+import main.IA;
 
 /**
  * This class creates the window for the initialization of the grid by the
@@ -37,7 +38,8 @@ public class WindowInitPawn extends WindowGame {
 			new InitWindow();
 		} else if (toInit == 1) { // Modif
 			if (game.getComplete() == 1) {
-				game.placeTeam(new GridIA(2).getGrid(), 2);
+				int lvl = IA.getIntLvl(game.getLevel());
+				game.placeTeam(new GridIA(2,lvl).getGrid(), 2);
 				new WindowGame(game);
 			} else if (game.getComplete() != 1) {
 				new InitWindow();
@@ -48,8 +50,9 @@ public class WindowInitPawn extends WindowGame {
 			} else if (game.getInitGridGame() == 0 && game.getComplete() != 1) {
 				// AUTOMATICAL
 				// TODO// Stratego normal or duel
-				game.placeTeam(new GridIA(1).getGrid(), 1);
-				game.placeTeam(new GridIA(2).getGrid(), 2);
+				int lvl = IA.getIntLvl(game.getLevel());
+				game.placeTeam(new GridIA(1,1).getGrid(), 1);
+				game.placeTeam(new GridIA(2,lvl).getGrid(), 2);
 				new WindowGame(game);
 			} else if (game.getComplete() == 1) {
 				if (game.getInitGridGame() == 2) { // 1 player (BLUE)

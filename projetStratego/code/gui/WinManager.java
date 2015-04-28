@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.FileInputStream;
@@ -28,10 +30,11 @@ public class WinManager extends JFrame {
 	 */
 	private static final long serialVersionUID = -6421255455563013157L;
 	private Vector<GridStart> list;
-	private JComboBox combo = new JComboBox();
+	private JComboBox combo;
 	private JButton newGrid, modif, supp;
 	private GridStart focus;
 	public PaneInitPawn panelCenter;
+	public JPanel paneCombo = new JPanel();
 
 	public WinManager(int i) {
 		this.setLayout(new GridLayout());
@@ -43,7 +46,7 @@ public class WinManager extends JFrame {
 		this.setTitle("Gestionnaire de grille de depart ");
 		this.setSize(800, 400);
 		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		if (load()) {
 			JPanel paneNorth = new JPanel();
@@ -51,11 +54,12 @@ public class WinManager extends JFrame {
 			focus = list.get(0);
 			paneNorth.setLayout(new GridLayout(1, 3));
 			paneSouth.setLayout(new GridLayout(1, 2));
+			combo = new JComboBox();
 			for (int i = 0; i < list.size(); i++) {
 				combo.addItem(list.get(i));
 			}
 			combo.addActionListener(new ChoixCombo());
-			JPanel paneCombo = new JPanel();
+			
 			JPanel paneNouv = new JPanel();
 			JLabel lab = new JLabel("Selectionnez une grille");
 			JLabel lab2 = new JLabel("ou creer une ");
@@ -82,13 +86,36 @@ public class WinManager extends JFrame {
 			this.add(panelCenter, BorderLayout.CENTER);
 			this.add(paneSouth, BorderLayout.SOUTH);
 			this.validate();
-		} else {
-			new WindowInitPawn(new Game(10, 4, 0), 0);
+		} 
+		else {
+			WindowInitPawn fen=new WindowInitPawn(new Game(10, 4, 0), 2);
 			close();
 		}
-
+//		this.addFocusListener(new FocusListener() {
+//	        // Arrivée du focus       
+//	       	public void focusGained(FocusEvent e) {
+//	       		upCombo();
+//	       		System.out.println("focus");
+//	       	}
+//
+//			@Override
+//			public void focusLost(FocusEvent arg0) {
+//				System.out.println("lost focus");
+//			}
+//		});
 	}
 
+	public void upCombo(){
+		load();
+		combo.removeAllItems();
+		for (int i = 0; i < list.size(); i++) {
+			combo.addItem(list.get(i));
+		}
+		combo.repaint();
+		this.repaint();
+		
+	}
+	
 	public boolean load() {
 		ObjectInputStream in;
 		try {
@@ -97,18 +124,23 @@ public class WinManager extends JFrame {
 			Vector<GridStart> vector = (Vector<GridStart>) in.readObject();
 			this.list = vector;
 			in.close();
+			if(vector.size()==0){
+				return false;
+			}
 			return true;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("here");
 			return false;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("here");
+			System.out.println("here2");
 			return false;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("here3");
 			return false;
 		}
 
@@ -120,16 +152,17 @@ public class WinManager extends JFrame {
 
 	class ChoixCombo implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			if(combo.getItemCount()!=0){
 			focus = (GridStart) combo.getSelectedItem();
 			System.out.println(focus + " focus");
 			panelCenter.setGrid(focus.getGrid());
 			panelCenter.repaint();
+			}
 		}
 	}
 
 	class actionNewGrid implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("NewGrid");
 			new WindowInitPawn(new Game(10, 4, 0), 2);
 			close();
 		}
@@ -138,8 +171,7 @@ public class WinManager extends JFrame {
 	class actionSupp implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			focus.delete();
-			new WinManager();
-			close();
+			upCombo();
 		}
 	}
 

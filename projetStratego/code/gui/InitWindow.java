@@ -56,10 +56,12 @@ public class InitWindow extends WindowInitPawn {
 	
 	public Client client;
 	public boolean online=false,send=false;
+	public int Oplayer=0;
 
-	public InitWindow(Client client){
+	public InitWindow(Client client, int Oplayer){
 		this.client = client;
 		this.online=true;
+		this.Oplayer=Oplayer;
 		init();
 	}
 	
@@ -162,11 +164,12 @@ public class InitWindow extends WindowInitPawn {
 						GridIA grid = new GridIA(gridPlayer.getGrid());
 						client.sendTCP(grid);
 						send = true;
+						System.out.println("sended");
 						client.addListener(new Listener() {
 							public void received(Connection connection, Object object) {
 								if(send=true){
 									if(object instanceof Game){
-										new WindowGame(game);
+										new WindowGame(game,client,Oplayer);
 									}
 								}
 							}

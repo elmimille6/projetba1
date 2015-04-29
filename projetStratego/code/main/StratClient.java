@@ -19,7 +19,7 @@ import com.esotericsoftware.kryonet.Listener;
 public class StratClient extends JFrame{
 	private Client client=new Client();
 	private String adIp = "127.0.0.1";
-	private int state;
+	private int state, Oplayer;
 	private JLabel lab=new JLabel();
 	
 	
@@ -112,7 +112,7 @@ public class StratClient extends JFrame{
 						System.out.println("GOGOGOGOGO");
 						state=2;
 						state();
-						new InitWindow(client);
+						new InitWindow(client,Oplayer);
 					}
 					
 				}
@@ -127,6 +127,12 @@ public class StratClient extends JFrame{
 					if((Integer)object == 2){
 						state = 2;
 						state();
+					}
+					if((Integer)object == -1){
+						Oplayer = 1;
+					}
+					if((Integer)object == -2){
+						Oplayer = 2;
 					}
 				}
 			}

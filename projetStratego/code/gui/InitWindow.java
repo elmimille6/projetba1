@@ -1,6 +1,5 @@
 package gui;
 
-import java.text.DateFormat;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.Vector;
 
@@ -17,6 +17,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import main.Game;
+import main.GridIA;
+import main.GridStart;
 import pawn.APawn;
 import pawn.Bomb;
 import pawn.Captain;
@@ -31,8 +34,10 @@ import pawn.NoPawn;
 import pawn.Scout;
 import pawn.Sergeant;
 import pawn.Spy;
-import main.Game;
-import main.GridStart;
+
+import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.Listener;
 
 public class InitWindow extends WindowInitPawn {
 
@@ -48,8 +53,22 @@ public class InitWindow extends WindowInitPawn {
 	public APawn currentPawn, pawnShow;
 	public JOptionPane jop1, jop2;
 	public String link, nom;
+	
+	public Client client;
+	public boolean online=false,send=false;
 
+	public InitWindow(Client client){
+		this.client = client;
+		this.online=true;
+		init();
+	}
+	
 	public InitWindow() {
+		init();
+	}
+
+	public void init(){
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle("Initialisation de la grille");
 		this.setSize(1024, 650);
 		this.setResizable(false);
@@ -126,17 +145,33 @@ public class InitWindow extends WindowInitPawn {
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (verifTheGrid()) {
-					if (toInit == 2) {
-						toInit = 0;
-					} else if (toInit == 1) {
-						System.out.println("toInit = " + toInit);
+					if (!online) {
+						if (toInit == 2) {
+							toInit = 0;
+						} else if (toInit == 1) {
+							System.out.println("toInit = " + toInit);
+						}
+						game.setComplete(game.getComplete() + 1);
+						Game gridPlayer = createGrid();
+						gridPlayer.showGrid();
+						game.placeTeam(gridPlayer.getGrid(), side);
+						fen.dispose();
+						initGame();
+					} else {
+						Game gridPlayer = createGrid();
+						GridIA grid = new GridIA(gridPlayer.getGrid());
+						client.sendTCP(grid);
+						send = true;
+						client.addListener(new Listener() {
+							public void received(Connection connection, Object object) {
+								if(send=true){
+									if(object instanceof Game){
+										new WindowGame(game);
+									}
+								}
+							}
+						});
 					}
-					game.setComplete(game.getComplete() + 1);
-					Game gridPlayer = createGrid();
-					gridPlayer.showGrid();
-					game.placeTeam(gridPlayer.getGrid(), side);
-					fen.dispose();
-					initGame();
 				}
 			}
 		});
@@ -183,7 +218,7 @@ public class InitWindow extends WindowInitPawn {
 			deletePawnOfGrid();
 		}
 	}
-
+	
 	/**
 	 * Verifies if the grid is complete and if the player can move at least one
 	 * pawn.

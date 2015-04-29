@@ -157,7 +157,9 @@ public class Game implements java.io.Serializable {
 			for (int i = 0; i < tgrid.length; i++) {
 				for (int j = 0; j < tgrid[0].length; j++) {
 					// grid[6+i][0+j]=tgrid[i][j];
+					tgrid[i][j].setTeam(1);
 					this.set(6 + i, 0 + j, tgrid[i][j]);
+					
 				}
 			}
 		}

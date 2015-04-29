@@ -3,6 +3,8 @@ package main;
 import java.util.Random;
 import java.util.Vector;
 
+import com.esotericsoftware.kryo.Kryo;
+
 import pawn.*;
 
 /**
@@ -23,6 +25,10 @@ public class GridIA {
 	 */
 	public GridIA(int team) {
 		eval(team,17000);
+	}
+	
+	public GridIA(APawn[][] tab){
+		this.grid=tab;
 	}
 	
 	public GridIA(int team, int lvl){

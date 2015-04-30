@@ -41,7 +41,7 @@ public class PaneGamePawn extends JPanel {
 		grid = game;
 		count = count();
 		this.removeAll();
-//		System.out.println("DELETE");
+		// System.out.println("DELETE");
 		this.affichage();
 		this.validate();
 		;
@@ -63,7 +63,7 @@ public class PaneGamePawn extends JPanel {
 				}
 			}
 		}
-//		System.out.println("HERE" + dic);
+		// System.out.println("HERE" + dic);
 		return dic;
 	}
 
@@ -82,9 +82,9 @@ public class PaneGamePawn extends JPanel {
 					+ count.get(startTeam.getObject(i)) + "/"
 					+ startTeam.get(i) + "  ");
 			this.add(label);
-//			System.out.println("affichage");
+			// System.out.println("affichage");
 		}
-//		System.out.println("fin affichage");
+		// System.out.println("fin affichage");
 		// }
 		move = false;
 		// this.repaint();

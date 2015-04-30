@@ -44,7 +44,8 @@ public class IA {
 						}
 						if (dir == 0) {
 							if (pawn.movePoss(game, line + max, row)) {
-								int[][] m = { { line, row }, { line + max, row } };
+								int[][] m = { { line, row },
+										{ line + max, row } };
 								move = m;
 								return move;
 							}
@@ -52,21 +53,24 @@ public class IA {
 						}
 						if (dir == 1) {
 							if (pawn.movePoss(game, line - max, row)) {
-								int[][] m = { { line, row }, { line - max, row } };
+								int[][] m = { { line, row },
+										{ line - max, row } };
 								move = m;
 								return move;
 							}
 						}
 						if (dir == 2) {
 							if (pawn.movePoss(game, line, row + max)) {
-								int[][] m = { { line, row }, { line, row + max } };
+								int[][] m = { { line, row },
+										{ line, row + max } };
 								move = m;
 								return move;
 							}
 						}
 						if (dir == 3) {
 							if (pawn.movePoss(game, line, row - max)) {
-								int[][] m = { { line, row }, { line, row - max } };
+								int[][] m = { { line, row },
+										{ line, row - max } };
 								move = m;
 								return move;
 							}
@@ -91,200 +95,228 @@ public class IA {
 		if (team == ((game.getTurn() + 1) % 2) + 1) {
 			Vector<APawn> pawnSide = getSidedPawn(game);
 			System.out.println(pawnSide.toString());
-			if (pawnSide.size()!=0) { //verifie tout les pions qui sont collé a un ennemi
-				int[][] move = { { -1, -1 }, { -1, -1 } ,{0}};
-				int[][] res = iaL1Side(game,pawnSide,move);
-				System.out.println("RES  "+res[0][0]+" "+res[1][0]+" "+res[2][0]);
-				if(res[2][0]>0){
+			if (pawnSide.size() != 0) { // verifie tout les pions qui sont collï¿½
+										// a un ennemi
+				int[][] move = { { -1, -1 }, { -1, -1 }, { 0 } };
+				int[][] res = iaL1Side(game, pawnSide, move);
+				System.out.println("RES  " + res[0][0] + " " + res[1][0] + " "
+						+ res[2][0]);
+				if (res[2][0] > 0) {
 					return res;
 				}
 			}
 
-			// TODO quand aucun pion n est collé
+			// TODO quand aucun pion n est collï¿½
 		}
-		System.out.println("pas de mouvement interessant, passage en aleatoire");
+		System.out
+				.println("pas de mouvement interessant, passage en aleatoire");
 		return iaL0(game);
 	}
 
-	
-	private int[][] iaL1Side(Game game, Vector<APawn> pawnSide,int[][] move){
+	private int[][] iaL1Side(Game game, Vector<APawn> pawnSide, int[][] move) {
 		System.out.println("SLIDE");
-		int[][] res = { { -1, -1 }, { -1, -1 } ,{0}};
+		int[][] res = { { -1, -1 }, { -1, -1 }, { 0 } };
 		APawn pawn = pawnSide.get(0);
 		if (pawn.getLevel() == 2) { // si notre pion est un eclaireur
 			System.out.println("SCOUT");
 			APawn pawnside = game.getPawn(pawn.posX - 1, pawn.posY);
 			if (pawnside != null) {
 				if (pawnside.getTeam() == (team % 2) + 1 && !pawnside.getKnow()) {
-					int[][] moveI = { { pawn.posX, pawn.posY }, { pawn.posX - 1, pawn.posY },{1} };
+					int[][] moveI = { { pawn.posX, pawn.posY },
+							{ pawn.posX - 1, pawn.posY }, { 1 } };
 					res = moveI;
 				}
 			}
-			if(res[2][0]>move[2][0]){
-				move=res;
+			if (res[2][0] > move[2][0]) {
+				move = res;
 			}
 			pawnside = game.getPawn(pawn.posX + 1, pawn.posY);
 			if (pawnside != null) {
 				if (pawnside.getTeam() == (team % 2) + 1 && !pawnside.getKnow()) {
-					int[][] moveI = { { pawn.posX, pawn.posY }, { pawn.posX + 1, pawn.posY } ,{1}};
+					int[][] moveI = { { pawn.posX, pawn.posY },
+							{ pawn.posX + 1, pawn.posY }, { 1 } };
 					res = moveI;
 				}
 			}
-			if(res[2][0]>move[2][0]){
-				move=res;
+			if (res[2][0] > move[2][0]) {
+				move = res;
 			}
 			pawnside = game.getPawn(pawn.posX, pawn.posY - 1);
 			if (pawnside != null) {
 				if (pawnside.getTeam() == (team % 2) + 1 && !pawnside.getKnow()) {
-					int[][] moveI = { { pawn.posX, pawn.posY }, { pawn.posX, pawn.posY - 1 } ,{1}};
+					int[][] moveI = { { pawn.posX, pawn.posY },
+							{ pawn.posX, pawn.posY - 1 }, { 1 } };
 					res = moveI;
 				}
 			}
-			if(res[2][0]>move[2][0]){
-				move=res;
+			if (res[2][0] > move[2][0]) {
+				move = res;
 			}
 			pawnside = game.getPawn(pawn.posX, pawn.posY + 1);
 			if (pawnside != null) {
 				if (pawnside.getTeam() == (team % 2) + 1 && !pawnside.getKnow()) {
-					int[][] moveI = { { pawn.posX, pawn.posY }, { pawn.posX, pawn.posY + 1 },{1} };
+					int[][] moveI = { { pawn.posX, pawn.posY },
+							{ pawn.posX, pawn.posY + 1 }, { 1 } };
 					res = moveI;
 				}
 			}
-			if(res[2][0]>move[2][0]){
-				move=res;
+			if (res[2][0] > move[2][0]) {
+				move = res;
 			}
 			// TODO mouvement pour se "sauver" (si on veut les sauver....)
 
 		} // fin pion eclaireur
 
-		else if (pawn.getLevel() != -6 && pawn.getLevel() != 11) { // debut pion n est pas eclaireur,flag ou bomb
-			
+		else if (pawn.getLevel() != -6 && pawn.getLevel() != 11) { // debut pion
+																	// n est pas
+																	// eclaireur,flag
+																	// ou bomb
+
 			APawn pawnside = game.getPawn(pawn.posX - 1, pawn.posY);
-			if (pawnside != null && team%2+1==pawnside.getTeam()) {
-				res = iaL1SideM(game,pawn,pawnside,pawn.posX - 1, pawn.posY,pawn.posX + 1, pawn.posY);
-				
+			if (pawnside != null && team % 2 + 1 == pawnside.getTeam()) {
+				res = iaL1SideM(game, pawn, pawnside, pawn.posX - 1, pawn.posY,
+						pawn.posX + 1, pawn.posY);
+
 			}
-			if(res[2][0]>move[2][0]){
-				move=res;
+			if (res[2][0] > move[2][0]) {
+				move = res;
 			}
 			pawnside = game.getPawn(pawn.posX + 1, pawn.posY);
-			if (pawnside != null && team%2+1==pawnside.getTeam()) {
-				res = iaL1SideM(game,pawn,pawnside,pawn.posX + 1, pawn.posY,pawn.posX - 1, pawn.posY);
-				
+			if (pawnside != null && team % 2 + 1 == pawnside.getTeam()) {
+				res = iaL1SideM(game, pawn, pawnside, pawn.posX + 1, pawn.posY,
+						pawn.posX - 1, pawn.posY);
+
 			}
-			if(res[2][0]>move[2][0]){
-				move=res;
+			if (res[2][0] > move[2][0]) {
+				move = res;
 			}
-			pawnside = game.getPawn(pawn.posX , pawn.posY-1);
-			if (pawnside != null && team%2+1==pawnside.getTeam()) {
-				res = iaL1SideM(game,pawn,pawnside,pawn.posX , pawn.posY-1,pawn.posX , pawn.posY+1);
-				
+			pawnside = game.getPawn(pawn.posX, pawn.posY - 1);
+			if (pawnside != null && team % 2 + 1 == pawnside.getTeam()) {
+				res = iaL1SideM(game, pawn, pawnside, pawn.posX, pawn.posY - 1,
+						pawn.posX, pawn.posY + 1);
+
 			}
-			if(res[2][0]>move[2][0]){
-				move=res;
+			if (res[2][0] > move[2][0]) {
+				move = res;
 			}
-			pawnside = game.getPawn(pawn.posX , pawn.posY+1);
-			if (pawnside != null && team%2+1==pawnside.getTeam()) {
-				 res = iaL1SideM(game,pawn,pawnside,pawn.posX , pawn.posY+1,pawn.posX , pawn.posY-1);
-				
+			pawnside = game.getPawn(pawn.posX, pawn.posY + 1);
+			if (pawnside != null && team % 2 + 1 == pawnside.getTeam()) {
+				res = iaL1SideM(game, pawn, pawnside, pawn.posX, pawn.posY + 1,
+						pawn.posX, pawn.posY - 1);
+
 			}
-			if(res[2][0]>move[2][0]){
-				move=res;
+			if (res[2][0] > move[2][0]) {
+				move = res;
 			}
 		}
-		
+
 		if (pawnSide.size() > 1) {
 			pawnSide.remove(0);
-			return iaL1Side(game,pawnSide,move);
+			return iaL1Side(game, pawnSide, move);
 		}
 		return move;
 	}
-	
+
 	/**
 	 * 
 	 * @param game
 	 * @param pawn
 	 * @param pawnside
-	 * @param x1 coord final si attack
-	 * @param y1 coord final si attack
-	 * @param x2 coord fianl si !attack
-	 * @param y2 coord final si !attack
+	 * @param x1
+	 *            coord final si attack
+	 * @param y1
+	 *            coord final si attack
+	 * @param x2
+	 *            coord fianl si !attack
+	 * @param y2
+	 *            coord final si !attack
 	 * @return
 	 */
-	private int[][] iaL1SideM(Game game,APawn pawn,APawn pawnside,int x1,int y1, int x2,int y2 ){
+	private int[][] iaL1SideM(Game game, APawn pawn, APawn pawnside, int x1,
+			int y1, int x2, int y2) {
 
 		if (pawnside.getKnow()) {
-				if (pawn.attack(pawnside)==1 && team%2+1==pawnside.getTeam()) {
-					int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 } ,{pawnside.getLevel()*4}};
-					return move;
-				} 
-				if (pawn.attack(pawnside)==2 && team%2+1==pawnside.getTeam()) {
-					if (game.getPawn(x2, y2) == null && x2 <= game.getLine() && x2 >=0 && y2 <= game.getRow() && y2 >=0&& team%2+1==pawnside.getTeam()) {
-						int[][] move = { { pawn.posX, pawn.posY }, { x2, y2 },{pawn.getLevel()*2} };
-						return move;
-					}
-					int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 } ,{-400}};
+			if (pawn.attack(pawnside) == 1
+					&& team % 2 + 1 == pawnside.getTeam()) {
+				int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 },
+						{ pawnside.getLevel() * 4 } };
+				return move;
+			}
+			if (pawn.attack(pawnside) == 2
+					&& team % 2 + 1 == pawnside.getTeam()) {
+				if (game.getPawn(x2, y2) == null && x2 <= game.getLine()
+						&& x2 >= 0 && y2 <= game.getRow() && y2 >= 0
+						&& team % 2 + 1 == pawnside.getTeam()) {
+					int[][] move = { { pawn.posX, pawn.posY }, { x2, y2 },
+							{ pawn.getLevel() * 2 } };
 					return move;
 				}
-				
+				int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 }, { -400 } };
+				return move;
 			}
-		else if(pawn.getLevel()==3){
-			if(!pawnside.getMoved()){
+
+		} else if (pawn.getLevel() == 3) {
+			if (!pawnside.getMoved()) {
 				int prob = probFlagBomb(game);
-				if(prob<10){
-					int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 } ,{20}};
+				if (prob < 10) {
+					int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 },
+							{ 20 } };
 					return move;
 				}
 			}
+		} else {
+			// si pion ennemi inconnu
+			int probLvl;
+			if (pawnside.getMoved()) { // si pion ennemi a
+										// bougï¿½
+				probLvl = probMoved(game);
+			} else { // si pion ennemi n as pas encore bougï¿½
+				probLvl = probUnmoved(game);
+				if (probFlagBomb(game) < 3
+						&& team % 2 + 1 == pawnside.getTeam()) {
+					int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 },
+							{ 20 } };
+					return move;
+				}
+			}
+			if (pawn.getLevel() > probLvl && team % 2 + 1 == pawnside.getTeam()) {
+				int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 }, { 15 } };
+				return move;
+			} else {
+				if (game.getPawn(x2, y2) == null && x2 <= game.getLine()
+						&& x2 >= 0 && y2 <= game.getRow() && y2 >= 0
+						&& team % 2 + 1 == pawnside.getTeam()) {
+					int[][] move = { { pawn.posX, pawn.posY }, { x2, y2 },
+							{ 15 } };
+					return move;
+				}
+
+			}
+
 		}
-		else {
-				// si pion ennemi inconnu
-				int probLvl;
-				if (pawnside.getMoved()) { // si pion ennemi a
-											// bougé
-					probLvl = probMoved(game);
-				} else { // si pion ennemi n as pas encore bougé
-					probLvl = probUnmoved(game);
-					if(probFlagBomb(game)<3 && team%2+1==pawnside.getTeam()){
-						int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 },{20} };
-						return move;
-					}
-				}
-				if (pawn.getLevel() > probLvl &&team%2+1==pawnside.getTeam()) {
-					int[][] move = { { pawn.posX, pawn.posY }, { x1, y1 } ,{15}};
-					return move;
-				} else {
-					if (game.getPawn(x2, y2) == null && x2 <= game.getLine() && x2 >=0 && y2 <= game.getRow() && y2 >=0&& team%2+1==pawnside.getTeam()) {
-						int[][] move = { { pawn.posX, pawn.posY }, { x2, y2 },{15} };
-						return move;
-					}
-
-				}
-
-			}
-		int[][] moveNull = { { -1, -1 }, { -1, -1 } ,{-15}};
+		int[][] moveNull = { { -1, -1 }, { -1, -1 }, { -15 } };
 		return moveNull;
-		
+
 	}
-	
+
 	private int probFlagBomb(Game game) {
-		int nbpawn=0;
+		int nbpawn = 0;
 		for (int i = 0; i <= game.getLine(); i++) {
 			for (int j = 0; j <= game.getRow(); j++) {
 				APawn pawn = game.getPawn(i, j);
-				if(pawn!=null){
-					if(pawn.getTeam()==(team % 2) + 1 && !pawn.getKnow() && !pawn.getMoved()){
+				if (pawn != null) {
+					if (pawn.getTeam() == (team % 2) + 1 && !pawn.getKnow()
+							&& !pawn.getMoved()) {
 						nbpawn++;
 					}
 				}
 			}
-			}
+		}
 		return nbpawn;
 	}
-	
 
 	private Vector<APawn> getSidedPawn(Game game) {
-		Vector<APawn> pawnSide= new Vector<APawn>();
+		Vector<APawn> pawnSide = new Vector<APawn>();
 		for (int i = 0; i <= game.getLine(); i++) {
 			for (int j = 0; j <= game.getRow(); j++) {
 				boolean added = false;
@@ -332,17 +364,17 @@ public class IA {
 			for (int j = 0; j <= game.getRow(); j++) {
 				APawn pawn = game.getPawn(i, j);
 				if (pawn != null) {
-					if (pawn.getTeam() == (team % 2) + 1 && !pawn.getKnow() && pawn.getLevel() != -6) {
+					if (pawn.getTeam() == (team % 2) + 1 && !pawn.getKnow()
+							&& pawn.getLevel() != -6) {
 						allLvl += pawn.getLevel();
 						count++;
 					}
 				}
 			}
 		}
-		if(count!=0){
-		return allLvl / count;
-		}
-		else{
+		if (count != 0) {
+			return allLvl / count;
+		} else {
 			return 0;
 		}
 	}
@@ -369,12 +401,11 @@ public class IA {
 			}
 		}
 
-		if(count!=0){
+		if (count != 0) {
 			return allLvl / count;
-			}
-			else{
-				return 0;
-			}
+		} else {
+			return 0;
+		}
 	}
 
 	private boolean isPawnSide(APawn pawnside) {
@@ -389,7 +420,8 @@ public class IA {
 	public static String[] getListLvl() {
 		return listLvl;
 	}
-	public static int getIntLvl(String lvl){
+
+	public static int getIntLvl(String lvl) {
 		for (int i = 0; i < listLvl.length; i++) {
 			if (lvl == listLvl[i]) {
 				return i;
@@ -401,23 +433,38 @@ public class IA {
 }
 
 /*
- * si c est eclaireur, il attaque que si le pion n est pas connu, ia differente pour eclaireur
+ * si c est eclaireur, il attaque que si le pion n est pas connu, ia differente
+ * pour eclaireur
  * 
- * si c est espion, n attaque que si c est le marechal connu A VOIR si demineur va chercher bombe plus proche connue mettre valeur sur les pions qui ont bouge comme ca on sait que c est pas une bombe mettre valeur sur le pion pour savoir ssi il est connu ou pas
+ * si c est espion, n attaque que si c est le marechal connu A VOIR si demineur
+ * va chercher bombe plus proche connue mettre valeur sur les pions qui ont
+ * bouge comme ca on sait que c est pas une bombe mettre valeur sur le pion pour
+ * savoir ssi il est connu ou pas
  * 
- * pour tous(sauf eclaireur):attaque que si il connait la valeur de l autre pion et <= a lui n attaque jamais un pion qui n as pas bouge (sauf demineur) quand il trouve un pion avec 1/4 que cela soit un flag il l attaque
+ * pour tous(sauf eclaireur):attaque que si il connait la valeur de l autre pion
+ * et <= a lui n attaque jamais un pion qui n as pas bouge (sauf demineur) quand
+ * il trouve un pion avec 1/4 que cela soit un flag il l attaque
  * 
  * 1 verifier si un de ses pions et colle a un pion adverse
  * 
- * si oui si plusieurs random prendre 1 pion bool = mouvement() du pion si true: attaque si false: recule else si non bouge un pion random
+ * si oui si plusieurs random prendre 1 pion bool = mouvement() du pion si true:
+ * attaque si false: recule else si non bouge un pion random
  * 
  * 
  * 
- * doitonattaquer(): si eclaireur mouvement de taille random si pion inconnu ou spy return true si pion connu: return false else si victime connu: si attaquant perds return false si attaquant gagne ou egalite attaque return true else si victime a bouge calcul proba que la victime soit le flag calcul
- * proba du niveau de la victime si proba flag <=4 attaque else si selon proba attaquant gagne attaque else return false
+ * doitonattaquer(): si eclaireur mouvement de taille random si pion inconnu ou
+ * spy return true si pion connu: return false else si victime connu: si
+ * attaquant perds return false si attaquant gagne ou egalite attaque return
+ * true else si victime a bouge calcul proba que la victime soit le flag calcul
+ * proba du niveau de la victime si proba flag <=4 attaque else si selon proba
+ * attaquant gagne attaque else return false
  * 
  * 
- * proba flag: return compte les pions qui non pas bouge - les bombes connu/detruite
+ * proba flag: return compte les pions qui non pas bouge - les bombes
+ * connu/detruite
  * 
- * proba(bool abouge: parcours tableau si pion team adverse et pion inconnu et abouge: si pion !=bombe et pion != flag nbrpion++ sommelevel+=leveldupion else si pion teamadverse et pion inconnu si pion !=flag nbrpion++ sommelevel+=levelpion return sommelevel/nbrpion
+ * proba(bool abouge: parcours tableau si pion team adverse et pion inconnu et
+ * abouge: si pion !=bombe et pion != flag nbrpion++ sommelevel+=leveldupion
+ * else si pion teamadverse et pion inconnu si pion !=flag nbrpion++
+ * sommelevel+=levelpion return sommelevel/nbrpion
  */

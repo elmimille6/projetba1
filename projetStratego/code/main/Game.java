@@ -21,31 +21,32 @@ import util.Dic;
 public class Game implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8927958880942845647L;
-	private APawn[][] grid=new APawn[10][10];
-	private int row=10, line=10;
-	public int view = 1, turn = 1, player = 2, nbPawn = 40;
+	private APawn[][] grid = new APawn[10][10];
+	private int row = 10, line = 10;
+	private int view = 1, turn = 1, player = 2, nbPawn = 40;
 	public String level;
-	public Dic startTeam;
-	public int[] lastMove = { -1, -1, -1 };
-	public APawn Flag = new Flag(1), Bomb = new Bomb(1);
-	public int nbPawns = 40, complete = 0;
+	private Dic startTeam;
+	private int[] lastMove = { -1, -1, -1 };
+	// private APawn Flag = new Flag(1), Bomb = new Bomb(1);
+	private int nbPawns = 40, complete = 0;
 	private int initGridGame = 0;
 
 	/**
 	 * Main constructor of the class.
 	 */
 	public Game() {
-		
+
 	}
 
 	/**
+	 * Constructor of the grid.
 	 * 
-	 * @param ngrid
+	 * @param grid
 	 */
-	public Game(APawn[][] ngrid) {
-		grid = ngrid;
-		row = grid[0].length;
-		line = grid.length;
+	public Game(APawn[][] grid) {
+		this.grid = grid;
+		row = this.grid[0].length;
+		line = this.grid.length;
 	}
 
 	/**
@@ -124,7 +125,7 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
-	 * Displays the grid.
+	 * Displays the grid in the terminal.
 	 */
 	public void showGrid() {
 		for (int i = 0; i < grid.length; i++) {
@@ -151,25 +152,25 @@ public class Game implements java.io.Serializable {
 	 *            1 in the bottom of the grid,<br/>
 	 *            2 on the top of the grid.
 	 */
-	public void placeTeam(APawn[][] tgrid, int side) {
+	public void placeTeam(APawn[][] grid, int side) {
 
 		if (side == 1) {
-			for (int i = 0; i < tgrid.length; i++) {
-				for (int j = 0; j < tgrid[0].length; j++) {
-					// grid[6+i][0+j]=tgrid[i][j];
-					tgrid[i][j].setTeam(1);
-					this.set(6 + i, 0 + j, tgrid[i][j]);
-					
+			for (int i = 0; i < grid.length; i++) {
+				for (int j = 0; j < grid[0].length; j++) {
+					// grid[6+i][0+j]=grid[i][j];
+					grid[i][j].setTeam(1);
+					this.set(6 + i, 0 + j, grid[i][j]);
+
 				}
 			}
 		}
 		if (side == 2) {
-			for (int i = 0; i < tgrid.length; i++) {
-				for (int j = 0; j < tgrid[0].length; j++) {
-					// grid[3-i][9-j]=tgrid[i][j];
-					// tgrid[i][j].setPos(3-i, 9-j);
-					tgrid[i][j].setTeam(2);
-					this.set(3 - i, 9 - j, tgrid[i][j]);
+			for (int i = 0; i < grid.length; i++) {
+				for (int j = 0; j < grid[0].length; j++) {
+					// grid[3-i][9-j]=grid[i][j];
+					// grid[i][j].setPos(3-i, 9-j);
+					grid[i][j].setTeam(2);
+					this.set(3 - i, 9 - j, grid[i][j]);
 				}
 			}
 		}
@@ -243,14 +244,14 @@ public class Game implements java.io.Serializable {
 		boolean canPlay = false;
 		boolean flag1 = false;
 		boolean flag2 = false;
-//		int winner = 0, test = 0;
-//		System.out.println("LINE  "+this.getLine());
-//		System.out.println("ROW  "+this.getRow());
+		// int winner = 0, test = 0;
+		// System.out.println("LINE  "+this.getLine());
+		// System.out.println("ROW  "+this.getRow());
 		for (int j = 0; j < this.getRow() + 1; j++) {
 			for (int i = 0; i < this.getLine() + 1; i++) {
 				if (this.getPawn(i, j) != null) {
 					APawn pawn = this.getPawn(i, j);
-//					System.out.println(pawn.getTeam()+"  "+pawn.getLevel());
+					// System.out.println(pawn.getTeam()+"  "+pawn.getLevel());
 					if (pawn.getTeam() == 1 && pawn.getLevel() == -6) {
 						flag1 = true;
 					}
@@ -271,7 +272,6 @@ public class Game implements java.io.Serializable {
 
 					}
 				}
-				
 
 			}
 
@@ -288,49 +288,49 @@ public class Game implements java.io.Serializable {
 		}
 		if (!canPlay) {
 			this.showGrid();
-			System.out.println("win canplay "+(turn % 2) + 1);
+			System.out.println("win canplay " + (turn % 2) + 1);
 			return (turn % 2) + 1;
 		}
 		return 0;
 	}
-				
-//				
-//				if (pawn != null) {
-//					if (pawn.getTeam() == 1) {
-//						test = this.canMove(1);
-//						if (test != 0) {
-//							canPlay = false;
-//							winner = test;
-//						} else if (pawn.getClass() == Flag.getClass()) {
-//							// System.out.println("Flag 1");
-//							flag1 = true;
-//						}
-//					} else if (pawn.getTeam() == 2) {
-//						test = this.canMove(1);
-//						if (test != 0) {
-//							canPlay = false;
-//							winner = test;
-//						} else if (pawn.getClass() == Flag.getClass()) {
-//							// System.out.println("Flag 2");
-//							flag2 = true;
-//						}
-//					}
-//				}
-//			}
-//		}
-//
-//		if (!canPlay) {
-//			// System.out.println("winner = " + winner);
-//			return winner;
-//		}
-//		if (!flag1) {
-//			return 2;
-//		}
-//		if (!flag2) {
-//			return 1;
-//		}
-//		return 0;
-//	}
+
+	//
+	// if (pawn != null) {
+	// if (pawn.getTeam() == 1) {
+	// test = this.canMove(1);
+	// if (test != 0) {
+	// canPlay = false;
+	// winner = test;
+	// } else if (pawn.getClass() == Flag.getClass()) {
+	// // System.out.println("Flag 1");
+	// flag1 = true;
+	// }
+	// } else if (pawn.getTeam() == 2) {
+	// test = this.canMove(1);
+	// if (test != 0) {
+	// canPlay = false;
+	// winner = test;
+	// } else if (pawn.getClass() == Flag.getClass()) {
+	// // System.out.println("Flag 2");
+	// flag2 = true;
+	// }
+	// }
+	// }
+	// }
+	// }
+	//
+	// if (!canPlay) {
+	// // System.out.println("winner = " + winner);
+	// return winner;
+	// }
+	// if (!flag1) {
+	// return 2;
+	// }
+	// if (!flag2) {
+	// return 1;
+	// }
+	// return 0;
+	// }
 
 	/**
 	 * Returns the team of the winner or 0 if the game isn't over.
@@ -405,7 +405,7 @@ public class Game implements java.io.Serializable {
 	 * @return Pawn at the given coordinates.
 	 */
 	public APawn getPawn(int i, int j) {
-		if(i>=0 && i<line && j>=0 && j<row){
+		if (i >= 0 && i < line && j >= 0 && j < row) {
 			return grid[i][j];
 		}
 		return null;
@@ -540,10 +540,18 @@ public class Game implements java.io.Serializable {
 		return complete;
 	}
 
+	/**
+	 * 
+	 * @param complete
+	 */
 	public void setComplete(int complete) {
 		this.complete = complete;
 	}
 
+	/**
+	 * 
+	 * @param pawn
+	 */
 	public void resetMove(APawn pawn) {
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
@@ -560,63 +568,97 @@ public class Game implements java.io.Serializable {
 
 	}
 
+	/**
+	 * Gets the level of the IA.
+	 * 
+	 * @return The level of the IA.
+	 */
 	public String getLevel() {
 		return level;
 	}
 
+	/**
+	 * Sets the level of the IA.
+	 * 
+	 * @param level
+	 *            The level:<br/>
+	 *            0 for the low IA,<br/>
+	 *            2 for the higher IA.
+	 */
 	public void setLevel(String level) {
 		this.level = level;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getInitGridGame() {
 		return initGridGame;
 	}
 
+	/**
+	 * 
+	 * @param initGridGame
+	 */
 	public void setInitGridGame(int initGridGame) {
-		this.initGridGame  = initGridGame;
+		this.initGridGame = initGridGame;
 	}
-	
-	public void showMoved(int te){
+
+	/**
+	 * 
+	 * @param te
+	 */
+	public void showMoved(int te) {
 		Vector<APawn> vect = new Vector<APawn>();
-		for(int i = 0; i<line;i++){
-			for(int j = 0;j <row;j++){
-				APawn pawn =grid[i][j]; 
-				if(pawn!=null){
-					 if(pawn.getTeam()!=0){
-						 if(te==0 && pawn.getMoved()){
-							 vect.addElement(pawn);
-						 }
-						 if(te==pawn.getTeam() && pawn.getMoved()){
-							 vect.addElement(pawn);
-						 }
-					 }
+		for (int i = 0; i < line; i++) {
+			for (int j = 0; j < row; j++) {
+				APawn pawn = grid[i][j];
+				if (pawn != null) {
+					if (pawn.getTeam() != 0) {
+						if (te == 0 && pawn.getMoved()) {
+							vect.addElement(pawn);
+						}
+						if (te == pawn.getTeam() && pawn.getMoved()) {
+							vect.addElement(pawn);
+						}
+					}
 				}
 			}
 		}
 		System.out.println(vect);
 	}
-	
-	public void showKnow(int te){
+
+	/**
+	 * 
+	 * @param te
+	 */
+	public void showKnow(int te) {
 		Vector<APawn> vect = new Vector<APawn>();
-		for(int i = 0; i<line;i++){
-			for(int j = 0;j <row;j++){
-				APawn pawn =grid[i][j]; 
-				if(pawn!=null){
-					 if(pawn.getTeam()!=0){
-						 if(te==0 && pawn.getKnow()){
-							 vect.addElement(pawn);
-						 }
-						 if(te==pawn.getTeam() && pawn.getKnow()){
-							 vect.addElement(pawn);
-						 }
-					 }
+		for (int i = 0; i < line; i++) {
+			for (int j = 0; j < row; j++) {
+				APawn pawn = grid[i][j];
+				if (pawn != null) {
+					if (pawn.getTeam() != 0) {
+						if (te == 0 && pawn.getKnow()) {
+							vect.addElement(pawn);
+						}
+						if (te == pawn.getTeam() && pawn.getKnow()) {
+							vect.addElement(pawn);
+						}
+					}
 				}
 			}
 		}
 		System.out.println(vect);
 	}
-	
-	public int getNextTeam(){
-		return ((turn+1)%2)+1;
+
+	/**
+	 * Gets the next team.
+	 * 
+	 * @return The next team (1 or 2).
+	 */
+	public int getNextTeam() {
+		return ((turn + 1) % 2) + 1;
 	}
 }

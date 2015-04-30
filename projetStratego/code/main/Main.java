@@ -36,7 +36,7 @@ public class Main {
 		nbrPlayer = menu.getNbrPlayer();
 		initGridGame = menu.getInitGridGame();
 		typeOfGame = menu.getTypeOfGame();
-		level=menu.lvl1;
+		level = menu.lvl1;
 		// if (typeOfGame == 40) {
 		// System.out.println("Stratego");
 		// game = new Game(10, 1);

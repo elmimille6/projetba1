@@ -46,7 +46,7 @@ public class WinManager extends JFrame {
 		this.setTitle("Gestionnaire de grille de depart ");
 		this.setSize(800, 400);
 		this.setLocationRelativeTo(null);
-//		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		if (load()) {
 			JPanel paneNorth = new JPanel();
@@ -59,7 +59,7 @@ public class WinManager extends JFrame {
 				combo.addItem(list.get(i));
 			}
 			combo.addActionListener(new ChoixCombo());
-			
+
 			JPanel paneNouv = new JPanel();
 			JLabel lab = new JLabel("Selectionnez une grille");
 			JLabel lab2 = new JLabel("ou creer une ");
@@ -86,26 +86,25 @@ public class WinManager extends JFrame {
 			this.add(panelCenter, BorderLayout.CENTER);
 			this.add(paneSouth, BorderLayout.SOUTH);
 			this.validate();
-		} 
-		else {
-			WindowInitPawn fen=new WindowInitPawn(new Game(10, 4, 0), 2);
+		} else {
+			WindowInitPawn fen = new WindowInitPawn(new Game(10, 4, 0), 2);
 			close();
 		}
-//		this.addFocusListener(new FocusListener() {
-//	        // Arrivée du focus       
-//	       	public void focusGained(FocusEvent e) {
-//	       		upCombo();
-//	       		System.out.println("focus");
-//	       	}
-//
-//			@Override
-//			public void focusLost(FocusEvent arg0) {
-//				System.out.println("lost focus");
-//			}
-//		});
+		// this.addFocusListener(new FocusListener() {
+		// // Arrivï¿½e du focus
+		// public void focusGained(FocusEvent e) {
+		// upCombo();
+		// System.out.println("focus");
+		// }
+		//
+		// @Override
+		// public void focusLost(FocusEvent arg0) {
+		// System.out.println("lost focus");
+		// }
+		// });
 	}
 
-	public void upCombo(){
+	public void upCombo() {
 		load();
 		combo.removeAllItems();
 		for (int i = 0; i < list.size(); i++) {
@@ -113,9 +112,9 @@ public class WinManager extends JFrame {
 		}
 		combo.repaint();
 		this.repaint();
-		
+
 	}
-	
+
 	public boolean load() {
 		ObjectInputStream in;
 		try {
@@ -124,7 +123,7 @@ public class WinManager extends JFrame {
 			Vector<GridStart> vector = (Vector<GridStart>) in.readObject();
 			this.list = vector;
 			in.close();
-			if(vector.size()==0){
+			if (vector.size() == 0) {
 				return false;
 			}
 			return true;
@@ -152,11 +151,11 @@ public class WinManager extends JFrame {
 
 	class ChoixCombo implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if(combo.getItemCount()!=0){
-			focus = (GridStart) combo.getSelectedItem();
-			System.out.println(focus + " focus");
-			panelCenter.setGrid(focus.getGrid());
-			panelCenter.repaint();
+			if (combo.getItemCount() != 0) {
+				focus = (GridStart) combo.getSelectedItem();
+				System.out.println(focus + " focus");
+				panelCenter.setGrid(focus.getGrid());
+				panelCenter.repaint();
 			}
 		}
 	}

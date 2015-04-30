@@ -39,7 +39,7 @@ public class WindowInitPawn extends WindowGame {
 		} else if (toInit == 1) { // Modif
 			if (game.getComplete() == 1) {
 				int lvl = IA.getIntLvl(game.getLevel());
-				game.placeTeam(new GridIA(2,lvl).getGrid(), 2);
+				game.placeTeam(new GridIA(2, lvl).getGrid(), 2);
 				new WindowGame(game);
 			} else if (game.getComplete() != 1) {
 				new InitWindow();
@@ -51,8 +51,8 @@ public class WindowInitPawn extends WindowGame {
 				// AUTOMATICAL
 				// TODO// Stratego normal or duel
 				int lvl = IA.getIntLvl(game.getLevel());
-				game.placeTeam(new GridIA(1,1).getGrid(), 1);
-				game.placeTeam(new GridIA(2,lvl).getGrid(), 2);
+				game.placeTeam(new GridIA(1, 1).getGrid(), 1);
+				game.placeTeam(new GridIA(2, lvl).getGrid(), 2);
 				new WindowGame(game);
 			} else if (game.getComplete() == 1) {
 				if (game.getInitGridGame() == 2) { // 1 player (BLUE)

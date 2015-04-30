@@ -53,29 +53,29 @@ public class InitWindow extends WindowInitPawn {
 	public APawn currentPawn, pawnShow;
 	public JOptionPane jop1, jop2;
 	public String link, nom;
-	
-	public Client client;
-	public boolean online=false,send=false;
-	public int Oplayer=0;
 
-	public InitWindow(Client client, int Oplayer){
+	public Client client;
+	public boolean online = false, send = false;
+	public int Oplayer = 0;
+
+	public InitWindow(Client client, int Oplayer) {
 		this.client = client;
-		this.online=true;
-		this.Oplayer=Oplayer;
+		this.online = true;
+		this.Oplayer = Oplayer;
 		init();
 	}
-	
+
 	public InitWindow() {
 		init();
 	}
 
-	public void init(){
+	public void init() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle("Initialisation de la grille");
 		this.setSize(1024, 650);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
-//		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		initialize();
 
 		xSize = ((int) this.getWidth());
@@ -166,10 +166,11 @@ public class InitWindow extends WindowInitPawn {
 						send = true;
 						System.out.println("sended");
 						client.addListener(new Listener() {
-							public void received(Connection connection, Object object) {
-								if(send=true){
-									if(object instanceof Game){
-										new WindowGame(game,client,Oplayer);
+							public void received(Connection connection,
+									Object object) {
+								if (send = true) {
+									if (object instanceof Game) {
+										new WindowGame(game, client, Oplayer);
 									}
 								}
 							}
@@ -221,7 +222,7 @@ public class InitWindow extends WindowInitPawn {
 			deletePawnOfGrid();
 		}
 	}
-	
+
 	/**
 	 * Verifies if the grid is complete and if the player can move at least one
 	 * pawn.

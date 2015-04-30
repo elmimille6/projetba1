@@ -24,23 +24,22 @@ public class GridIA {
 	 *            The team of the IA.
 	 */
 	public GridIA(int team) {
-		eval(team,17000);
+		eval(team, 17000);
 	}
-	
-	public GridIA(APawn[][] tab){
-		this.grid=tab;
+
+	public GridIA(APawn[][] tab) {
+		this.grid = tab;
 	}
-	
-	public GridIA(int team, int lvl){
-		if(lvl==1){
-			eval(team,17000);
+
+	public GridIA(int team, int lvl) {
+		if (lvl == 1) {
+			eval(team, 17000);
+		} else if (lvl == 0) {
+			eval(team, 10000);
 		}
-		else if (lvl==0){
-			eval(team,10000);
-		}
 	}
-	
-	public void eval(int team,int valeur){
+
+	public void eval(int team, int valeur) {
 		int i = 0;
 		while (val < valeur) {
 			APawn[][] gridEval = createGrid(team);
@@ -52,7 +51,7 @@ public class GridIA {
 			i++;
 		}
 	}
-	
+
 	public APawn getPawn(int i, int j) {
 		return grid[i][j];
 	}
@@ -81,9 +80,9 @@ public class GridIA {
 	public static APawn[][] createGrid(int team) {
 		APawn[][] grid = new APawn[4][10];
 		Vector<APawn> listPawn = APawn.createTeam(0, team, 40); // 40 if 40
-																	// pawns,
-																	// 10 if
-																	// duel
+																// pawns,
+																// 10 if
+																// duel
 		while (!listPawn.isEmpty()) {
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 10; j++) {

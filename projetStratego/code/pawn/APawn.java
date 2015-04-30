@@ -21,7 +21,7 @@ public abstract class APawn implements java.io.Serializable {
 	public int posX;
 	public int posY;
 	protected String URI;
-	public boolean show = false, isEmpty = false, know = false, moved = false,
+	private boolean show = false, /*isEmpty = false,*/ know = false, moved = false,
 			selected = false;
 	protected Vector<int[]> place = new Vector<int[]>();
 

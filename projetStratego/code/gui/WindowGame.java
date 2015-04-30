@@ -51,20 +51,20 @@ public class WindowGame extends JFrame {
 	 * 
 	 */
 	public WindowGame() {
-		
+
 	}
-	
-	public WindowGame(Game ngame, Client client,int Oplayer){
+
+	public WindowGame(Game ngame, Client client, int Oplayer) {
 		this(ngame);
 		this.client = client;
-		this.Oplayer=Oplayer;
-		client.addListener(new Listener(){
-			public void received(Connection connection,Object object){
-				if(object instanceof Game){
-					game=(Game) object;
+		this.Oplayer = Oplayer;
+		client.addListener(new Listener() {
+			public void received(Connection connection, Object object) {
+				if (object instanceof Game) {
+					game = (Game) object;
 				}
-				}
-			});
+			}
+		});
 	}
 
 	/**
@@ -237,7 +237,7 @@ public class WindowGame extends JFrame {
 						}
 					}
 					att = false;
-					
+
 				}
 			}).start();
 		}
@@ -293,8 +293,8 @@ public class WindowGame extends JFrame {
 									} catch (InterruptedException e) {
 									}
 									int[][] next = ia.getNext(game);
-									APawn currentPawn = game.getPawn(next[0][0],
-											next[0][1]);
+									APawn currentPawn = game.getPawn(
+											next[0][0], next[0][1]);
 									if (game.getPawn(next[1][0], next[1][1]) != null) {
 										currentPawn.setShow(true);
 										repaint();
@@ -305,7 +305,8 @@ public class WindowGame extends JFrame {
 										currentPawn.setShow(false);
 										repaint();
 									}
-									currentPawn.move(game, next[1][0], next[1][1]);
+									currentPawn.move(game, next[1][0],
+											next[1][1]);
 									game.addTurn();
 									game.save();
 									repaint();
@@ -356,7 +357,7 @@ public class WindowGame extends JFrame {
 			}).start();
 		}
 
-		private void clickOnline(){
+		private void clickOnline() {
 			new Thread(new Runnable() {
 				@SuppressWarnings("static-access")
 				public void run() {
@@ -385,11 +386,9 @@ public class WindowGame extends JFrame {
 								repaint();
 								paneRed.upGame(game);
 								paneBlue.upGame(game);
-								
-								
+
 								client.sendTCP(game);
 
-								
 								int result = game.win();
 								// System.out
 								// .println("Result = " + result);
@@ -403,7 +402,7 @@ public class WindowGame extends JFrame {
 											+ resultName[result - 1]
 											+ " player wins !", "Result",
 											JOptionPane.INFORMATION_MESSAGE);
-								} 
+								}
 							}
 						}
 						if (pawn != null) {
@@ -433,7 +432,7 @@ public class WindowGame extends JFrame {
 				}
 			}).start();
 		}
-		
+
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub

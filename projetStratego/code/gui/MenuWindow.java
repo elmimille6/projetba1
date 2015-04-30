@@ -33,7 +33,7 @@ public class MenuWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menu1 = new JMenu("Fichier");
-	private JMenu menu2= new JMenu("En ligne");
+	private JMenu menu2 = new JMenu("En ligne");
 
 	private JMenuItem quit = new JMenuItem("Quitter");
 	private JMenuItem testia = new JMenuItem("Tester l'IA");
@@ -62,9 +62,9 @@ public class MenuWindow extends JFrame {
 
 	private JPanel container = new JPanel();
 
-	public int game = 1, nbrPlayer = 1, lvl2 = 0, test = 1,
-			modifGrid = 0, typeOfGame = 40;
-	public String lvl1="";
+	public int game = 1, nbrPlayer = 1, lvl2 = 0, test = 1, modifGrid = 0,
+			typeOfGame = 40;
+	public String lvl1 = "";
 
 	public int initGridGame = 0;
 
@@ -81,7 +81,7 @@ public class MenuWindow extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setTitle("Menu");
 		this.setContentPane(container);
-		
+
 		this.
 
 		quit.addActionListener(new ActionListener() {
@@ -112,9 +112,9 @@ public class MenuWindow extends JFrame {
 				}
 			}
 		});
-		
-		serveur.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+
+		serveur.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				new StratClient();
 			}
 		});
@@ -126,12 +126,11 @@ public class MenuWindow extends JFrame {
 		this.menu1.addSeparator();
 		this.menu1.add(quit);
 		this.menuBar.add(menu1);
-		
+
 		this.menu2.add(serveur);
 		this.menuBar.add(menu2);
 
 		this.setJMenuBar(menuBar);
-		
 
 		container.setBackground(Color.white);
 		container.setLayout(new GridLayout(5, 1));
@@ -170,8 +169,8 @@ public class MenuWindow extends JFrame {
 		JPanel panIA1 = new JPanel();
 		panIA1.add(labIa1);
 		panIA1.add(comboIa1);
-		String[] listLvl=IA.getListLvl();
-		for(int i=0;i<listLvl.length;i++){
+		String[] listLvl = IA.getListLvl();
+		for (int i = 0; i < listLvl.length; i++) {
 			comboIa1.addItem(listLvl[i]);
 		}
 		comboIa1.addActionListener(new ItemActionIa1());
@@ -266,7 +265,7 @@ public class MenuWindow extends JFrame {
 
 	class ItemActionIa1 implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			lvl1=(String) comboIa1.getSelectedItem();
+			lvl1 = (String) comboIa1.getSelectedItem();
 			tryEnable();
 		}
 	}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="0" hostname="MBPdeAlexandre.lan" name="tests.Tests" skipped="0" tests="3" time="0.02" timestamp="2015-04-30T15:00:52">
+  <properties>
+    <property name="ant.project.invoked-targets" value="test" />
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
+    <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries" />
+    <property name="java.vm.version" value="20.65-b04-466.1" />
+    <property name="awt.nativeDoubleBuffering" value="true" />
+    <property name="ant.library.dir" value="/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib" />
+    <property name="gopherProxySet" value="false" />
+    <property name="ant.version" value="Apache Ant(TM) version 1.9.2 compiled on July 8 2013" />
+    <property name="mrj.build" value="11M4716" />
+    <property name="ant.java.version" value="1.6" />
+    <property name="java.vm.vendor" value="Apple Inc." />
+    <property name="java.vendor.url" value="http://www.apple.com/" />
+    <property name="path.separator" value=":" />
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM" />
+    <property name="file.encoding.pkg" value="sun.io" />
+    <property name="user.country" value="FR" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
+    <property name="sun.os.patch.level" value="unknown" />
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
+    <property name="user.dir" value="/Users/alexandre/Documents/Programmation/projetba1/projetStratego" />
+    <property name="ant.file.type.ProjetBac1" value="file" />
+    <property name="java.runtime.version" value="1.6.0_65-b14-466.1-11M4716" />
+    <property name="java.awt.graphicsenv" value="apple.awt.CGraphicsEnvironment" />
+    <property name="basedir" value="/Users/alexandre/Documents/Programmation/projetba1/projetStratego" />
+    <property name="java.endorsed.dirs" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/endorsed" />
+    <property name="os.arch" value="x86_64" />
+    <property name="java.io.tmpdir" value="/var/folders/ls/p7vdt6d178vf6_18dhblvqn40000gn/T/" />
+    <property name="ant.core.lib" value="/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant.jar" />
+    <property name="line.separator" value="&#xa;" />
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc." />
+    <property name="os.name" value="Mac OS X" />
+    <property name="ant.home" value="/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502" />
+    <property name="ant.project.name" value="ProjetBac1" />
+    <property name="sun.jnu.encoding" value="MacRoman" />
+    <property name="java.library.path" value="/Users/alexandre/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.:/Users/alexandre/Desktop/eclipse/configuration/org.eclipse.osgi/336/0/.cp" />
+    <property name="java.class.version" value="50.0" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers" />
+    <property name="ant.file.ProjetBac1" value="/Users/alexandre/Documents/Programmation/projetba1/projetStratego/build.xml" />
+    <property name="os.version" value="10.10.3" />
+    <property name="ant.file" value="/Users/alexandre/Documents/Programmation/projetba1/projetStratego/build.xml" />
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+    <property name="user.home" value="/Users/alexandre" />
+    <property name="user.timezone" value="" />
+    <property name="java.awt.printerjob" value="apple.awt.CPrinterJob" />
+    <property name="java.specification.version" value="1.6" />
+    <property name="file.encoding" value="ISO-8859-1" />
+    <property name="user.name" value="alexandre" />
+    <property name="java.class.path" value="/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-antlr.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-apache-bcel.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-apache-bsf.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-apache-log4j.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-apache-oro.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-apache-regexp.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-apache-resolver.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-apache-xalan2.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-commons-logging.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-commons-net.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-jai.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-javamail.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-jdepend.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-jmf.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-jsch.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-junit.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-junit4.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-launcher.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-netrexx.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-swing.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant-testutil.jar:/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502/lib/ant.jar:/Users/alexandre/Desktop/eclipse/configuration/org.eclipse.osgi/56/0/.cp/lib/antdebug.jar:/Users/alexandre/Desktop/eclipse/configuration/org.eclipse.osgi/56/0/.cp/lib/remote.jar:/Users/alexandre/Desktop/eclipse/configuration/org.eclipse.osgi/57/0/.cp/lib/remoteAnt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_11.jdk/Contents/Home/lib/tools.jar:/Users/alexandre/Desktop/eclipse/plugins/org.eclipse.swt.cocoa.macosx.x86_64_3.103.1.v20140903-1947.jar" />
+    <property name="java.vm.specification.version" value="1.0" />
+    <property name="sun.java.command" value="org.eclipse.ant.internal.launching.remote.InternalAntRunner -Dorg.eclipse.ant.core.ANT_PROCESS_ID=1430406051890 -Declipse.connect.port=53840 -Dant.home=/Users/alexandre/Desktop/eclipse/plugins/org.apache.ant_1.9.2.v201404171502 -logger org.eclipse.ant.internal.launching.remote.logger.RemoteAntBuildLogger -inputhandler org.eclipse.ant.internal.ui.antsupport.inputhandler.ProxyInputHandler -buildfile /Users/alexandre/Documents/Programmation/projetba1/projetStratego/build.xml test" />
+    <property name="sun.arch.data.model" value="64" />
+    <property name="java.home" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home" />
+    <property name="java.specification.vendor" value="Sun Microsystems Inc." />
+    <property name="user.language" value="fr" />
+    <property name="awt.toolkit" value="apple.awt.CToolkit" />
+    <property name="java.vm.info" value="mixed mode" />
+    <property name="java.version" value="1.6.0_65" />
+    <property name="java.ext.dirs" value="/Library/Java/Extensions:/System/Library/Java/Extensions:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext" />
+    <property name="sun.boot.class.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jsfd.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar:/System/Library/Frameworks/JavaVM.framework/Frameworks/JavaRuntimeSupport.framework/Resources/Java/JavaRuntimeSupport.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/ui.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/laf.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/sunrsasign.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jsse.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jce.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/charsets.jar" />
+    <property name="java.vendor" value="Apple Inc." />
+    <property name="file.separator" value="/" />
+    <property name="java.vendor.url.bug" value="http://bugreport.apple.com/" />
+    <property name="sun.cpu.endian" value="little" />
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
+    <property name="mrj.version" value="1070.1.6.0_65-466.1" />
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16" />
+    <property name="sun.cpu.isalist" value="" />
+  </properties>
+  <testcase classname="tests.Tests" name="marshalVSpy" time="0.0010" />
+  <testcase classname="tests.Tests" name="minerVBomb" time="0.0010" />
+  <testcase classname="tests.Tests" name="spyVMarshal" time="0.0" />
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

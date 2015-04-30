@@ -43,7 +43,7 @@ public class Miner extends APawn {
 	/**
 	 * Returns the result of the fight between this pawn and the target.
 	 * 
-	 * @param tar
+	 * @param currentPawn
 	 *            The pawn who is targeted by this pawn.
 	 * 
 	 * @return 0 if it's a drawn <br/>
@@ -51,19 +51,19 @@ public class Miner extends APawn {
 	 *         2 if this pawn loose <br/>
 	 *         3 if tar is the flag.
 	 */
-	public int attack(APawn tar) {
-		if (tar.getLevel() == 12)
+	public int attack(APawn currentPawn) {
+		if (currentPawn.getLevel() == 12)
 			return 3;
-		if (tar instanceof Bomb) {
+		if (currentPawn instanceof Bomb) {
 			return 1;
 		}
-		if (tar.getLevel() == this.levelPawn) {
+		if (currentPawn.getLevel() == this.levelPawn) {
 			return 0;
 		}
-		if (tar.getLevel() < this.levelPawn) {
+		if (currentPawn.getLevel() < this.levelPawn) {
 			return 1;
 		}
-		if (tar.getLevel() > this.levelPawn) {
+		if (currentPawn.getLevel() > this.levelPawn) {
 			return 2;
 		}
 		return -1;

@@ -44,24 +44,24 @@ public class Spy extends APawn {
 	/**
 	 * Returns the result of the fight between this pawn and the target.
 	 * 
-	 * @param tar
+	 * @param currentPawn
 	 *            The pawn who is targeted by this pawn.
 	 * 
 	 * @return 0 if it's a drawn <br/>
 	 *         1 if this pawn win <br/>
 	 *         2 if this pawn loose.
 	 */
-	public int attack(APawn tar) {
-		if (tar instanceof Marshal) {
+	public int attack(APawn currentPawn) {
+		if (currentPawn instanceof Marshal) {
 			return 1;
 		}
-		if (tar.getLevel() == this.levelPawn) {
+		if (currentPawn.getLevel() == this.levelPawn) {
 			return 0;
 		}
-		if (tar.getLevel() < this.levelPawn) {
+		if (currentPawn.getLevel() < this.levelPawn) {
 			return 1;
 		}
-		if (tar.getLevel() > this.levelPawn) {
+		if (currentPawn.getLevel() > this.levelPawn) {
 			return 2;
 		}
 		return -1;

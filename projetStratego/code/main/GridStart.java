@@ -39,15 +39,15 @@ public class GridStart implements java.io.Serializable {
 		return name;
 	}
 
-	public void changeTeam(int team) {
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[0].length; j++) {
+	public void changeTeam(int team){
+		for(int i=0;i<grid.length;i++){
+			for(int j=0;j<grid[0].length;j++){
 				APawn pawn = grid[i][j];
 				pawn.setTeam(team);
 			}
 		}
 	}
-
+	
 	public void save() {
 		ObjectInputStream in;
 		Vector<GridStart> vector = new Vector<GridStart>();

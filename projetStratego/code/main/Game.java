@@ -278,7 +278,7 @@ public class Game implements java.io.Serializable {
 		}
 		if (!flag1) {
 			this.showGrid();
-			System.out.println("win falg 2");
+			System.out.println("win flag 2");
 			return 2;
 		}
 		if (!flag2) {

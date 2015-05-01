@@ -2,8 +2,8 @@ package tests;
 
 import main.*;
 import pawn.*;
-
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 /**
@@ -16,6 +16,8 @@ public class Tests {
 	private APawn spy = new Spy(), marshal = new Marshal(),
 			marshal2 = new Marshal(), miner = new Miner(), bomb = new Bomb();
 	private int win = 1, lost = 2, draw = 0;
+	private Game game = new Game(10, 1);
+	private GridIA grid1 = new GridIA(1), grid2 = new GridIA(2);
 
 	/**
 	 * This method tests if the spy wins against the marshal.
@@ -57,4 +59,44 @@ public class Tests {
 		assertTrue(draw == marshal.attack(marshal2));
 	}
 
+	/**
+	 * This method tests what happens when a team loses its flag.
+	 */
+	@Test
+	public void blueFlagLost() {
+		game.placeTeam(grid1.getGrid(), 1);
+		game.placeTeam(grid2.getGrid(), 2);
+		for (int i = 0; i < game.getLine(); i++) {
+			for (int j = 0; j < game.getRow(); j++) {
+				if ((game.getPawn(i, j) != null)
+						&& (game.getPawn(i, j).getTeam() == 2)
+						&& (game.getPawn(i, j).getLevel() == -6)) {
+					game.set(i, j, null);
+				}
+			}
+		}
+		assertTrue(1 == game.win()); // Red team wins.
+	}
+
+	/**
+	 * This method tests what happens when a team can't move.
+	 */
+	@Test
+	public void redBlocked() {
+		game.placeTeam(grid1.getGrid(), 1);
+		game.placeTeam(grid2.getGrid(), 2);
+		for (int i = 0; i <= game.getLine(); i++) {
+			for (int j = 0; j <= game.getRow(); j++) {
+				if (i > 5) {
+					game.set(i, j, null);
+				}
+				if (((i == 8) && (j == 9)) || ((i == 9) && (j == 8))) {
+					game.set(i, j, new Bomb(1));
+				} else if ((i == 9) && (j == 9)) {
+					game.set(i, j, new Flag(1));
+				}
+			}
+		}
+		assertTrue(2 == game.win()); // Blue team wins.
+	}
 }

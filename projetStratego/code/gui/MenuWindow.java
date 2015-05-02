@@ -38,7 +38,7 @@ public class MenuWindow extends JFrame {
 	private JMenuItem testia = new JMenuItem("Tester l'IA");
 	private JMenuItem startSave = new JMenuItem("Utiliser la sauvegarde");
 	private JMenuItem manager = new JMenuItem(
-			"Gestionnaire de grille de depart");
+			"Gestionnaire de grille de départ");
 	private JMenuItem serveur = new JMenuItem("via serveur");
 
 	// private JLabel labJeu = new JLabel("Jeu");
@@ -54,7 +54,7 @@ public class MenuWindow extends JFrame {
 	private JLabel labInit = new JLabel("Initialisation des pions");
 	private JComboBox comboInit = new JComboBox();
 
-	private JLabel labIa1 = new JLabel("Niveau de la premiere IA");
+	private JLabel labIa1 = new JLabel("Niveau de la première IA");
 	private JComboBox comboIa1 = new JComboBox();
 
 	private JButton goBtn = new JButton("Lancer la partie !");

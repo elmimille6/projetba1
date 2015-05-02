@@ -195,7 +195,7 @@ public class WindowGame extends JFrame {
 								jopWin = new JOptionPane();
 								jopWin.showMessageDialog(null, "Le joueur "
 										+ resultName[result - 1] + " gagne !",
-										"Resultat",
+										"Résultat",
 										JOptionPane.INFORMATION_MESSAGE);
 							} else {
 								game.setView(3);
@@ -206,7 +206,7 @@ public class WindowGame extends JFrame {
 										null,
 										"C'est votre tour, joueur "
 												+ resultName[((game.getTurn() + 1) % 2)]
-												+ " !", "Tour termine",
+												+ " !", "Tour terminé",
 										JOptionPane.INFORMATION_MESSAGE);
 								game.setView((((game.getTurn() + 1) % 2) + 1));
 								repaint();
@@ -284,7 +284,7 @@ public class WindowGame extends JFrame {
 									jopWin = new JOptionPane();
 									jopWin.showMessageDialog(null, "Le joueur "
 											+ resultName[result - 1]
-											+ " gagne !", "Resultat",
+											+ " gagne !", "Résultat",
 											JOptionPane.INFORMATION_MESSAGE);
 								} else {
 									try {
@@ -325,7 +325,7 @@ public class WindowGame extends JFrame {
 												"Le joueur "
 														+ resultName[result - 1]
 														+ " gagne !",
-												"Resultat",
+												"Résultat",
 												JOptionPane.INFORMATION_MESSAGE);
 									}
 								}
@@ -402,7 +402,7 @@ public class WindowGame extends JFrame {
 									jopWin = new JOptionPane();
 									jopWin.showMessageDialog(null, "Le joueur "
 											+ resultName[result - 1]
-											+ " gagne !", "Resultat",
+											+ " gagne !", "Résultat",
 											JOptionPane.INFORMATION_MESSAGE);
 								}
 							}

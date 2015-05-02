@@ -30,7 +30,7 @@ public class ProgressTestIa extends JFrame {
 		this.lvl2 = lvl2;
 
 		this.setSize(300, 80);
-		this.setTitle("test de l'ia en cours");
+		this.setTitle("Test de l'IA en cours...");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 
@@ -128,7 +128,7 @@ public class ProgressTestIa extends JFrame {
 			JOptionPane jop1 = new JOptionPane();
 			jop1.showMessageDialog(null, "Victoire de l'IA 1: " + lvl1 + ": "
 					+ win1 + " soit " + moy1 + " %\nVictoire de l'IA 2 : "
-					+ lvl2 + ": " + win2 + " soit " + moy2 + " %", "Resultat",
+					+ lvl2 + ": " + win2 + " soit " + moy2 + " %", "Résultat",
 					JOptionPane.INFORMATION_MESSAGE);
 			System.out.println("ia1= " + win1 + "  ia2= " + win2);
 			launch.setEnabled(true);

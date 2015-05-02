@@ -71,7 +71,7 @@ public class StratClient extends JFrame {
 			// JPanel panel = new JPanel();
 			// lab = new
 			// JLabel("Vous ï¿½tes le joueur 1, veuillez attendre votre adversaire");
-			lab.setText("Vous ï¿½tes le joueur 1, veuillez attendre votre adversaire");
+			lab.setText("Vous êtes le joueur 1, veuillez attendre votre adversaire");
 			lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
 			this.add(lab);
 			this.repaint();
@@ -81,7 +81,7 @@ public class StratClient extends JFrame {
 			// JPanel panel = new JPanel();
 			// lab = new
 			// JLabel("Partie en cours, veuillez ne pas fermer cette fenï¿½tre");
-			lab.setText("Partie en cours, veuillez ne pas fermer cette fenï¿½tre");
+			lab.setText("Partie en cours, veuillez ne pas fermer cette fenêtre");
 			lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
 			this.add(lab);
 			this.repaint();
@@ -107,7 +107,7 @@ public class StratClient extends JFrame {
 						JOptionPane
 								.showMessageDialog(
 										null,
-										"Connexion impossible, le serveur est plein, veuillez patienter",
+										"Connexion impossible, le serveur est plein, veuillez patienter.",
 										"Serveur plein",
 										JOptionPane.INFORMATION_MESSAGE);
 						close();
@@ -148,7 +148,7 @@ public class StratClient extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null,
-					"Connexion impossible, veuillez verifier l'adresse.",
+					"Connexion impossible, veuillez vérifier l'adresse.",
 					"Erreur", JOptionPane.ERROR_MESSAGE);
 			askIp();
 			connect();

@@ -41,7 +41,7 @@ public class WinManager extends JFrame {
 
 	public WinManager() {
 		this.setLayout(new BorderLayout());
-		this.setTitle("Gestionnaire de grille de depart ");
+		this.setTitle("Gestionnaire de grille de départ ");
 		this.setSize(800, 400);
 		this.setLocationRelativeTo(null);
 		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,8 +59,8 @@ public class WinManager extends JFrame {
 			combo.addActionListener(new ChoixCombo());
 
 			JPanel paneNouv = new JPanel();
-			JLabel lab = new JLabel("Selectionnez une grille");
-			JLabel lab2 = new JLabel("ou creez en une ");
+			JLabel lab = new JLabel("Sélectionnez une grille");
+			JLabel lab2 = new JLabel("ou créez en une ");
 			paneCombo.add(lab);
 			paneCombo.add(combo);
 			paneNorth.add(paneCombo);

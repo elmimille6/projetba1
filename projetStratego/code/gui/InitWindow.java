@@ -136,8 +136,8 @@ public class InitWindow extends WindowInitPawn {
 						ngrid.setName(nom);
 						ngrid.save();
 						JOptionPane.showMessageDialog(null,
-								"Votre grille est bien sauvegardee au nom de "
-										+ nom, "Grille sauvee",
+								"Votre grille est bien sauvegardée au nom de "
+										+ nom, "Grille sauvée",
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
@@ -238,7 +238,7 @@ public class InitWindow extends WindowInitPawn {
 					JOptionPane.WARNING_MESSAGE);
 		} else if (nbPawns != 10 && !canPlay()) {
 			JOptionPane.showMessageDialog(null,
-					"Assurez-vous que vous pouvez au moins deplacer un pion.",
+					"Assurez-vous que vous pouvez au moins déplacer un pion.",
 					"Attention", JOptionPane.WARNING_MESSAGE);
 		} else {
 			return true;

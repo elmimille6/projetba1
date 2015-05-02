@@ -71,9 +71,9 @@ public class PaneGamePawn extends JPanel {
 		// if (move)
 		JLabel lTeam;
 		if (side == 1) {
-			lTeam = new JLabel("  Equipe rouge");
+			lTeam = new JLabel("  Équipe rouge");
 		} else {
-			lTeam = new JLabel("  Equipe bleue");
+			lTeam = new JLabel("  Équipe bleue");
 		}
 		this.add(lTeam);
 		for (int i = 0; i < startTeam.getSize(); i++) {

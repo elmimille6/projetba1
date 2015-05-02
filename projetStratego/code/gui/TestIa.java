@@ -47,7 +47,7 @@ public class TestIa extends JFrame {
 		nbr.setMinorTickSpacing(10);
 		nbr.setMajorTickSpacing(20);
 
-		lab1 = new JLabel("Nombre de tests ï¿½ effectuer: " + nbr.getValue());
+		lab1 = new JLabel("Nombre de tests à effectuer: " + nbr.getValue());
 		panel1.add(lab1);
 		panel1.add(nbr);
 		this.add(panel1);
@@ -73,7 +73,7 @@ public class TestIa extends JFrame {
 
 		nbr.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
-				lab1.setText("Nombre de tests ï¿½ effectuer: "
+				lab1.setText("Nombre de tests à effectuer: "
 						+ ((JSlider) event.getSource()).getValue());
 			}
 		});

@@ -94,7 +94,7 @@ public class IA {
 		if (team == ((game.getTurn() + 1) % 2) + 1) {
 			Vector<APawn> pawnSide = getSidedPawn(game);
 			System.out.println(pawnSide.toString());
-			if (pawnSide.size() != 0) { // verifie tout les pions qui sont collï¿½
+			if (pawnSide.size() != 0) { // verifie tout les pions qui sont collés
 										// a un ennemi
 				int[][] move = { { -1, -1 }, { -1, -1 }, { 0 } };
 				int[][] res = iaL1Side(game, pawnSide, move);
@@ -105,7 +105,7 @@ public class IA {
 				}
 			}
 
-			// TODO quand aucun pion n est collï¿½
+			// TODO quand aucun pion n est collés
 		}
 		System.out
 				.println("pas de mouvement interessant, passage en aleatoire");
@@ -267,9 +267,9 @@ public class IA {
 			// si pion ennemi inconnu
 			int probLvl;
 			if (pawnside.getMoved()) { // si pion ennemi a
-										// bougï¿½
+										// bougé
 				probLvl = probMoved(game);
-			} else { // si pion ennemi n as pas encore bougï¿½
+			} else { // si pion ennemi n as pas encore bougé
 				probLvl = probUnmoved(game);
 				if (probFlagBomb(game) < 3
 						&& team % 2 + 1 == pawnside.getTeam()) {
@@ -352,7 +352,7 @@ public class IA {
 	}
 
 	/**
-	 * calculate the probablity level of the pawn for unmoved pawn
+	 * Calculates the probability level of the pawn for unmoved pawn
 	 * 
 	 * @param game
 	 * @return
@@ -379,7 +379,7 @@ public class IA {
 	}
 
 	/**
-	 * calculate the probablity level of the pawn for moved pawn
+	 * Calculates the probability level of the pawn for moved pawn
 	 * 
 	 * @param game
 	 * @return

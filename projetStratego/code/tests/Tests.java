@@ -7,9 +7,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * 
- * @author alexandre
+ * This is the test class of this project. <br/>
+ * It tests the moves and the battles of
+ * the pawns, and the victory conditions.
  *
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Tests {
 
@@ -20,7 +22,7 @@ public class Tests {
 	private Game game = new Game(10, 1);;
 	private GridIA grid1 = new GridIA(1), grid2 = new GridIA(2);
 
-	// Battles
+	// Battles between two pawns.
 
 	/**
 	 * This method tests if the spy wins against the marshal.
@@ -70,7 +72,7 @@ public class Tests {
 		assertTrue(win == major.attack(lieutenant));
 	}
 
-	// Victory
+	// Victory.
 
 	/**
 	 * This method tests what happens when a team loses its flag.
@@ -113,7 +115,7 @@ public class Tests {
 		assertTrue(2 == game.win()); // Blue team wins.
 	}
 
-	// Moves
+	// Moves.
 
 	/**
 	 * This method tests what happens when a pawn moves more than 5 times
@@ -140,7 +142,7 @@ public class Tests {
 
 		assertFalse(marshal.movePoss(game, 7, 5)); // marshal can't move.
 	}
-	
+
 	public void initMovesMajor() {
 		game.placeTeam(grid1.getGrid(), 1);
 		game.placeTeam(grid2.getGrid(), 2);

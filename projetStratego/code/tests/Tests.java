@@ -13,17 +13,20 @@ import org.junit.Test;
  */
 public class Tests {
 
-	private APawn spy = new Spy(), marshal = new Marshal(),
-			marshal2 = new Marshal(), miner = new Miner(), bomb = new Bomb();
+	private APawn bomb = new Bomb(), lieutenant = new Lieutenant(),
+			major = new Major(), marshal = new Marshal(),
+			marshal2 = new Marshal(), miner = new Miner(), spy = new Spy();
 	private int win = 1, lost = 2, draw = 0;
 	private Game game = new Game(10, 1);;
 	private GridIA grid1 = new GridIA(1), grid2 = new GridIA(2);
+
+	// Battles
 
 	/**
 	 * This method tests if the spy wins against the marshal.
 	 */
 	@Test
-	public void spyVMarshal() {
+	public void spyVsMarshal() {
 		assertTrue(win == spy.attack(marshal));
 	}
 
@@ -31,7 +34,7 @@ public class Tests {
 	 * This method tests if the marshal wins against the spy.
 	 */
 	@Test
-	public void marshalVSpy() {
+	public void marshalVsSpy() {
 		assertTrue(win == marshal.attack(spy));
 	}
 
@@ -39,7 +42,7 @@ public class Tests {
 	 * This method tests if the miner clears of mines.
 	 */
 	@Test
-	public void minerVBomb() {
+	public void minerVsBomb() {
 		assertTrue(win == miner.attack(bomb));
 	}
 
@@ -47,7 +50,7 @@ public class Tests {
 	 * This method tests if the marshal blows up against mines.
 	 */
 	@Test
-	public void marshalVBomb() {
+	public void marshalVsBomb() {
 		assertTrue(lost == marshal.attack(bomb));
 	}
 
@@ -55,9 +58,19 @@ public class Tests {
 	 * This method tests if two marshals are on par.
 	 */
 	@Test
-	public void marshalVMarshal() {
+	public void marshalVsMarshal() {
 		assertTrue(draw == marshal.attack(marshal2));
 	}
+
+	/**
+	 * This method tests if the major wins against the lieutenant.
+	 */
+	@Test
+	public void majorVsLieutenant() {
+		assertTrue(win == major.attack(lieutenant));
+	}
+
+	// Victory
 
 	/**
 	 * This method tests what happens when a team loses its flag.
@@ -100,6 +113,8 @@ public class Tests {
 		assertTrue(2 == game.win()); // Blue team wins.
 	}
 
+	// Moves
+
 	/**
 	 * This method tests what happens when a pawn moves more than 5 times
 	 * between two squares.
@@ -124,5 +139,40 @@ public class Tests {
 		}
 
 		assertFalse(marshal.movePoss(game, 7, 5)); // marshal can't move.
+	}
+	
+	public void initMovesMajor() {
+		game.placeTeam(grid1.getGrid(), 1);
+		game.placeTeam(grid2.getGrid(), 2);
+		for (int i = 0; i <= game.getLine(); i++) {
+			for (int j = 0; j <= game.getRow(); j++) {
+				if (i > 5) {
+					game.set(i, j, null);
+				}
+				if ((i == 7) && (j == 5)) {
+					game.set(i, j, major);
+				}
+			}
+		}
+	}
+
+	/**
+	 * This method tests what happens when a pawn moves more than 5 times
+	 * between two squares.
+	 */
+	@Test
+	public void threeMovesMajor() {
+		initMovesMajor();
+		assertFalse(major.movePoss(game, 7, 8)); // marshal can't do it.
+	}
+
+	/**
+	 * This method tests what happens when a pawn moves more than 5 times
+	 * between two squares.
+	 */
+	@Test
+	public void oneMoveMajor() {
+		initMovesMajor();
+		assertTrue(major.movePoss(game, 7, 6)); // marshal can do it.
 	}
 }

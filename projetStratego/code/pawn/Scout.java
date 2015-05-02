@@ -54,7 +54,7 @@ public class Scout extends APawn {
 	 * @param y
 	 *            The ordinate of the object.
 	 * 
-	 * @return The grid after the move.
+	 * @return true if the move is possible, false otherwise.
 	 */
 	public boolean movePoss(Game grid, int x, int y) {
 
@@ -97,7 +97,7 @@ public class Scout extends APawn {
 			// System.out.println("5");
 			return false;
 		} else if (y - this.posY == 0 && x - this.posX == 0) { // test if the
-																// pawn isnt
+																// pawn isn't
 																// already on
 																// the target
 			// System.out.println("6");

@@ -16,7 +16,7 @@ public class Tests {
 	private APawn spy = new Spy(), marshal = new Marshal(),
 			marshal2 = new Marshal(), miner = new Miner(), bomb = new Bomb();
 	private int win = 1, lost = 2, draw = 0;
-	private Game game = new Game(10, 1);
+	private Game game = new Game(10, 1);;
 	private GridIA grid1 = new GridIA(1), grid2 = new GridIA(2);
 
 	/**
@@ -66,8 +66,8 @@ public class Tests {
 	public void blueFlagLost() {
 		game.placeTeam(grid1.getGrid(), 1);
 		game.placeTeam(grid2.getGrid(), 2);
-		for (int i = 0; i < game.getLine(); i++) {
-			for (int j = 0; j < game.getRow(); j++) {
+		for (int i = 0; i <= game.getLine(); i++) {
+			for (int j = 0; j <= game.getRow(); j++) {
 				if ((game.getPawn(i, j) != null)
 						&& (game.getPawn(i, j).getTeam() == 2)
 						&& (game.getPawn(i, j).getLevel() == -6)) {
@@ -98,5 +98,31 @@ public class Tests {
 			}
 		}
 		assertTrue(2 == game.win()); // Blue team wins.
+	}
+
+	/**
+	 * This method tests what happens when a pawn moves more than 5 times
+	 * between two squares.
+	 */
+	@Test
+	public void sixMovement() {
+		game.placeTeam(grid1.getGrid(), 1);
+		game.placeTeam(grid2.getGrid(), 2);
+		for (int i = 0; i <= game.getLine(); i++) {
+			for (int j = 0; j <= game.getRow(); j++) {
+				if (i > 5) {
+					game.set(i, j, null);
+				}
+				if ((i == 7) && (j == 5)) {
+					game.set(i, j, marshal);
+				}
+			}
+		}
+
+		for (int k = 0; k < 5; k++) { // Moves 5 times the pawn.
+			marshal.move(game, (6 + (k % 2)), 5);
+		}
+
+		assertFalse(marshal.movePoss(game, 7, 5)); // marshal can't move.
 	}
 }

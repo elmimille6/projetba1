@@ -21,8 +21,8 @@ public abstract class APawn implements java.io.Serializable {
 	public int posX;
 	public int posY;
 	protected String URI;
-	private boolean show = false, /*isEmpty = false,*/ know = false, moved = false,
-			selected = false;
+	private boolean show = false, /* isEmpty = false, */know = false,
+			moved = false, selected = false;
 	protected Vector<int[]> place = new Vector<int[]>();
 
 	/**
@@ -276,7 +276,7 @@ public abstract class APawn implements java.io.Serializable {
 	 * @param y
 	 *            The ordinate of the object.
 	 * 
-	 * @return true or false
+	 * @return true if the move is possible, false otherwise.
 	 */
 	public boolean movePoss(Game grid, int x, int y) {
 
@@ -402,8 +402,9 @@ public abstract class APawn implements java.io.Serializable {
 			grid.set(this.posX, this.posY, null);// delete the old coordinates
 													// of the pawn
 			grid.set(x, y, this);// set the new coordinates of the pawn
-		} else if (res == 2)// the pawn who attack loose
+		} else if (res == 2) {// the pawn who attack loose
 			grid.set(this.posX, this.posY, null);// delete the pawn who attack
+		}
 		grid.resetMove(this);
 		return grid;
 	}

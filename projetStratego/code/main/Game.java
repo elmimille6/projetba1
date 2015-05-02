@@ -277,18 +277,18 @@ public class Game implements java.io.Serializable {
 
 		}
 		if (!flag1) {
-			this.showGrid();
-			System.out.println("win flag 2");
+			// this.showGrid();
+			// System.out.println("win flag 2");
 			return 2;
 		}
 		if (!flag2) {
-			this.showGrid();
-			System.out.println("win flag 1");
+			// this.showGrid();
+			// System.out.println("win flag 1");
 			return 1;
 		}
 		if (!canPlay) {
-			this.showGrid();
-			System.out.println("win canplay " + (turn % 2) + 1);
+			// this.showGrid();
+			// System.out.println("win canplay " + (turn % 2) + 1);
 			return (turn % 2) + 1;
 		}
 		return 0;

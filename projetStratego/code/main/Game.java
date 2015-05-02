@@ -8,8 +8,6 @@ import java.io.ObjectOutputStream;
 import java.util.Vector;
 
 import pawn.APawn;
-import pawn.Bomb;
-import pawn.Flag;
 import pawn.Lake;
 import util.Dic;
 

@@ -5,7 +5,6 @@ import java.util.Vector;
 
 import pawn.APawn;
 import pawn.Scout;
-import util.Dic;
 
 public class IA {
 	int level = 0, team = 0;

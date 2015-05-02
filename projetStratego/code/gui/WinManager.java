@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.FileInputStream;
@@ -62,13 +60,13 @@ public class WinManager extends JFrame {
 
 			JPanel paneNouv = new JPanel();
 			JLabel lab = new JLabel("Selectionnez une grille");
-			JLabel lab2 = new JLabel("ou creer une ");
+			JLabel lab2 = new JLabel("ou creez en une ");
 			paneCombo.add(lab);
 			paneCombo.add(combo);
 			paneNorth.add(paneCombo);
-			newGrid = new JButton("nouvelle grille");
-			modif = new JButton("modifier");
-			supp = new JButton("supprimer");
+			newGrid = new JButton("Nouvelle grille");
+			modif = new JButton("Modifier");
+			supp = new JButton("Supprimer");
 			newGrid.addActionListener(new actionNewGrid());
 			supp.addActionListener(new actionSupp());
 			modif.addActionListener(new actionModif());
@@ -87,7 +85,7 @@ public class WinManager extends JFrame {
 			this.add(paneSouth, BorderLayout.SOUTH);
 			this.validate();
 		} else {
-			WindowInitPawn fen = new WindowInitPawn(new Game(10, 4, 0), 2);
+			/* WindowInitPawn fen = */new WindowInitPawn(new Game(10, 4, 0), 2);
 			close();
 		}
 		// this.addFocusListener(new FocusListener() {
@@ -115,6 +113,7 @@ public class WinManager extends JFrame {
 
 	}
 
+	@SuppressWarnings("resource")
 	public boolean load() {
 		ObjectInputStream in;
 		try {
@@ -128,16 +127,13 @@ public class WinManager extends JFrame {
 			}
 			return true;
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("here");
 			return false;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("here2");
 			return false;
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("here3");
 			return false;

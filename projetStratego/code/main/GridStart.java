@@ -39,21 +39,22 @@ public class GridStart implements java.io.Serializable {
 		return name;
 	}
 
-	public void changeTeam(int team){
-		for(int i=0;i<grid.length;i++){
-			for(int j=0;j<grid[0].length;j++){
+	public void changeTeam(int team) {
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
 				APawn pawn = grid[i][j];
 				pawn.setTeam(team);
 			}
 		}
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public void save() {
 		ObjectInputStream in;
 		Vector<GridStart> vector = new Vector<GridStart>();
 		try {
 			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
-			vector = (Vector) in.readObject();
+			vector = (Vector<GridStart>) in.readObject();
 			in.close();
 
 		} catch (FileNotFoundException e) {
@@ -82,12 +83,13 @@ public class GridStart implements java.io.Serializable {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void delete() {
 		ObjectInputStream in;
 		Vector<GridStart> vector = new Vector<GridStart>();
 		try {
 			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
-			vector = (Vector) in.readObject();
+			vector = (Vector<GridStart>) in.readObject();
 			in.close();
 
 		} catch (FileNotFoundException e) {

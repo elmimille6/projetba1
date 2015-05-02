@@ -8,8 +8,7 @@ import org.junit.Test;
 
 /**
  * This is the test class of this project. <br/>
- * It tests the moves and the battles of
- * the pawns, and the victory conditions.
+ * It tests the moves and the battles of the pawns, and the victory conditions.
  *
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */

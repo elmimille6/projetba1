@@ -92,7 +92,7 @@ public class StratClient extends JFrame{
 
 	private void close() {
 		client.close();
-		System.out.println("close");
+		System.out.println("closeClient");
 		this.dispose();
 	}
 

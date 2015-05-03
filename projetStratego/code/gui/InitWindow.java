@@ -165,6 +165,7 @@ public class InitWindow extends WindowInitPawn {
 						client.sendTCP(grid);
 						send = true;
 						System.out.println("sended");
+						JOptionPane jop = new JOptionPane();
 						client.addListener(new Listener() {
 							public void received(Connection connection,
 									Object object) {

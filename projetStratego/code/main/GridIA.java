@@ -17,6 +17,9 @@ public class GridIA {
 	APawn[][] grid;
 	int val = 0;
 
+	public GridIA(){
+		
+	}
 	/**
 	 * Constructor of the grid for the IA.
 	 * 

@@ -15,34 +15,19 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
+import com.esotericsoftware.minlog.Log;
 
 public class StratClient extends JFrame{
-	private Client client=new Client();
+	private Client client=new Client(6000,6000);
 	private String adIp = "127.0.0.1";
 	private int state, Oplayer;
 	private JLabel lab=new JLabel();
 	
 	
 	public StratClient(){
-		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		askIp();
-		connect();
-		System.out.println("connect "+client.isConnected());
-		this.addWindowListener(new WindowAdapter() {
-			   public void windowClosing(WindowEvent evt) {
-			     close();
-			   }
-			  });
-		
-		this.setSize(400, 400);
-		this.setTitle("Client");
-		this.setVisible(true);
-		this.setLocationRelativeTo(null);
-		state();
 		Kryo kryo = client.getKryo();
-	    kryo.register(Game.class);
-	    kryo.register(GridIA.class);
+	    kryo.register(main.Game.class);
+	    kryo.register(main.GridIA.class);
 	    kryo.register(pawn.APawn.class);
 	    kryo.register(pawn.APawn[].class);
 	    kryo.register(pawn.APawn[][].class);
@@ -62,6 +47,23 @@ public class StratClient extends JFrame{
 	    kryo.register(pawn.Spy.class);
 	    kryo.register(java.util.Vector.class);
 	    kryo.register(int[].class);
+		Log.set(Log.LEVEL_DEBUG);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		askIp();
+		connect();
+		System.out.println("connect "+client.isConnected());
+		this.addWindowListener(new WindowAdapter() {
+			   public void windowClosing(WindowEvent evt) {
+			     close();
+			   }
+			  });
+		
+		this.setSize(400, 400);
+		this.setTitle("Client");
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+		state();
+		
 	    
 	    
 	    
@@ -106,6 +108,7 @@ public class StratClient extends JFrame{
 					if(((String)object).equals("FULL")){
 						JOptionPane jop = new JOptionPane();
 						jop.showMessageDialog(null, "Connexion impossible, le serveur est plein, veuillez patienter", "Serveur plein", JOptionPane.INFORMATION_MESSAGE);
+						System.out.println("client full close");
 						close();
 					}
 					if(((String)object).equals("GO")){
@@ -113,6 +116,7 @@ public class StratClient extends JFrame{
 						state=2;
 						state();
 						new InitWindow(client,Oplayer);
+						
 					}
 					
 				}

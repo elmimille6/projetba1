@@ -8,8 +8,6 @@ import java.io.ObjectOutputStream;
 import java.util.Vector;
 
 import pawn.APawn;
-import pawn.Bomb;
-import pawn.Flag;
 import pawn.Lake;
 import util.Dic;
 
@@ -144,7 +142,7 @@ public class Game implements java.io.Serializable {
 	/**
 	 * Places the teams on each side of the grid.
 	 * 
-	 * @param tgrid
+	 * @param grid
 	 *            The grid of pawn to place in the grid.
 	 * 
 	 * @param side
@@ -277,18 +275,18 @@ public class Game implements java.io.Serializable {
 
 		}
 		if (!flag1) {
-			this.showGrid();
-			System.out.println("win falg 2");
+			// this.showGrid();
+			// System.out.println("win falg 2");
 			return 2;
 		}
 		if (!flag2) {
-			this.showGrid();
-			System.out.println("win flag 1");
+			// this.showGrid();
+			// System.out.println("win flag 1");
 			return 1;
 		}
 		if (!canPlay) {
-			this.showGrid();
-			System.out.println("win canplay " + (turn % 2) + 1);
+			// this.showGrid();
+			// System.out.println("win canplay " + (turn % 2) + 1);
 			return (turn % 2) + 1;
 		}
 		return 0;
@@ -381,9 +379,13 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
+	 * Returns a grid "Game" of the chosen size.
 	 * 
 	 * @param typeOfGame
-	 * @return
+	 *            40 for the Stratego, <br/>
+	 *            10 for the Stratego Duel.
+	 * 
+	 * @return A grid "Game" of the chosen size.
 	 */
 	public static Game chosenSize(int typeOfGame) {
 		if (typeOfGame == 40) {
@@ -450,7 +452,7 @@ public class Game implements java.io.Serializable {
 	/**
 	 * Sets a new value to the view.
 	 * 
-	 * @param vie
+	 * @param view
 	 *            Changes the view.
 	 */
 	public void setView(int view) {
@@ -493,16 +495,18 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
+	 * Gets the team which begins.
 	 * 
-	 * @return
+	 * @return The team which begins.
 	 */
 	public Dic getStartTeam() {
 		return startTeam;
 	}
 
 	/**
+	 * Gets the last move in the game.
 	 * 
-	 * @return
+	 * @return A grid containing the lasts moves.
 	 */
 	public int[] getLastMove() {
 		return lastMove;
@@ -520,9 +524,9 @@ public class Game implements java.io.Serializable {
 	 * 
 	 * @return
 	 */
-	public int getNbPawns() {
-		return nbPawns;
-	}
+	/*
+	 * public int getNbPawns() { return nbPawns; }
+	 */
 
 	/**
 	 * 
@@ -533,8 +537,10 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
+	 * Gets if the grid of the game is complete.
 	 * 
-	 * @return
+	 * @return true if the grid of the game is complete, <br/>
+	 *         false otherwise.
 	 */
 	public int getComplete() {
 		return complete;
@@ -590,8 +596,12 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
+	 * Gets if the player wants to initialize its grid.
 	 * 
-	 * @return
+	 * @return 0 if everything is automatic,<br/>
+	 *         1 if the red player wants to initialize,<br/>
+	 *         2 if the blue player wants to initialize or<br/>
+	 *         3 if the two players want to initialize.
 	 */
 	public int getInitGridGame() {
 		return initGridGame;

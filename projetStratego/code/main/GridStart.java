@@ -48,12 +48,13 @@ public class GridStart implements java.io.Serializable {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void save() {
 		ObjectInputStream in;
 		Vector<GridStart> vector = new Vector<GridStart>();
 		try {
 			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
-			vector = (Vector) in.readObject();
+			vector = (Vector<GridStart>) in.readObject();
 			in.close();
 
 		} catch (FileNotFoundException e) {
@@ -82,12 +83,13 @@ public class GridStart implements java.io.Serializable {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void delete() {
 		ObjectInputStream in;
 		Vector<GridStart> vector = new Vector<GridStart>();
 		try {
 			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
-			vector = (Vector) in.readObject();
+			vector = (Vector<GridStart>) in.readObject();
 			in.close();
 
 		} catch (FileNotFoundException e) {

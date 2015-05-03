@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -42,14 +41,14 @@ public class MenuWindow extends JFrame {
 			"Gestionnaire de grille de depart");
 	private JMenuItem serveur = new JMenuItem("via serveur");
 
-	private JLabel labJeu = new JLabel("Jeu");
+	// private JLabel labJeu = new JLabel("Jeu");
 
 	private JComboBox comboJeu = new JComboBox();
 
 	private JLabel labType = new JLabel("Type de jeu");
 	private JComboBox comboType = new JComboBox();
 
-	private JLabel labPlayer = new JLabel("Nombre de joueur");
+	private JLabel labPlayer = new JLabel("Nombre de joueurs");
 	private JComboBox comboPlayer = new JComboBox();
 
 	private JLabel labInit = new JLabel("Initialisation des pions");
@@ -68,8 +67,10 @@ public class MenuWindow extends JFrame {
 
 	public int initGridGame = 0;
 
-	private JCheckBoxMenuItem changeGrid = new JCheckBoxMenuItem(
-			"modifier la taille de la grille");
+	/*
+	 * private JCheckBoxMenuItem changeGrid = new JCheckBoxMenuItem(
+	 * "modifier la taille de la grille");
+	 */
 
 	/**
 	 * Creates the 'Menu' window.
@@ -182,19 +183,17 @@ public class MenuWindow extends JFrame {
 		panBtn2.add(goBtn);
 		panBtn.setLayout(new BorderLayout());
 		panBtn.add(panBtn2, BorderLayout.CENTER);
-		panBtn.add(changeGrid, BorderLayout.NORTH);
-		changeGrid.setEnabled(false);
-		changeGrid.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (modifGrid == 1) {
-					modifGrid = 0;
-				} else if (modifGrid == 0) {
-					modifGrid = 1;
-				}
-
-			}
-
-		});
+		/*
+		 * panBtn.add(changeGrid, BorderLayout.NORTH);
+		 * changeGrid.setEnabled(false); changeGrid.addActionListener(new
+		 * ActionListener() { public void actionPerformed(ActionEvent arg0) { if
+		 * (modifGrid == 1) { modifGrid = 0; } else if (modifGrid == 0) {
+		 * modifGrid = 1; }
+		 * 
+		 * }
+		 * 
+		 * });
+		 */
 
 		goBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -295,16 +294,21 @@ public class MenuWindow extends JFrame {
 	/**
 	 * Gets the number of players.
 	 * 
-	 * @return The number of players.
+	 * @return The number of players:<br/>
+	 *         1 if it's against IA or<br/>
+	 *         2 if it's player against player.
 	 */
 	public int getNbrPlayer() {
 		return nbrPlayer;
 	}
 
 	/**
-	 * Gets the number of players.
+	 * Gets if the player wants to initialize its grid.
 	 * 
-	 * @return The number of players.
+	 * @return 0 if everything is automatic,<br/>
+	 *         1 if the red player wants to initialize,<br/>
+	 *         2 if the blue player wants to initialize or<br/>
+	 *         3 if the two players want to initialize.
 	 */
 	public int getInitGridGame() {
 		return initGridGame;

@@ -35,7 +35,15 @@ public class Game implements java.io.Serializable {
 	 * Main constructor of the class.
 	 */
 	public Game() {
-
+		APawn lake = new Lake();
+		grid[4][2] = lake;
+		grid[4][3] = lake;
+		grid[5][2] = lake;
+		grid[5][3] = lake;
+		grid[4][6] = lake;
+		grid[4][7] = lake;
+		grid[5][6] = lake;
+		grid[5][7] = lake;
 	}
 
 	/**
@@ -497,7 +505,7 @@ public class Game implements java.io.Serializable {
 	 * @return
 	 */
 	public Dic getStartTeam() {
-		return startTeam;
+		return startTeam();
 	}
 
 	/**

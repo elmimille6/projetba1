@@ -76,7 +76,9 @@ public class PaneGamePawn extends JPanel {
 			lTeam = new JLabel("  Blue team");
 		}
 		this.add(lTeam);
-		for (int i = 0; i < startTeam.getSize(); i++) {
+		System.out.println(startTeam.toString());
+		int g= startTeam.getSize();
+		for (int i = 0; i < g; i++) {
 			JLabel label = new JLabel("  "
 					+ ((APawn) startTeam.getObject(i)).getNamePawn() + " : "
 					+ count.get(startTeam.getObject(i)) + "/"

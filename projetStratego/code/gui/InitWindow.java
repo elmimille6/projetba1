@@ -171,7 +171,7 @@ public class InitWindow extends WindowInitPawn {
 									Object object) {
 								if (send = true) {
 									if (object instanceof Game) {
-										new WindowGame(game, client, Oplayer);
+										new WindowGame((Game) object, client, Oplayer);
 									}
 								}
 							}

@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -214,10 +213,10 @@ public class PaneGame extends JPanel {
 	 * @param nouvGrid
 	 *            The grid.
 	 */
-	public void recupGrid(Game nouvGrid) {
+	/*public void recupGrid(Game nouvGrid) {
 		grid = nouvGrid;
 		lastMove = nouvGrid.getLastMove();
-	}
+	}*/
 
 	// public void recupGame(AGame type){
 	// jeu = type;

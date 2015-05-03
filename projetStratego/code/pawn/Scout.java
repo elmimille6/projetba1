@@ -54,7 +54,7 @@ public class Scout extends APawn {
 	 * @param y
 	 *            The ordinate of the object.
 	 * 
-	 * @return The grid after the move.
+	 * @return true if the move is possible, false otherwise.
 	 */
 	public boolean movePoss(Game grid, int x, int y) {
 

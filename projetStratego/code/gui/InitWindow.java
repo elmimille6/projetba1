@@ -99,7 +99,7 @@ public class InitWindow extends WindowInitPawn {
 		JButton play = new JButton("Jouer");
 		JButton save = new JButton("Sauvegarder");
 		JButton load = new JButton("Charger");
-		JButton auto = new JButton("Automatique");
+//		JButton auto = new JButton("Automatique");
 
 		if (nbPawns == 40) {
 			// Center.add(auto); // Add an auto init.
@@ -526,7 +526,7 @@ public class InitWindow extends WindowInitPawn {
 	/**
 	 * Deletes the pawn at the given coordinates.
 	 * 
-	 * @param pawnInit
+	 * @param pawn
 	 *            The type of the pawn to delete.
 	 * 
 	 * @param line

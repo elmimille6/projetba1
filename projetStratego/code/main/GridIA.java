@@ -17,9 +17,10 @@ public class GridIA {
 	APawn[][] grid;
 	int val = 0;
 
-	public GridIA(){
-		
+	public GridIA() {
+
 	}
+
 	/**
 	 * Constructor of the grid for the IA.
 	 * 
@@ -43,7 +44,6 @@ public class GridIA {
 	}
 
 	public void eval(int team, int valeur) {
-		int i = 0;
 		while (val < valeur) {
 			APawn[][] gridEval = createGrid(team);
 			int value = evalGrid(gridEval);
@@ -51,7 +51,6 @@ public class GridIA {
 				grid = gridEval;
 				val = value;
 			}
-			i++;
 		}
 	}
 

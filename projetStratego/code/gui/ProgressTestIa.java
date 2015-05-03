@@ -16,6 +16,7 @@ import pawn.APawn;
 
 public class ProgressTestIa extends JFrame {
 
+	private static final long serialVersionUID = 8642526437577440017L;
 	private Thread t;
 	private JProgressBar bar;
 	private JButton launch;
@@ -29,7 +30,7 @@ public class ProgressTestIa extends JFrame {
 		this.lvl2 = lvl2;
 
 		this.setSize(300, 80);
-		this.setTitle("test de l'ia en cours");
+		this.setTitle("Test de l'IA en cours...");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 
@@ -125,8 +126,8 @@ public class ProgressTestIa extends JFrame {
 			int moy1 = (int) imoy1;
 			int moy2 = (int) imoy2;
 			JOptionPane jop1 = new JOptionPane();
-			jop1.showMessageDialog(null, "Victoire de l'ia 1: " + lvl1 + ": "
-					+ win1 + " soit " + moy1 + " %\nVictoire de l'ia 2 : "
+			jop1.showMessageDialog(null, "Victoire de l'IA 1: " + lvl1 + ": "
+					+ win1 + " soit " + moy1 + " %\nVictoire de l'IA 2 : "
 					+ lvl2 + ": " + win2 + " soit " + moy2 + " %", "Resultat",
 					JOptionPane.INFORMATION_MESSAGE);
 			System.out.println("ia1= " + win1 + "  ia2= " + win2);

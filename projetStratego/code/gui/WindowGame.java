@@ -41,7 +41,7 @@ public class WindowGame extends JFrame {
 	JOptionPane jop, jopWin;
 	Dic startTeam;
 
-	public final String[] resultName = { "Red", "Blue" };
+	public final String[] resultName = { "Rouge", "Bleu" };
 	public boolean playGame = true;
 	public IA ia;
 	public Client client;
@@ -71,7 +71,6 @@ public class WindowGame extends JFrame {
 	 * 
 	 * @param ngame
 	 */
-	@SuppressWarnings("static-access")
 	public WindowGame(Game ngame) {
 		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -194,9 +193,9 @@ public class WindowGame extends JFrame {
 								repaint();
 
 								jopWin = new JOptionPane();
-								jopWin.showMessageDialog(null, "The "
-										+ resultName[result - 1]
-										+ " player wins !", "Result",
+								jopWin.showMessageDialog(null, "Le joueur "
+										+ resultName[result - 1] + " gagne !",
+										"Resultat",
 										JOptionPane.INFORMATION_MESSAGE);
 							} else {
 								game.setView(3);
@@ -205,9 +204,9 @@ public class WindowGame extends JFrame {
 								jop = new JOptionPane();
 								jop.showMessageDialog(
 										null,
-										"It's your turn, "
+										"C'est votre tour, joueur "
 												+ resultName[((game.getTurn() + 1) % 2)]
-												+ " player !", "Turn finished",
+												+ " !", "Fin du tour",
 										JOptionPane.INFORMATION_MESSAGE);
 								game.setView((((game.getTurn() + 1) % 2) + 1));
 								repaint();
@@ -283,9 +282,9 @@ public class WindowGame extends JFrame {
 									repaint();
 
 									jopWin = new JOptionPane();
-									jopWin.showMessageDialog(null, "The "
+									jopWin.showMessageDialog(null, "Le joueur "
 											+ resultName[result - 1]
-											+ " player wins !", "Result",
+											+ " gagne !", "Resultat",
 											JOptionPane.INFORMATION_MESSAGE);
 								} else {
 									try {
@@ -321,9 +320,9 @@ public class WindowGame extends JFrame {
 										repaint();
 
 										jopWin = new JOptionPane();
-										jopWin.showMessageDialog(null, "The "
+										jopWin.showMessageDialog(null, "Le joueur "
 												+ resultName[result - 1]
-												+ " player wins !", "Result",
+												+ " gagne !", "Resultat",
 												JOptionPane.INFORMATION_MESSAGE);
 									}
 								}
@@ -398,9 +397,9 @@ public class WindowGame extends JFrame {
 									repaint();
 
 									jopWin = new JOptionPane();
-									jopWin.showMessageDialog(null, "The "
+									jopWin.showMessageDialog(null, "Le joueur "
 											+ resultName[result - 1]
-											+ " player wins !", "Result",
+											+ " gagne !", "Resultat",
 											JOptionPane.INFORMATION_MESSAGE);
 								}
 							}

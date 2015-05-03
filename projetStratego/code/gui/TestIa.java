@@ -14,20 +14,17 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import main.Game;
-import main.GridIA;
 import main.IA;
-import pawn.APawn;
 
 public class TestIa extends JFrame {
 
-	public JComboBox ia1 = new JComboBox(), ia2 = new JComboBox();
+	private static final long serialVersionUID = -3048638208007991240L;
+ 	public JComboBox ia1 = new JComboBox(), ia2 = new JComboBox();
 	public JSlider nbr = new JSlider();
 	public JButton goBtn = new JButton("Lancer les tests");
 	public String[] listLvl;
 	JLabel lab1;
 
-	@SuppressWarnings("unchecked")
 	public TestIa() {
 		this.setResizable(true);
 		this.setSize(300, 320);
@@ -50,7 +47,7 @@ public class TestIa extends JFrame {
 		nbr.setMinorTickSpacing(10);
 		nbr.setMajorTickSpacing(20);
 
-		lab1 = new JLabel("Nombre de test � effectuer: " + nbr.getValue());
+		lab1 = new JLabel("Nombre de tests a effectuer: " + nbr.getValue());
 		panel1.add(lab1);
 		panel1.add(nbr);
 		this.add(panel1);
@@ -76,7 +73,7 @@ public class TestIa extends JFrame {
 
 		nbr.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent event) {
-				lab1.setText("Nombre de test � effectuer: "
+				lab1.setText("Nombre de tests a effectuer: "
 						+ ((JSlider) event.getSource()).getValue());
 			}
 		});
@@ -88,8 +85,7 @@ public class TestIa extends JFrame {
 					new ProgressTestIa(nbr.getValue(), (String) ia1
 							.getSelectedItem(), (String) ia2.getSelectedItem());
 				} else {
-					JOptionPane jop1 = new JOptionPane();
-					jop1.showMessageDialog(null,
+					JOptionPane.showMessageDialog(null,
 							"Veuillez entrer un nombre valable", "Information",
 							JOptionPane.INFORMATION_MESSAGE);
 				}

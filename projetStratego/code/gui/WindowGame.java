@@ -58,10 +58,12 @@ public class WindowGame extends JFrame {
 		this(ngame);
 		this.client = client;
 		this.Oplayer = Oplayer;
+		System.out.println("OPLAYER="+Oplayer);
 		client.addListener(new Listener() {
 			public void received(Connection connection, Object object) {
 				if (object instanceof Game) {
 					game = (Game) object;
+					repaint();
 				}
 			}
 		});
@@ -361,6 +363,7 @@ public class WindowGame extends JFrame {
 				@SuppressWarnings("static-access")
 				public void run() {
 					if (game.getNextTeam() == Oplayer) {
+						System.out.println("Oplayer true");
 						int[] res = getRes(game, pane, posX, posY);
 						int line = res[0];
 						int row = res[1];
@@ -401,6 +404,7 @@ public class WindowGame extends JFrame {
 											+ resultName[result - 1]
 											+ " gagne !", "Resultat",
 											JOptionPane.INFORMATION_MESSAGE);
+									client.close();
 								}
 							}
 						}

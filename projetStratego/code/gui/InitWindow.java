@@ -62,6 +62,7 @@ public class InitWindow extends WindowInitPawn {
 		this.client = client;
 		this.online = true;
 		this.Oplayer = Oplayer;
+		System.out.println("Oplayer="+Oplayer);
 		init();
 	}
 

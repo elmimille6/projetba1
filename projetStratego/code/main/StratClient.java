@@ -48,7 +48,7 @@ public class StratClient extends JFrame {
 		kryo.register(pawn.Spy.class);
 		kryo.register(java.util.Vector.class);
 		kryo.register(int[].class);
-		Log.set(Log.LEVEL_DEBUG);
+//		Log.set(Log.LEVEL_DEBUG);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// askIp();
 		connect();

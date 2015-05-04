@@ -1,9 +1,5 @@
 package gui;
 
-import javax.swing.JComboBox;
-
-import gui.WinManager.ChoixCombo;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -84,56 +80,6 @@ public class InitWindow extends WindowInitPawn {
 		init();
 	}
 
-	@SuppressWarnings("resource")
-	public boolean load() {
-		ObjectInputStream in;
-		try {
-			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
-			System.out.println("LoadVector");
-			@SuppressWarnings("unchecked")
-			Vector<GridStart> vector = (Vector<GridStart>) in.readObject();
-			this.list = vector;
-			in.close();
-			if (vector.size() == 0) {
-				return false;
-			}
-			return true;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("here");
-			return false;
-		} catch (IOException e) {
-			System.out.println("here2");
-			return false;
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("here3");
-			return false;
-		}
-
-	}
-
-	class ChoixCombo implements ActionListener { // TODO
-		public void actionPerformed(ActionEvent e) {
-			System.out.println("AZERTY");
-			if (combo.getItemCount() != 0) {
-				focus = (GridStart) combo.getSelectedItem();
-				System.out.println(focus + " focus");
-				gridPane1 = new Game(focus.getGrid());
-				pane1.setGrid(gridPane1.getGrid());
-				game.setComplete(0);
-				toInit = 1;
-				initialize();
-				initPane2();
-				pawns.removeAllElements();
-				pane2.setGrid(gridPane2.getGrid());
-				pane1.repaint();
-				pane2.repaint();
-				deletePawnOfGrid();
-			}
-		}
-	}
-
 	public void init() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle("Initialisation de la grille");
@@ -163,18 +109,17 @@ public class InitWindow extends WindowInitPawn {
 		JPanel Center = new JPanel();
 		JButton play = new JButton("Jouer");
 		JButton save = new JButton("Sauvegarder");
-		// JButton load = new JButton("Charger");
 		JLabel load = new JLabel("Charger une grille");
+		JButton auto = new JButton("Automatique");
 
-		if (load()) {
+		if (loadListGrid()) {
 			focus = list.get(0);
 			combo = new JComboBox();
 			for (int i = 0; i < list.size(); i++) {
 				combo.addItem(list.get(i));
 			}
 		}
-		combo.addActionListener(new ChoixCombo());
-		// JButton auto = new JButton("Automatique");
+		combo.addActionListener(new ListGridCombo());
 
 		if (nbPawns == 40) {
 			if (toInit == 0 && game.getPlayer() != 2) {
@@ -185,7 +130,7 @@ public class InitWindow extends WindowInitPawn {
 			if (toInit != 2) {
 				Center.add(play);// Launches the game with the grid
 			}
-			// Center.add(auto); // Add an auto init.
+			Center.add(auto); // Add an auto init.
 			Center.add(save); // Save the grid in the 'Saves' folder
 		} else {
 			Center.add(play);// Launches the game with the grid
@@ -241,7 +186,7 @@ public class InitWindow extends WindowInitPawn {
 						client.sendTCP(grid);
 						send = true;
 						System.out.println("sended");
-						JOptionPane jop = new JOptionPane();
+						// JOptionPane jop = new JOptionPane();
 						client.addListener(new Listener() {
 							public void received(Connection connection,
 									Object object) {
@@ -261,21 +206,19 @@ public class InitWindow extends WindowInitPawn {
 			}
 		});
 
-		// auto.addActionListener(new ActionListener() {// TODO //AUTO button
-		// public void actionPerformed(ActionEvent arg0) {
-		// GridIA gridIA = new GridIA(team);
-		// for (int i = 0; i < 4; i++) {
-		// for (int j = 0; j < 10; j++) {
-		// gridPane1.set(i, j, gridIA.getPawn(i, j));
-		// }
-		// }
-		// toInit = 1;
-		// gridPane2.showGrid();
-		// initPane2();
-		// gridPane2.showGrid();
-		// fen.repaint();
-		// }
-		// });
+		auto.addActionListener(new ActionListener() {// TODO 
+			//AUTO button
+			public void actionPerformed(ActionEvent arg0) {
+				GridIA gridIA = new GridIA(team);
+				for (int i = 0; i < 4; i++) {
+					for (int j = 0; j < 10; j++) {
+						gridPane1.set(i, j, gridIA.getPawn(i, j));
+					}
+				}
+				placeGrid();
+				System.out.println("AUTO");
+			}
+		});
 
 		pane2 = new PaneInitPawn(gridPane2);
 		pane2.setPreferredSize(new Dimension(0, southHeight));
@@ -295,6 +238,59 @@ public class InitWindow extends WindowInitPawn {
 		} else {
 			deletePawnOfGrid();
 		}
+	}
+
+	@SuppressWarnings("resource")
+	public boolean loadListGrid() {
+		ObjectInputStream in;
+		try {
+			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
+			System.out.println("LoadVector");
+			@SuppressWarnings("unchecked")
+			Vector<GridStart> vector = (Vector<GridStart>) in.readObject();
+			this.list = vector;
+			in.close();
+			if (vector.size() == 0) {
+				return false;
+			}
+			return true;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("here");
+			return false;
+		} catch (IOException e) {
+			System.out.println("here2");
+			return false;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("here3");
+			return false;
+		}
+
+	}
+
+	class ListGridCombo implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (combo.getItemCount() != 0) {
+				focus = (GridStart) combo.getSelectedItem();
+				System.out.println(focus + " focus");
+				gridPane1 = new Game(focus.getGrid());
+				placeGrid();
+			}
+		}
+	}
+	
+	public void placeGrid() { //TODO
+		pane1.setGrid(gridPane1.getGrid());
+		game.setComplete(0);
+		toInit = 1;
+		initialize();
+		initPane2();
+		pawns.removeAllElements();
+		pane2.setGrid(gridPane2.getGrid());
+		pane1.repaint();
+		pane2.repaint();
+		deletePawnOfGrid();
 	}
 
 	/**

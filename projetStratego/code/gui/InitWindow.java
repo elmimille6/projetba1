@@ -89,6 +89,7 @@ public class InitWindow extends WindowInitPawn {
 		ObjectInputStream in;
 		try {
 			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
+			System.out.println("LoadVector");
 			@SuppressWarnings("unchecked")
 			Vector<GridStart> vector = (Vector<GridStart>) in.readObject();
 			this.list = vector;
@@ -114,24 +115,22 @@ public class InitWindow extends WindowInitPawn {
 
 	class ChoixCombo implements ActionListener { // TODO
 		public void actionPerformed(ActionEvent e) {
+			System.out.println("AZERTY");
 			if (combo.getItemCount() != 0) {
 				focus = (GridStart) combo.getSelectedItem();
 				System.out.println(focus + " focus");
 				gridPane1 = new Game(focus.getGrid());
 				pane1.setGrid(gridPane1.getGrid());
-				pane1.repaint();
 				game.setComplete(0);
 				toInit = 1;
 				initialize();
 				initPane2();
 				pawns.removeAllElements();
 				pane2.setGrid(gridPane2.getGrid());
+				pane1.repaint();
 				pane2.repaint();
 				deletePawnOfGrid();
 			}
-			// System.out.println("length: " + pawns.size());
-			// System.out.println("toInit: " + toInit);
-			// System.out.println("game.getComplete() : " + game.getComplete());
 		}
 	}
 
@@ -248,9 +247,10 @@ public class InitWindow extends WindowInitPawn {
 									Object object) {
 								if (send = true) {
 									if (object instanceof Game) {
-										if(game.getGameN()==0){
+										if (game.getGameN() == 0) {
 											game.setGameN(1);
-											new WindowGame((Game) object, client, Oplayer);
+											new WindowGame((Game) object,
+													client, Oplayer);
 										}
 									}
 								}
@@ -511,16 +511,11 @@ public class InitWindow extends WindowInitPawn {
 					int row = res[1];
 					if (gridPane1.getPawn(line, row) != null) {
 						APawn pawn = gridPane1.getPawn(line, row);
-						System.out.println(pawn);
 						deletePawn(chosenPawn(pawn), line, row);
-						gridPane1.showGrid();
-						System.out.println();
-						gridPane2.showGrid();
-//						pane1.repaint();
-//						pane2.repaint();
+						pane1.repaint();
+						pane2.repaint();
 					}
 				}
-				System.out.println("Size: " + pawns.size());// TODO
 				addPawnOfGrid();
 			}
 		});
@@ -614,12 +609,10 @@ public class InitWindow extends WindowInitPawn {
 	 *            The row of the pawn.
 	 */
 	public void deletePawn(APawn pawn, int line, int row) {
-		System.out.println("pawn.getNbPawn(): " + pawn.getNbPawn());
 		if (pawn.getNbPawn() == 0) {
 			if (nbPawns == 40) {
 				for (int x = 0; x < 2; x++) {
 					for (int y = 0; y < 6; y++) {
-						System.out.println("deletePawn…");//TODO
 						pawnShow = gridPane2.getPawn(x, y);
 						if (pawnShow.getNamePawn() == pawn.getNamePawn()) {
 							showPawn(x, y, pawnShow, false);

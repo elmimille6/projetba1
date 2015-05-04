@@ -139,8 +139,10 @@ public class GridStart implements java.io.Serializable {
 			if (this.name.equals(gri.getName())) {
 				for (int i = 0; i < this.grid.length; i++) {
 					for (int j = 0; j < this.grid[0].length; j++) {
-						if (!this.grid[i][j].equals(gri.getGrid()[i][j])) {
-							// System.out.println("false");
+						if (this.grid[i][j] == null
+								|| gri.getGrid()[i][j] == null) {
+							return !(this.grid[i][j] == null && gri.getGrid()[i][j] == null);
+						} else if (!this.grid[i][j].equals(gri.getGrid()[i][j])) {
 							return false;
 						}
 					}

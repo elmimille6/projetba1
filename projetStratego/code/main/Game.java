@@ -28,6 +28,7 @@ public class Game implements java.io.Serializable {
 	// private APawn Flag = new Flag(1), Bomb = new Bomb(1);
 	private int nbPawns = 40, complete = 0;
 	private int initGridGame = 0;
+	private int gameN;
 
 	/**
 	 * Main constructor of the class.
@@ -678,5 +679,13 @@ public class Game implements java.io.Serializable {
 	 */
 	public int getNextTeam() {
 		return ((turn + 1) % 2) + 1;
+	}
+	
+	public void setGameN(int gameN){
+		this.gameN=gameN;
+	}
+	
+	public int getGameN(){
+		return this.gameN;
 	}
 }

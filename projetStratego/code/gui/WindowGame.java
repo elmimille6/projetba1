@@ -56,14 +56,17 @@ public class WindowGame extends JFrame {
 
 	public WindowGame(Game ngame, Client client, int Oplayer) {
 		this(ngame);
+		game.setView(Oplayer);
 		this.client = client;
 		this.Oplayer = Oplayer;
 		System.out.println("OPLAYER="+Oplayer);
 		client.addListener(new Listener() {
 			public void received(Connection connection, Object object) {
 				if (object instanceof Game) {
-					game = (Game) object;
-					repaint();
+					if(game.getGameN()==1){
+						game = (Game) object;
+						repaint();
+					}
 				}
 			}
 		});

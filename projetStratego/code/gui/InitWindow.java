@@ -172,7 +172,10 @@ public class InitWindow extends WindowInitPawn {
 									Object object) {
 								if (send = true) {
 									if (object instanceof Game) {
-										new WindowGame((Game) object, client, Oplayer);
+										if(game.getGameN()==0){
+											game.setGameN(1);
+											new WindowGame((Game) object, client, Oplayer);
+										}
 									}
 								}
 							}

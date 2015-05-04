@@ -161,6 +161,4 @@ public class StratClient extends JFrame {
 			adIp = adIp2;
 		}
 	}
-	
-	
 }

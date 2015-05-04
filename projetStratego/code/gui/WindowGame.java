@@ -57,14 +57,13 @@ public class WindowGame extends JFrame {
 	public WindowGame(Game ngame, Client client, int Oplayer) {
 		this(ngame);
 		this.game.setGameN(1);
-		game.setView(Oplayer);
 		this.client = client;
 		this.Oplayer = Oplayer;
-		System.out.println("OPLAYER="+Oplayer);
+		System.out.println("OPLAYER=" + Oplayer);
 		client.addListener(new Listener() {
 			public void received(Connection connection, Object object) {
 				if (object instanceof Game) {
-					if(game.getGameN()==1){
+					if (game.getGameN() == 1) {
 						game = (Game) object;
 						repaint();
 					}
@@ -326,9 +325,12 @@ public class WindowGame extends JFrame {
 										repaint();
 
 										jopWin = new JOptionPane();
-										jopWin.showMessageDialog(null, "Le joueur "
-												+ resultName[result - 1]
-												+ " gagne !", "Resultat",
+										jopWin.showMessageDialog(
+												null,
+												"Le joueur "
+														+ resultName[result - 1]
+														+ " gagne !",
+												"Resultat",
 												JOptionPane.INFORMATION_MESSAGE);
 									}
 								}

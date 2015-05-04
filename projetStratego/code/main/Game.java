@@ -680,12 +680,12 @@ public class Game implements java.io.Serializable {
 	public int getNextTeam() {
 		return ((turn + 1) % 2) + 1;
 	}
-	
-	public void setGameN(int gameN){
-		this.gameN=gameN;
+
+	public void setGameN(int gameN) {
+		this.gameN = gameN;
 	}
-	
-	public int getGameN(){
+
+	public int getGameN() {
 		return this.gameN;
 	}
 }

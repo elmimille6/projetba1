@@ -29,7 +29,7 @@ public class WinManager extends JFrame {
 	private static final long serialVersionUID = -6421255455563013157L;
 	private Vector<GridStart> list;
 	private JComboBox combo;
-	private JButton newGrid, modif, supp;
+	private JButton newGrid, change, delete;
 	private GridStart focus;
 	public PaneInitPawn panelCenter;
 	public JPanel paneCombo = new JPanel();
@@ -59,20 +59,20 @@ public class WinManager extends JFrame {
 			combo.addActionListener(new ChoixCombo());
 
 			JPanel paneNouv = new JPanel();
-			JLabel lab = new JLabel("Selectionnez une grille");
-			JLabel lab2 = new JLabel("ou creez en une ");
-			paneCombo.add(lab);
+			JLabel selectGrid = new JLabel("Selectionnez une grille");
+			JLabel createNewGrid = new JLabel("ou creez en une ");
+			paneCombo.add(selectGrid);
 			paneCombo.add(combo);
 			paneNorth.add(paneCombo);
 			newGrid = new JButton("Nouvelle grille");
-			modif = new JButton("Modifier");
-			supp = new JButton("Supprimer");
+			change = new JButton("Modifier");
+			delete = new JButton("Supprimer");
 			newGrid.addActionListener(new actionNewGrid());
-			supp.addActionListener(new actionSupp());
-			modif.addActionListener(new actionModif());
-			paneSouth.add(modif);
-			paneSouth.add(supp);
-			paneNouv.add(lab2);
+			delete.addActionListener(new actionSupp());
+			change.addActionListener(new actionModif());
+			paneSouth.add(change);
+			paneSouth.add(delete);
+			paneNouv.add(createNewGrid);
 			paneNouv.add(newGrid);
 			paneNorth.add(paneNouv);
 

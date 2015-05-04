@@ -56,6 +56,7 @@ public class WindowGame extends JFrame {
 
 	public WindowGame(Game ngame, Client client, int Oplayer) {
 		this(ngame);
+		this.game.setGameN(1);
 		game.setView(Oplayer);
 		this.client = client;
 		this.Oplayer = Oplayer;

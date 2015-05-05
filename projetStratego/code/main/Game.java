@@ -21,7 +21,7 @@ public class Game implements java.io.Serializable {
 	private static final long serialVersionUID = 8927958880942845647L;
 	private APawn[][] grid = new APawn[10][10];
 	private int row = 10, line = 10;
-	private int view = 1, turn = 1, player = 2, nbPawn = 40;
+	private int  turn = 1, player = 2, nbPawn = 40;
 	public String level;
 	private Dic startTeam;
 	private int[] lastMove = { -1, -1, -1 };
@@ -449,24 +449,24 @@ public class Game implements java.io.Serializable {
 		return this.grid;
 	}
 
-	/**
-	 * Gets the view.
-	 * 
-	 * @return The value of view.
-	 */
-	public int getView() {
-		return view;
-	}
-
-	/**
-	 * Sets a new value to the view.
-	 * 
-	 * @param view
-	 *            Changes the view.
-	 */
-	public void setView(int view) {
-		this.view = view;
-	}
+//	/**
+//	 * Gets the view.
+//	 * 
+//	 * @return The value of view.
+//	 */
+//	public int getView() {
+//		return view;
+//	}
+//
+//	/**
+//	 * Sets a new value to the view.
+//	 * 
+//	 * @param view
+//	 *            Changes the view.
+//	 */
+//	public void setView(int view) {
+//		this.view = view;
+//	}
 
 	/**
 	 * Gets the turn.

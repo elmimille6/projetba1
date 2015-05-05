@@ -64,12 +64,18 @@ public class WindowGame extends JFrame {
 			public void received(Connection connection, Object object) {
 				if (object instanceof Game) {
 					if (game.getGameN() == 1) {
+						System.out.println("received game client");
 						game = (Game) object;
+						pane.recupGame(game);
+						game.showGrid();
 						repaint();
 					}
 				}
 			}
 		});
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		pane.recupGame(game);
+		repaint();
 	}
 
 	/**
@@ -149,6 +155,7 @@ public class WindowGame extends JFrame {
 				}
 				if (e.getButton() == MouseEvent.BUTTON1
 						&& game.getPlayer() == 3) {
+					pane.setView(Oplayer);
 					clickOnline();
 				}
 			}
@@ -193,7 +200,7 @@ public class WindowGame extends JFrame {
 							// System.out
 							// .println("Result = " + result);
 							if (result != 0) {
-								game.setView(0);
+								pane.setView(0);
 								playGame = false;
 								repaint();
 
@@ -203,7 +210,7 @@ public class WindowGame extends JFrame {
 										"Resultat",
 										JOptionPane.INFORMATION_MESSAGE);
 							} else {
-								game.setView(3);
+								pane.setView(3);
 								repaint();
 
 								jop = new JOptionPane();
@@ -213,7 +220,7 @@ public class WindowGame extends JFrame {
 												+ resultName[((game.getTurn() + 1) % 2)]
 												+ " !", "Fin du tour",
 										JOptionPane.INFORMATION_MESSAGE);
-								game.setView((((game.getTurn() + 1) % 2) + 1));
+								pane.setView((((game.getTurn() + 1) % 2) + 1));
 								repaint();
 
 								paneRed.upGame(game);
@@ -250,7 +257,7 @@ public class WindowGame extends JFrame {
 			new Thread(new Runnable() {
 				@SuppressWarnings("static-access")
 				public void run() {
-					game.setView(0);
+					pane.setView(0);
 					System.out.println(game.win() + " : win");
 					if ((((game.getTurn() + 1) % 2) + 1) == 1) {
 						int[] res = getRes(game, pane, posX, posY);
@@ -282,7 +289,7 @@ public class WindowGame extends JFrame {
 								// System.out
 								// .println("Result = " + result);
 								if (result != 0) {
-									game.setView(0);
+									pane.setView(0);
 									playGame = false;
 									repaint();
 
@@ -320,7 +327,7 @@ public class WindowGame extends JFrame {
 									// System.out
 									// .println("Result = " + result);
 									if (result != 0) {
-										game.setView(0);
+										pane.setView(0);
 										playGame = false;
 										repaint();
 
@@ -401,7 +408,7 @@ public class WindowGame extends JFrame {
 								// System.out
 								// .println("Result = " + result);
 								if (result != 0) {
-									game.setView(0);
+									pane.setView(0);
 									playGame = false;
 									repaint();
 

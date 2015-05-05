@@ -26,6 +26,7 @@ import javax.swing.JPanel;
 import main.Game;
 import main.GridIA;
 import main.GridStart;
+import main.StratClient;
 import pawn.APawn;
 import pawn.Bomb;
 import pawn.Captain;
@@ -40,10 +41,6 @@ import pawn.NoPawn;
 import pawn.Scout;
 import pawn.Sergeant;
 import pawn.Spy;
-
-import com.esotericsoftware.kryonet.Client;
-import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
 
 public class InitWindow extends WindowInitPawn {
 
@@ -60,7 +57,7 @@ public class InitWindow extends WindowInitPawn {
 	public JOptionPane jop1, jop2;
 	public String link, nom;
 
-	public Client client;
+	public StratClient startClient;
 	public boolean online = false, send = false;
 	public int Oplayer = 0;
 
@@ -68,8 +65,8 @@ public class InitWindow extends WindowInitPawn {
 	public GridStart focus;
 	public Vector<GridStart> list;
 
-	public InitWindow(Client client, int Oplayer) {
-		this.client = client;
+	public InitWindow(StratClient startClient, int Oplayer) {
+		this.startClient = startClient;
 		this.online = true;
 		this.Oplayer = Oplayer;
 		System.out.println("Oplayer=" + Oplayer);
@@ -183,24 +180,12 @@ public class InitWindow extends WindowInitPawn {
 					} else {
 						Game gridPlayer = createGrid();
 						GridIA grid = new GridIA(gridPlayer.getGrid());
-						client.sendTCP(grid);
+						startClient.client.sendTCP(grid);
 						send = true;
 						System.out.println("sended");
 						// JOptionPane jop = new JOptionPane();
-						client.addListener(new Listener() {
-							public void received(Connection connection,
-									Object object) {
-								if (send = true) {
-									if (object instanceof Game) {
-										if (game.getGameN() == 0) {
-											game.setGameN(1);
-											new WindowGame((Game) object,
-													client, Oplayer);
-										}
-									}
-								}
-							}
-						});
+						startClient.setState(3);
+						fen.dispose();
 					}
 				}
 			}

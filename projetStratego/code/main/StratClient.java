@@ -1,6 +1,7 @@
 package main;
 
 import gui.InitWindow;
+import gui.WindowGame;
 
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
@@ -20,10 +21,12 @@ import com.esotericsoftware.minlog.Log;
 public class StratClient extends JFrame {
 
 	private static final long serialVersionUID = -1140319931747839365L;
-	private Client client = new Client(6000, 6000);
+	public Client client = new Client(6000, 6000);
 	private String adIp = "127.0.0.1";
 	private int state, Oplayer;
 	private JLabel lab = new JLabel();
+	private StratClient stratclient = this;
+	
 
 	public StratClient() {
 		Kryo kryo = client.getKryo();
@@ -69,18 +72,24 @@ public class StratClient extends JFrame {
 
 	private void state() {
 		if (state == 1) {
-			lab.setText("Vous Ãªtes le joueur 1, veuillez attendre votre adversaire");
+			lab.setText("Vous Ãªtes le joueur "+Oplayer+", veuillez attendre votre adversaire");
 			lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
 			this.add(lab);
 			this.repaint();
 			// this.setContentPane(panel);
 		}
 		if (state == 2) {
-			lab.setText("Partie en cours, veuillez ne pas fermer cette fenÃªtre");
+			lab.setText("<html>Partie en cours, veuillez ne pas fermer cette fenètre <br>Vous êtes le joueur "+Oplayer+"</html>");
 			lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
 			this.add(lab);
 			this.repaint();
 			// this.setContentPane(panel);
+		}
+		if (state == 3) {
+			lab.setText("Veuillez attendre, votre adversaire crée sa grille");
+			lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
+			this.add(lab);
+			this.repaint();
 		}
 
 	}
@@ -95,6 +104,17 @@ public class StratClient extends JFrame {
 		// crï¿½e l'objet
 		client.addListener(new Listener() {
 			public void received(Connection connection, Object object) {
+				if (state ==3) {
+					if (object instanceof Game) {
+						Game game = (Game) object;
+						if (game.getGameN() == 0) {
+							game.setGameN(1);
+							new WindowGame((Game) object,client, Oplayer);
+							state=2;
+							state();
+						}
+					}
+				}
 				if (object instanceof String) {
 					System.out.println("String");
 					System.out.println(object);
@@ -112,7 +132,7 @@ public class StratClient extends JFrame {
 						System.out.println("GOGOGOGOGO");
 						state = 2;
 						state();
-						new InitWindow(client, Oplayer);
+						new InitWindow(stratclient, Oplayer);
 
 					}
 
@@ -161,4 +181,11 @@ public class StratClient extends JFrame {
 			adIp = adIp2;
 		}
 	}
+	
+	public void setState(int state){
+		this.state=state;
+		state();
+	}
+	
+	
 }

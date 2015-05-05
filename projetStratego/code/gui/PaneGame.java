@@ -22,6 +22,7 @@ public class PaneGame extends JPanel {
 	public Game grid;
 	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
 	public int[] lastMove = { -1, -1, -1 };
+	int view = 1;
 
 	/**
 	 * Constructor of the class.
@@ -54,7 +55,6 @@ public class PaneGame extends JPanel {
 		// dessine le quadrillage
 		int nbrLigne = grid.getLine() + 1;
 		int nbrCol = grid.getRow() + 1;
-		int view = grid.getView();
 		// System.out.println(nbrLigne+" ligne");
 		// System.out.println(nbrCol+" col");
 		// dessine l image de fond
@@ -218,7 +218,11 @@ public class PaneGame extends JPanel {
 		lastMove = nouvGrid.getLastMove();
 	}*/
 
-	// public void recupGame(AGame type){
-	// jeu = type;
-	// }
+	 public void recupGame(Game game){
+	 grid= game;
+	 }
+	 
+	 public void setView(int view){
+		 this.view=view;
+	 }
 }

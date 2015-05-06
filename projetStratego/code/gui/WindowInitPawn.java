@@ -39,7 +39,8 @@ public class WindowInitPawn extends WindowGame {
 		} else if (toInit == 1) { // Modif
 			if (game.getComplete() == 1) {
 				int lvl = IA.getIntLvl(game.getLevel());
-				game.placeTeam(new GridIA(2, lvl).getGrid(), 2);
+				game.placeTeam(new GridIA((team % 2) + 1, lvl).getGrid(),
+						(team % 2) + 1);
 				new WindowGame(game);
 			} else if (game.getComplete() != 1) {
 				new InitWindow();

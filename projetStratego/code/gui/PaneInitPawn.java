@@ -70,6 +70,8 @@ public class PaneInitPawn extends JPanel {
 				if (grid.getPawn(i, j) != null) {
 					APawn pawn = grid.getPawn(i, j);
 					link = pawn.getURI();
+					System.out.println(link);
+					System.out.println(pawn);
 					java.net.URL uri = getClass().getResource(link);
 					try {
 						img = ImageIO.read(uri);

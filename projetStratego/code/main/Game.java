@@ -165,8 +165,9 @@ public class Game implements java.io.Serializable {
 			for (int i = 0; i < grid.length; i++) {
 				for (int j = 0; j < grid[0].length; j++) {
 					// grid[6+i][0+j]=grid[i][j];
-					grid[i][j].setTeam(1);
-					this.set(6 + i, 0 + j, grid[i][j]);
+					APawn pawn = grid[i][j];
+					pawn.setTeam(1);
+					this.set(6 + i, 0 + j, pawn);
 
 				}
 			}
@@ -174,10 +175,9 @@ public class Game implements java.io.Serializable {
 		if (side == 2) {
 			for (int i = 0; i < grid.length; i++) {
 				for (int j = 0; j < grid[0].length; j++) {
-					// grid[3-i][9-j]=grid[i][j];
-					// grid[i][j].setPos(3-i, 9-j);
-					grid[i][j].setTeam(2);
-					this.set(3 - i, 9 - j, grid[i][j]);
+					APawn pawn = grid[i][j];
+					pawn.setTeam(2);
+					this.set(3 - i, 9 - j, pawn);
 				}
 			}
 		}

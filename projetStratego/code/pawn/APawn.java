@@ -245,7 +245,18 @@ public abstract class APawn implements java.io.Serializable {
 	 * @return The URI of the pawn.
 	 */
 	public String getURI() {
-		return this.URI;
+		String ur = "/image/";
+		if(team==0 && levelPawn==0 && !(this instanceof Lake)){
+			ur+="no_pawn/no_";
+		}
+		else if (team == 1){
+			ur+="red/";
+		}
+		else if (team==2){
+			ur+="blue/";
+		}
+		ur= ur+this.namePawn+".png";
+		return ur;
 	}
 
 	/**

@@ -74,6 +74,7 @@ public class WindowGame extends JFrame {
 			}
 		});
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		pane.setView(Oplayer);
 		pane.recupGame(game);
 		repaint();
 	}
@@ -375,6 +376,8 @@ public class WindowGame extends JFrame {
 			new Thread(new Runnable() {
 				@SuppressWarnings("static-access")
 				public void run() {
+					pane.recupGame(game);
+					repaint();
 					if (game.getNextTeam() == Oplayer) {
 						System.out.println("Oplayer true");
 						int[] res = getRes(game, pane, posX, posY);

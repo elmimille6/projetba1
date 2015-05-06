@@ -45,7 +45,8 @@ public class PaneGame extends JPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		grid.showGrid();
+		System.out.println("pane game "+view);
+		grid.showGrid();
 		nbrLigne = grid.getLine() + 1;
 		nbrCol = grid.getRow() + 1;
 		// dessine l image de fond
@@ -76,6 +77,7 @@ public class PaneGame extends JPanel {
 							link = "/image/blue/hide.png";
 						}
 					}
+					System.out.println(link);
 					java.net.URL uri = getClass().getResource(link);
 					try {
 						img = ImageIO.read(uri);
@@ -99,9 +101,37 @@ public class PaneGame extends JPanel {
 		int line = arrow[4];
 		int row = arrow[5];
 		
+
+		//paint arrow last move
+		lastMove = grid.getLastMove();
+		if (lastMove[0] != -1) {
+			String linkLM = "/image/arrows/up_moved.png";
+			if (lastMove[2] == 0) {
+				linkLM = "/image/arrows/up_moved.png";
+			}
+			if (lastMove[2] == 1) {
+				linkLM = "/image/arrows/right_moved.png";
+			}
+			if (lastMove[2] == 2) {
+				linkLM = "/image/arrows/down_moved.png";
+			}
+			if (lastMove[2] == 3) {
+				linkLM = "/image/arrows/left_moved.png";
+			}
+			java.net.URL uriLM = getClass().getResource(linkLM);
+			try {
+				img = ImageIO.read(uriLM);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			g.drawImage(img, ((lastMove[1]) * (this.getWidth() / nbrCol)) + 10,
+					(lastMove[0] * (this.getHeight() / nbrLigne)) + 10,
+					this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne
+							- 20, this);
+		}
 		// dessine les fleches selon le focus
 		if (arrow[0] != -1) {
-			String linkUp = "/image/up.png";
+			String linkUp = "/image/arrows/up.png";
 			java.net.URL uriUp = getClass().getResource(linkUp);
 			try {
 				img = ImageIO.read(uriUp);
@@ -112,9 +142,10 @@ public class PaneGame extends JPanel {
 					((line - arrow[0]) * (this.getHeight() / nbrLigne)) + 10,
 					this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne
 							- 20, this);
+			// System.out.println("dessin");
 		}
 		if (arrow[1] != -1) {
-			String linkR = "/image/right.png";
+			String linkR = "/image/arrows/right.png";
 			java.net.URL uriR = getClass().getResource(linkR);
 			try {
 				img = ImageIO.read(uriR);
@@ -128,7 +159,7 @@ public class PaneGame extends JPanel {
 							- 20, this);
 		}
 		if (arrow[2] != -1) {
-			String linkD = "/image/down.png";
+			String linkD = "/image/arrows/down.png";
 			java.net.URL uriD = getClass().getResource(linkD);
 			try {
 				img = ImageIO.read(uriD);
@@ -141,7 +172,7 @@ public class PaneGame extends JPanel {
 							- 20, this);
 		}
 		if (arrow[3] != -1) {
-			String linkL = "/image/left.png";
+			String linkL = "/image/arrows/left.png";
 			java.net.URL uriL = getClass().getResource(linkL);
 			try {
 				img = ImageIO.read(uriL);
@@ -151,33 +182,6 @@ public class PaneGame extends JPanel {
 			g.drawImage(img,
 					((row - arrow[3]) * (this.getWidth() / nbrCol)) + 10,
 					(line * (this.getHeight() / nbrLigne)) + 10,
-					this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne
-							- 20, this);
-		}
-		//paint arrow last move
-		lastMove = grid.getLastMove();
-		if (lastMove[0] != -1) {
-			String linkLM = "/image/up.png";
-			if (lastMove[2] == 0) {
-				linkLM = "/image/up.png";
-			}
-			if (lastMove[2] == 1) {
-				linkLM = "/image/right.png";
-			}
-			if (lastMove[2] == 2) {
-				linkLM = "/image/down.png";
-			}
-			if (lastMove[2] == 3) {
-				linkLM = "/image/left.png";
-			}
-			java.net.URL uriLM = getClass().getResource(linkLM);
-			try {
-				img = ImageIO.read(uriLM);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			g.drawImage(img, ((lastMove[1]) * (this.getWidth() / nbrCol)) + 10,
-					(lastMove[0] * (this.getHeight() / nbrLigne)) + 10,
 					this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne
 							- 20, this);
 		}

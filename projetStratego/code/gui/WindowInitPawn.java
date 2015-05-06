@@ -13,16 +13,19 @@ import main.IA;
 public class WindowInitPawn extends WindowGame {
 
 	private static final long serialVersionUID = 1L;
-	public static Game gridPane1 = new Game(10, 4, 0), game = new Game(10, 1);
+	public static Game gridPane1/* = new Game(10, 4, 0) */, game = new Game(10,
+			1);
 	// public GridIA gridIA1 = new GridIA(1), gridIA2 = new GridIA(2);
 	public static int team = 1, nbPawn, nbPawns = 40, nbPlayer = 1;
-	public static int toInit = 0, side = 1;
+	public static int toInit/* = 0 */, side = 1;
 
 	public WindowInitPawn() {
 	}
 
 	public WindowInitPawn(Game game) {
 		WindowInitPawn.game = game;
+		gridPane1 = new Game(10, 4, 0);
+		toInit = 0;
 		initGame();
 	}
 

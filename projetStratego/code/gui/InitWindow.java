@@ -119,15 +119,13 @@ public class InitWindow extends WindowInitPawn {
 		combo.addActionListener(new ListGridCombo());
 
 		if (nbPawns == 40) {
-			if (toInit == 0 && game.getPlayer() != 2) {
-				// If 2 players or grid loaded
+			System.out.println("toInit: " + toInit);
+			if (toInit != 1) {
 				Center.add(load); // Search save in the 'Saves' folder
 				Center.add(combo);
-			}
-			if (toInit != 2) {
 				Center.add(play);// Launches the game with the grid
+				Center.add(auto); // Add an auto init.
 			}
-			Center.add(auto); // Add an auto init.
 			Center.add(save); // Save the grid in the 'Saves' folder
 		} else {
 			Center.add(play);// Launches the game with the grid
@@ -170,10 +168,12 @@ public class InitWindow extends WindowInitPawn {
 							toInit = 0;
 						} else if (toInit == 1) {
 							System.out.println("toInit = " + toInit);
+						} else if (toInit == 3) {
+							toInit = 0;
 						}
 						game.setComplete(game.getComplete() + 1);
 						Game gridPlayer = createGrid();
-//						gridPlayer.showGrid();
+						gridPlayer.showGrid();
 						game.placeTeam(gridPlayer.getGrid(), side);
 						fen.dispose();
 						initGame();
@@ -191,8 +191,8 @@ public class InitWindow extends WindowInitPawn {
 			}
 		});
 
-		auto.addActionListener(new ActionListener() {// TODO 
-			//AUTO button
+		auto.addActionListener(new ActionListener() {// TODO
+			// AUTO button
 			public void actionPerformed(ActionEvent arg0) {
 				GridIA gridIA = new GridIA(team);
 				for (int i = 0; i < 4; i++) {
@@ -259,16 +259,25 @@ public class InitWindow extends WindowInitPawn {
 			if (combo.getItemCount() != 0) {
 				focus = (GridStart) combo.getSelectedItem();
 				System.out.println(focus + " focus");
+				focus.changeTeam(team); // for saved grid from another team
 				gridPane1 = new Game(focus.getGrid());
 				placeGrid();
 			}
 		}
 	}
-	
-	public void placeGrid() { //TODO
+
+	public void placeGrid() { // TODO
 		pane1.setGrid(gridPane1.getGrid());
-		game.setComplete(0);
-		toInit = 1;
+		if (game.getInitGridGame() == 3) {
+			toInit = 3;
+			if (game.getComplete() == 1) {
+				// If the 2 teams have finish load/auto
+				game.setComplete(1);
+			}
+		} else {
+			game.setComplete(0);
+			toInit = 1;
+		}
 		initialize();
 		initPane2();
 		pawns.removeAllElements();
@@ -308,7 +317,8 @@ public class InitWindow extends WindowInitPawn {
 		System.out.println("ini");
 		if (nbPawns == 40) {
 			gridPane2 = new Game(6, 2, 0);
-			if (toInit != 1) {
+			if (toInit != 1 && toInit != 3) {
+				// toInit = 3 if auto/load for the 2 players
 				System.out.println("init1");
 				gridPane2.set(0, 0, spyInit);
 				gridPane2.set(0, 1, scoutInit);
@@ -374,7 +384,8 @@ public class InitWindow extends WindowInitPawn {
 		marshalInit = new Marshal(team);
 		bombInit = new Bomb(team);
 		flagInit = new Flag(team);
-		if (toInit == 1) {
+		if (toInit == 1 || toInit == 3) {
+			// toInit = 3 if auto/load for the 2 players
 			spyInit.setNbPawn(0);
 			scoutInit.setNbPawn(0);
 			minerInit.setNbPawn(0);

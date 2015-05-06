@@ -16,6 +16,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
+import com.esotericsoftware.minlog.Log;
 
 public class StratClient extends JFrame {
 
@@ -28,6 +29,7 @@ public class StratClient extends JFrame {
 	
 
 	public StratClient() {
+//		Log.set(Log.LEVEL_DEBUG);
 		Kryo kryo = client.getKryo();
 		kryo.register(main.Game.class);
 		kryo.register(main.GridIA.class);
@@ -128,7 +130,7 @@ public class StratClient extends JFrame {
 						close();
 					}
 					if (((String) object).equals("GO")) {
-						System.out.println("GOGOGOGOGO");
+//						System.out.println("GOGOGOGOGO");
 						state = 2;
 						state();
 						new InitWindow(stratclient, Oplayer);
@@ -156,6 +158,7 @@ public class StratClient extends JFrame {
 					}
 				}
 			}
+			
 		});
 		client.start();
 

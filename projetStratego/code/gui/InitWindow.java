@@ -173,7 +173,7 @@ public class InitWindow extends WindowInitPawn {
 						}
 						game.setComplete(game.getComplete() + 1);
 						Game gridPlayer = createGrid();
-						gridPlayer.showGrid();
+//						gridPlayer.showGrid();
 						game.placeTeam(gridPlayer.getGrid(), side);
 						fen.dispose();
 						initGame();

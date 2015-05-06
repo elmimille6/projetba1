@@ -67,7 +67,7 @@ public class WindowGame extends JFrame {
 						System.out.println("received game client");
 						game = (Game) object;
 						pane.recupGame(game);
-						game.showGrid();
+						
 						repaint();
 					}
 				}
@@ -87,7 +87,7 @@ public class WindowGame extends JFrame {
 		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.game = ngame;
-		System.out.println(game.level + " LEVEL WindowGame");
+//		System.out.println(game.level + " LEVEL WindowGame");
 		startTeam = game.getStartTeam();
 		paneRed = new PaneGamePawn(startTeam, game, 1);
 		paneBlue = new PaneGamePawn(startTeam, game, 2);
@@ -172,7 +172,7 @@ public class WindowGame extends JFrame {
 					int row = res[1];
 					// game.showGrid();
 					APawn pawn = game.getPawn(line, row);
-					System.out.println(game.getPlayer());
+//					System.out.println(game.getPlayer());
 					// System.out.println("pawn= " + pawn);
 					// System.out.println("focus= " + focus);
 					if (focus != null) {
@@ -406,7 +406,7 @@ public class WindowGame extends JFrame {
 								paneBlue.upGame(game);
 
 								client.sendTCP(game);
-
+								System.out.println("send client game");
 								int result = game.win();
 								// System.out
 								// .println("Result = " + result);
@@ -444,10 +444,10 @@ public class WindowGame extends JFrame {
 						}
 						att = false;
 					}
-					System.out.println("KNOW");
-					game.showKnow(0);
-					System.out.println("MOVED");
-					game.showMoved(0);
+//					System.out.println("KNOW");
+//					game.showKnow(0);
+//					System.out.println("MOVED");
+//					game.showMoved(0);
 				}
 			}).start();
 		}

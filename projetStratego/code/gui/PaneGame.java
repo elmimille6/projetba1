@@ -45,7 +45,6 @@ public class PaneGame extends JPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("pane game "+view);
 		grid.showGrid();
 		nbrLigne = grid.getLine() + 1;
 		nbrCol = grid.getRow() + 1;
@@ -77,7 +76,6 @@ public class PaneGame extends JPanel {
 							link = "/image/blue/hide.png";
 						}
 					}
-					System.out.println(link);
 					java.net.URL uri = getClass().getResource(link);
 					try {
 						img = ImageIO.read(uri);

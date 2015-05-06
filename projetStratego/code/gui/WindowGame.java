@@ -71,6 +71,22 @@ public class WindowGame extends JFrame {
 						repaint();
 					}
 				}
+				else if (object instanceof APawn){
+					System.out.println("received APAwn");
+					APawn pawn = (APawn) object;
+					int x = pawn.posX;
+					int y = pawn.posY;
+					game.getPawn(x, y).setShow(true);
+					pane.recupGame(game);
+					pane.repaint();
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+					}
+					game.getPawn(x, y).setShow(false);
+					pane.recupGame(game);
+					pane.repaint();
+				}
 			}
 		});
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -388,6 +404,8 @@ public class WindowGame extends JFrame {
 							if (focus.movePoss(game, line, row)) {
 								if (game.getPawn(line, row) != null) {
 									game.getPawn(line, row).setShow(true);
+									client.sendTCP(game.getPawn(line, row));
+									System.out.println("send pawn");
 									pane.recupArrow(arrowN);
 									repaint();
 									try {

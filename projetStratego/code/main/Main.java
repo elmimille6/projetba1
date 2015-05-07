@@ -26,8 +26,8 @@ public class Main {
 	 *            Number of arguments given.
 	 */
 	public static void main(String[] args) {
-		menu = new MenuWindow();
-//		new StratClient();
+//		menu = new MenuWindow();
+		new StratClient();
 	}
 
 	/**

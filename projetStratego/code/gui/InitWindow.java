@@ -113,6 +113,7 @@ public class InitWindow extends WindowInitPawn {
 		if (loadListGrid()) {
 			focus = list.get(0);
 			combo = new JComboBox();
+//			combo.addItem(new GridStart());
 			for (int i = 0; i < list.size(); i++) {
 				combo.addItem(list.get(i));
 			}

@@ -20,7 +20,8 @@ public class GridStart implements java.io.Serializable {
 	public String name;
 
 	public GridStart() {
-
+		this.grid=new APawn[4][10];
+		this.name="blank";
 	}
 
 	public void setGrid(APawn[][] ngrid) {

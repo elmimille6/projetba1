@@ -3,8 +3,6 @@ package main;
 import java.util.Random;
 import java.util.Vector;
 
-import com.esotericsoftware.kryo.Kryo;
-
 import pawn.*;
 
 /**

@@ -1,6 +1,8 @@
 package util;
 
 public class Dic implements java.io.Serializable {
+
+	private static final long serialVersionUID = 6856689867397939721L;
 	Object[][] tab;
 	int size = 0;
 

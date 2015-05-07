@@ -46,6 +46,7 @@ public class InitWindow extends WindowInitPawn {
 
 	private static final long serialVersionUID = 1L;
 	public Game gridPane2 = new Game(6, 2, 0);
+	public Game gridPane1 = new Game(10, 4, 0);
 	public PaneInitPawn pane1, pane2;
 	public Vector<APawn> pawns;
 	public APawn spyInit, scoutInit, minerInit, sergeantInit, lieutenantInit,
@@ -69,7 +70,7 @@ public class InitWindow extends WindowInitPawn {
 		this.startClient = startClient;
 		this.online = true;
 		this.Oplayer = Oplayer;
-		System.out.println("Oplayer=" + Oplayer);
+//		System.out.println("Oplayer=" + Oplayer);
 		init();
 	}
 

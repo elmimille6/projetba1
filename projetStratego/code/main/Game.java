@@ -26,21 +26,30 @@ public class Game implements java.io.Serializable {
 	private int[] lastMove = { -1, -1, -1 };
 	private int complete = 0;
 	private int initGridGame = 0;
-	private int gameN;
+	private int gameN, nbPawns = 40;
 
 	/**
 	 * Main constructor of the class.
 	 */
 	public Game() {
 		APawn lake = new Lake();
-		grid[4][2] = lake;
-		grid[4][3] = lake;
-		grid[5][2] = lake;
-		grid[5][3] = lake;
-		grid[4][6] = lake;
-		grid[4][7] = lake;
-		grid[5][6] = lake;
-		grid[5][7] = lake;
+		System.out.println("nbPawns: " + nbPawns);
+		if (nbPawns == 40) {
+			System.out.println("hgjugnjgkj");
+			grid[4][2] = lake;
+			grid[4][3] = lake;
+			grid[5][2] = lake;
+			grid[5][3] = lake;
+			grid[4][6] = lake;
+			grid[4][7] = lake;
+			grid[5][6] = lake;
+			grid[5][7] = lake;
+		} else {
+			grid[3][2] = lake;
+			grid[3][5] = lake;
+			grid[4][2] = lake;
+			grid[4][5] = lake;
+		}
 	}
 
 	/**
@@ -75,6 +84,7 @@ public class Game implements java.io.Serializable {
 		line = lineNumber;
 		grid = new APawn[line][row];
 		if (gameMode == 1) {
+			System.out.println("HRERERERERE");
 			APawn lake = new Lake();
 			grid[4][2] = lake;
 			grid[4][3] = lake;
@@ -165,8 +175,14 @@ public class Game implements java.io.Serializable {
 				for (int j = 0; j < grid[0].length; j++) {
 					// grid[6+i][0+j]=grid[i][j];
 					APawn pawn = grid[i][j];
-					pawn.setTeam(1);
-					this.set(6 + i, 0 + j, pawn);
+					if (pawn != null) {
+						pawn.setTeam(1);
+						if (nbPawns == 40) {
+							this.set(6 + i, 0 + j, pawn);
+						} else {
+							this.set(5 + i, 0 + j, pawn);
+						}
+					}
 
 				}
 			}
@@ -175,8 +191,14 @@ public class Game implements java.io.Serializable {
 			for (int i = 0; i < grid.length; i++) {
 				for (int j = 0; j < grid[0].length; j++) {
 					APawn pawn = grid[i][j];
-					pawn.setTeam(2);
-					this.set(3 - i, 9 - j, pawn);
+					if (pawn != null) {
+						pawn.setTeam(2);
+						if (nbPawns == 40) {
+							this.set(3 - i, 9 - j, pawn);
+						} else {
+							this.set(2 - i, 7 - j, pawn);
+						}
+					}
 				}
 			}
 		}
@@ -476,15 +498,16 @@ public class Game implements java.io.Serializable {
 	 * 
 	 * @return
 	 */
-	/*
-	 * public int getNbPawns() { return nbPawns; }
-	 */
+	public int getNbPawns() {
+		return nbPawns;
+	}
 
 	/**
 	 * 
 	 * @param nb
 	 */
 	public void setNbPawns(int nb) {
+		this.nbPawns = nb;
 	}
 
 	/**

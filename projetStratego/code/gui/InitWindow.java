@@ -564,14 +564,22 @@ public class InitWindow extends WindowInitPawn {
 	/**
 	 * Adds the chosen pawn of the gridPane2 to the gridPane1.
 	 */
-	public void addPawnOfGrid() {
+	public void addPawnOfGrid() {//TODO
 		pane2.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
 
 				if (e.getButton() == MouseEvent.BUTTON1) {
-					for (int i = 0; i < 2; i++) {
-						for (int j = 0; j < 6; j++) {
-							gridPane2.getPawn(i, j).setSelected(false);
+					if (nbPawns == 40) {
+						for (int i = 0; i < 2; i++) {
+							for (int j = 0; j < 6; j++) {
+								gridPane2.getPawn(i, j).setSelected(false);
+							}
+						}
+					} else {
+						for (int i = 0; i < 1; i++) {
+							for (int j = 0; j < 7; j++) {
+								gridPane2.getPawn(i, j).setSelected(false);
+							}
 						}
 					}
 					repaint();

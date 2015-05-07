@@ -65,7 +65,7 @@ public class WindowInitPawn extends WindowGame {
 				} else if (game.getInitGridGame() == 1 || game.getPlayer() == 2) {
 					// 1 player (RED)
 					nbPlayer = 1;
-					nbPawns = 40;
+					nbPawns = game.getNbPawns();
 					side = 1;
 					team = 1;
 					gridPane1 = Game.chosenSize(40);
@@ -73,7 +73,7 @@ public class WindowInitPawn extends WindowGame {
 				}
 			} else if (game.getInitGridGame() == 3 && game.getComplete() == 0) {// BLUE
 				nbPlayer = 1;
-				nbPawns = 40;
+				nbPawns = game.getNbPawns();
 				side = 2;
 				team = 2;
 				new InitWindow();

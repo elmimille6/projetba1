@@ -256,6 +256,7 @@ public class InitWindow extends WindowInitPawn {
 	 */
 	class ListGridCombo implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			System.out.println("hghg; " + combo.getItemCount());
 			if (combo.getItemCount() != 0) {
 				focus = (GridStart) combo.getSelectedItem();
 				System.out.println(focus + " focus");
@@ -564,7 +565,7 @@ public class InitWindow extends WindowInitPawn {
 	/**
 	 * Adds the chosen pawn of the gridPane2 to the gridPane1.
 	 */
-	public void addPawnOfGrid() {//TODO
+	public void addPawnOfGrid() {
 		pane2.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
 

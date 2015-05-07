@@ -21,36 +21,11 @@ public class Game implements java.io.Serializable {
 	private static final long serialVersionUID = 8927958880942845647L;
 	private APawn[][] grid = new APawn[10][10];
 	private int row = 10, line = 10;
-	private int turn = 1, player = 2, nbPawn = 40;
+	private int turn = 1, player = 2, nbPawns = 40;
 	public String level;
 	private int[] lastMove = { -1, -1, -1 };
 	private int complete = 0;
-	private int initGridGame = 0;
-	private int gameN, nbPawns = 40;
-
-	/**
-	 * Main constructor of the class.
-	 */
-	public Game() {
-		APawn lake = new Lake();
-		System.out.println("nbPawns: " + nbPawns);
-		if (nbPawns == 40) {
-			System.out.println("hgjugnjgkj");
-			grid[4][2] = lake;
-			grid[4][3] = lake;
-			grid[5][2] = lake;
-			grid[5][3] = lake;
-			grid[4][6] = lake;
-			grid[4][7] = lake;
-			grid[5][6] = lake;
-			grid[5][7] = lake;
-		} else {
-			grid[3][2] = lake;
-			grid[3][5] = lake;
-			grid[4][2] = lake;
-			grid[4][5] = lake;
-		}
-	}
+	private int initGridGame = 0, gameN;
 
 	/**
 	 * Constructor of the grid.
@@ -84,7 +59,6 @@ public class Game implements java.io.Serializable {
 		line = lineNumber;
 		grid = new APawn[line][row];
 		if (gameMode == 1) {
-			System.out.println("HRERERERERE");
 			APawn lake = new Lake();
 			grid[4][2] = lake;
 			grid[4][3] = lake;
@@ -95,7 +69,6 @@ public class Game implements java.io.Serializable {
 			grid[5][6] = lake;
 			grid[5][7] = lake;
 		} else if (gameMode == 2) {
-			nbPawn = 10;
 			APawn lake = new Lake();
 			grid[3][2] = lake;
 			grid[4][2] = lake;
@@ -258,7 +231,7 @@ public class Game implements java.io.Serializable {
 	 */
 	private Dic startTeam() {
 		Dic team = new Dic();
-		Vector<APawn> liste = APawn.createTeam(0, 1, nbPawn);
+		Vector<APawn> liste = APawn.createTeam(0, 1, nbPawns);
 		while (!liste.isEmpty()) {
 			if (team.isIn(liste.get(0))) {
 				team.increase(liste.get(0));

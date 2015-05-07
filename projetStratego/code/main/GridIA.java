@@ -79,10 +79,8 @@ public class GridIA {
 	 */
 	public static APawn[][] createGrid(int team) {
 		APawn[][] grid = new APawn[4][10];
-		Vector<APawn> listPawn = APawn.createTeam(0, team, 40); // 40 if 40
-																// pawns,
-																// 10 if
-																// duel
+		Vector<APawn> listPawn = APawn.createTeam(0, team, 40);
+		// 40 if 40 pawns
 		while (!listPawn.isEmpty()) {
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 10; j++) {

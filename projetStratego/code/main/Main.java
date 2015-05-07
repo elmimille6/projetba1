@@ -1,6 +1,5 @@
 package main;
 
-//import pawn.*;
 import gui.MenuWindow;
 import gui.WindowInitPawn;
 import main.Game;
@@ -38,15 +37,9 @@ public class Main {
 		initGridGame = menu.getInitGridGame();
 		typeOfGame = menu.getTypeOfGame();
 		level = menu.lvl1;
-		if (typeOfGame == 40) {
-			System.out.println("Stratego");
-			game = new Game(10, 1);
-		} else {
-			System.out.println("Stratego Duel");
-			game = new Game(8, 2);
-		}
 
 		if (typeOfGame == 40) {
+			System.out.println("Stratego");
 			game = new Game(10, 1);
 			if (initGridGame == 1 || initGridGame == 2) {
 				GridIA gridIA = new GridIA(((initGridGame) % 2) + 1);
@@ -54,7 +47,8 @@ public class Main {
 				game.setComplete(1);
 			}
 		} else {
-//			game = new Game(10, 1);
+			System.out.println("Stratego Duel");
+			game = new Game(8, 2);
 			initGridGame = 3;
 		}
 

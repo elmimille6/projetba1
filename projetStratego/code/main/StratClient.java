@@ -80,14 +80,14 @@ public class StratClient extends JFrame {
 			// this.setContentPane(panel);
 		}
 		if (state == 2) {
-			lab.setText("<html>Partie en cours, veuillez ne pas fermer cette fenètre <br>Vous êtes le joueur "+Oplayer+"</html>");
+			lab.setText("<html>Partie en cours, veuillez ne pas fermer cette fenÃªtre <br>Vous Ãªtes le joueur "+Oplayer+"</html>");
 			lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
 			this.add(lab);
 			this.repaint();
 			// this.setContentPane(panel);
 		}
 		if (state == 3) {
-			lab.setText("Veuillez attendre, votre adversaire crée sa grille");
+			lab.setText("Veuillez attendre, votre adversaire crÃ©e sa grille");
 			lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
 			this.add(lab);
 			this.repaint();

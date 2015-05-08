@@ -149,7 +149,7 @@ public abstract class APawn implements java.io.Serializable {
 	 * 
 	 * @param nbPawns
 	 * 
-	 * @return The vector of 40 pawn.
+	 * @return The vector of 40 or 10 pawns.
 	 */
 	public static Vector<APawn> createTeam(int toInit, int team, int nbPawns) {
 		Vector<APawn> listPawn = new Vector<APawn>();

@@ -21,34 +21,17 @@ public class Game implements java.io.Serializable {
 	private static final long serialVersionUID = 8927958880942845647L;
 	private APawn[][] grid = new APawn[10][10];
 	private int row = 10, line = 10;
-	private int  turn = 1, player = 2, nbPawn = 40;
+	private int turn = 1, player = 2, nbPawns = 40;
 	public String level;
-	private Dic startTeam;
 	private int[] lastMove = { -1, -1, -1 };
-	// private APawn Flag = new Flag(1), Bomb = new Bomb(1);
-	private int nbPawns = 40, complete = 0;
-	private int initGridGame = 0;
-	private int gameN;
-
-	/**
-	 * Main constructor of the class.
-	 */
-	public Game() {
-		APawn lake = new Lake();
-		grid[4][2] = lake;
-		grid[4][3] = lake;
-		grid[5][2] = lake;
-		grid[5][3] = lake;
-		grid[4][6] = lake;
-		grid[4][7] = lake;
-		grid[5][6] = lake;
-		grid[5][7] = lake;
-	}
+	private int complete = 0;
+	private int initGridGame = 0, gameN;
 
 	/**
 	 * Constructor of the grid.
 	 * 
 	 * @param grid
+	 *            The grid of the game.
 	 */
 	public Game(APawn[][] grid) {
 		this.grid = grid;
@@ -86,14 +69,13 @@ public class Game implements java.io.Serializable {
 			grid[5][6] = lake;
 			grid[5][7] = lake;
 		} else if (gameMode == 2) {
-			nbPawn = 10;
 			APawn lake = new Lake();
 			grid[3][2] = lake;
 			grid[4][2] = lake;
 			grid[3][5] = lake;
 			grid[4][5] = lake;
 		}
-		startTeam = startTeam();
+		startTeam();
 	}
 
 	/**
@@ -149,7 +131,7 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
-	 * Places the teams on each side of the grid.
+	 * Places the chosen team on the given side of the grid.
 	 * 
 	 * @param grid
 	 *            The grid of pawn to place in the grid.
@@ -166,8 +148,14 @@ public class Game implements java.io.Serializable {
 				for (int j = 0; j < grid[0].length; j++) {
 					// grid[6+i][0+j]=grid[i][j];
 					APawn pawn = grid[i][j];
-					pawn.setTeam(1);
-					this.set(6 + i, 0 + j, pawn);
+					if (pawn != null) {
+						pawn.setTeam(1);
+						if (nbPawns == 40) {
+							this.set(6 + i, 0 + j, pawn);
+						} else {
+							this.set(5 + i, 0 + j, pawn);
+						}
+					}
 
 				}
 			}
@@ -176,13 +164,30 @@ public class Game implements java.io.Serializable {
 			for (int i = 0; i < grid.length; i++) {
 				for (int j = 0; j < grid[0].length; j++) {
 					APawn pawn = grid[i][j];
-					pawn.setTeam(2);
-					this.set(3 - i, 9 - j, pawn);
+					if (pawn != null) {
+						pawn.setTeam(2);
+						if (nbPawns == 40) {
+							this.set(3 - i, 9 - j, pawn);
+						} else {
+							this.set(2 - i, 7 - j, pawn);
+						}
+					}
 				}
 			}
 		}
 	}
 
+	/**
+	 * Places the chosen team on the given side of the grid.
+	 * 
+	 * @param grid
+	 *            The GridStart grid to place in the grid.
+	 * 
+	 * @param side
+	 *            The side of the grid:<br/>
+	 *            1 in the bottom of the grid,<br/>
+	 *            2 on the top of the grid.
+	 */
 	public void placeTeam(GridStart grid, int side) {
 		placeTeam(grid.getGrid(), side);
 	}
@@ -226,7 +231,7 @@ public class Game implements java.io.Serializable {
 	 */
 	private Dic startTeam() {
 		Dic team = new Dic();
-		Vector<APawn> liste = APawn.createTeam(0, 1, nbPawn);
+		Vector<APawn> liste = APawn.createTeam(0, 1, nbPawns);
 		while (!liste.isEmpty()) {
 			if (team.isIn(liste.get(0))) {
 				team.increase(liste.get(0));
@@ -250,7 +255,6 @@ public class Game implements java.io.Serializable {
 		boolean canPlay = false;
 		boolean flag1 = false;
 		boolean flag2 = false;
-		// int winner = 0, test = 0;
 		for (int j = 0; j < this.getRow() + 1; j++) {
 			for (int i = 0; i < this.getLine() + 1; i++) {
 				if (this.getPawn(i, j) != null) {
@@ -280,57 +284,16 @@ public class Game implements java.io.Serializable {
 
 		}
 		if (!flag1) {
-			// this.showGrid();
 			return 2;
 		}
 		if (!flag2) {
-			// this.showGrid();
 			return 1;
 		}
 		if (!canPlay) {
-			// this.showGrid();
 			return (turn % 2) + 1;
 		}
 		return 0;
 	}
-
-	//
-	// if (pawn != null) {
-	// if (pawn.getTeam() == 1) {
-	// test = this.canMove(1);
-	// if (test != 0) {
-	// canPlay = false;
-	// winner = test;
-	// } else if (pawn.getClass() == Flag.getClass()) {
-	// // System.out.println("Flag 1");
-	// flag1 = true;
-	// }
-	// } else if (pawn.getTeam() == 2) {
-	// test = this.canMove(1);
-	// if (test != 0) {
-	// canPlay = false;
-	// winner = test;
-	// } else if (pawn.getClass() == Flag.getClass()) {
-	// // System.out.println("Flag 2");
-	// flag2 = true;
-	// }
-	// }
-	// }
-	// }
-	// }
-	//
-	// if (!canPlay) {
-	// // System.out.println("winner = " + winner);
-	// return winner;
-	// }
-	// if (!flag1) {
-	// return 2;
-	// }
-	// if (!flag2) {
-	// return 1;
-	// }
-	// return 0;
-	// }
 
 	/**
 	 * Returns the team of the winner or 0 if the game isn't over.
@@ -374,13 +337,6 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
-	 * 
-	 */
-	public void addComplete() {
-		complete++;
-	}
-
-	/**
 	 * Returns a grid "Game" of the chosen size.
 	 * 
 	 * @param typeOfGame
@@ -395,6 +351,14 @@ public class Game implements java.io.Serializable {
 		} else {
 			return new Game(8, 3, 0);
 		}
+	}
+
+	/**
+	 * Increments the "complete" value.<br/>
+	 * When its value is 2, the grid is complete.
+	 */
+	public void addComplete() {
+		complete++;
 	}
 
 	/**
@@ -441,25 +405,6 @@ public class Game implements java.io.Serializable {
 	public APawn[][] getGrid() {
 		return this.grid;
 	}
-
-//	/**
-//	 * Gets the view.
-//	 * 
-//	 * @return The value of view.
-//	 */
-//	public int getView() {
-//		return view;
-//	}
-//
-//	/**
-//	 * Sets a new value to the view.
-//	 * 
-//	 * @param view
-//	 *            Changes the view.
-//	 */
-//	public void setView(int view) {
-//		this.view = view;
-//	}
 
 	/**
 	 * Gets the turn.
@@ -526,9 +471,9 @@ public class Game implements java.io.Serializable {
 	 * 
 	 * @return
 	 */
-	/*
-	 * public int getNbPawns() { return nbPawns; }
-	 */
+	public int getNbPawns() {
+		return nbPawns;
+	}
 
 	/**
 	 * 

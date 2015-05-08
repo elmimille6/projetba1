@@ -42,6 +42,12 @@ import pawn.Scout;
 import pawn.Sergeant;
 import pawn.Spy;
 
+/**
+ * This class creates the window for the initialization of the grid by the
+ * player.
+ * 
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
+ */
 public class InitWindow extends WindowInitPawn {
 
 	private static final long serialVersionUID = 1L;
@@ -66,25 +72,36 @@ public class InitWindow extends WindowInitPawn {
 	public GridStart focus;
 	public Vector<GridStart> list;
 
-	public InitWindow(StratClient startClient, int Oplayer) {
-		this.startClient = startClient;
-		this.online = true;
-		this.Oplayer = Oplayer;
-//		System.out.println("Oplayer=" + Oplayer);
-		init();
-	}
-
+	/**
+	 * Main constructor of the class.
+	 */
 	public InitWindow() {
 		init();
 	}
 
+	/**
+	 * Constructor of the grid when the game is online.
+	 * 
+	 * @param startClient
+	 * @param Oplayer
+	 */
+	public InitWindow(StratClient startClient, int Oplayer) {
+		this.startClient = startClient;
+		this.online = true;
+		this.Oplayer = Oplayer;
+		init();
+	}
+
+	/**
+	 * Creates a window for the manual initialization of a new grid.<br/>
+	 * This grid is the team of the current player.
+	 */
 	public void init() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle("Initialisation de la grille");
 		this.setSize(1024, 650);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
-		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		initialize();
 
 		xSize = ((int) this.getWidth());
@@ -109,11 +126,12 @@ public class InitWindow extends WindowInitPawn {
 		JButton save = new JButton("Sauvegarder");
 		JLabel load = new JLabel("Charger une grille");
 		JButton auto = new JButton("Automatique");
+		JButton clear = new JButton("Effacer la grille");
 
 		if (loadListGrid()) {
 			focus = list.get(0);
 			combo = new JComboBox();
-//			combo.addItem(new GridStart());
+			// combo.addItem(new GridStart());
 			for (int i = 0; i < list.size(); i++) {
 				combo.addItem(list.get(i));
 			}
@@ -121,12 +139,12 @@ public class InitWindow extends WindowInitPawn {
 		combo.addActionListener(new ListGridCombo());
 
 		if (nbPawns == 40) {
-			System.out.println("toInit: " + toInit);
 			if (toInit != 1) {
 				Center.add(load); // Search save in the 'Saves' folder
 				Center.add(combo);
 				Center.add(play);// Launches the game with the grid
 				Center.add(auto); // Add an auto init.
+				Center.add(clear); // Add an auto init.
 			}
 			Center.add(save); // Save the grid in the 'Saves' folder
 		} else {
@@ -168,8 +186,6 @@ public class InitWindow extends WindowInitPawn {
 					if (!online) {
 						if (toInit == 2) {
 							toInit = 0;
-						} else if (toInit == 1) {
-							System.out.println("toInit = " + toInit);
 						} else if (toInit == 3) {
 							toInit = 0;
 						}
@@ -193,7 +209,7 @@ public class InitWindow extends WindowInitPawn {
 			}
 		});
 
-		auto.addActionListener(new ActionListener() {// TODO
+		auto.addActionListener(new ActionListener() {
 			// AUTO button
 			public void actionPerformed(ActionEvent arg0) {
 				GridIA gridIA = new GridIA(team);
@@ -203,7 +219,13 @@ public class InitWindow extends WindowInitPawn {
 					}
 				}
 				placeGrid();
-				System.out.println("AUTO");
+			}
+		});
+
+		clear.addActionListener(new ActionListener() {
+			// CLEAR button
+			public void actionPerformed(ActionEvent arg0) {
+				clearGrid();
 			}
 		});
 
@@ -227,37 +249,14 @@ public class InitWindow extends WindowInitPawn {
 		}
 	}
 
-	@SuppressWarnings("resource")
-	public boolean loadListGrid() {
-		ObjectInputStream in;
-		try {
-			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
-			System.out.println("LoadVector");
-			@SuppressWarnings("unchecked")
-			Vector<GridStart> vector = (Vector<GridStart>) in.readObject();
-			this.list = vector;
-			in.close();
-			if (vector.size() == 0) {
-				return false;
-			}
-			return true;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("here");
-			return false;
-		} catch (IOException e) {
-			System.out.println("here2");
-			return false;
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("here3");
-			return false;
-		}
-
-	}
-
+	/**
+	 * 
+	 * 
+	 * @author CAREDDA Giuliano, DUCOBU Alexandre
+	 */
 	class ListGridCombo implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			System.out.println("hghg; " + combo.getItemCount());
 			if (combo.getItemCount() != 0) {
 				focus = (GridStart) combo.getSelectedItem();
 				System.out.println(focus + " focus");
@@ -268,7 +267,42 @@ public class InitWindow extends WindowInitPawn {
 		}
 	}
 
-	public void placeGrid() { // TODO
+	/**
+	 * Loads an existing grid from the "gridStart.save" file.
+	 * 
+	 * @return true if the grid is loaded,<br/>
+	 *         false otherwise.
+	 */
+	@SuppressWarnings("resource")
+	public boolean loadListGrid() {
+		ObjectInputStream in;
+		try {
+			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
+			@SuppressWarnings("unchecked")
+			Vector<GridStart> vector = (Vector<GridStart>) in.readObject();
+			this.list = vector;
+			in.close();
+			if (vector.size() == 0) {
+				return false;
+			}
+			return true;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			return false;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+
+	/**
+	 * This method places the loaded (or automatically created) grid in the
+	 * window and clears the available pawns.
+	 */
+	public void placeGrid() {
 		pane1.setGrid(gridPane1.getGrid());
 		if (game.getInitGridGame() == 3) {
 			toInit = 3;
@@ -290,11 +324,27 @@ public class InitWindow extends WindowInitPawn {
 	}
 
 	/**
+	 * This method erases the grid in the window and reinitializes the available
+	 * pawns.
+	 */
+	public void clearGrid() {
+		gridPane1 = new Game(10, 4, 0);
+		pane1.setGrid(gridPane1.getGrid());
+		toInit = 0;
+		initialize();
+		initPane2();
+		pane2.setGrid(gridPane2.getGrid());
+		pane1.repaint();
+		pane2.repaint();
+		addPawnOfGrid();
+	}
+
+	/**
 	 * Verifies if the grid is complete and if the player can move at least one
 	 * pawn.
 	 * 
 	 * @return true if the grid is complete and if the player can move at least
-	 *         one pawn, <br/ >
+	 *         one pawn,<br/ >
 	 *         false otherwise.
 	 */
 	private boolean verifTheGrid() {
@@ -316,12 +366,10 @@ public class InitWindow extends WindowInitPawn {
 	 * Initializes the gridPane1 and gridPane2.
 	 */
 	public void initPane2() {
-		System.out.println("ini");
 		if (nbPawns == 40) {
 			gridPane2 = new Game(6, 2, 0);
 			if (toInit != 1 && toInit != 3) {
 				// toInit = 3 if auto/load for the 2 players
-				System.out.println("init1");
 				gridPane2.set(0, 0, spyInit);
 				gridPane2.set(0, 1, scoutInit);
 				gridPane2.set(0, 2, minerInit);
@@ -335,7 +383,6 @@ public class InitWindow extends WindowInitPawn {
 				gridPane2.set(1, 4, bombInit);
 				gridPane2.set(1, 5, flagInit);
 			} else {
-				System.out.println("init2");
 				gridPane2.set(0, 0, new NoPawn("spy"));
 				gridPane2.set(0, 1, new NoPawn("scout"));
 				gridPane2.set(0, 2, new NoPawn("miner"));
@@ -523,9 +570,17 @@ public class InitWindow extends WindowInitPawn {
 			public void mouseReleased(MouseEvent e) {
 
 				if (e.getButton() == MouseEvent.BUTTON1) {
-					for (int i = 0; i < 2; i++) {
-						for (int j = 0; j < 6; j++) {
-							gridPane2.getPawn(i, j).setSelected(false);
+					if (nbPawns == 40) {
+						for (int i = 0; i < 2; i++) {
+							for (int j = 0; j < 6; j++) {
+								gridPane2.getPawn(i, j).setSelected(false);
+							}
+						}
+					} else {
+						for (int i = 0; i < 1; i++) {
+							for (int j = 0; j < 7; j++) {
+								gridPane2.getPawn(i, j).setSelected(false);
+							}
 						}
 					}
 					repaint();

@@ -67,7 +67,7 @@ public class WindowGame extends JFrame {
 						System.out.println("received game client");
 						game = (Game) object;
 						pane.recupGame(game);
-						
+
 						repaint();
 						int result = game.win();
 						// System.out
@@ -85,9 +85,9 @@ public class WindowGame extends JFrame {
 							clientclose();
 						}
 					}
-					
+
 				}
-				if(object instanceof int[]){
+				if (object instanceof int[]) {
 					System.out.println("received int[]");
 					int[] res = (int[]) object;
 //					APawn pawn = game.getPawn(res[0], res[1]);
@@ -98,8 +98,7 @@ public class WindowGame extends JFrame {
 					pane.repaint();
 					
 //					pane.paintPawn(res[0], res[1]);
-				}
-				else if (object instanceof APawn){
+				} else if (object instanceof APawn) {
 					System.out.println("received APAwn");
 					APawn pawn = (APawn) object;
 					int x = pawn.posX;
@@ -135,11 +134,13 @@ public class WindowGame extends JFrame {
 		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.game = ngame;
-//		System.out.println(game.level + " LEVEL WindowGame");
+		// System.out.println(game.level + " LEVEL WindowGame");
 		startTeam = game.getStartTeam();
 		paneRed = new PaneGamePawn(startTeam, game, 1);
 		paneBlue = new PaneGamePawn(startTeam, game, 2);
 		pane = new PaneGame(game);
+		pane.setView(game.getNextTeam());
+		// When we use the last game, the current team is viewable.
 		pane.setLayout(new BorderLayout());
 		// paneRed.fixSize(this.getWidth()/12, this.getHeight());
 		this.add(paneRed, BorderLayout.WEST);
@@ -220,7 +221,7 @@ public class WindowGame extends JFrame {
 					int row = res[1];
 					// game.showGrid();
 					APawn pawn = game.getPawn(line, row);
-//					System.out.println(game.getPlayer());
+					// System.out.println(game.getPlayer());
 					// System.out.println("pawn= " + pawn);
 					// System.out.println("focus= " + focus);
 					if (focus != null) {
@@ -436,7 +437,7 @@ public class WindowGame extends JFrame {
 							if (focus.movePoss(game, line, row)) {
 								if (game.getPawn(line, row) != null) {
 									game.getPawn(line, row).setShow(true);
-									
+
 									client.sendTCP(res);
 									System.out.println("send pawn");
 									pane.recupArrow(arrowN);
@@ -495,10 +496,10 @@ public class WindowGame extends JFrame {
 						}
 						att = false;
 					}
-//					System.out.println("KNOW");
-//					game.showKnow(0);
-//					System.out.println("MOVED");
-//					game.showMoved(0);
+					// System.out.println("KNOW");
+					// game.showKnow(0);
+					// System.out.println("MOVED");
+					// game.showMoved(0);
 				}
 			}).start();
 		}

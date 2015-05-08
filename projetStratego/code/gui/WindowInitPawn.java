@@ -5,7 +5,7 @@ import main.GridIA;
 import main.IA;
 
 /**
- * This class creates the window for the initialization of the grid by the
+ * This class choose the right action for the initialization of the grid by the
  * player.
  * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
@@ -13,11 +13,9 @@ import main.IA;
 public class WindowInitPawn extends WindowGame {
 
 	private static final long serialVersionUID = 1L;
-	public static Game gridPane1/* = new Game(10, 4, 0) */, game = new Game(10,
-			1);
-	// public GridIA gridIA1 = new GridIA(1), gridIA2 = new GridIA(2);
+	public static Game gridPane1, game = new Game(10, 1);
 	public static int team = 1, nbPawn, nbPawns = 40, nbPlayer = 1;
-	public static int toInit/* = 0 */, side = 1;
+	public static int toInit, side = 1;
 
 	public WindowInitPawn() {
 	}
@@ -59,7 +57,6 @@ public class WindowInitPawn extends WindowGame {
 				new WindowGame(game);
 			} else if (game.getComplete() == 1) {
 				if (game.getInitGridGame() == 2) { // 1 player (BLUE)
-					// gridPane1 = Game.chosenSize(40);
 					nbPlayer = 1;
 					nbPawns = 40;
 					side = 2;
@@ -68,16 +65,15 @@ public class WindowInitPawn extends WindowGame {
 				} else if (game.getInitGridGame() == 1 || game.getPlayer() == 2) {
 					// 1 player (RED)
 					nbPlayer = 1;
-					nbPawns = 40;
+					nbPawns = game.getNbPawns();
 					side = 1;
 					team = 1;
 					gridPane1 = Game.chosenSize(40);
 					new InitWindow();
 				}
 			} else if (game.getInitGridGame() == 3 && game.getComplete() == 0) {// BLUE
-				// gridPane1 = Game.chosenSize(40);
 				nbPlayer = 1;
-				nbPawns = 40;
+				nbPawns = game.getNbPawns();
 				side = 2;
 				team = 2;
 				new InitWindow();

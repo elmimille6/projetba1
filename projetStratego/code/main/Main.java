@@ -1,6 +1,5 @@
 package main;
 
-//import pawn.*;
 import gui.MenuWindow;
 import gui.WindowInitPawn;
 import main.Game;
@@ -26,8 +25,8 @@ public class Main {
 	 *            Number of arguments given.
 	 */
 	public static void main(String[] args) {
-//		menu = new MenuWindow();
-		new StratClient();
+		menu = new MenuWindow();
+		// new StratClient();
 	}
 
 	/**
@@ -38,24 +37,23 @@ public class Main {
 		initGridGame = menu.getInitGridGame();
 		typeOfGame = menu.getTypeOfGame();
 		level = menu.lvl1;
-		// if (typeOfGame == 40) {
-		// System.out.println("Stratego");
-		// game = new Game(10, 1);
-		// } else {
-		// System.out.println("Stratego Duel");
-		// game = new Game(8, 1);
-		// }
 
 		if (typeOfGame == 40) {
+			System.out.println("Stratego");
 			game = new Game(10, 1);
 			if (initGridGame == 1 || initGridGame == 2) {
 				GridIA gridIA = new GridIA(((initGridGame) % 2) + 1);
 				game.placeTeam(gridIA.getGrid(), ((initGridGame) % 2) + 1);
 				game.setComplete(1);
 			}
-		} /*
-		 * else { game = new Game(10, 1); initGridGame = 3; }
-		 */
+		} else {
+			System.out.println("Stratego Duel");
+			game = new Game(8, 2);
+			initGridGame = 3;
+		}
+
+		game.setNbPawns(typeOfGame);
+		System.out.println(typeOfGame);
 		game.setPlayer(nbrPlayer);
 		game.setInitGridGame(initGridGame);
 		game.setLevel(level);

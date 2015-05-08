@@ -23,7 +23,7 @@ public class PaneGame extends JPanel {
 	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
 	public int[] lastMove = { -1, -1, -1 };
 	int view = 1;
-	int nbrCol,nbrLigne,px=-1,py=-1;
+	int nbrCol,nbrLigne;
 	Graphics graph;
 
 	/**
@@ -69,11 +69,7 @@ public class PaneGame extends JPanel {
 			for (int j = 0; j < (nbrCol); j++) {
 				if (grid.getPawn(i, j) != null) {
 					APawn pawn = grid.getPawn(i, j);
-					if(i==px && j==py){
-						link = pawn.getURI();
-						System.out.println("PAINT PAWN FUCK");
-					}
-					else if (pawn.getTeam() == view || view == 0 || pawn.getTeam() == 0 ) {
+					if (pawn.getTeam() == view || view == 0 || pawn.getTeam() == 0 ) {
 						link = pawn.getURI();
 					} 
 					else if (pawn.getShow()){
@@ -101,8 +97,7 @@ public class PaneGame extends JPanel {
 				}
 			}
 		}
-		px=-1;
-		py=-1;
+		
 
 		paintArrow(g);
 		grid.save();
@@ -240,10 +235,5 @@ public class PaneGame extends JPanel {
 	 
 	 public void setView(int view){
 		 this.view=view;
-	 }
-	 
-	 public void setPView(int[] res){
-		 px=res[0];
-		 py=res[1];
 	 }
 }

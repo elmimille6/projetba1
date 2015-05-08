@@ -69,35 +69,18 @@ public class WindowGame extends JFrame {
 						pane.recupGame(game);
 
 						repaint();
-						int result = game.win();
-						// System.out
-						// .println("Result = " + result);
-						if (result != 0) {
-							pane.setView(0);
-							playGame = false;
-							repaint();
-
-							jopWin = new JOptionPane();
-							jopWin.showMessageDialog(null, "Le joueur "
-									+ resultName[result - 1]
-									+ " gagne !", "Resultat",
-									JOptionPane.INFORMATION_MESSAGE);
-							clientclose();
-						}
 					}
 
 				}
 				if (object instanceof int[]) {
 					System.out.println("received int[]");
 					int[] res = (int[]) object;
-//					APawn pawn = game.getPawn(res[0], res[1]);
-//					pawn.setShow(!pawn.getShow());
-//					System.out.println("pawnshow "+pawn.getShow());
-//					pane.recupGame(game);
-					pane.setPView(res);
-					pane.repaint();
-					
-//					pane.paintPawn(res[0], res[1]);
+					// APawn pawn = game.getPawn(res[0], res[1]);
+					// pawn.setShow(!pawn.getShow());
+					// System.out.println("pawnshow "+pawn.getShow());
+					// pane.recupGame(game);
+					// repaint();
+					pane.paintPawn(res[0], res[1]);
 				} else if (object instanceof APawn) {
 					System.out.println("received APAwn");
 					APawn pawn = (APawn) object;
@@ -122,10 +105,6 @@ public class WindowGame extends JFrame {
 		repaint();
 	}
 
-	public void clientclose(){
-		client.close();
-	}
-	
 	/**
 	 * 
 	 * @param ngame
@@ -446,6 +425,7 @@ public class WindowGame extends JFrame {
 										Thread.sleep(2000);
 									} catch (InterruptedException e) {
 									}
+									client.sendTCP(res);
 									game.getPawn(line, row).setShow(false);
 								}
 								game = focus.move(game, line, row);

@@ -127,7 +127,7 @@ public class FrameServeur extends JFrame {
 					connection.sendTCP(-2);
 				}
 				nbrCon++;
-				System.out.println("connecté");
+				System.out.println("connecte");
 				// connection.sendTCP("serveur atteint");
 				if (nbrCon == 3) {
 					System.out.println("full close");
@@ -154,7 +154,7 @@ public class FrameServeur extends JFrame {
 			}
 
 			public void disconnected(Connection connection) {
-				System.out.println("deconnecté");
+				System.out.println("deconnecte");
 
 				if (nbrCon == 2) {
 					server.sendToAllTCP("STOP");

@@ -58,7 +58,7 @@
 
 	<target name="javadoc">
 		<mkdir dir="doc" />
-		<javadoc destdir="doc" sourcepath="code" packagenames="" additionalparam="-Xdoclint:none">
+		<javadoc destdir="doc" sourcepath="code" packagenames="" > <!-- additionalparam="-Xdoclint:none" -->  <!-- For Java 1.8 -->
 			<classpath>
 				<pathelement path="lib/kryonet-2.21-all.jar; lib/junit-4.11.jar; lib/hamcrest-core-1.3.jar" />
 			</classpath>

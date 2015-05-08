@@ -26,7 +26,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		menu = new MenuWindow();
-		// new StratClient();
+//		 new StratClient();
 	}
 
 	/**

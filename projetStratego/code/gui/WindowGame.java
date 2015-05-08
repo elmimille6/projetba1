@@ -69,34 +69,51 @@ public class WindowGame extends JFrame {
 						pane.recupGame(game);
 
 						repaint();
+						int result = game.win();
+						if (result != 0) {
+							pane.setView(0);
+							playGame = false;
+							repaint();
+
+							jopWin = new JOptionPane();
+							jopWin.showMessageDialog(null, "Le joueur "
+									+ resultName[result - 1]
+									+ " gagne !", "Resultat",
+									JOptionPane.INFORMATION_MESSAGE);
+							clientClose();
+						}
 					}
 
 				}
 				if (object instanceof int[]) {
 					System.out.println("received int[]");
 					int[] res = (int[]) object;
-					// APawn pawn = game.getPawn(res[0], res[1]);
-					// pawn.setShow(!pawn.getShow());
-					// System.out.println("pawnshow "+pawn.getShow());
-					// pane.recupGame(game);
-					// repaint();
-					pane.paintPawn(res[0], res[1]);
-				} else if (object instanceof APawn) {
-					System.out.println("received APAwn");
-					APawn pawn = (APawn) object;
-					int x = pawn.posX;
-					int y = pawn.posY;
-					game.getPawn(x, y).setShow(true);
-					pane.recupGame(game);
-					pane.repaint();
-					try {
-						Thread.sleep(2000);
-					} catch (InterruptedException e) {
-					}
-					game.getPawn(x, y).setShow(false);
-					pane.recupGame(game);
-					pane.repaint();
+					
+					 APawn pawn = game.getPawn(res[0], res[1]);
+					 pawn.setShow(!pawn.getShow());
+					 System.out.println();
+					 pane.recupGame(game);
+					 pane.repaint();
+//					 pane.recupGame(game);
+//					 repaint();
+//					pane.paintPawn(res[0], res[1]);
 				}
+//				else if (object instanceof APawn) {
+//					System.out.println("received APAwn");
+//					APawn pawn = (APawn) object;
+//					int x = pawn.posX;
+//					int y = pawn.posY;
+//					game.getPawn(x, y).setShow(true);
+//					pane.recupGame(game);
+//					pane.repaint();
+//					try {
+//						Thread.sleep(2000);
+//					} catch (InterruptedException e) {
+//					}
+//					game.getPawn(x, y).setShow(false);
+//					pane.recupGame(game);
+//					pane.repaint();
+//				}
 			}
 		});
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -105,6 +122,10 @@ public class WindowGame extends JFrame {
 		repaint();
 	}
 
+	public void clientClose(){
+		client.close();
+	}
+	
 	/**
 	 * 
 	 * @param ngame
@@ -416,8 +437,8 @@ public class WindowGame extends JFrame {
 							if (focus.movePoss(game, line, row)) {
 								if (game.getPawn(line, row) != null) {
 									game.getPawn(line, row).setShow(true);
-
-									client.sendTCP(res);
+									int[] att = {focus.posX,focus.posY};
+									client.sendTCP(att);
 									System.out.println("send pawn");
 									pane.recupArrow(arrowN);
 									repaint();
@@ -425,7 +446,7 @@ public class WindowGame extends JFrame {
 										Thread.sleep(2000);
 									} catch (InterruptedException e) {
 									}
-									client.sendTCP(res);
+									client.sendTCP(att);
 									game.getPawn(line, row).setShow(false);
 								}
 								game = focus.move(game, line, row);
@@ -504,7 +525,9 @@ public class WindowGame extends JFrame {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
+			if(e.getButton() == MouseEvent.BUTTON3 && game.getPlayer() == 2){
+				
+			}
 
 		}
 

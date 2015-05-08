@@ -40,8 +40,6 @@ public class PaneGame extends JPanel {
 	 * 
 	 */
 	public void paintComponent(Graphics g) {
-		graph = g;
-		System.out.println("paintcomponent");
 		try {
 			java.net.URL urlBack = getClass().getResource("/image/back.jpg");
 			imgBack = ImageIO.read(urlBack);
@@ -69,13 +67,12 @@ public class PaneGame extends JPanel {
 			for (int j = 0; j < (nbrCol); j++) {
 				if (grid.getPawn(i, j) != null) {
 					APawn pawn = grid.getPawn(i, j);
-					if (pawn.getTeam() == view || view == 0 || pawn.getTeam() == 0 ) {
+					 if (pawn.getShow()){
+							link = pawn.getURI();
+					 }
+					 else if (pawn.getTeam() == view || view == 0 || pawn.getTeam() == 0 ) {
 						link = pawn.getURI();
 					} 
-					else if (pawn.getShow()){
-						link = pawn.getURI();
-						System.out.println("pawnshow pc");
-					}
 					else {
 						if (pawn.getTeam() == 1) {
 							link = "/image/red/hide.png";
@@ -103,20 +100,6 @@ public class PaneGame extends JPanel {
 		grid.save();
 	}
 
-	public void paintPawn(int i, int j){
-		APawn pawn = grid.getPawn(i, j);
-		String link = pawn.getURI();
-		java.net.URL uri = getClass().getResource(link);
-		try {
-			img = ImageIO.read(uri);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		graph.drawImage(img, (j * (this.getWidth() / (nbrCol))) + 10,
-				(i * (this.getHeight() / (nbrLigne))) + 10,
-				this.getWidth() / nbrCol - 20, this.getHeight()
-						/ nbrLigne - 20, this);
-	}
 	
 	public void paintArrow(Graphics g){
 		int line = arrow[4];
@@ -163,7 +146,6 @@ public class PaneGame extends JPanel {
 					((line - arrow[0]) * (this.getHeight() / nbrLigne)) + 10,
 					this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne
 							- 20, this);
-			// System.out.println("dessin");
 		}
 		if (arrow[1] != -1) {
 			String linkR = "/image/arrows/right.png";

@@ -17,10 +17,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import online.StratClient;
 import main.Game;
 import main.IA;
 import main.Main;
-import main.StratClient;
 
 /**
  * This class creates a menu window.

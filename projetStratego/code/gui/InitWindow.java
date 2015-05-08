@@ -23,10 +23,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import online.StratClient;
 import main.Game;
 import main.GridIA;
 import main.GridStart;
-import main.StratClient;
 import pawn.APawn;
 import pawn.Bomb;
 import pawn.Captain;

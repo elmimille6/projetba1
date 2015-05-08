@@ -1,4 +1,4 @@
-package main;
+package online;
 
 import gui.InitWindow;
 import gui.WindowGame;
@@ -11,6 +11,9 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import main.Game;
+import main.GridIA;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
@@ -54,7 +57,7 @@ public class StratClient extends JFrame {
 		kryo.register(int[].class);
 //		Log.set(Log.LEVEL_DEBUG);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// askIp();
+		 askIp();
 		connect();
 		System.out.println("connect " + client.isConnected());
 		this.addWindowListener(new WindowAdapter() {
@@ -102,7 +105,6 @@ public class StratClient extends JFrame {
 	}
 
 	private void connect() {
-		// cr�e l'objet
 		client.addListener(new Listener() {
 			public void received(Connection connection, Object object) {
 				if (state ==3) {
@@ -176,7 +178,8 @@ public class StratClient extends JFrame {
 	}
 
 	public void askIp() {
-		String adIp2 = JOptionPane.showInputDialog(null,
+		JOptionPane jop = new JOptionPane();
+		String adIp2 = jop.showInputDialog(null,
 				"Veuillez taper l'adresse ip du serveur", "Adresse IP",
 				JOptionPane.QUESTION_MESSAGE);
 		if (!adIp2.isEmpty()) {

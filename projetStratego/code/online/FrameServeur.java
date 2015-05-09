@@ -1,8 +1,12 @@
 package online;
 
+import java.awt.Font;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import main.Game;
 import main.GridIA;
@@ -17,8 +21,26 @@ public class FrameServeur extends JFrame {
 	int nbrCon;
 	Game game = new Game();
 	Connection pl1, pl2;
+	JLabel lab = new JLabel();
 
 	public FrameServeur() {
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(400, 400);
+		this.setTitle("Serveur");
+		this.setVisible(true);
+		this.setLocationRelativeTo(null);
+		
+		String ip="";
+		try {
+			ip = InetAddress.getLocalHost().getHostAddress().toString();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 		game.setPlayer(3);
 //		Log.set(Log.LEVEL_DEBUG);
 		server = new Server(6000, 6000);
@@ -171,7 +193,14 @@ public class FrameServeur extends JFrame {
 			}
 		});
 		System.out.println("serveur OK");
+	
+	
+		lab.setText("Votre adresse ip locale est "+ip);
+		lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
+		this.add(lab);
 	}
+
+	
 
 	private void close() {
 		System.out.println("serveur close");

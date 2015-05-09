@@ -62,7 +62,7 @@ public class StratClient extends JFrame {
 		System.out.println("connect " + client.isConnected());
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent evt) {
-				close();
+				client.close();
 			}
 		});
 

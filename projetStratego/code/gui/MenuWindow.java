@@ -17,6 +17,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import online.FrameServeur;
 import online.StratClient;
 import main.Game;
 import main.IA;
@@ -39,7 +40,8 @@ public class MenuWindow extends JFrame {
 	private JMenuItem startSave = new JMenuItem("Utiliser la sauvegarde");
 	private JMenuItem manager = new JMenuItem(
 			"Gestionnaire de grille de depart");
-	private JMenuItem serveur = new JMenuItem("via serveur");
+	private JMenuItem client = new JMenuItem("Se connecter a un serveur");
+	private JMenuItem serveur = new JMenuItem("Heberger une partie");
 
 	// private JLabel labJeu = new JLabel("Jeu");
 
@@ -114,9 +116,15 @@ public class MenuWindow extends JFrame {
 			}
 		});
 
-		serveur.addActionListener(new ActionListener() {
+		client.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new StratClient();
+			}
+		});
+		
+		serveur.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new FrameServeur();
 			}
 		});
 
@@ -128,6 +136,7 @@ public class MenuWindow extends JFrame {
 		this.menu1.add(quit);
 		this.menuBar.add(menu1);
 
+		this.menu2.add(client);
 		this.menu2.add(serveur);
 		this.menuBar.add(menu2);
 

@@ -29,9 +29,14 @@ public class StratClient extends JFrame {
 	private int state, Oplayer;
 	private JLabel lab = new JLabel();
 	private StratClient stratclient = this;
+	private boolean local=false;
 	
 
-	public StratClient() {
+	public StratClient(){
+		init();
+	}
+	
+	public void init() {
 //		Log.set(Log.LEVEL_DEBUG);
 		Kryo kryo = client.getKryo();
 		kryo.register(main.Game.class);
@@ -57,7 +62,9 @@ public class StratClient extends JFrame {
 		kryo.register(int[].class);
 //		Log.set(Log.LEVEL_DEBUG);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 askIp();
+		 if(this.local==false){
+			 askIp();
+		 }
 		connect();
 		System.out.println("connect " + client.isConnected());
 		this.addWindowListener(new WindowAdapter() {
@@ -72,6 +79,11 @@ public class StratClient extends JFrame {
 		this.setLocationRelativeTo(null);
 		state();
 
+	}
+
+	public StratClient(boolean b) {
+		this.local=b;
+		init();
 	}
 
 	private void state() {

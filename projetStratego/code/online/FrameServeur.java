@@ -198,6 +198,7 @@ public class FrameServeur extends JFrame {
 		lab.setText("Votre adresse ip locale est "+ip);
 		lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
 		this.add(lab);
+		new StratClient(true);
 	}
 
 	

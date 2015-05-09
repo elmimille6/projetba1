@@ -2,7 +2,7 @@ package main;
 
 import gui.MenuWindow;
 import gui.WindowInitPawn;
-import main.Game;
+import online.GetIp;
 
 /**
  * This is the main class of this project.
@@ -27,6 +27,7 @@ public class Main {
 	public static void main(String[] args) {
 		menu = new MenuWindow();
 //		 new StratClient();
+//		new GetIp(null, "IP", false);
 	}
 
 	/**

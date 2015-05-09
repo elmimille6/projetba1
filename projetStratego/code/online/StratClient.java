@@ -98,7 +98,7 @@ public class StratClient extends JFrame {
 
 	}
 
-	private void close() {
+	public void close() {
 		client.close();
 		System.out.println("closeClient");
 		this.dispose();
@@ -178,13 +178,16 @@ public class StratClient extends JFrame {
 	}
 
 	public void askIp() {
-		JOptionPane jop = new JOptionPane();
-		String adIp2 = jop.showInputDialog(null,
-				"Veuillez taper l'adresse ip du serveur", "Adresse IP",
-				JOptionPane.QUESTION_MESSAGE);
-		if (!adIp2.isEmpty()) {
-			adIp = adIp2;
+		try {
+			GetIp jop = new GetIp(this, "IP", true);
+			String adIp2 = jop.showDialog();
+			if (!adIp2.isEmpty()) {
+				adIp = adIp2;
+			}
+		} catch (Exception e) {
+
 		}
+		System.out.println(adIp);
 	}
 	
 	public void setState(int state){

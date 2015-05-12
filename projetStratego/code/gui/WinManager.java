@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 
 import main.Game;
 import main.GridStart;
+import main.Main;
 
 public class WinManager extends JFrame {
 
@@ -123,7 +124,8 @@ public class WinManager extends JFrame {
 			this.list = vector;
 			in.close();
 			if (vector.size() == 0) {
-				return false;
+				Main.copyFile();
+				return load();
 			}
 			return true;
 		} catch (FileNotFoundException e) {
@@ -137,6 +139,10 @@ public class WinManager extends JFrame {
 			e.printStackTrace();
 			System.out.println("here3");
 			return false;
+		}catch (NullPointerException e) {
+			Main.copyFile();
+			System.out.println("copyfile");
+			return load();
 		}
 
 	}

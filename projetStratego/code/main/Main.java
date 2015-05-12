@@ -1,5 +1,14 @@
 package main;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.channels.FileChannel;
+import java.util.Vector;
+
 import gui.MenuWindow;
 import gui.WindowInitPawn;
 import online.GetIp;
@@ -25,6 +34,9 @@ public class Main {
 	 *            Number of arguments given.
 	 */
 	public static void main(String[] args) {
+		checkFile();
+		
+		
 		menu = new MenuWindow();
 //		 new StratClient();
 //		new GetIp(null, "IP", false);
@@ -59,5 +71,46 @@ public class Main {
 		game.setInitGridGame(initGridGame);
 		game.setLevel(level);
 		new WindowInitPawn(game);
+	}
+	
+	public static void checkFile(){
+		ObjectInputStream in;
+		try {
+			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
+			
+			in.close();
+		} catch (FileNotFoundException e) {
+			copyFile();
+			
+		} catch (IOException e) {
+			
+		} 
+	}
+	
+	public static void copyFile(){
+		FileChannel in = null; // canal d'entrée
+		FileChannel out = null; // canal de sortie
+		 
+		try {
+		  // Init
+		  in = new FileInputStream("code/ressources/GridStart.save").getChannel();
+		  out = new FileOutputStream("GridStart.save").getChannel();
+		 
+		  // Copie depuis le in vers le out
+		  in.transferTo(0, in.size(), out);
+		} catch (Exception e) {
+		  e.printStackTrace(); // n'importe quelle exception
+		} finally { // finalement on ferme
+		  if(in != null) {
+		  	try {
+			  in.close();
+			} catch (IOException e) {}
+		  }
+		  if(out != null) {
+		  	try {
+			  out.close();
+			} catch (IOException e) {}
+		  }
+		}
 	}
 }

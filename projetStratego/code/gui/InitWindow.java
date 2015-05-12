@@ -277,7 +277,7 @@ public class InitWindow extends WindowInitPawn {
 	public boolean loadListGrid() {
 		ObjectInputStream in;
 		try {
-			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
+			in = new ObjectInputStream(new FileInputStream("GridStart.save"));
 			@SuppressWarnings("unchecked")
 			Vector<GridStart> vector = (Vector<GridStart>) in.readObject();
 			this.list = vector;

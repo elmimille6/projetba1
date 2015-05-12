@@ -118,7 +118,7 @@ public class WinManager extends JFrame {
 	public boolean load() {
 		ObjectInputStream in;
 		try {
-			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
+			in = new ObjectInputStream(new FileInputStream("GridStart.save"));
 			@SuppressWarnings("unchecked")
 			Vector<GridStart> vector = (Vector<GridStart>) in.readObject();
 			this.list = vector;

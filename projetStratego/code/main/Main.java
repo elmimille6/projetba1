@@ -76,7 +76,7 @@ public class Main {
 	public static void checkFile(){
 		ObjectInputStream in;
 		try {
-			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
+			in = new ObjectInputStream(new FileInputStream("GridStart.save"));
 			
 			in.close();
 		} catch (FileNotFoundException e) {

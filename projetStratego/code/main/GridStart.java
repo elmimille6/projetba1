@@ -51,7 +51,7 @@ public class GridStart implements java.io.Serializable {
 		ObjectInputStream in;
 		Vector<GridStart> vector = new Vector<GridStart>();
 		try {
-			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
+			in = new ObjectInputStream(new FileInputStream("GridStart.save"));
 			vector = (Vector<GridStart>) in.readObject();
 			in.close();
 
@@ -68,7 +68,7 @@ public class GridStart implements java.io.Serializable {
 		ObjectOutputStream out;
 		vector.add(this);
 		try {
-			out = new ObjectOutputStream(new FileOutputStream("gridStart.save"));
+			out = new ObjectOutputStream(new FileOutputStream("GridStart.save"));
 			out.writeObject(vector);
 			out.close();
 		} catch (FileNotFoundException e) {
@@ -86,7 +86,7 @@ public class GridStart implements java.io.Serializable {
 		ObjectInputStream in;
 		Vector<GridStart> vector = new Vector<GridStart>();
 		try {
-			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
+			in = new ObjectInputStream(new FileInputStream("GridStart.save"));
 			vector = (Vector<GridStart>) in.readObject();
 			in.close();
 
@@ -114,7 +114,7 @@ public class GridStart implements java.io.Serializable {
 
 		vector.removeElementAt(ind);
 		try {
-			out = new ObjectOutputStream(new FileOutputStream("gridStart.save"));
+			out = new ObjectOutputStream(new FileOutputStream("GridStart.save"));
 			out.writeObject(vector);
 			out.close();
 		} catch (FileNotFoundException e) {

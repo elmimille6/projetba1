@@ -88,7 +88,7 @@ public class Main {
 	}
 	
 	public static void copyFile(){
-		FileChannel in = null; // canal d'entrée
+		FileChannel in = null; // canal d'entree
 		FileChannel out = null; // canal de sortie
 		 
 		try {

@@ -8,7 +8,7 @@
 
 	<target name="test"  depends="build">
 		<mkdir dir="junit"/>
-		<junit printsummary="yes" showoutput="yes">
+		<junit fork="true" printsummary="yes" showoutput="yes">
 			<formatter type="xml"/>
 			<classpath>
 				<pathelement path="build/classes"/>

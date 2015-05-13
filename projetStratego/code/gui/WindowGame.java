@@ -55,7 +55,7 @@ public class WindowGame extends JFrame {
 	private JCheckBoxMenuItem showGrid = new JCheckBoxMenuItem(
 			"Montrer toute la grille");
 	private JCheckBoxMenuItem showPawn = new JCheckBoxMenuItem(
-			"Montrer les pion connu");
+			"Montrer les pions connus");
 
 	/**
 	 * Main constructor of the class.

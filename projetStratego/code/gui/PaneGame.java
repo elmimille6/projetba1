@@ -36,9 +36,7 @@ public class PaneGame extends JPanel {
 		this.grid = grid;
 	}
 
-	/**
-	 * 
-	 */
+	@Override
 	public void paintComponent(Graphics g) {
 		try {
 			java.net.URL urlBack = getClass().getResource("/image/back.jpg");
@@ -52,12 +50,10 @@ public class PaneGame extends JPanel {
 		g.drawImage(imgBack, 0, 0, this.getWidth(), this.getHeight(), this);
 		// dessine les lignes
 		for (int lig = 1; lig < nbrCol; lig++) {
-			g.drawLine((this.getWidth() / nbrCol) * lig, 0,
-					(this.getWidth() / nbrCol) * lig, this.getHeight());
+			g.drawLine((this.getWidth() / nbrCol) * lig, 0, (this.getWidth() / nbrCol) * lig, this.getHeight());
 		}
 		for (int lig = 1; lig < nbrLigne; lig++) {
-			g.drawLine(0, (this.getHeight() / nbrLigne) * lig, this.getWidth(),
-					(this.getHeight() / nbrLigne) * lig);
+			g.drawLine(0, (this.getHeight() / nbrLigne) * lig, this.getWidth(), (this.getHeight() / nbrLigne) * lig);
 		}
 
 		// dessine les images des pions selon la grid
@@ -70,11 +66,9 @@ public class PaneGame extends JPanel {
 						link = pawn.getURI();
 					} else if (pawn.getShow()) {
 						link = pawn.getURI();
-					} else if (pawn.getTeam() == view || view == 0
-							|| pawn.getTeam() == 0) {
+					} else if (pawn.getTeam() == view || view == 0 || pawn.getTeam() == 0) {
 						link = pawn.getURI();
-					} else if (pawn.getTeam() == view || view == 0
-							|| pawn.getTeam() == 0) {
+					} else if (pawn.getTeam() == view || view == 0 || pawn.getTeam() == 0) {
 						link = pawn.getURI();
 					} else {
 						if (pawn.getTeam() == 1) {
@@ -90,10 +84,7 @@ public class PaneGame extends JPanel {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					g.drawImage(img, (j * (this.getWidth() / (nbrCol))) + 10,
-							(i * (this.getHeight() / (nbrLigne))) + 10,
-							this.getWidth() / nbrCol - 20, this.getHeight()
-									/ nbrLigne - 20, this);
+					g.drawImage(img, (j * (this.getWidth() / (nbrCol))) + 10, (i * (this.getHeight() / (nbrLigne))) + 10, this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne - 20, this);
 				}
 			}
 		}
@@ -103,8 +94,10 @@ public class PaneGame extends JPanel {
 	}
 
 	/**
+	 * paint the arrow of the possible move when a pawn is focused
 	 * 
 	 * @param g
+	 *            a graphics object
 	 */
 	public void paintArrow(Graphics g) {
 		int line = arrow[4];
@@ -132,10 +125,7 @@ public class PaneGame extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			g.drawImage(img, ((lastMove[1]) * (this.getWidth() / nbrCol)) + 10,
-					(lastMove[0] * (this.getHeight() / nbrLigne)) + 10,
-					this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne
-							- 20, this);
+			g.drawImage(img, ((lastMove[1]) * (this.getWidth() / nbrCol)) + 10, (lastMove[0] * (this.getHeight() / nbrLigne)) + 10, this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne - 20, this);
 		}
 		// dessine les fleches selon le focus
 		if (arrow[0] != -1) {
@@ -146,10 +136,7 @@ public class PaneGame extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			g.drawImage(img, (row * (this.getWidth() / nbrCol)) + 10,
-					((line - arrow[0]) * (this.getHeight() / nbrLigne)) + 10,
-					this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne
-							- 20, this);
+			g.drawImage(img, (row * (this.getWidth() / nbrCol)) + 10, ((line - arrow[0]) * (this.getHeight() / nbrLigne)) + 10, this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne - 20, this);
 		}
 		if (arrow[1] != -1) {
 			String linkR = "/image/arrows/right.png";
@@ -159,11 +146,7 @@ public class PaneGame extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			g.drawImage(img,
-					((row + arrow[1]) * (this.getWidth() / nbrCol)) + 10,
-					(line * (this.getHeight() / nbrLigne)) + 10,
-					this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne
-							- 20, this);
+			g.drawImage(img, ((row + arrow[1]) * (this.getWidth() / nbrCol)) + 10, (line * (this.getHeight() / nbrLigne)) + 10, this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne - 20, this);
 		}
 		if (arrow[2] != -1) {
 			String linkD = "/image/arrows/down.png";
@@ -173,10 +156,7 @@ public class PaneGame extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			g.drawImage(img, (row * (this.getWidth() / nbrCol)) + 10,
-					((line + arrow[2]) * (this.getHeight() / nbrLigne)) + 10,
-					this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne
-							- 20, this);
+			g.drawImage(img, (row * (this.getWidth() / nbrCol)) + 10, ((line + arrow[2]) * (this.getHeight() / nbrLigne)) + 10, this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne - 20, this);
 		}
 		if (arrow[3] != -1) {
 			String linkL = "/image/arrows/left.png";
@@ -186,11 +166,7 @@ public class PaneGame extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			g.drawImage(img,
-					((row - arrow[3]) * (this.getWidth() / nbrCol)) + 10,
-					(line * (this.getHeight() / nbrLigne)) + 10,
-					this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne
-							- 20, this);
+			g.drawImage(img, ((row - arrow[3]) * (this.getWidth() / nbrCol)) + 10, (line * (this.getHeight() / nbrLigne)) + 10, this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne - 20, this);
 		}
 	}
 
@@ -215,16 +191,24 @@ public class PaneGame extends JPanel {
 	}
 
 	/**
+	 * set the view to know which pawn are visible or hide
 	 * 
 	 * @param view
+	 *            0 if all pawn is visible <br/>
+	 *            1 if pawn of team 1 is visible <br/>
+	 *            2 if pawn of the team 2 is visible <br/>
+	 *            3 if all pawn is hide
 	 */
 	public void setView(int view) {
 		this.view = view;
 	}
 
 	/**
+	 * set the showKnow to know if the know pawn is visible or not
 	 * 
 	 * @param know
+	 *            true if the know pawn are visible <br/>
+	 *            false if the know pawn are hide
 	 */
 	public void setShowKnow(boolean know) {
 		this.showKnow = know;

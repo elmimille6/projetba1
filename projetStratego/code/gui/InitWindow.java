@@ -246,7 +246,7 @@ public class InitWindow extends WindowInitPawn {
 	}
 
 	/**
-	 * 
+	 * action listener for the combo
 	 * 
 	 * @author CAREDDA Giuliano, DUCOBU Alexandre
 	 */

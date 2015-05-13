@@ -9,6 +9,12 @@ import main.Game;
 import pawn.APawn;
 import util.Dic;
 
+/**
+ * panel which display the number of the pawn in the game of each team
+ * 
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
+ *
+ */
 public class PaneGamePawn extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -20,10 +26,14 @@ public class PaneGamePawn extends JPanel {
 	boolean move;
 
 	/**
+	 * main constructor of the object
 	 * 
 	 * @param dic
+	 *            dic object of the start team
 	 * @param game
+	 *            game object of the current game
 	 * @param side
+	 *            which team to count the pawn
 	 */
 	public PaneGamePawn(Dic dic, Game game, int side) {
 		this.setLayout(new GridLayout(15, 1));
@@ -34,31 +44,24 @@ public class PaneGamePawn extends JPanel {
 	}
 
 	/**
-	 * 
-	 * @param width
-	 * @param heigth
-	 */
-	public void fixSize(int width, int heigth) {
-		this.width = width;
-		this.height = heigth;
-	}
-
-	/**
+	 * methods called to update the panel
 	 * 
 	 * @param game
+	 *            the updated game object
 	 */
 	public void upGame(Game game) {
 		move = true;
 		grid = game;
 		count = count();
 		this.removeAll();
-		this.affichage();
+		this.display();
 		this.validate();
 	}
 
 	/**
+	 * methods called to count the pawn
 	 * 
-	 * @return
+	 * @return the dic object with the results of the count
 	 */
 	public Dic count() {
 		Dic dic = new Dic();
@@ -80,9 +83,9 @@ public class PaneGamePawn extends JPanel {
 	}
 
 	/**
-	 * 
+	 * called when the panel is updating, display the panel
 	 */
-	public void affichage() {
+	public void display() {
 		JLabel lTeam;
 		if (side == 1) {
 			lTeam = new JLabel("  Equipe rouge");
@@ -92,10 +95,7 @@ public class PaneGamePawn extends JPanel {
 		this.add(lTeam);
 		int g = startTeam.getSize();
 		for (int i = 0; i < g; i++) {
-			JLabel label = new JLabel("  "
-					+ ((APawn) startTeam.getObject(i)).getNamePawn() + " : "
-					+ count.get(startTeam.getObject(i)) + "/"
-					+ startTeam.get(i) + "  ");
+			JLabel label = new JLabel("  " + ((APawn) startTeam.getObject(i)).getNamePawn() + " : " + count.get(startTeam.getObject(i)) + "/" + startTeam.get(i) + "  ");
 			this.add(label);
 		}
 		move = false;

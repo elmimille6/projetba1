@@ -15,8 +15,9 @@ import main.IA;
 import pawn.APawn;
 
 /**
+ * Class of the frame whith the progress bar when a testia is on progress
  * 
- * @author 140897
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
  *
  */
 public class ProgressTestIa extends JFrame {
@@ -30,10 +31,14 @@ public class ProgressTestIa extends JFrame {
 	private int win1, win2;
 
 	/**
+	 * main constructor of the class
 	 * 
 	 * @param nbr
+	 *            number of test to run
 	 * @param lvl1
+	 *            level of the first ai
 	 * @param lvl2
+	 *            level of the second ai
 	 */
 	public ProgressTestIa(int nbr, String lvl1, String lvl2) {
 		this.nbr = nbr;
@@ -56,6 +61,7 @@ public class ProgressTestIa extends JFrame {
 		launch = new JButton("Relancer");
 
 		launch.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent event) {
 				t = new Thread(new Traitement());
 				t.start();
@@ -69,7 +75,7 @@ public class ProgressTestIa extends JFrame {
 	}
 
 	/**
-	 * 
+	 * methods called at the beginning and the ending of the test to change the default close operation
 	 */
 	public void changeClose() {
 		if (dispose == 0) {
@@ -80,15 +86,17 @@ public class ProgressTestIa extends JFrame {
 	}
 
 	/**
+	 * the threads who run the test
 	 * 
-	 * @author 140897
+	 * @author CAREDDA Giuliano, DUCOBU Alexandre
 	 *
 	 */
 	class Traitement implements Runnable {
-		
+
 		/**
-		 * 
+		 * run the test
 		 */
+		@Override
 		@SuppressWarnings("static-access")
 		public void run() {
 			win1 = 0;
@@ -139,10 +147,7 @@ public class ProgressTestIa extends JFrame {
 			int moy1 = (int) imoy1;
 			int moy2 = (int) imoy2;
 			JOptionPane jop1 = new JOptionPane();
-			jop1.showMessageDialog(null, "Victoire de l'IA 1: " + lvl1 + ": "
-					+ win1 + " soit " + moy1 + " %\nVictoire de l'IA 2 : "
-					+ lvl2 + ": " + win2 + " soit " + moy2 + " %", "Resultat",
-					JOptionPane.INFORMATION_MESSAGE);
+			jop1.showMessageDialog(null, "Victoire de l'IA 1: " + lvl1 + ": " + win1 + " soit " + moy1 + " %\nVictoire de l'IA 2 : " + lvl2 + ": " + win2 + " soit " + moy2 + " %", "Resultat", JOptionPane.INFORMATION_MESSAGE);
 			launch.setEnabled(true);
 			dispose = 0;
 			changeClose();

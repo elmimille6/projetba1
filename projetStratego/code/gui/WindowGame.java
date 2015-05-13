@@ -64,6 +64,12 @@ public class WindowGame extends JFrame {
 
 	}
 
+	/**
+	 * 
+	 * @param ngame
+	 * @param client
+	 * @param Oplayer
+	 */
 	public WindowGame(Game ngame, Client client, int Oplayer) {
 		this(ngame);
 		this.game.setGameN(1);
@@ -86,9 +92,8 @@ public class WindowGame extends JFrame {
 
 							jopWin = new JOptionPane();
 							jopWin.showMessageDialog(null, "Le joueur "
-									+ resultName[result - 1]
-									+ " gagne !", "Resultat",
-									JOptionPane.INFORMATION_MESSAGE);
+									+ resultName[result - 1] + " gagne !",
+									"Resultat", JOptionPane.INFORMATION_MESSAGE);
 							clientClose();
 						}
 					}
@@ -112,10 +117,13 @@ public class WindowGame extends JFrame {
 		repaint();
 	}
 
-	public void clientClose(){
+	/**
+	 * 
+	 */
+	public void clientClose() {
 		client.close();
 	}
-	
+
 	/**
 	 * 
 	 * @param ngame
@@ -216,6 +224,11 @@ public class WindowGame extends JFrame {
 
 	}
 
+	/**
+	 * 
+	 * @author alexandre
+	 *
+	 */
 	class MouseGame implements MouseListener {
 		int posX, posY;
 
@@ -450,7 +463,7 @@ public class WindowGame extends JFrame {
 							if (focus.movePoss(game, line, row)) {
 								if (game.getPawn(line, row) != null) {
 									game.getPawn(line, row).setShow(true);
-									int[] att = {focus.posX,focus.posY};
+									int[] att = { focus.posX, focus.posY };
 									client.sendTCP(att);
 									pane.recupArrow(arrowN);
 									repaint();
@@ -527,8 +540,8 @@ public class WindowGame extends JFrame {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			if(e.getButton() == MouseEvent.BUTTON3 && game.getPlayer() == 2){
-				
+			if (e.getButton() == MouseEvent.BUTTON3 && game.getPlayer() == 2) {
+
 			}
 
 		}

@@ -32,11 +32,8 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		checkFile();
-		
-		
+
 		menu = new MenuWindow();
-//		 new StratClient();
-//		new GetIp(null, "IP", false);
 	}
 
 	/**
@@ -66,45 +63,55 @@ public class Main {
 		game.setLevel(level);
 		new WindowInitPawn(game);
 	}
-	
-	public static void checkFile(){
+
+	/**
+	 * This method verifies if the 'GridStart.save' file exists.<br/>
+	 * If it doesn't, the method calls the 'copyFile' method.
+	 */
+	public static void checkFile() {
 		ObjectInputStream in;
 		try {
-			in = new ObjectInputStream(new FileInputStream("gridStart.save"));
-			
+			in = new ObjectInputStream(new FileInputStream("GridStart.save"));
+
 			in.close();
 		} catch (FileNotFoundException e) {
 			copyFile();
-			
 		} catch (IOException e) {
-			
-		} 
+
+		}
 	}
-	
-	public static void copyFile(){
+
+	/**
+	 * This method copies the 'GridStart.save' file located in 'ressources' to
+	 * the root of the project.
+	 */
+	public static void copyFile() {
 		FileChannel in = null; // canal d'entree
 		FileChannel out = null; // canal de sortie
-		 
+
 		try {
-		  // Init
-		  in = new FileInputStream("code/ressources/GridStart.save").getChannel();
-		  out = new FileOutputStream("GridStart.save").getChannel();
-		 
-		  // Copie depuis le in vers le out
-		  in.transferTo(0, in.size(), out);
+			// Init
+			in = new FileInputStream("code/ressources/GridStart.save")
+					.getChannel();
+			out = new FileOutputStream("GridStart.save").getChannel();
+
+			// Copie depuis le in vers le out
+			in.transferTo(0, in.size(), out);
 		} catch (Exception e) {
-		  e.printStackTrace(); // n'importe quelle exception
+			e.printStackTrace(); // n'importe quelle exception
 		} finally { // finalement on ferme
-		  if(in != null) {
-		  	try {
-			  in.close();
-			} catch (IOException e) {}
-		  }
-		  if(out != null) {
-		  	try {
-			  out.close();
-			} catch (IOException e) {}
-		  }
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+				}
+			}
+			if (out != null) {
+				try {
+					out.close();
+				} catch (IOException e) {
+				}
+			}
 		}
 	}
 }

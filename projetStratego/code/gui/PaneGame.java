@@ -74,8 +74,10 @@ public class PaneGame extends JPanel {
 					 }
 					 else if (pawn.getTeam() == view || view == 0 || pawn.getTeam() == 0 ) {
 						link = pawn.getURI();
-					} 
-					else {
+					} else if (pawn.getTeam() == view || view == 0
+							|| pawn.getTeam() == 0) {
+						link = pawn.getURI();
+					} else {
 						if (pawn.getTeam() == 1) {
 							link = "/image/red/hide.png";
 						}
@@ -96,19 +98,16 @@ public class PaneGame extends JPanel {
 				}
 			}
 		}
-		
 
 		paintArrow(g);
 		grid.save();
 	}
 
-	
-	public void paintArrow(Graphics g){
+	public void paintArrow(Graphics g) {
 		int line = arrow[4];
 		int row = arrow[5];
-		
 
-		//paint arrow last move
+		// paint arrow last move
 		lastMove = grid.getLastMove();
 		if (lastMove[0] != -1) {
 			String linkLM = "/image/arrows/up_moved.png";
@@ -191,7 +190,7 @@ public class PaneGame extends JPanel {
 							- 20, this);
 		}
 	}
-	
+
 	/**
 	 * Gets the array 'nouvArrow' and store it into 'arrow'.
 	 * 

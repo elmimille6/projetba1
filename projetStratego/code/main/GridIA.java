@@ -111,7 +111,6 @@ public class GridIA {
 			l2 += grid[1][i].getValue();
 			l3 += grid[2][i].getValue();
 			l4 += grid[3][i].getValue();
-			// if (grid[2][i] instanceof Flag) {
 			if (grid[2][i].getClass() == Flag.class) {
 				if (i != 0) {
 					if (grid[2][i - 1].getClass() == Bomb.class

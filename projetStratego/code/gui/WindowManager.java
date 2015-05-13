@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,30 +20,29 @@ import main.Game;
 import main.GridStart;
 import main.Main;
 
-public class WinManager extends JFrame {
+public class WindowManager extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6421255455563013157L;
 	private Vector<GridStart> list;
-	private JComboBox combo;
+	private JComboBox<GridStart> combo;
 	private JButton newGrid, change, delete;
 	private GridStart focus;
 	public PaneInitPawn panelCenter;
 	public JPanel paneCombo = new JPanel();
 
-	public WinManager(int i) {
+	public WindowManager(int i) {
 		this.setLayout(new GridLayout());
 
 	}
 
-	public WinManager() {
+	public WindowManager() {
 		this.setLayout(new BorderLayout());
 		this.setTitle("Gestionnaire de grille de depart ");
 		this.setSize(800, 400);
 		this.setLocationRelativeTo(null);
-		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		if (load()) {
 			JPanel paneNorth = new JPanel();
@@ -53,7 +50,7 @@ public class WinManager extends JFrame {
 			focus = list.get(0);
 			paneNorth.setLayout(new GridLayout(1, 3));
 			paneSouth.setLayout(new GridLayout(1, 2));
-			combo = new JComboBox();
+			combo = new JComboBox<GridStart>();
 			for (int i = 0; i < list.size(); i++) {
 				combo.addItem(list.get(i));
 			}
@@ -78,8 +75,6 @@ public class WinManager extends JFrame {
 			paneNorth.add(paneNouv);
 
 			panelCenter = new PaneInitPawn();
-			// panelCenter.setMinimumSize(new Dimension(this.getWidth(),300));
-			// paneSouth.setSize(50, 50);
 
 			this.add(paneNorth, BorderLayout.NORTH);
 			this.add(panelCenter, BorderLayout.CENTER);
@@ -89,18 +84,6 @@ public class WinManager extends JFrame {
 			/* WindowInitPawn fen = */new WindowInitPawn(new Game(10, 4, 0), 2);
 			close();
 		}
-		// this.addFocusListener(new FocusListener() {
-		// // Arriv�e du focus
-		// public void focusGained(FocusEvent e) {
-		// upCombo();
-		// System.out.println("focus");
-		// }
-		//
-		// @Override
-		// public void focusLost(FocusEvent arg0) {
-		// System.out.println("lost focus");
-		// }
-		// });
 	}
 
 	public void upCombo() {
@@ -129,19 +112,13 @@ public class WinManager extends JFrame {
 			}
 			return true;
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("here");
 			return false;
 		} catch (IOException e) {
-			System.out.println("here2");
 			return false;
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("here3");
 			return false;
 		}catch (NullPointerException e) {
 			Main.copyFile();
-			System.out.println("copyfile");
 			return load();
 		}
 
@@ -155,7 +132,6 @@ public class WinManager extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if (combo.getItemCount() != 0) {
 				focus = (GridStart) combo.getSelectedItem();
-				System.out.println(focus + " focus");
 				panelCenter.setGrid(focus.getGrid());
 				panelCenter.repaint();
 			}
@@ -178,15 +154,9 @@ public class WinManager extends JFrame {
 
 	class actionModif implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Modif");
 			new WindowInitPawn(new Game(focus.getGrid()), 1);
 			close();
 		}
 	}
 
-	class ItemState implements ItemListener {
-		public void itemStateChanged(ItemEvent e) {
-			System.out.println("Evenement declenche sur : " + e.getItem());
-		}
-	}
 }

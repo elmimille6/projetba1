@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import main.Game;
-import main.GridIA;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
@@ -37,7 +36,7 @@ public class StratClient extends JFrame {
 	}
 	
 	public void init() {
-//		Log.set(Log.LEVEL_DEBUG);
+		Log.set(Log.LEVEL_NONE);
 		Kryo kryo = client.getKryo();
 		kryo.register(main.Game.class);
 		kryo.register(main.GridIA.class);
@@ -66,7 +65,6 @@ public class StratClient extends JFrame {
 			 askIp();
 		 }
 		connect();
-		System.out.println("connect " + client.isConnected());
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent evt) {
 				client.close();
@@ -112,7 +110,6 @@ public class StratClient extends JFrame {
 
 	public void close() {
 		client.close();
-		System.out.println("closeClient");
 		this.dispose();
 	}
 
@@ -131,8 +128,6 @@ public class StratClient extends JFrame {
 					}
 				}
 				if (object instanceof String) {
-					System.out.println("String");
-					System.out.println(object);
 					if (((String) object).equals("FULL")) {
 						JOptionPane
 								.showMessageDialog(
@@ -140,11 +135,9 @@ public class StratClient extends JFrame {
 										"Connexion impossible, le serveur est plein, veuillez patienter",
 										"Serveur plein",
 										JOptionPane.INFORMATION_MESSAGE);
-						System.out.println("client full close");
 						close();
 					}
 					if (((String) object).equals("GO")) {
-//						System.out.println("GOGOGOGOGO");
 						state = 2;
 						state();
 						new InitWindow(stratclient, Oplayer);
@@ -153,11 +146,8 @@ public class StratClient extends JFrame {
 
 				}
 				if (object instanceof Integer) {
-					System.out.println("integer");
-					System.out.println(object);
 					if ((Integer) object == 1) {
 						state = 1;
-						// System.out.println("state=1");
 						state();
 					}
 					if ((Integer) object == 2) {
@@ -179,7 +169,6 @@ public class StratClient extends JFrame {
 		try {
 			client.connect(5000, adIp, 54555, 54777);
 		} catch (IOException e) {
-			e.printStackTrace();
 			JOptionPane.showMessageDialog(null,
 					"Connexion impossible, veuillez verifier l'adresse.",
 					"Erreur", JOptionPane.ERROR_MESSAGE);
@@ -199,7 +188,6 @@ public class StratClient extends JFrame {
 		} catch (Exception e) {
 
 		}
-		System.out.println(adIp);
 	}
 	
 	public void setState(int state){

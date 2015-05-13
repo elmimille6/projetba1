@@ -24,7 +24,7 @@ public class PaneGame extends JPanel {
 	public int[] lastMove = { -1, -1, -1 };
 	int view = 1;
 	int nbrCol,nbrLigne;
-	Graphics graph;
+	boolean showKnow = false;
 
 	/**
 	 * Constructor of the class.
@@ -46,7 +46,6 @@ public class PaneGame extends JPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		grid.showGrid();
 		nbrLigne = grid.getLine() + 1;
 		nbrCol = grid.getRow() + 1;
 		// dessine l image de fond
@@ -67,7 +66,10 @@ public class PaneGame extends JPanel {
 			for (int j = 0; j < (nbrCol); j++) {
 				if (grid.getPawn(i, j) != null) {
 					APawn pawn = grid.getPawn(i, j);
-					 if (pawn.getShow()){
+					 if(pawn.getKnow() && showKnow){
+						 link = pawn.getURI();
+					 }
+					else if (pawn.getShow()){
 							link = pawn.getURI();
 					 }
 					 else if (pawn.getTeam() == view || view == 0 || pawn.getTeam() == 0 ) {
@@ -201,21 +203,20 @@ public class PaneGame extends JPanel {
 	}
 
 	/**
-	 * Retrieves the grid in parameter.
+	 * Retrieves the game in parameter.
 	 * 
-	 * @param nouvGrid
-	 *            The grid.
+	 * @param game
+	 *            The game.
 	 */
-	/*public void recupGrid(Game nouvGrid) {
-		grid = nouvGrid;
-		lastMove = nouvGrid.getLastMove();
-	}*/
-
 	 public void recupGame(Game game){
 	 grid= game;
 	 }
 	 
 	 public void setView(int view){
 		 this.view=view;
+	 }
+	 
+	 public void setShowKnow(boolean know){
+		 this.showKnow=know;
 	 }
 }

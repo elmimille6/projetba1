@@ -1,17 +1,14 @@
 package main;
 
+import gui.MenuWindow;
+import gui.WindowInitPawn;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.nio.channels.FileChannel;
-import java.util.Vector;
-
-import gui.MenuWindow;
-import gui.WindowInitPawn;
-import online.GetIp;
 
 /**
  * This is the main class of this project.
@@ -52,7 +49,6 @@ public class Main {
 		level = menu.lvl1;
 
 		if (typeOfGame == 40) {
-			System.out.println("Stratego");
 			game = new Game(10, 1);
 			if (initGridGame == 1 || initGridGame == 2) {
 				GridIA gridIA = new GridIA(((initGridGame) % 2) + 1);
@@ -60,13 +56,11 @@ public class Main {
 				game.setComplete(1);
 			}
 		} else {
-			System.out.println("Stratego Duel");
 			game = new Game(8, 2);
 			initGridGame = 3;
 		}
 
 		game.setNbPawns(typeOfGame);
-		System.out.println(typeOfGame);
 		game.setPlayer(nbrPlayer);
 		game.setInitGridGame(initGridGame);
 		game.setLevel(level);

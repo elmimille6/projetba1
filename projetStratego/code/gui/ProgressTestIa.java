@@ -73,11 +73,9 @@ public class ProgressTestIa extends JFrame {
 			dispose = 1;
 			changeClose();
 			launch.setEnabled(false);
-			System.out.println(lvl1 + "   " + lvl2);
 			GridIA grid1 = new GridIA(1, 1);
 			GridIA grid2 = new GridIA(2, 1);
 			for (int i = 0; i < nbr; i++) {
-				// System.out.println("debut");
 				try {
 					Thread.sleep(10L);
 				} catch (InterruptedException e) {
@@ -91,20 +89,14 @@ public class ProgressTestIa extends JFrame {
 				grid2 = new GridIA(2, IA.getIntLvl(lvl2));
 				game.placeTeam(grid1.getGrid(), 1);
 				game.placeTeam(grid2.getGrid(), 2);
-				game.showGrid();
 				int gameWin = 0;
 				while (gameWin == 0) {
-					// System.out.println("boucle");
 					if ((((game.getTurn() + 1) % 2) + 1) == 1) {
-						// System.out.println("1if");
 						int[][] next = ia1.getNext(game);
-						// System.out.println("afternext1");
 						APawn pa = game.getPawn(next[0][0], next[0][1]);
 						pa.move(game, next[1][0], next[1][1]);
 						game.addTurn();
-						// System.out.println("fin if1");
 					} else if ((((game.getTurn() + 1) % 2) + 1) == 2) {
-						// System.out.println("2if");
 						int[][] next = ia2.getNext(game);
 						APawn pa = game.getPawn(next[0][0], next[0][1]);
 						pa.move(game, next[1][0], next[1][1]);
@@ -112,8 +104,6 @@ public class ProgressTestIa extends JFrame {
 					}
 					gameWin = game.win();
 				}
-				game.showGrid();
-				System.out.println("WIN GAME  " + gameWin);
 				if (gameWin == 1) {
 					win1++;
 				} else if (gameWin == 2) {
@@ -130,7 +120,6 @@ public class ProgressTestIa extends JFrame {
 					+ win1 + " soit " + moy1 + " %\nVictoire de l'IA 2 : "
 					+ lvl2 + ": " + win2 + " soit " + moy2 + " %", "Resultat",
 					JOptionPane.INFORMATION_MESSAGE);
-			System.out.println("ia1= " + win1 + "  ia2= " + win2);
 			launch.setEnabled(true);
 			dispose = 0;
 			changeClose();

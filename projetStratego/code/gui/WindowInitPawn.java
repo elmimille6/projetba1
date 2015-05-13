@@ -50,7 +50,6 @@ public class WindowInitPawn extends WindowGame {
 				new WindowGame(game);
 			} else if (game.getInitGridGame() == 0 && game.getComplete() != 1) {
 				// AUTOMATICAL
-				// TODO// Stratego normal or duel
 				int lvl = IA.getIntLvl(game.getLevel());
 				game.placeTeam(new GridIA(1, 1).getGrid(), 1);
 				game.placeTeam(new GridIA(2, lvl).getGrid(), 2);

@@ -1,10 +1,15 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -19,7 +24,6 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
-//import pawn.*;
 
 /**
  * This class creates the window of the game.
@@ -46,6 +50,12 @@ public class WindowGame extends JFrame {
 	public IA ia;
 	public Client client;
 	public int Oplayer;
+	
+	private JMenuBar menuBar = new JMenuBar();
+	private JMenu menu1 = new JMenu("Triche");
+	private JCheckBoxMenuItem showGrid = new JCheckBoxMenuItem("Montrer toute la grille");
+	private JCheckBoxMenuItem showPawn = new JCheckBoxMenuItem("Montrer les pion connu");
+
 
 	/**
 	 * 
@@ -59,12 +69,11 @@ public class WindowGame extends JFrame {
 		this.game.setGameN(1);
 		this.client = client;
 		this.Oplayer = Oplayer;
-		System.out.println("OPLAYER=" + Oplayer);
 		client.addListener(new Listener() {
+			@SuppressWarnings("static-access")
 			public void received(Connection connection, Object object) {
 				if (object instanceof Game) {
 					if (game.getGameN() == 1) {
-						System.out.println("received game client");
 						game = (Game) object;
 						pane.recupGame(game);
 
@@ -86,39 +95,20 @@ public class WindowGame extends JFrame {
 
 				}
 				if (object instanceof int[]) {
-					System.out.println("received int[]");
 					int[] res = (int[]) object;
 					
 					 APawn pawn = game.getPawn(res[0], res[1]);
 					 pawn.setShow(!pawn.getShow());
-					 System.out.println();
 					 pane.recupGame(game);
 					 pane.repaint();
-//					 pane.recupGame(game);
-//					 repaint();
-//					pane.paintPawn(res[0], res[1]);
 				}
-//				else if (object instanceof APawn) {
-//					System.out.println("received APAwn");
-//					APawn pawn = (APawn) object;
-//					int x = pawn.posX;
-//					int y = pawn.posY;
-//					game.getPawn(x, y).setShow(true);
-//					pane.recupGame(game);
-//					pane.repaint();
-//					try {
-//						Thread.sleep(2000);
-//					} catch (InterruptedException e) {
-//					}
-//					game.getPawn(x, y).setShow(false);
-//					pane.recupGame(game);
-//					pane.repaint();
-//				}
 			}
 		});
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pane.setView(Oplayer);
 		pane.recupGame(game);
+		
+
 		repaint();
 	}
 
@@ -131,10 +121,8 @@ public class WindowGame extends JFrame {
 	 * @param ngame
 	 */
 	public WindowGame(Game ngame) {
-		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.game = ngame;
-		// System.out.println(game.level + " LEVEL WindowGame");
 		startTeam = game.getStartTeam();
 		paneRed = new PaneGamePawn(startTeam, game, 1);
 		paneBlue = new PaneGamePawn(startTeam, game, 2);
@@ -142,15 +130,25 @@ public class WindowGame extends JFrame {
 		pane.setView(game.getNextTeam());
 		// When we use the last game, the current team is viewable.
 		pane.setLayout(new BorderLayout());
-		// paneRed.fixSize(this.getWidth()/12, this.getHeight());
 		this.add(paneRed, BorderLayout.WEST);
 		this.add(paneBlue, BorderLayout.EAST);
 		this.setSize(900, 700);
 		this.setResizable(true);
 		this.setTitle("Game");
 		this.setLocationRelativeTo(null); // Fenetre centree
-		// this.setContentPane(pane);
 		this.add(pane, BorderLayout.CENTER);
+		
+		menu1.add(showPawn);
+		
+		if(game.getPlayer()!=3){
+			menu1.add(showGrid);
+		}
+		menuBar.add(menu1);
+		this.setJMenuBar(menuBar);
+		
+		showPawn.addActionListener(new PawnListener());
+		showGrid.addActionListener(new GridListener());
+		
 		this.setVisible(true);
 		if (game.getPlayer() == 1) {
 			ia = new IA(game.getLevel());
@@ -158,6 +156,38 @@ public class WindowGame extends JFrame {
 		pane.addMouseListener(new MouseGame());
 	}
 
+	class PawnListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	      if(showPawn.isSelected()){
+	    	  pane.setShowKnow(true);
+	    	  repaint();
+	      }
+	      else{
+	    	  pane.setShowKnow(false);
+	    	  repaint();
+	      }
+	    }    
+	  }  
+	
+	class GridListener implements ActionListener{
+	    public void actionPerformed(ActionEvent e) {
+	    	if(showGrid.isSelected()){
+	    	  pane.setView(0);
+	    	  repaint();
+	      }
+	      else{
+	    	  if(game.getPlayer()==2){
+	    		  pane.setView(game.getNextTeam());
+	    	  }
+	    	  else if(game.getPlayer()==1){
+	    		  pane.setView(1);
+	    	  }
+	    	  
+	    	  repaint();
+	      }
+	    }    
+	  }  
+	
 	/**
 	 * Transforms the coordinates of the cursor into coordinates of the game.
 	 * 
@@ -219,11 +249,7 @@ public class WindowGame extends JFrame {
 					int[] res = getRes(game, pane, posX, posY);
 					int line = res[0];
 					int row = res[1];
-					// game.showGrid();
 					APawn pawn = game.getPawn(line, row);
-					// System.out.println(game.getPlayer());
-					// System.out.println("pawn= " + pawn);
-					// System.out.println("focus= " + focus);
 					if (focus != null) {
 						if (focus.movePoss(game, line, row)) {
 							if (game.getPawn(line, row) != null) {
@@ -247,8 +273,6 @@ public class WindowGame extends JFrame {
 							paneBlue.upGame(game);
 
 							int result = game.win();
-							// System.out
-							// .println("Result = " + result);
 							if (result != 0) {
 								pane.setView(0);
 								playGame = false;
@@ -307,8 +331,6 @@ public class WindowGame extends JFrame {
 			new Thread(new Runnable() {
 				@SuppressWarnings("static-access")
 				public void run() {
-					pane.setView(0);
-					System.out.println(game.win() + " : win");
 					if ((((game.getTurn() + 1) % 2) + 1) == 1) {
 						int[] res = getRes(game, pane, posX, posY);
 						int line = res[0];
@@ -336,8 +358,6 @@ public class WindowGame extends JFrame {
 								paneBlue.upGame(game);
 
 								int result = game.win();
-								// System.out
-								// .println("Result = " + result);
 								if (result != 0) {
 									pane.setView(0);
 									playGame = false;
@@ -374,8 +394,6 @@ public class WindowGame extends JFrame {
 									paneRed.upGame(game);
 									paneBlue.upGame(game);
 									result = game.win();
-									// System.out
-									// .println("Result = " + result);
 									if (result != 0) {
 										pane.setView(0);
 										playGame = false;
@@ -413,10 +431,6 @@ public class WindowGame extends JFrame {
 						}
 						att = false;
 					}
-					System.out.println("KNOW");
-					game.showKnow(0);
-					System.out.println("MOVED");
-					game.showMoved(0);
 				}
 			}).start();
 		}
@@ -428,7 +442,6 @@ public class WindowGame extends JFrame {
 					pane.recupGame(game);
 					repaint();
 					if (game.getNextTeam() == Oplayer) {
-						System.out.println("Oplayer true");
 						int[] res = getRes(game, pane, posX, posY);
 						int line = res[0];
 						int row = res[1];
@@ -439,7 +452,6 @@ public class WindowGame extends JFrame {
 									game.getPawn(line, row).setShow(true);
 									int[] att = {focus.posX,focus.posY};
 									client.sendTCP(att);
-									System.out.println("send pawn");
 									pane.recupArrow(arrowN);
 									repaint();
 									try {
@@ -459,10 +471,7 @@ public class WindowGame extends JFrame {
 								paneBlue.upGame(game);
 
 								client.sendTCP(game);
-								System.out.println("send client game");
 								int result = game.win();
-								// System.out
-								// .println("Result = " + result);
 								if (result != 0) {
 									pane.setView(0);
 									playGame = false;
@@ -497,29 +506,22 @@ public class WindowGame extends JFrame {
 						}
 						att = false;
 					}
-					// System.out.println("KNOW");
-					// game.showKnow(0);
-					// System.out.println("MOVED");
-					// game.showMoved(0);
 				}
 			}).start();
 		}
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
@@ -534,3 +536,4 @@ public class WindowGame extends JFrame {
 	}
 
 }
+

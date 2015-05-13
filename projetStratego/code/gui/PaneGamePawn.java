@@ -1,6 +1,5 @@
 package gui;
 
-//import java.awt.Graphics;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -26,9 +25,6 @@ public class PaneGamePawn extends JPanel {
 		this.side = side;
 		upGame(game);
 
-		// System.out.println(startTeam.getSize()+"here");
-		// this.setSize(10, 10);
-
 	}
 
 	public void fixSize(int width, int heigth) {
@@ -41,7 +37,6 @@ public class PaneGamePawn extends JPanel {
 		grid = game;
 		count = count();
 		this.removeAll();
-		// System.out.println("DELETE");
 		this.affichage();
 		this.validate();
 		;
@@ -63,12 +58,10 @@ public class PaneGamePawn extends JPanel {
 				}
 			}
 		}
-		// System.out.println("HERE" + dic);
 		return dic;
 	}
 
 	public void affichage() {
-		// if (move)
 		JLabel lTeam;
 		if (side == 1) {
 			lTeam = new JLabel("  Equipe rouge");
@@ -76,7 +69,6 @@ public class PaneGamePawn extends JPanel {
 			lTeam = new JLabel("  Equipe bleue");
 		}
 		this.add(lTeam);
-		System.out.println(startTeam.toString());
 		int g= startTeam.getSize();
 		for (int i = 0; i < g; i++) {
 			JLabel label = new JLabel("  "
@@ -84,12 +76,8 @@ public class PaneGamePawn extends JPanel {
 					+ count.get(startTeam.getObject(i)) + "/"
 					+ startTeam.get(i) + "  ");
 			this.add(label);
-			// System.out.println("affichage");
 		}
-		// System.out.println("fin affichage");
-		// }
 		move = false;
-		// this.repaint();
 
 	}
 }

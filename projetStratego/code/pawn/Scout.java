@@ -74,40 +74,33 @@ public class Scout extends APawn {
 		}
 
 		if (x > grid.getLine()) {
-			// System.out.println("1");
 			return false;
 		}
 		if (y > grid.getRow()) {
-			// System.out.println("2");
 			return false;
 		}
 		APawn target = grid.getPawn(x, y);
 		if (target instanceof Lake) { // test if the target isnt a lake
-			// System.out.println("3");
 			return false;
 		} else if (target instanceof APawn) { // test if the target isnt a pawn
 												// of the same team
 			if (target.getTeam() == this.team) {
-				// System.out.println("4");
 				return false;
 			}
 		} else if (x - this.posX != 0 && y - this.posY != 0) { // test if the
 																// move is in
 																// the same lane
-			// System.out.println("5");
 			return false;
 		} else if (y - this.posY == 0 && x - this.posX == 0) { // test if the
 																// pawn isnt
 																// already on
 																// the target
-			// System.out.println("6");
 			return false;
 		}
 		if (x - this.posX != 0) {// check if the lane X is empty
 			if (x < this.posX) {
 				for (int i = 1; posX - i != x && posX - i >= 0; i++) {
 					if (grid.getPawn(posX - i, posY) != null) {
-						// System.out.println("1");
 						return false;
 					}
 				}
@@ -115,7 +108,6 @@ public class Scout extends APawn {
 			if (x > this.posX) {
 				for (int i = 1; posX + i != x && posX + i < grid.getLine(); i++) {
 					if (grid.getPawn(posX + i, posY) != null) {
-						// System.out.println("2");
 						return false;
 					}
 				}
@@ -125,7 +117,6 @@ public class Scout extends APawn {
 			if (y < this.posY) {
 				for (int i = 1; posY - i != y && posY - i >= 0; i++) {
 					if (grid.getPawn(posX, posY - i) != null) {
-						// System.out.println("3");
 						return false;
 					}
 				}
@@ -133,7 +124,6 @@ public class Scout extends APawn {
 			if (y > this.posY) {
 				for (int i = 1; posY + i != y && posY + i < grid.getRow(); i++) {
 					if (grid.getPawn(posX, posY + i) != null) {
-						// System.out.println("4");
 						return false;
 					}
 				}
@@ -149,18 +139,14 @@ public class Scout extends APawn {
 	 * @param grid
 	 *            The grid of the game.
 	 */
-	public int[] focus(Game grid) { // TODO retourner le nombre de case qu il
-									// peut avancer (avec des for)
+	public int[] focus(Game grid) {
 		int[] arrow = { -1, -1, -1, -1, posX, posY };
-		// System.out.println(focus);
 		if (posX != grid.getLine()) {// check down move
-			// System.out.println("D");
 			if (this.movePoss(grid, posX + 1, posY)) {
 				for (int i = 1; this.movePoss(grid, posX + i, posY); i++) {
 					arrow[2] = i;
 				}
 
-				// System.out.println("ok");
 			} else {
 				arrow[2] = -1;
 			}
@@ -169,8 +155,6 @@ public class Scout extends APawn {
 
 		}
 		if (posY != grid.getRow()) {// check right move
-			// System.out.println("R");
-			// System.out.println(posX+" tu");
 			if (this.movePoss(grid, posX, posY + 1)) {
 				for (int i = 1; this.movePoss(grid, posX, posY + i); i++) {
 					arrow[1] = i;
@@ -184,7 +168,6 @@ public class Scout extends APawn {
 		}
 
 		if (posX != 0) {// check up move
-			// System.out.println("U");
 			if (this.movePoss(grid, posX - 1, posY)) {
 				boolean test = true;
 				for (int i = 1; test; i++) {
@@ -203,7 +186,6 @@ public class Scout extends APawn {
 			arrow[0] = -1;
 		}
 		if (posY != 0) {// check left move
-			// System.out.println("L");
 			if (this.movePoss(grid, posX, posY - 1)) {
 				boolean test = true;
 				for (int i = 1; test; i++) {
@@ -221,11 +203,6 @@ public class Scout extends APawn {
 		} else {
 			arrow[3] = -1;
 		}
-		for (int i = 0; i < arrow.length; i++) {
-			// System.out.print(arrow[i] + "    ");
-
-		}
-		// System.out.println();
 		return arrow;
 	}
 }

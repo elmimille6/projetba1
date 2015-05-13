@@ -43,21 +43,20 @@ public class MenuWindow extends JFrame {
 	private JMenuItem client = new JMenuItem("Se connecter a un serveur");
 	private JMenuItem serveur = new JMenuItem("Heberger une partie");
 
-	// private JLabel labJeu = new JLabel("Jeu");
 
-	private JComboBox comboJeu = new JComboBox();
+	private JComboBox<String> comboJeu = new JComboBox<String>();
 
 	private JLabel labType = new JLabel("Type de jeu");
-	private JComboBox comboType = new JComboBox();
+	private JComboBox<String> comboType = new JComboBox<String>();
 
 	private JLabel labPlayer = new JLabel("Nombre de joueurs");
-	private JComboBox comboPlayer = new JComboBox();
+	private JComboBox<String> comboPlayer = new JComboBox<String>();
 
 	private JLabel labInit = new JLabel("Initialisation des pions");
-	private JComboBox comboInit = new JComboBox();
+	private JComboBox<String> comboInit = new JComboBox<String>();
 
 	private JLabel labIa1 = new JLabel("Niveau de la premiere IA");
-	private JComboBox comboIa1 = new JComboBox();
+	private JComboBox<String> comboIa1 = new JComboBox<String>();
 
 	private JButton goBtn = new JButton("Lancer la partie !");
 
@@ -100,7 +99,7 @@ public class MenuWindow extends JFrame {
 		});
 		manager.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/* WinManager managerWin = */new WinManager();
+				/* WinManager managerWin = */new WindowManager();
 			}
 		});
 		startSave.addActionListener(new ActionListener() {
@@ -152,8 +151,6 @@ public class MenuWindow extends JFrame {
 		panPlayer.add(comboPlayer);
 		comboPlayer.addItem("1 Joueur");
 		comboPlayer.addItem("2 Joueurs");
-		// comboPlayer.addItem("0 Joueur");
-		// comboPlayer.setSelectedItem("2 Joueurs");
 		comboPlayer.addActionListener(new ItemActionPlayer());
 		comboPlayer.setPreferredSize(new Dimension(130, 20));
 		comboPlayer.setEnabled(true);
@@ -167,7 +164,7 @@ public class MenuWindow extends JFrame {
 		comboType.setPreferredSize(new Dimension(100, 20));
 		comboType.setEnabled(true);
 
-		JPanel panInit = new JPanel(); // TODO
+		JPanel panInit = new JPanel(); 
 		panInit.add(labInit);
 		panInit.add(comboInit);
 		comboInit.addItem("Automatique");
@@ -192,17 +189,7 @@ public class MenuWindow extends JFrame {
 		panBtn2.add(goBtn);
 		panBtn.setLayout(new BorderLayout());
 		panBtn.add(panBtn2, BorderLayout.CENTER);
-		/*
-		 * panBtn.add(changeGrid, BorderLayout.NORTH);
-		 * changeGrid.setEnabled(false); changeGrid.addActionListener(new
-		 * ActionListener() { public void actionPerformed(ActionEvent arg0) { if
-		 * (modifGrid == 1) { modifGrid = 0; } else if (modifGrid == 0) {
-		 * modifGrid = 1; }
-		 * 
-		 * }
-		 * 
-		 * });
-		 */
+		
 
 		goBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

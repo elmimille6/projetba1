@@ -14,18 +14,20 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.minlog.Log;
 
 public class GetIp extends JDialog{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5101917374232225862L;
 	private String ip="";
-	private boolean sendData;
 	private final static JFrame nn = null;
-	private StratClient parent;
 	JTextField text;
 	
 	
 	public GetIp(StratClient parent, String title, boolean modal){
 		super(nn,title,modal);
-		this.parent = parent;
 		this.setSize(400, 200);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
@@ -34,7 +36,6 @@ public class GetIp extends JDialog{
 	}
 
 	public String showDialog(){
-		this.sendData = false;
 		this.setVisible(true);
 		String ipp="";
 		for(int i=0;i<this.ip.length();i++){
@@ -46,7 +47,7 @@ public class GetIp extends JDialog{
 	}
 
 	private void initComponent() {
-		
+		Log.set(Log.LEVEL_NONE);
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(3,1));
 		JLabel lab = new JLabel("Entrez l'adresse ip de l'hebergeur ou scanner le reseau local");
@@ -63,6 +64,8 @@ public class GetIp extends JDialog{
 		p1.add(scan);
 		panel2.add(p1);
 		JButton goBtn = new JButton("ok");
+		this.getRootPane().setDefaultButton(goBtn);
+		goBtn.requestFocus();
 		JButton cancel = new JButton("annuler");
 		JPanel panel3=new JPanel();
 		panel3.setLayout(new GridLayout(1,2));

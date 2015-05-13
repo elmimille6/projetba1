@@ -56,14 +56,8 @@ public class GridStart implements java.io.Serializable {
 			in.close();
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		ObjectOutputStream out;
 		vector.add(this);
@@ -72,11 +66,7 @@ public class GridStart implements java.io.Serializable {
 			out.writeObject(vector);
 			out.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 	}
@@ -91,24 +81,15 @@ public class GridStart implements java.io.Serializable {
 			in.close();
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		ObjectOutputStream out;
 		int ind = -1;
-		// System.out.println(vector.size());
-		// System.out.println(this.name.equals(vector.elementAt(3).getName()));
 		for (int i = 0; i < vector.size(); i++) {
 			System.out.println(vector.elementAt(i));
 			if (this.equals(vector.elementAt(i))) {
 				ind = i;
-				// System.out.println("get index " + i);
 			}
 		}
 
@@ -118,11 +99,7 @@ public class GridStart implements java.io.Serializable {
 			out.writeObject(vector);
 			out.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 	}

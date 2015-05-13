@@ -23,10 +23,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import online.StratClient;
 import main.Game;
 import main.GridIA;
 import main.GridStart;
+import online.StratClient;
 import pawn.APawn;
 import pawn.Bomb;
 import pawn.Captain;
@@ -68,7 +68,7 @@ public class InitWindow extends WindowInitPawn {
 	public boolean online = false, send = false;
 	public int Oplayer = 0;
 
-	public JComboBox combo;
+	public JComboBox<GridStart> combo;
 	public GridStart focus;
 	public Vector<GridStart> list;
 
@@ -130,8 +130,7 @@ public class InitWindow extends WindowInitPawn {
 
 		if (loadListGrid()) {
 			focus = list.get(0);
-			combo = new JComboBox();
-			// combo.addItem(new GridStart());
+			combo = new JComboBox<GridStart>();
 			for (int i = 0; i < list.size(); i++) {
 				combo.addItem(list.get(i));
 			}
@@ -191,7 +190,6 @@ public class InitWindow extends WindowInitPawn {
 						}
 						game.setComplete(game.getComplete() + 1);
 						Game gridPlayer = createGrid();
-						gridPlayer.showGrid();
 						game.placeTeam(gridPlayer.getGrid(), side);
 						fen.dispose();
 						initGame();
@@ -200,8 +198,6 @@ public class InitWindow extends WindowInitPawn {
 						GridIA grid = new GridIA(gridPlayer.getGrid());
 						startClient.client.sendTCP(grid);
 						send = true;
-						System.out.println("sended");
-						// JOptionPane jop = new JOptionPane();
 						startClient.setState(3);
 						fen.dispose();
 					}
@@ -256,10 +252,8 @@ public class InitWindow extends WindowInitPawn {
 	 */
 	class ListGridCombo implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("hghg; " + combo.getItemCount());
 			if (combo.getItemCount() != 0) {
 				focus = (GridStart) combo.getSelectedItem();
-				System.out.println(focus + " focus");
 				focus.changeTeam(team); // for saved grid from another team
 				gridPane1 = new Game(focus.getGrid());
 				placeGrid();

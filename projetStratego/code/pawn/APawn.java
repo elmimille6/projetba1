@@ -1,6 +1,5 @@
 package pawn;
 
-//import gui.WindowGame;
 
 import java.util.Vector;
 
@@ -21,7 +20,7 @@ public abstract class APawn implements java.io.Serializable {
 	public int posX;
 	public int posY;
 	protected String URI;
-	private boolean show = false, /* isEmpty = false, */know = false,
+	private boolean show = false,know = false,
 			moved = false, selected = false;
 	protected Vector<int[]> place = new Vector<int[]>();
 
@@ -51,10 +50,7 @@ public abstract class APawn implements java.io.Serializable {
 		this.posY = posY;
 		this.posX = posX;
 		int[] pla = { posX, posY };
-		// System.out.println(posY + " posY");
-		// System.out.println(posX + " posX");
 		place.addElement(pla);
-		// System.out.println("placesize  " + place.size());
 	}
 
 	/**
@@ -300,10 +296,6 @@ public abstract class APawn implements java.io.Serializable {
 			int[] tab2 = place.get(place.size() - 6);
 			int[] tab3 = place.get(place.size() - 2);
 
-			// System.out.println(tab1[0] + " " + tab1[1]);
-			// System.out.println(tab2[0] + " " + tab2[1]);
-			//
-			// System.out.println();
 			if (tab1[0] == x && x == tab2[0] && tab1[1] == y && tab2[1] == y
 					&& tab3[0] == x && tab3[1] == y) {
 				return false;
@@ -311,7 +303,6 @@ public abstract class APawn implements java.io.Serializable {
 
 		}
 		if (target instanceof Lake) { // test if the target isn't a lake
-			// System.out.println(1);
 			return false;
 		}
 		if (target instanceof APawn) { // test if the target isn't a pawn of the
@@ -429,12 +420,9 @@ public abstract class APawn implements java.io.Serializable {
 	 */
 	public int[] focus(Game grid) {
 		int[] arrow = { -1, -1, -1, -1, posX, posY };
-		// System.out.println(focus);
 		if (posX != grid.getLine()) {// check down move
-			// System.out.println("D");
 			if (this.movePoss(grid, posX + 1, posY)) {
 				arrow[2] = 1;
-				// System.out.println("ok");
 			} else {
 				arrow[2] = -1;
 			}
@@ -443,10 +431,8 @@ public abstract class APawn implements java.io.Serializable {
 
 		}
 		if (posY != grid.getRow()) {// check right move
-			// System.out.println("R");
 			if (this.movePoss(grid, posX, posY + 1)) {
 				arrow[1] = 1;
-				// System.out.println("ok");
 			} else {
 				arrow[1] = -1;
 			}
@@ -454,10 +440,8 @@ public abstract class APawn implements java.io.Serializable {
 			arrow[1] = -1;
 		}
 		if (posX != 0) {// check up move
-			// System.out.println("U");
 			if (this.movePoss(grid, posX - 1, posY)) {
 				arrow[0] = 1;
-				// System.out.println("ok");
 			} else {
 				arrow[0] = -1;
 			}
@@ -465,10 +449,8 @@ public abstract class APawn implements java.io.Serializable {
 			arrow[0] = -1;
 		}
 		if (posY != 0) {// check left move
-			// System.out.println("L");
 			if (this.movePoss(grid, posX, posY - 1)) {
 				arrow[3] = 1;
-				// System.out.println("ok");
 			} else {
 				arrow[3] = -1;
 			}
@@ -476,7 +458,6 @@ public abstract class APawn implements java.io.Serializable {
 			arrow[3] = -1;
 		}
 		for (int i = 0; i < arrow.length; i++) {
-			// System.out.print(arrow[i] + "    ");
 		}
 		return arrow;
 	}

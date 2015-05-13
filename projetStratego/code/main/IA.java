@@ -30,7 +30,6 @@ public class IA {
 			Random rand = new Random();
 			while (!moved) {
 
-				// System.out.println("boucle ia");
 				int row = rand.nextInt(game.getRow() + 1);
 				int line = rand.nextInt(game.getLine() + 1);
 				APawn pawn = game.getPawn(line, row);
@@ -90,26 +89,19 @@ public class IA {
 	}
 
 	private int[][] iaL1(Game game) {
-		System.out.println("mouvement ia lvl2");
 		if (team == ((game.getTurn() + 1) % 2) + 1) {
 			Vector<APawn> pawnSide = getSidedPawn(game);
-			System.out.println(pawnSide.toString());
 			if (pawnSide.size() != 0) { // verifie tout les pions qui sont
 										// collés
 										// a un ennemi
 				int[][] move = { { -1, -1 }, { -1, -1 }, { 0 } };
 				int[][] res = iaL1Side(game, pawnSide, move);
-				System.out.println("RES  " + res[0][0] + " " + res[1][0] + " "
-						+ res[2][0]);
 				if (res[2][0] > 0) {
 					return res;
 				}
 			}
 
-			// TODO quand aucun pion n est collé
 		}
-		System.out
-				.println("pas de mouvement interessant, passage en aleatoire");
 		return iaL0(game);
 	}
 
@@ -163,7 +155,6 @@ public class IA {
 			if (res[2][0] > move[2][0]) {
 				move = res;
 			}
-			// TODO mouvement pour se "sauver" (si on veut les sauver....)
 
 		} // fin pion eclaireur
 

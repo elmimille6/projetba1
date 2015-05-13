@@ -15,8 +15,13 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
+import com.esotericsoftware.minlog.Log;
 
 public class FrameServeur extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1152560430109907807L;
 	Server server;
 	int nbrCon;
 	Game game = new Game();
@@ -27,6 +32,7 @@ public class FrameServeur extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(400, 400);
 		this.setTitle("Serveur");
+		Log.set(Log.LEVEL_NONE);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		
@@ -34,8 +40,6 @@ public class FrameServeur extends JFrame {
 		try {
 			ip = InetAddress.getLocalHost().getHostAddress().toString();
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		
@@ -75,13 +79,7 @@ public class FrameServeur extends JFrame {
 
 		server.addListener(new Listener() {
 			public void received(Connection connection, Object object) {
-//				System.out.println("received");
-				if (object instanceof String) {
-					System.out.println("string");
-					String request = (String) object;
-					System.out.println(request);
-				} 
-				else if (object instanceof int[]){
+				if (object instanceof int[]){
 					int[] res = (int[]) object;
 					if(connection==pl1){
 						pl2.sendTCP(res);
@@ -92,15 +90,12 @@ public class FrameServeur extends JFrame {
 				
 				
 				else if (object instanceof Game) {
-					System.out.println("received game serveur");
 					game = (Game) object;
 					game.setGameN(1);
 					if (game.getNextTeam() == 1) {
 						pl1.sendTCP(game);
-						System.out.println("send game pl1");
 					} else if (game.getNextTeam() == 2) {
 						pl2.sendTCP(game);
-						System.out.println("send game pl2");
 					}
 					if(game.win()!=0){
 						pl1.close();
@@ -114,30 +109,21 @@ public class FrameServeur extends JFrame {
 				}
 				else if (object instanceof GridIA) {
 
-					System.out.println("received grid ia");
 					if (game.getComplete() != 2) {
 						if (connection == pl1) {
 							game.placeTeam(((GridIA) object).getGrid(), 1);
 							game.setComplete(game.getComplete() + 1);
-							System.out.println("complete pl1");
-							game.showGrid();
 						}
 
 						else if (connection == pl2) {
 							game.placeTeam(((GridIA) object).getGrid(), 2);
 							game.setComplete(game.getComplete() + 1);
-							System.out.println("complete pl2");
-							game.showGrid();
 						}
 					}
 					if (game.getComplete() == 2) {
 						server.sendToAllTCP(game);
-						System.out.println("send game");
-						game.showGrid();
 					}
 				} else {
-					// System.out.println("else");
-					// System.out.println(object);
 				}
 			}
 
@@ -149,10 +135,7 @@ public class FrameServeur extends JFrame {
 					connection.sendTCP(-2);
 				}
 				nbrCon++;
-				System.out.println("connecte");
-				// connection.sendTCP("serveur atteint");
 				if (nbrCon == 3) {
-					System.out.println("full close");
 					connection.sendTCP("FULL");
 					connection.close();
 				}
@@ -164,19 +147,11 @@ public class FrameServeur extends JFrame {
 					pl2 = connection;
 					pl1.sendTCP(2);
 					server.sendToAllTCP("GO");
-					// game=new Game();
-					// game.setPlayer(3);
-					// GridIA grid1 = new GridIA(1);
-					// GridIA grid2 = new GridIA(2);
-					// game.placeTeam(grid1.getGrid(), 1);
-					// game.placeTeam(grid2.getGrid(), 2);
-					// server.sendToAllTCP(game);
 				}
 				connection.sendTCP(nbrCon);
 			}
 
 			public void disconnected(Connection connection) {
-				System.out.println("deconnecte");
 
 				if (nbrCon == 2) {
 					server.sendToAllTCP("STOP");
@@ -192,7 +167,6 @@ public class FrameServeur extends JFrame {
 				nbrCon--;
 			}
 		});
-		System.out.println("serveur OK");
 	
 	
 		lab.setText("Votre adresse ip locale est "+ip);
@@ -203,11 +177,6 @@ public class FrameServeur extends JFrame {
 
 	
 
-	private void close() {
-		System.out.println("serveur close");
-		server.close();
-		System.exit(0);
-	}
 	
 	
 

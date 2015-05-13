@@ -2,7 +2,7 @@ package pawn;
 
 /**
  * Sergeant is the class that creates a "sergeant" pawn.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Sergeant extends APawn {

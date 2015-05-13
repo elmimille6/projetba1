@@ -28,13 +28,12 @@ public class StratClient extends JFrame {
 	private int state, Oplayer;
 	private JLabel lab = new JLabel();
 	private StratClient stratclient = this;
-	private boolean local=false;
-	
+	private boolean local = false;
 
-	public StratClient(){
+	public StratClient() {
 		init();
 	}
-	
+
 	public void init() {
 		Log.set(Log.LEVEL_NONE);
 		Kryo kryo = client.getKryo();
@@ -59,11 +58,10 @@ public class StratClient extends JFrame {
 		kryo.register(pawn.Spy.class);
 		kryo.register(java.util.Vector.class);
 		kryo.register(int[].class);
-//		Log.set(Log.LEVEL_DEBUG);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 if(this.local==false){
-			 askIp();
-		 }
+		if (this.local == false) {
+			askIp();
+		}
 		connect();
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent evt) {
@@ -71,7 +69,7 @@ public class StratClient extends JFrame {
 			}
 		});
 
-		this.setSize(400, 400);
+		this.setSize(450, 450);
 		this.setTitle("Client");
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
@@ -80,27 +78,27 @@ public class StratClient extends JFrame {
 	}
 
 	public StratClient(boolean b) {
-		this.local=b;
+		this.local = b;
 		init();
 	}
 
 	private void state() {
 		if (state == 1) {
-			lab.setText("Vous êtes le joueur "+Oplayer+", veuillez attendre votre adversaire");
+			lab.setText("Vous etes le joueur " + Oplayer
+					+ ", veuillez attendre votre adversaire");
 			lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
 			this.add(lab);
 			this.repaint();
-			// this.setContentPane(panel);
 		}
 		if (state == 2) {
-			lab.setText("<html>Partie en cours, veuillez ne pas fermer cette fenêtre <br>Vous êtes le joueur "+Oplayer+"</html>");
+			lab.setText("<html>Partie en cours, veuillez ne pas fermer cette fenetre <br>Vous etes le joueur "
+					+ Oplayer + "</html>");
 			lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
 			this.add(lab);
 			this.repaint();
-			// this.setContentPane(panel);
 		}
 		if (state == 3) {
-			lab.setText("Veuillez attendre, votre adversaire crée sa grille");
+			lab.setText("Veuillez attendre, votre adversaire cree sa grille");
 			lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
 			this.add(lab);
 			this.repaint();
@@ -116,13 +114,13 @@ public class StratClient extends JFrame {
 	private void connect() {
 		client.addListener(new Listener() {
 			public void received(Connection connection, Object object) {
-				if (state ==3) {
+				if (state == 3) {
 					if (object instanceof Game) {
 						Game game = (Game) object;
 						if (game.getGameN() == 0) {
 							game.setGameN(1);
-							new WindowGame((Game) object,client, Oplayer);
-							state=2;
+							new WindowGame((Game) object, client, Oplayer);
+							state = 2;
 							state();
 						}
 					}
@@ -162,7 +160,7 @@ public class StratClient extends JFrame {
 					}
 				}
 			}
-			
+
 		});
 		client.start();
 
@@ -189,11 +187,10 @@ public class StratClient extends JFrame {
 
 		}
 	}
-	
-	public void setState(int state){
-		this.state=state;
+
+	public void setState(int state) {
+		this.state = state;
 		state();
 	}
-	
-	
+
 }

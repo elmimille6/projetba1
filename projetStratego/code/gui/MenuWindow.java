@@ -25,7 +25,7 @@ import main.Main;
 
 /**
  * This class creates a menu window.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class MenuWindow extends JFrame {
@@ -42,7 +42,6 @@ public class MenuWindow extends JFrame {
 			"Gestionnaire de grille de depart");
 	private JMenuItem client = new JMenuItem("Se connecter a un serveur");
 	private JMenuItem serveur = new JMenuItem("Heberger une partie");
-
 
 	private JComboBox<String> comboJeu = new JComboBox<String>();
 
@@ -67,11 +66,6 @@ public class MenuWindow extends JFrame {
 	public String lvl1 = "";
 
 	public int initGridGame = 0;
-
-	/*
-	 * private JCheckBoxMenuItem changeGrid = new JCheckBoxMenuItem(
-	 * "modifier la taille de la grille");
-	 */
 
 	/**
 	 * Creates the 'Menu' window.
@@ -99,7 +93,7 @@ public class MenuWindow extends JFrame {
 		});
 		manager.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/* WinManager managerWin = */new WindowManager();
+				new WindowManager();
 			}
 		});
 		startSave.addActionListener(new ActionListener() {
@@ -120,7 +114,7 @@ public class MenuWindow extends JFrame {
 				new StratClient();
 			}
 		});
-		
+
 		serveur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new FrameServeur();
@@ -164,7 +158,7 @@ public class MenuWindow extends JFrame {
 		comboType.setPreferredSize(new Dimension(100, 20));
 		comboType.setEnabled(true);
 
-		JPanel panInit = new JPanel(); 
+		JPanel panInit = new JPanel();
 		panInit.add(labInit);
 		panInit.add(comboInit);
 		comboInit.addItem("Automatique");
@@ -189,7 +183,6 @@ public class MenuWindow extends JFrame {
 		panBtn2.add(goBtn);
 		panBtn.setLayout(new BorderLayout());
 		panBtn.add(panBtn2, BorderLayout.CENTER);
-		
 
 		goBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

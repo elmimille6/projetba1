@@ -4,7 +4,7 @@ import main.Game;
 
 /**
  * Lake is the class that creates a "lake" pawn.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Lake extends APawn {

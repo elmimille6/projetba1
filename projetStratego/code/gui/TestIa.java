@@ -19,12 +19,16 @@ import main.IA;
 public class TestIa extends JFrame {
 
 	private static final long serialVersionUID = -3048638208007991240L;
- 	public JComboBox<String> ia1 = new JComboBox<String>(), ia2 = new JComboBox<String>();
+	public JComboBox<String> ia1 = new JComboBox<String>(),
+			ia2 = new JComboBox<String>();
 	public JSlider nbr = new JSlider();
 	public JButton goBtn = new JButton("Lancer les tests");
 	public String[] listLvl;
 	JLabel lab1;
 
+	/**
+	 * 
+	 */
 	public TestIa() {
 		this.setResizable(true);
 		this.setSize(300, 320);
@@ -92,5 +96,4 @@ public class TestIa extends JFrame {
 
 	}
 
-	
 }

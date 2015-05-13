@@ -23,7 +23,7 @@ public class PaneGame extends JPanel {
 	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
 	public int[] lastMove = { -1, -1, -1 };
 	int view = 1;
-	int nbrCol,nbrLigne;
+	int nbrCol, nbrLigne;
 	boolean showKnow = false;
 
 	/**
@@ -66,13 +66,12 @@ public class PaneGame extends JPanel {
 			for (int j = 0; j < (nbrCol); j++) {
 				if (grid.getPawn(i, j) != null) {
 					APawn pawn = grid.getPawn(i, j);
-					 if(pawn.getKnow() && showKnow){
-						 link = pawn.getURI();
-					 }
-					else if (pawn.getShow()){
-							link = pawn.getURI();
-					 }
-					 else if (pawn.getTeam() == view || view == 0 || pawn.getTeam() == 0 ) {
+					if (pawn.getKnow() && showKnow) {
+						link = pawn.getURI();
+					} else if (pawn.getShow()) {
+						link = pawn.getURI();
+					} else if (pawn.getTeam() == view || view == 0
+							|| pawn.getTeam() == 0) {
 						link = pawn.getURI();
 					} else if (pawn.getTeam() == view || view == 0
 							|| pawn.getTeam() == 0) {
@@ -103,6 +102,10 @@ public class PaneGame extends JPanel {
 		grid.save();
 	}
 
+	/**
+	 * 
+	 * @param g
+	 */
 	public void paintArrow(Graphics g) {
 		int line = arrow[4];
 		int row = arrow[5];
@@ -207,15 +210,23 @@ public class PaneGame extends JPanel {
 	 * @param game
 	 *            The game.
 	 */
-	 public void recupGame(Game game){
-	 grid= game;
-	 }
-	 
-	 public void setView(int view){
-		 this.view=view;
-	 }
-	 
-	 public void setShowKnow(boolean know){
-		 this.showKnow=know;
-	 }
+	public void recupGame(Game game) {
+		grid = game;
+	}
+
+	/**
+	 * 
+	 * @param view
+	 */
+	public void setView(int view) {
+		this.view = view;
+	}
+
+	/**
+	 * 
+	 * @param know
+	 */
+	public void setShowKnow(boolean know) {
+		this.showKnow = know;
+	}
 }

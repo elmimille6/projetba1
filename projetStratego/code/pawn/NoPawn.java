@@ -2,7 +2,7 @@ package pawn;
 
 /**
  * NoPawn is the class that creates a gray pawn for the initialization windows.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class NoPawn extends APawn {

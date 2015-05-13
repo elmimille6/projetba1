@@ -4,7 +4,7 @@ import main.Game;
 
 /**
  * Bomb is the class that creates a "bomb" pawn.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Bomb extends APawn {

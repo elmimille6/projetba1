@@ -2,7 +2,7 @@ package pawn;
 
 /**
  * Miner is the class that creates a "miner" pawn.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Miner extends APawn {

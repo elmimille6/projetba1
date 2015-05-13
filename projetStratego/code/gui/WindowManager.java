@@ -22,9 +22,6 @@ import main.Main;
 
 public class WindowManager extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6421255455563013157L;
 	private Vector<GridStart> list;
 	private JComboBox<GridStart> combo;
@@ -33,11 +30,18 @@ public class WindowManager extends JFrame {
 	public PaneInitPawn panelCenter;
 	public JPanel paneCombo = new JPanel();
 
+	/**
+	 * 
+	 * @param i
+	 */
 	public WindowManager(int i) {
 		this.setLayout(new GridLayout());
 
 	}
 
+	/**
+	 * 
+	 */
 	public WindowManager() {
 		this.setLayout(new BorderLayout());
 		this.setTitle("Gestionnaire de grille de depart ");
@@ -81,11 +85,14 @@ public class WindowManager extends JFrame {
 			this.add(paneSouth, BorderLayout.SOUTH);
 			this.validate();
 		} else {
-			/* WindowInitPawn fen = */new WindowInitPawn(new Game(10, 4, 0), 2);
+			new WindowInitPawn(new Game(10, 4, 0), 2);
 			close();
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void upCombo() {
 		load();
 		combo.removeAllItems();
@@ -97,6 +104,10 @@ public class WindowManager extends JFrame {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	@SuppressWarnings("resource")
 	public boolean load() {
 		ObjectInputStream in;
@@ -117,17 +128,25 @@ public class WindowManager extends JFrame {
 			return false;
 		} catch (ClassNotFoundException e) {
 			return false;
-		}catch (NullPointerException e) {
+		} catch (NullPointerException e) {
 			Main.copyFile();
 			return load();
 		}
 
 	}
 
+	/**
+	 * 
+	 */
 	public void close() {
 		this.dispose();
 	}
 
+	/**
+	 * 
+	 * @author 140897
+	 *
+	 */
 	class ChoixCombo implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (combo.getItemCount() != 0) {
@@ -138,6 +157,11 @@ public class WindowManager extends JFrame {
 		}
 	}
 
+	/**
+	 * 
+	 * @author 140897
+	 *
+	 */
 	class actionNewGrid implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			new WindowInitPawn(new Game(10, 4, 0), 2);
@@ -145,6 +169,11 @@ public class WindowManager extends JFrame {
 		}
 	}
 
+	/**
+	 * 
+	 * @author 140897
+	 *
+	 */
 	class actionSupp implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			focus.delete();
@@ -152,6 +181,11 @@ public class WindowManager extends JFrame {
 		}
 	}
 
+	/**
+	 * 
+	 * @author 140897
+	 *
+	 */
 	class actionModif implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			new WindowInitPawn(new Game(focus.getGrid()), 1);

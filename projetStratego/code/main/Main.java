@@ -12,7 +12,7 @@ import java.nio.channels.FileChannel;
 
 /**
  * This is the main class of this project.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Main {
@@ -26,7 +26,7 @@ public class Main {
 
 	/**
 	 * Method that launches the menu of the program.
-	 *
+	 * 
 	 * @param args
 	 *            Number of arguments given.
 	 */

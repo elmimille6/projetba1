@@ -2,7 +2,7 @@ package pawn;
 
 /**
  * Marshal is the class that creates a "marshal" pawn.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Marshal extends APawn {

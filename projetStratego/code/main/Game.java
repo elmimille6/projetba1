@@ -161,7 +161,6 @@ public class Game implements java.io.Serializable {
 		if (side == 1) {
 			for (int i = 0; i < grid.length; i++) {
 				for (int j = 0; j < grid[0].length; j++) {
-					// grid[6+i][0+j]=grid[i][j];
 					APawn pawn = grid[i][j];
 					if (pawn != null) {
 						pawn.setTeam(1);
@@ -244,8 +243,10 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
+	 * Creates a dic of the pawns of a team which start the game.
 	 * 
-	 * @return
+	 * @return A 'Dic' object containing the pawns of a team which start the
+	 *         game.
 	 */
 	private Dic startTeam() {
 		Dic team = new Dic();
@@ -478,8 +479,10 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
+	 * Sets the last move in the game from the 'move' parameter.
 	 * 
 	 * @param move
+	 *            The last move in the game.
 	 */
 	public void setLastMove(int[] move) {
 		this.lastMove = move;
@@ -519,16 +522,22 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
+	 * Sets the value of the 'complete' value.
 	 * 
 	 * @param complete
+	 *            0 if the grid is empty or<br/>
+	 *            1 if the grid contains 1 team or<br/>
+	 *            2 if the grid is complete.
 	 */
 	public void setComplete(int complete) {
 		this.complete = complete;
 	}
 
 	/**
+	 * Resets the number of moves for the given pawn.
 	 * 
 	 * @param pawn
+	 *            The pawn we want to resets its number of moves.
 	 */
 	public void resetMove(APawn pawn) {
 		for (int i = 0; i < grid.length; i++) {
@@ -580,59 +589,13 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
+	 * Sets the 'initGridGame' value to the given one.
 	 * 
 	 * @param initGridGame
+	 *            The new value of 'initGridGame'.
 	 */
 	public void setInitGridGame(int initGridGame) {
 		this.initGridGame = initGridGame;
-	}
-
-	/**
-	 * 
-	 * @param moved
-	 */
-	public void showMoved(int moved) {
-		Vector<APawn> vect = new Vector<APawn>();
-		for (int i = 0; i < line; i++) {
-			for (int j = 0; j < row; j++) {
-				APawn pawn = grid[i][j];
-				if (pawn != null) {
-					if (pawn.getTeam() != 0) {
-						if (moved == 0 && pawn.getMoved()) {
-							vect.addElement(pawn);
-						}
-						if (moved == pawn.getTeam() && pawn.getMoved()) {
-							vect.addElement(pawn);
-						}
-					}
-				}
-			}
-		}
-		System.out.println(vect);
-	}
-
-	/**
-	 * 
-	 * @param known
-	 */
-	public void showKnow(int known) {
-		Vector<APawn> vect = new Vector<APawn>();
-		for (int i = 0; i < line; i++) {
-			for (int j = 0; j < row; j++) {
-				APawn pawn = grid[i][j];
-				if (pawn != null) {
-					if (pawn.getTeam() != 0) {
-						if (known == 0 && pawn.getKnow()) {
-							vect.addElement(pawn);
-						}
-						if (known == pawn.getTeam() && pawn.getKnow()) {
-							vect.addElement(pawn);
-						}
-					}
-				}
-			}
-		}
-		System.out.println(vect);
 	}
 
 	/**
@@ -645,18 +608,23 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
-	 * Gets the
+	 * Gets the value of 'gameN'.<br/>
+	 * If the game is online, checks if it must creates a new window or update
+	 * it.
 	 * 
-	 * @return
+	 * @return 0 if it must create a new window,<br/>
+	 *         1 otherwise.
 	 */
 	public int getGameN() {
 		return this.gameN;
 	}
 
 	/**
-	 * Sets the
+	 * Sets the value of 'gameN'.
 	 * 
 	 * @param gameN
+	 *            0 if it must create a new window,<br/>
+	 *            1 otherwise.
 	 */
 	public void setGameN(int gameN) {
 		this.gameN = gameN;

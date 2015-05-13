@@ -14,6 +14,11 @@ import main.GridIA;
 import main.IA;
 import pawn.APawn;
 
+/**
+ * 
+ * @author 140897
+ *
+ */
 public class ProgressTestIa extends JFrame {
 
 	private static final long serialVersionUID = 8642526437577440017L;
@@ -24,6 +29,12 @@ public class ProgressTestIa extends JFrame {
 	private String lvl1, lvl2;
 	private int win1, win2;
 
+	/**
+	 * 
+	 * @param nbr
+	 * @param lvl1
+	 * @param lvl2
+	 */
 	public ProgressTestIa(int nbr, String lvl1, String lvl2) {
 		this.nbr = nbr;
 		this.lvl1 = lvl1;
@@ -57,6 +68,9 @@ public class ProgressTestIa extends JFrame {
 
 	}
 
+	/**
+	 * 
+	 */
 	public void changeClose() {
 		if (dispose == 0) {
 			this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -65,7 +79,16 @@ public class ProgressTestIa extends JFrame {
 		}
 	}
 
+	/**
+	 * 
+	 * @author 140897
+	 *
+	 */
 	class Traitement implements Runnable {
+		
+		/**
+		 * 
+		 */
 		@SuppressWarnings("static-access")
 		public void run() {
 			win1 = 0;

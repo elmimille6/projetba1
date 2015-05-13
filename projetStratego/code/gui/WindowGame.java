@@ -24,7 +24,6 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
-
 /**
  * This class creates the window of the game.
  * 
@@ -50,12 +49,13 @@ public class WindowGame extends JFrame {
 	public IA ia;
 	public Client client;
 	public int Oplayer;
-	
+
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menu1 = new JMenu("Triche");
-	private JCheckBoxMenuItem showGrid = new JCheckBoxMenuItem("Montrer toute la grille");
-	private JCheckBoxMenuItem showPawn = new JCheckBoxMenuItem("Montrer les pion connu");
-
+	private JCheckBoxMenuItem showGrid = new JCheckBoxMenuItem(
+			"Montrer toute la grille");
+	private JCheckBoxMenuItem showPawn = new JCheckBoxMenuItem(
+			"Montrer les pion connu");
 
 	/**
 	 * 
@@ -101,18 +101,17 @@ public class WindowGame extends JFrame {
 				}
 				if (object instanceof int[]) {
 					int[] res = (int[]) object;
-					
-					 APawn pawn = game.getPawn(res[0], res[1]);
-					 pawn.setShow(!pawn.getShow());
-					 pane.recupGame(game);
-					 pane.repaint();
+
+					APawn pawn = game.getPawn(res[0], res[1]);
+					pawn.setShow(!pawn.getShow());
+					pane.recupGame(game);
+					pane.repaint();
 				}
 			}
 		});
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pane.setView(Oplayer);
 		pane.recupGame(game);
-		
 
 		repaint();
 	}
@@ -145,18 +144,18 @@ public class WindowGame extends JFrame {
 		this.setTitle("Game");
 		this.setLocationRelativeTo(null); // Fenetre centree
 		this.add(pane, BorderLayout.CENTER);
-		
+
 		menu1.add(showPawn);
-		
-		if(game.getPlayer()!=3){
+
+		if (game.getPlayer() != 3) {
 			menu1.add(showGrid);
 		}
 		menuBar.add(menu1);
 		this.setJMenuBar(menuBar);
-		
+
 		showPawn.addActionListener(new PawnListener());
 		showGrid.addActionListener(new GridListener());
-		
+
 		this.setVisible(true);
 		if (game.getPlayer() == 1) {
 			ia = new IA(game.getLevel());
@@ -164,38 +163,45 @@ public class WindowGame extends JFrame {
 		pane.addMouseListener(new MouseGame());
 	}
 
-	class PawnListener implements ActionListener{
-	    public void actionPerformed(ActionEvent e) {
-	      if(showPawn.isSelected()){
-	    	  pane.setShowKnow(true);
-	    	  repaint();
-	      }
-	      else{
-	    	  pane.setShowKnow(false);
-	    	  repaint();
-	      }
-	    }    
-	  }  
-	
-	class GridListener implements ActionListener{
-	    public void actionPerformed(ActionEvent e) {
-	    	if(showGrid.isSelected()){
-	    	  pane.setView(0);
-	    	  repaint();
-	      }
-	      else{
-	    	  if(game.getPlayer()==2){
-	    		  pane.setView(game.getNextTeam());
-	    	  }
-	    	  else if(game.getPlayer()==1){
-	    		  pane.setView(1);
-	    	  }
-	    	  
-	    	  repaint();
-	      }
-	    }    
-	  }  
-	
+	/**
+	 * 
+	 * @author 140897
+	 * 
+	 */
+	class PawnListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (showPawn.isSelected()) {
+				pane.setShowKnow(true);
+				repaint();
+			} else {
+				pane.setShowKnow(false);
+				repaint();
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @author 140897
+	 * 
+	 */
+	class GridListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (showGrid.isSelected()) {
+				pane.setView(0);
+				repaint();
+			} else {
+				if (game.getPlayer() == 2) {
+					pane.setView(game.getNextTeam());
+				} else if (game.getPlayer() == 1) {
+					pane.setView(1);
+				}
+
+				repaint();
+			}
+		}
+	}
+
 	/**
 	 * Transforms the coordinates of the cursor into coordinates of the game.
 	 * 
@@ -227,7 +233,7 @@ public class WindowGame extends JFrame {
 	/**
 	 * 
 	 * @author alexandre
-	 *
+	 * 
 	 */
 	class MouseGame implements MouseListener {
 		int posX, posY;
@@ -254,6 +260,9 @@ public class WindowGame extends JFrame {
 			}
 		}
 
+		/**
+		 * 
+		 */
 		private void click2player() {
 			new Thread(new Runnable() {
 				@SuppressWarnings("static-access")
@@ -340,6 +349,9 @@ public class WindowGame extends JFrame {
 			}).start();
 		}
 
+		/**
+		 * 
+		 */
 		private void click1player() {
 			new Thread(new Runnable() {
 				@SuppressWarnings("static-access")
@@ -448,6 +460,9 @@ public class WindowGame extends JFrame {
 			}).start();
 		}
 
+		/**
+		 * 
+		 */
 		private void clickOnline() {
 			new Thread(new Runnable() {
 				@SuppressWarnings("static-access")
@@ -549,4 +564,3 @@ public class WindowGame extends JFrame {
 	}
 
 }
-

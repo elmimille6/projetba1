@@ -2,7 +2,7 @@ package pawn;
 
 /**
  * Captain is the class that creates a "captain" pawn.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Captain extends APawn {

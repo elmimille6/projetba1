@@ -2,7 +2,7 @@ package pawn;
 
 /**
  * Lieutenant is the class that creates a "lieutenant" pawn.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Lieutenant extends APawn {

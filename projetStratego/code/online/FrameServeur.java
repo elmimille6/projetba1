@@ -35,18 +35,15 @@ public class FrameServeur extends JFrame {
 		Log.set(Log.LEVEL_NONE);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
-		
-		String ip="";
+
+		String ip = "";
 		try {
 			ip = InetAddress.getLocalHost().getHostAddress().toString();
 		} catch (UnknownHostException e) {
 		}
-		
-		
-		
-		
+
 		game.setPlayer(3);
-//		Log.set(Log.LEVEL_DEBUG);
+		// Log.set(Log.LEVEL_DEBUG);
 		server = new Server(6000, 6000);
 		Kryo kryo = server.getKryo();
 		kryo.register(main.Game.class);
@@ -79,16 +76,15 @@ public class FrameServeur extends JFrame {
 
 		server.addListener(new Listener() {
 			public void received(Connection connection, Object object) {
-				if (object instanceof int[]){
+				if (object instanceof int[]) {
 					int[] res = (int[]) object;
-					if(connection==pl1){
+					if (connection == pl1) {
 						pl2.sendTCP(res);
-					}else if(connection==pl2){
+					} else if (connection == pl2) {
 						pl1.sendTCP(res);
 					}
 				}
-				
-				
+
 				else if (object instanceof Game) {
 					game = (Game) object;
 					game.setGameN(1);
@@ -97,17 +93,15 @@ public class FrameServeur extends JFrame {
 					} else if (game.getNextTeam() == 2) {
 						pl2.sendTCP(game);
 					}
-					if(game.win()!=0){
+					if (game.win() != 0) {
 						pl1.close();
 						pl2.close();
-						game=new Game();
+						game = new Game();
 						game.setPlayer(3);
 					}
-				} 
-				else if (object instanceof int[][]){
-					
-				}
-				else if (object instanceof GridIA) {
+				} else if (object instanceof int[][]) {
+
+				} else if (object instanceof GridIA) {
 
 					if (game.getComplete() != 2) {
 						if (connection == pl1) {
@@ -128,10 +122,9 @@ public class FrameServeur extends JFrame {
 			}
 
 			public void connected(Connection connection) {
-				if(nbrCon==0){
+				if (nbrCon == 0) {
 					connection.sendTCP(-1);
-				}
-				else if(nbrCon == 1){
+				} else if (nbrCon == 1) {
 					connection.sendTCP(-2);
 				}
 				nbrCon++;
@@ -167,17 +160,11 @@ public class FrameServeur extends JFrame {
 				nbrCon--;
 			}
 		});
-	
-	
-		lab.setText("Votre adresse ip locale est "+ip);
+
+		lab.setText("Votre adresse ip locale est " + ip);
 		lab.setFont(new Font(" TimesRoman ", Font.BOLD, 13));
 		this.add(lab);
 		new StratClient(true);
 	}
-
-	
-
-	
-	
 
 }

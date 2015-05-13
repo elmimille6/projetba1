@@ -1,6 +1,5 @@
 package pawn;
 
-
 import java.util.Vector;
 
 import main.Game;
@@ -20,8 +19,8 @@ public abstract class APawn implements java.io.Serializable {
 	public int posX;
 	public int posY;
 	protected String URI;
-	private boolean show = false,know = false,
-			moved = false, selected = false;
+	private boolean show = false, know = false, moved = false,
+			selected = false;
 	protected Vector<int[]> place = new Vector<int[]>();
 
 	/**
@@ -242,16 +241,14 @@ public abstract class APawn implements java.io.Serializable {
 	 */
 	public String getURI() {
 		String ur = "/image/";
-		if(team==0 && levelPawn==0 && !(this instanceof Lake)){
-			ur+="no_pawn/no_";
+		if (team == 0 && levelPawn == 0 && !(this instanceof Lake)) {
+			ur += "no_pawn/no_";
+		} else if (team == 1) {
+			ur += "red/";
+		} else if (team == 2) {
+			ur += "blue/";
 		}
-		else if (team == 1){
-			ur+="red/";
-		}
-		else if (team==2){
-			ur+="blue/";
-		}
-		ur= ur+this.namePawn+".png";
+		ur = ur + this.namePawn + ".png";
 		return ur;
 	}
 

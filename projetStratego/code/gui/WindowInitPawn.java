@@ -17,9 +17,16 @@ public class WindowInitPawn extends WindowGame {
 	public static int team = 1, nbPawn, nbPawns = 40, nbPlayer = 1;
 	public static int toInit, side = 1;
 
+	/**
+	 * 
+	 */
 	public WindowInitPawn() {
 	}
 
+	/**
+	 * 
+	 * @param game
+	 */
 	public WindowInitPawn(Game game) {
 		WindowInitPawn.game = game;
 		gridPane1 = new Game(10, 4, 0);
@@ -27,6 +34,11 @@ public class WindowInitPawn extends WindowGame {
 		initGame();
 	}
 
+	/**
+	 * 
+	 * @param gridPane1
+	 * @param toInit
+	 */
 	public WindowInitPawn(Game gridPane1, int toInit) {
 		WindowInitPawn.gridPane1 = gridPane1;
 		WindowInitPawn.toInit = toInit;
@@ -34,6 +46,9 @@ public class WindowInitPawn extends WindowGame {
 		initGame();
 	}
 
+	/**
+	 * 
+	 */
 	public void initGame() {
 		if (toInit == 2) { // New grid
 			new InitWindow();

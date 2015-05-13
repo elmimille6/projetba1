@@ -6,10 +6,20 @@ import java.util.Vector;
 import pawn.APawn;
 import pawn.Scout;
 
+/**
+ * 
+ * @author 140897
+ * 
+ */
 public class IA {
 	int level = 0, team = 0;
 	final static String[] listLvl = { "Niveau facile", "Niveau moyen" };
 
+	/**
+	 * 
+	 * @param lvl
+	 * @param team
+	 */
 	public IA(String lvl, int team) {
 		for (int i = 0; i < listLvl.length; i++) {
 			if (lvl == listLvl[i]) {
@@ -19,10 +29,19 @@ public class IA {
 		this.team = team;
 	}
 
+	/**
+	 * 
+	 * @param lvl
+	 */
 	public IA(String lvl) {
 		this(lvl, 2);
 	}
 
+	/**
+	 * 
+	 * @param game
+	 * @return
+	 */
 	private int[][] iaL0(Game game) {
 		int[][] move = { { -1, -1 }, { -1, -1 } };
 		if (team == ((game.getTurn() + 1) % 2) + 1) {
@@ -81,6 +100,11 @@ public class IA {
 		return move;
 	}
 
+	/**
+	 * 
+	 * @param game
+	 * @return
+	 */
 	public int[][] getNext(Game game) {
 		if (level == 1) {
 			return iaL1(game);
@@ -88,6 +112,11 @@ public class IA {
 		return iaL0(game);
 	}
 
+	/**
+	 * 
+	 * @param game
+	 * @return
+	 */
 	private int[][] iaL1(Game game) {
 		if (team == ((game.getTurn() + 1) % 2) + 1) {
 			Vector<APawn> pawnSide = getSidedPawn(game);
@@ -105,12 +134,17 @@ public class IA {
 		return iaL0(game);
 	}
 
+	/**
+	 * 
+	 * @param game
+	 * @param pawnSide
+	 * @param move
+	 * @return
+	 */
 	private int[][] iaL1Side(Game game, Vector<APawn> pawnSide, int[][] move) {
-		System.out.println("SLIDE");
 		int[][] res = { { -1, -1 }, { -1, -1 }, { 0 } };
 		APawn pawn = pawnSide.get(0);
 		if (pawn.getLevel() == 2) { // si notre pion est un eclaireur
-			System.out.println("SCOUT");
 			APawn pawnside = game.getPawn(pawn.posX - 1, pawn.posY);
 			if (pawnside != null) {
 				if (pawnside.getTeam() == (team % 2) + 1 && !pawnside.getKnow()) {
@@ -290,6 +324,11 @@ public class IA {
 
 	}
 
+	/**
+	 * 
+	 * @param game
+	 * @return
+	 */
 	private int probFlagBomb(Game game) {
 		int nbpawn = 0;
 		for (int i = 0; i <= game.getLine(); i++) {
@@ -306,6 +345,11 @@ public class IA {
 		return nbpawn;
 	}
 
+	/**
+	 * 
+	 * @param game
+	 * @return
+	 */
 	private Vector<APawn> getSidedPawn(Game game) {
 		Vector<APawn> pawnSide = new Vector<APawn>();
 		for (int i = 0; i <= game.getLine(); i++) {
@@ -399,6 +443,11 @@ public class IA {
 		}
 	}
 
+	/**
+	 * 
+	 * @param pawnside
+	 * @return
+	 */
 	private boolean isPawnSide(APawn pawnside) {
 		if (pawnside != null) {
 			if (pawnside.getTeam() == (team % 2) + 1) {
@@ -408,10 +457,19 @@ public class IA {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public static String[] getListLvl() {
 		return listLvl;
 	}
 
+	/**
+	 * 
+	 * @param lvl
+	 * @return
+	 */
 	public static int getIntLvl(String lvl) {
 		for (int i = 0; i < listLvl.length; i++) {
 			if (lvl == listLvl[i]) {

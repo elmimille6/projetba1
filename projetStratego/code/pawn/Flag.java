@@ -4,7 +4,7 @@ import main.Game;
 
 /**
  * Flag is the class that creates a "flag" pawn.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Flag extends APawn {

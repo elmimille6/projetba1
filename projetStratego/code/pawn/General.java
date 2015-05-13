@@ -2,7 +2,7 @@ package pawn;
 
 /**
  * General is the class that creates a "general" pawn.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class General extends APawn {

@@ -2,7 +2,7 @@ package pawn;
 
 /**
  * Major is the class that creates a "major" pawn.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Major extends APawn {

@@ -2,7 +2,7 @@ package pawn;
 
 /**
  * Colonel is the class that creates a "colonel" pawn.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class Colonel extends APawn {

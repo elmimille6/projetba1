@@ -16,27 +16,50 @@ public class GridStart implements java.io.Serializable {
 	public APawn[][] grid;
 	public String name;
 
+	/**
+	 * 
+	 */
 	public GridStart() {
-		this.grid=new APawn[4][10];
-		this.name="blank";
+		this.grid = new APawn[4][10];
+		this.name = "blank";
 	}
 
+	/**
+	 * 
+	 * @param ngrid
+	 */
 	public void setGrid(APawn[][] ngrid) {
 		this.grid = ngrid;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public APawn[][] getGrid() {
 		return grid;
 	}
 
+	/**
+	 * 
+	 * @param str
+	 */
 	public void setName(String str) {
 		this.name = str;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * 
+	 * @param team
+	 */
 	public void changeTeam(int team) {
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid[0].length; j++) {
@@ -46,6 +69,9 @@ public class GridStart implements java.io.Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	@SuppressWarnings("unchecked")
 	public void save() {
 		ObjectInputStream in;
@@ -71,6 +97,9 @@ public class GridStart implements java.io.Serializable {
 
 	}
 
+	/**
+	 * 
+	 */
 	@SuppressWarnings("unchecked")
 	public void delete() {
 		ObjectInputStream in;
@@ -104,10 +133,16 @@ public class GridStart implements java.io.Serializable {
 
 	}
 
+	/**
+	 * 
+	 */
 	public String toString() {
 		return name;
 	}
 
+	/**
+	 * 
+	 */
 	public boolean equals(Object obj) {
 		if (obj instanceof GridStart) {
 			GridStart gri = (GridStart) obj;

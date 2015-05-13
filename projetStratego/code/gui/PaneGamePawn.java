@@ -19,6 +19,12 @@ public class PaneGamePawn extends JPanel {
 	JPanel pane;
 	boolean move;
 
+	/**
+	 * 
+	 * @param dic
+	 * @param game
+	 * @param side
+	 */
 	public PaneGamePawn(Dic dic, Game game, int side) {
 		this.setLayout(new GridLayout(15, 1));
 		startTeam = dic;
@@ -27,11 +33,20 @@ public class PaneGamePawn extends JPanel {
 
 	}
 
+	/**
+	 * 
+	 * @param width
+	 * @param heigth
+	 */
 	public void fixSize(int width, int heigth) {
 		this.width = width;
 		this.height = heigth;
 	}
 
+	/**
+	 * 
+	 * @param game
+	 */
 	public void upGame(Game game) {
 		move = true;
 		grid = game;
@@ -39,9 +54,12 @@ public class PaneGamePawn extends JPanel {
 		this.removeAll();
 		this.affichage();
 		this.validate();
-		;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Dic count() {
 		Dic dic = new Dic();
 		for (int i = 0; i <= grid.getLine(); i++) {
@@ -61,6 +79,9 @@ public class PaneGamePawn extends JPanel {
 		return dic;
 	}
 
+	/**
+	 * 
+	 */
 	public void affichage() {
 		JLabel lTeam;
 		if (side == 1) {
@@ -69,7 +90,7 @@ public class PaneGamePawn extends JPanel {
 			lTeam = new JLabel("  Equipe bleue");
 		}
 		this.add(lTeam);
-		int g= startTeam.getSize();
+		int g = startTeam.getSize();
 		for (int i = 0; i < g; i++) {
 			JLabel label = new JLabel("  "
 					+ ((APawn) startTeam.getObject(i)).getNamePawn() + " : "

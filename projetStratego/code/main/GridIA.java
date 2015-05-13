@@ -7,7 +7,7 @@ import pawn.*;
 
 /**
  * GridIA is the class that creates a "grid" object for the IA.
- *
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class GridIA {
@@ -15,6 +15,9 @@ public class GridIA {
 	APawn[][] grid;
 	int val = 0;
 
+	/**
+	 * 
+	 */
 	public GridIA() {
 
 	}
@@ -29,10 +32,19 @@ public class GridIA {
 		eval(team, 17000);
 	}
 
+	/**
+	 * 
+	 * @param tab
+	 */
 	public GridIA(APawn[][] tab) {
 		this.grid = tab;
 	}
 
+	/**
+	 * 
+	 * @param team
+	 * @param lvl
+	 */
 	public GridIA(int team, int lvl) {
 		if (lvl == 1) {
 			eval(team, 17000);
@@ -41,6 +53,11 @@ public class GridIA {
 		}
 	}
 
+	/**
+	 * 
+	 * @param team
+	 * @param valeur
+	 */
 	public void eval(int team, int valeur) {
 		while (val < valeur) {
 			APawn[][] gridEval = createGrid(team);
@@ -52,6 +69,12 @@ public class GridIA {
 		}
 	}
 
+	/**
+	 * 
+	 * @param i
+	 * @param j
+	 * @return
+	 */
 	public APawn getPawn(int i, int j) {
 		return grid[i][j];
 	}

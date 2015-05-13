@@ -23,7 +23,7 @@ public class PaneGame extends JPanel {
 	public int[] arrow = { -1, -1, -1, -1, -1, -1 };
 	public int[] lastMove = { -1, -1, -1 };
 	int view = 1;
-	int nbrCol,nbrLigne;
+	int nbrCol, nbrLigne;
 	Graphics graph;
 
 	/**
@@ -67,13 +67,12 @@ public class PaneGame extends JPanel {
 			for (int j = 0; j < (nbrCol); j++) {
 				if (grid.getPawn(i, j) != null) {
 					APawn pawn = grid.getPawn(i, j);
-					 if (pawn.getShow()){
-							link = pawn.getURI();
-					 }
-					 else if (pawn.getTeam() == view || view == 0 || pawn.getTeam() == 0 ) {
+					if (pawn.getShow()) {
 						link = pawn.getURI();
-					} 
-					else {
+					} else if (pawn.getTeam() == view || view == 0
+							|| pawn.getTeam() == 0) {
+						link = pawn.getURI();
+					} else {
 						if (pawn.getTeam() == 1) {
 							link = "/image/red/hide.png";
 						}
@@ -94,19 +93,16 @@ public class PaneGame extends JPanel {
 				}
 			}
 		}
-		
 
 		paintArrow(g);
 		grid.save();
 	}
 
-	
-	public void paintArrow(Graphics g){
+	public void paintArrow(Graphics g) {
 		int line = arrow[4];
 		int row = arrow[5];
-		
 
-		//paint arrow last move
+		// paint arrow last move
 		lastMove = grid.getLastMove();
 		if (lastMove[0] != -1) {
 			String linkLM = "/image/arrows/up_moved.png";
@@ -189,7 +185,7 @@ public class PaneGame extends JPanel {
 							- 20, this);
 		}
 	}
-	
+
 	/**
 	 * Gets the array 'nouvArrow' and store it into 'arrow'.
 	 * 
@@ -200,22 +196,30 @@ public class PaneGame extends JPanel {
 		arrow = nouvArrow;
 	}
 
-	/**
-	 * Retrieves the grid in parameter.
-	 * 
-	 * @param nouvGrid
-	 *            The grid.
-	 */
-	/*public void recupGrid(Game nouvGrid) {
-		grid = nouvGrid;
-		lastMove = nouvGrid.getLastMove();
-	}*/
+	// /**
+	// * Retrieves the grid in parameter.
+	// *
+	// * @param nouvGrid
+	// * The grid.
+	// */
+	// public void recupGrid(Game nouvGrid) {
+	// grid = nouvGrid;
+	// lastMove = nouvGrid.getLastMove();
+	// }
 
-	 public void recupGame(Game game){
-	 grid= game;
-	 }
-	 
-	 public void setView(int view){
-		 this.view=view;
-	 }
+	/**
+	 * 
+	 * @param game
+	 */
+	public void recupGame(Game game) {
+		grid = game;
+	}
+
+	/**
+	 * 
+	 * @param view
+	 */
+	public void setView(int view) {
+		this.view = view;
+	}
 }

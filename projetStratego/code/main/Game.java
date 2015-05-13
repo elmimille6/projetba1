@@ -41,8 +41,7 @@ public class Game implements java.io.Serializable {
 		grid[5][6] = lake;
 		grid[5][7] = lake;
 	}
-	
-	
+
 	/**
 	 * Constructor of the grid.
 	 * 
@@ -224,6 +223,9 @@ public class Game implements java.io.Serializable {
 
 	/**
 	 * Loads the grid from the 'grid.save' file.
+	 * 
+	 * @return The grid if there's no problem,<br/>
+	 *         null otherwise.
 	 */
 	public static Game load() {
 		try {
@@ -484,16 +486,23 @@ public class Game implements java.io.Serializable {
 	}
 
 	/**
+	 * Gets the number of pawns.
 	 * 
-	 * @return
+	 * @return The number of pawns:<br/>
+	 *         40 for the Original Stratego or<br/>
+	 *         10 for the Stratego Duel.
 	 */
 	public int getNbPawns() {
 		return nbPawns;
 	}
 
 	/**
+	 * Sets the number of pawns.
 	 * 
 	 * @param nb
+	 *            The number of pawns:<br/>
+	 *            40 for the Original Stratego or<br/>
+	 *            10 for the Stratego Duel.
 	 */
 	public void setNbPawns(int nb) {
 		this.nbPawns = nb;
@@ -580,19 +589,19 @@ public class Game implements java.io.Serializable {
 
 	/**
 	 * 
-	 * @param te
+	 * @param moved
 	 */
-	public void showMoved(int te) {
+	public void showMoved(int moved) {
 		Vector<APawn> vect = new Vector<APawn>();
 		for (int i = 0; i < line; i++) {
 			for (int j = 0; j < row; j++) {
 				APawn pawn = grid[i][j];
 				if (pawn != null) {
 					if (pawn.getTeam() != 0) {
-						if (te == 0 && pawn.getMoved()) {
+						if (moved == 0 && pawn.getMoved()) {
 							vect.addElement(pawn);
 						}
-						if (te == pawn.getTeam() && pawn.getMoved()) {
+						if (moved == pawn.getTeam() && pawn.getMoved()) {
 							vect.addElement(pawn);
 						}
 					}
@@ -604,19 +613,19 @@ public class Game implements java.io.Serializable {
 
 	/**
 	 * 
-	 * @param te
+	 * @param known
 	 */
-	public void showKnow(int te) {
+	public void showKnow(int known) {
 		Vector<APawn> vect = new Vector<APawn>();
 		for (int i = 0; i < line; i++) {
 			for (int j = 0; j < row; j++) {
 				APawn pawn = grid[i][j];
 				if (pawn != null) {
 					if (pawn.getTeam() != 0) {
-						if (te == 0 && pawn.getKnow()) {
+						if (known == 0 && pawn.getKnow()) {
 							vect.addElement(pawn);
 						}
-						if (te == pawn.getTeam() && pawn.getKnow()) {
+						if (known == pawn.getTeam() && pawn.getKnow()) {
 							vect.addElement(pawn);
 						}
 					}
@@ -635,11 +644,21 @@ public class Game implements java.io.Serializable {
 		return ((turn + 1) % 2) + 1;
 	}
 
-	public void setGameN(int gameN) {
-		this.gameN = gameN;
-	}
-
+	/**
+	 * Gets the
+	 * 
+	 * @return
+	 */
 	public int getGameN() {
 		return this.gameN;
+	}
+
+	/**
+	 * Sets the
+	 * 
+	 * @param gameN
+	 */
+	public void setGameN(int gameN) {
+		this.gameN = gameN;
 	}
 }

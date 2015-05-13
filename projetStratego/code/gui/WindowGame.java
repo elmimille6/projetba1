@@ -240,6 +240,10 @@ public class WindowGame extends JFrame {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
+			if (e.getButton() == MouseEvent.BUTTON3 && game.getPlayer() == 2) {
+				pane.setShowKnow(false);
+				repaint();
+			}
 			if (playGame) {
 				posX = e.getX();
 				posY = e.getY();
@@ -285,6 +289,7 @@ public class WindowGame extends JFrame {
 								game.getPawn(line, row).setShow(false);
 							}
 							game = focus.move(game, line, row);
+							
 							att = true;
 							game.addTurn();
 							pane.recupArrow(arrowN);
@@ -556,7 +561,8 @@ public class WindowGame extends JFrame {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			if (e.getButton() == MouseEvent.BUTTON3 && game.getPlayer() == 2) {
-
+				pane.setShowKnow(true);
+				repaint();
 			}
 
 		}

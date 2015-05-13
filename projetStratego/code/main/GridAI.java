@@ -6,60 +6,70 @@ import java.util.Vector;
 import pawn.*;
 
 /**
- * GridIA is the class that creates a "grid" object for the IA.
+ * GridAI is the class that creates a "grid" object for the AI.
  * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
-public class GridIA {
+public class GridAI {
 
 	APawn[][] grid;
 	int val = 0;
 
 	/**
-	 * 
+	 * Main constructor of the class.
 	 */
-	public GridIA() {
-
+	public GridAI() {
 	}
 
 	/**
-	 * Constructor of the grid for the IA.
+	 * Constructor of the grid for the AI.
 	 * 
 	 * @param team
 	 *            The team of the IA.
 	 */
-	public GridIA(int team) {
+	public GridAI(int team) {
 		eval(team, 17000);
 	}
 
 	/**
+	 * Constructor of the class,<br/>
+	 * takes an APawn[][] object to a GridAI object.
 	 * 
 	 * @param tab
+	 *            The gridAI as an APawn[][] object.
 	 */
-	public GridIA(APawn[][] tab) {
+	public GridAI(APawn[][] tab) {
 		this.grid = tab;
 	}
 
 	/**
+	 * Constructor of the class based on the team and the level of the AI.
 	 * 
 	 * @param team
-	 * @param lvl
+	 *            The team of the new GridAI.
+	 * 
+	 * @param level
+	 *            The level of the new GridAI.
 	 */
-	public GridIA(int team, int lvl) {
-		if (lvl == 1) {
+	public GridAI(int team, int level) {
+		if (level == 1) {
 			eval(team, 17000);
-		} else if (lvl == 0) {
+		} else if (level == 0) {
 			eval(team, 10000);
 		}
 	}
 
 	/**
+	 * This method evaluates the level of the GridIA object created.
 	 * 
 	 * @param team
-	 * @param valeur
+	 *            The team of the created grid.
+	 * 
+	 * @param level
+	 *            The value of the level of difficulty of the grid.
 	 */
-	public void eval(int team, int valeur) {
-		while (val < valeur) {
+	public void eval(int team, int level) {
+		while (val < level) {
 			APawn[][] gridEval = createGrid(team);
 			int value = evalGrid(gridEval);
 			if (value > val) {
@@ -70,10 +80,15 @@ public class GridIA {
 	}
 
 	/**
+	 * Gets the pawn at the given coordinates.
 	 * 
 	 * @param i
+	 *            The abscissa of the grid.
+	 * 
 	 * @param j
-	 * @return
+	 *            The ordinate of the grid.
+	 * 
+	 * @return The pawn at the given coordinates.
 	 */
 	public APawn getPawn(int i, int j) {
 		return grid[i][j];
@@ -127,7 +142,7 @@ public class GridIA {
 	 */
 	public int evalGrid(APawn[][] grid) {
 		int bonus = 2000;
-		int valeur = 0;
+		int value = 0;
 		int l1 = 0, l2 = 0, l3 = 0, l4 = 0;
 		for (int i = 0; i < 10; i++) {
 			l1 += grid[0][i].getValue();
@@ -138,29 +153,29 @@ public class GridIA {
 				if (i != 0) {
 					if (grid[2][i - 1].getClass() == Bomb.class
 							|| grid[2][i - 1].getClass() == Marshal.class) {
-						valeur += bonus;
+						value += bonus;
 					}
 					if (i != 9) {
 						if (grid[2][i + 1].getClass() == Bomb.class
 								|| grid[2][i + 1].getClass() == Marshal.class) {
-							valeur += bonus;
+							value += bonus;
 						}
 					} else {
-						valeur += bonus;
+						value += bonus;
 					}
 					if (grid[1][i].getClass() == Bomb.class
 							|| grid[1][i].getClass() == Marshal.class) {
-						valeur += bonus;
+						value += bonus;
 					}
 				} else {
-					valeur += bonus;
+					value += bonus;
 					if (grid[2][i + 1].getClass() == Bomb.class
 							|| grid[2][i + 1].getClass() == Marshal.class) {
-						valeur += bonus;
+						value += bonus;
 					}
 					if (grid[1][i].getClass() == Bomb.class
 							|| grid[1][i].getClass() == Marshal.class) {
-						valeur += bonus;
+						value += bonus;
 					}
 
 				}
@@ -169,34 +184,34 @@ public class GridIA {
 				if (i != 0) {
 					if (grid[3][i - 1].getClass() == Bomb.class
 							|| grid[3][i - 1].getClass() == Marshal.class) {
-						valeur += bonus;
+						value += bonus;
 					}
 					if (i != 9) {
 						if (grid[3][i + 1].getClass() == Bomb.class
 								|| grid[3][i + 1].getClass() == Marshal.class) {
-							valeur += bonus;
+							value += bonus;
 						}
 					}
 					if (grid[2][i].getClass() == Bomb.class
 							|| grid[2][i].getClass() == Marshal.class) {
-						valeur += bonus;
+						value += bonus;
 					}
 				} else {
-					valeur += bonus;
+					value += bonus;
 					if (i != 9) {
 						if (grid[3][i + 1].getClass() == Bomb.class
 								|| grid[3][i + 1].getClass() == Marshal.class) {
-							valeur += bonus;
+							value += bonus;
 						}
 					}
 					if (grid[2][i].getClass() == Bomb.class
 							|| grid[2][i].getClass() == Marshal.class) {
-						valeur += bonus;
+						value += bonus;
 					}
 				}
 			}
 		}
-		return valeur + l1 + 2 * l2 + 4 * l3 + 6 * l4;
+		return value + l1 + 2 * l2 + 4 * l3 + 6 * l4;
 	}
 
 	/**

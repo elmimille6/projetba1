@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import main.Game;
-import main.IA;
+import main.AI;
 import pawn.APawn;
 import pawn.Bomb;
 import pawn.Flag;
@@ -46,7 +46,7 @@ public class WindowGame extends JFrame {
 
 	public final String[] resultName = { "Rouge", "Bleu" };
 	public boolean playGame = true;
-	public IA ia;
+	public AI ia;
 	public Client client;
 	public int Oplayer;
 
@@ -58,13 +58,56 @@ public class WindowGame extends JFrame {
 			"Montrer les pion connu");
 
 	/**
-	 * 
+	 * Main constructor of the class.
 	 */
 	public WindowGame() {
 
 	}
 
 	/**
+	 * Constructor of the class.
+	 * 
+	 * @param ngame
+	 *            The 'game' object of the current game.
+	 */
+	public WindowGame(Game ngame) {
+
+		this.game = ngame;
+		startTeam = game.getStartTeam();
+		paneRed = new PaneGamePawn(startTeam, game, 1);
+		paneBlue = new PaneGamePawn(startTeam, game, 2);
+		pane = new PaneGame(game);
+		pane.setView(game.getNextTeam());
+		// When we use the last game, the current team is viewable.
+		pane.setLayout(new BorderLayout());
+		this.add(paneRed, BorderLayout.WEST);
+		this.add(paneBlue, BorderLayout.EAST);
+		this.setSize(900, 700);
+		this.setResizable(true);
+		this.setTitle("Game");
+		this.setLocationRelativeTo(null); // The window is centered.
+		this.add(pane, BorderLayout.CENTER);
+
+		menu1.add(showPawn);
+
+		if (game.getPlayer() != 3) {
+			menu1.add(showGrid);
+		}
+		menuBar.add(menu1);
+		this.setJMenuBar(menuBar);
+
+		showPawn.addActionListener(new PawnListener());
+		showGrid.addActionListener(new GridListener());
+
+		this.setVisible(true);
+		if (game.getPlayer() == 1) {
+			ia = new AI(game.getLevel());
+		}
+		pane.addMouseListener(new MouseGame());
+	}
+
+	/**
+	 * Constructor of the class.//TODO
 	 * 
 	 * @param ngame
 	 * @param client
@@ -117,56 +160,16 @@ public class WindowGame extends JFrame {
 	}
 
 	/**
-	 * 
+	 * Closes the widow.
 	 */
 	public void clientClose() {
 		client.close();
 	}
 
 	/**
+	 * Action listener to display (or hide) the known pawns.
 	 * 
-	 * @param ngame
-	 */
-	public WindowGame(Game ngame) {
-
-		this.game = ngame;
-		startTeam = game.getStartTeam();
-		paneRed = new PaneGamePawn(startTeam, game, 1);
-		paneBlue = new PaneGamePawn(startTeam, game, 2);
-		pane = new PaneGame(game);
-		pane.setView(game.getNextTeam());
-		// When we use the last game, the current team is viewable.
-		pane.setLayout(new BorderLayout());
-		this.add(paneRed, BorderLayout.WEST);
-		this.add(paneBlue, BorderLayout.EAST);
-		this.setSize(900, 700);
-		this.setResizable(true);
-		this.setTitle("Game");
-		this.setLocationRelativeTo(null); // Fenetre centree
-		this.add(pane, BorderLayout.CENTER);
-
-		menu1.add(showPawn);
-
-		if (game.getPlayer() != 3) {
-			menu1.add(showGrid);
-		}
-		menuBar.add(menu1);
-		this.setJMenuBar(menuBar);
-
-		showPawn.addActionListener(new PawnListener());
-		showGrid.addActionListener(new GridListener());
-
-		this.setVisible(true);
-		if (game.getPlayer() == 1) {
-			ia = new IA(game.getLevel());
-		}
-		pane.addMouseListener(new MouseGame());
-	}
-
-	/**
-	 * 
-	 * @author 140897
-	 * 
+	 * @author CAREDDA Giuliano, DUCOBU Alexandre
 	 */
 	class PawnListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -181,9 +184,9 @@ public class WindowGame extends JFrame {
 	}
 
 	/**
+	 * Action listener to display (or hide) the entire grid.
 	 * 
-	 * @author 140897
-	 * 
+	 * @author CAREDDA Giuliano, DUCOBU Alexandre
 	 */
 	class GridListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -231,13 +234,17 @@ public class WindowGame extends JFrame {
 	}
 
 	/**
+	 * This class redefines the right click event.
 	 * 
-	 * @author alexandre
-	 * 
+	 * @author CAREDDA Giuliano, DUCOBU Alexandre
 	 */
 	class MouseGame implements MouseListener {
 		int posX, posY;
 
+		/**
+		 * Redefines the right click event:<br/>
+		 * based the game mode, the known pawns can be displayed (hidden).
+		 */
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			if (e.getButton() == MouseEvent.BUTTON3 && game.getPlayer() == 2) {
@@ -265,10 +272,14 @@ public class WindowGame extends JFrame {
 		}
 
 		/**
-		 * 
+		 * This method contains the 'game' for the 2 players mode.
 		 */
 		private void click2player() {
 			new Thread(new Runnable() {
+
+				/**
+				 * Runs the game.
+				 */
 				@SuppressWarnings("static-access")
 				public void run() {
 
@@ -289,7 +300,7 @@ public class WindowGame extends JFrame {
 								game.getPawn(line, row).setShow(false);
 							}
 							game = focus.move(game, line, row);
-							
+
 							att = true;
 							game.addTurn();
 							pane.recupArrow(arrowN);
@@ -355,10 +366,14 @@ public class WindowGame extends JFrame {
 		}
 
 		/**
-		 * 
+		 * This method contains the 'game' for the player versus AI mode.
 		 */
 		private void click1player() {
 			new Thread(new Runnable() {
+
+				/**
+				 * Runs the game.
+				 */
 				@SuppressWarnings("static-access")
 				public void run() {
 					if ((((game.getTurn() + 1) % 2) + 1) == 1) {
@@ -466,10 +481,14 @@ public class WindowGame extends JFrame {
 		}
 
 		/**
-		 * 
+		 * This method contains the 'game' for the online mode.
 		 */
 		private void clickOnline() {
 			new Thread(new Runnable() {
+
+				/**
+				 * Runs the game.
+				 */
 				@SuppressWarnings("static-access")
 				public void run() {
 					pane.recupGame(game);

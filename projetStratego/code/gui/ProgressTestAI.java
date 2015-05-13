@@ -10,17 +10,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 
 import main.Game;
-import main.GridIA;
-import main.IA;
+import main.GridAI;
+import main.AI;
 import pawn.APawn;
 
 /**
- * Class of the frame whith the progress bar when a testia is on progress
+ * Class of the frame whith the progress bar when a testAI is on progress
  * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  *
  */
-public class ProgressTestIa extends JFrame {
+public class ProgressTestAI extends JFrame {
 
 	private static final long serialVersionUID = 8642526437577440017L;
 	private Thread t;
@@ -31,16 +31,16 @@ public class ProgressTestIa extends JFrame {
 	private int win1, win2;
 
 	/**
-	 * main constructor of the class
+	 * Main constructor of the class
 	 * 
 	 * @param nbr
-	 *            number of test to run
+	 *            Number of tests to run.
 	 * @param lvl1
-	 *            level of the first ai
+	 *            Level of the first AI.
 	 * @param lvl2
-	 *            level of the second ai
+	 *            Level of the second AI.
 	 */
-	public ProgressTestIa(int nbr, String lvl1, String lvl2) {
+	public ProgressTestAI(int nbr, String lvl1, String lvl2) {
 		this.nbr = nbr;
 		this.lvl1 = lvl1;
 		this.lvl2 = lvl2;
@@ -50,7 +50,7 @@ public class ProgressTestIa extends JFrame {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 
-		t = new Thread(new Traitement());
+		t = new Thread(new Processing());
 
 		bar = new JProgressBar();
 		bar.setMaximum(nbr - 1);
@@ -63,7 +63,7 @@ public class ProgressTestIa extends JFrame {
 		launch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				t = new Thread(new Traitement());
+				t = new Thread(new Processing());
 				t.start();
 			}
 		});
@@ -75,7 +75,8 @@ public class ProgressTestIa extends JFrame {
 	}
 
 	/**
-	 * methods called at the beginning and the ending of the test to change the default close operation
+	 * This method is called at the beginning and the end of the tests to change the
+	 * default close operation.
 	 */
 	public void changeClose() {
 		if (dispose == 0) {
@@ -86,15 +87,14 @@ public class ProgressTestIa extends JFrame {
 	}
 
 	/**
-	 * the threads who run the test
+	 * The thread who run the tests.
 	 * 
 	 * @author CAREDDA Giuliano, DUCOBU Alexandre
-	 *
 	 */
-	class Traitement implements Runnable {
+	class Processing implements Runnable {
 
 		/**
-		 * run the test
+		 * Runs the tests.
 		 */
 		@Override
 		@SuppressWarnings("static-access")
@@ -104,8 +104,8 @@ public class ProgressTestIa extends JFrame {
 			dispose = 1;
 			changeClose();
 			launch.setEnabled(false);
-			GridIA grid1 = new GridIA(1, 1);
-			GridIA grid2 = new GridIA(2, 1);
+			GridAI grid1 = new GridAI(1, 1);
+			GridAI grid2 = new GridAI(2, 1);
 			for (int i = 0; i < nbr; i++) {
 				try {
 					Thread.sleep(10L);
@@ -113,11 +113,11 @@ public class ProgressTestIa extends JFrame {
 					e.printStackTrace();
 				}
 				bar.setValue(i);
-				IA ia1 = new IA(lvl1, 1);
-				IA ia2 = new IA(lvl2, 2);
+				AI ia1 = new AI(lvl1, 1);
+				AI ia2 = new AI(lvl2, 2);
 				Game game = new Game(10, 1);
-				grid1 = new GridIA(1, IA.getIntLvl(lvl1));
-				grid2 = new GridIA(2, IA.getIntLvl(lvl2));
+				grid1 = new GridAI(1, AI.getIntLevel(lvl1));
+				grid2 = new GridAI(2, AI.getIntLevel(lvl2));
 				game.placeTeam(grid1.getGrid(), 1);
 				game.placeTeam(grid2.getGrid(), 2);
 				int gameWin = 0;
@@ -147,7 +147,10 @@ public class ProgressTestIa extends JFrame {
 			int moy1 = (int) imoy1;
 			int moy2 = (int) imoy2;
 			JOptionPane jop1 = new JOptionPane();
-			jop1.showMessageDialog(null, "Victoire de l'IA 1: " + lvl1 + ": " + win1 + " soit " + moy1 + " %\nVictoire de l'IA 2 : " + lvl2 + ": " + win2 + " soit " + moy2 + " %", "Resultat", JOptionPane.INFORMATION_MESSAGE);
+			jop1.showMessageDialog(null, "Victoire de l'IA 1: " + lvl1 + ": "
+					+ win1 + " soit " + moy1 + " %\nVictoire de l'IA 2 : "
+					+ lvl2 + ": " + win2 + " soit " + moy2 + " %", "Resultat",
+					JOptionPane.INFORMATION_MESSAGE);
 			launch.setEnabled(true);
 			dispose = 0;
 			changeClose();

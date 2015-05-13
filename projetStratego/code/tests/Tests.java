@@ -19,7 +19,7 @@ public class Tests {
 			marshal2 = new Marshal(), miner = new Miner(), spy = new Spy();
 	private int win = 1, lost = 2, draw = 0;
 	private Game game = new Game(10, 1);;
-	private GridIA grid1 = new GridIA(1), grid2 = new GridIA(2);
+	private GridAI grid1 = new GridAI(1), grid2 = new GridAI(2);
 
 	// Battles between two pawns.
 

@@ -38,7 +38,7 @@ public class StratClient extends JFrame {
 		Log.set(Log.LEVEL_NONE);
 		Kryo kryo = client.getKryo();
 		kryo.register(main.Game.class);
-		kryo.register(main.GridIA.class);
+		kryo.register(main.GridAI.class);
 		kryo.register(pawn.APawn.class);
 		kryo.register(pawn.APawn[].class);
 		kryo.register(pawn.APawn[][].class);

@@ -10,6 +10,12 @@ import java.util.Vector;
 
 import pawn.APawn;
 
+/**
+ * GridStart is the class that saves (and deletes) manually created grids into
+ * the 'GridStart.save' file.
+ * 
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
+ */
 public class GridStart implements java.io.Serializable {
 
 	private static final long serialVersionUID = -4344347610962103007L;
@@ -17,7 +23,7 @@ public class GridStart implements java.io.Serializable {
 	public String name;
 
 	/**
-	 * 
+	 * Main constructor of the grid.
 	 */
 	public GridStart() {
 		this.grid = new APawn[4][10];
@@ -25,14 +31,18 @@ public class GridStart implements java.io.Serializable {
 	}
 
 	/**
+	 * Sets the given grid into the 'grid' value.<br/>
+	 * This grid'll be saved.
 	 * 
-	 * @param ngrid
+	 * @param grid
+	 *            An APawn[][] object to be saved.
 	 */
-	public void setGrid(APawn[][] ngrid) {
-		this.grid = ngrid;
+	public void setGrid(APawn[][] grid) {
+		this.grid = grid;
 	}
 
 	/**
+	 * Gets the chosen grid.
 	 * 
 	 * @return
 	 */
@@ -41,24 +51,29 @@ public class GridStart implements java.io.Serializable {
 	}
 
 	/**
+	 * Sets the name of the chosen grid.
 	 * 
-	 * @param str
+	 * @param name
+	 *            The name of the chosen grid.
 	 */
-	public void setName(String str) {
-		this.name = str;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
+	 * Gets the name of the chosen grid.
 	 * 
-	 * @return
+	 * @return The name of the chosen grid.
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
+	 * Changes the team of the chosen grid into the given team.
 	 * 
 	 * @param team
+	 *            The wanted team of the chosen grid.
 	 */
 	public void changeTeam(int team) {
 		for (int i = 0; i < grid.length; i++) {
@@ -70,7 +85,7 @@ public class GridStart implements java.io.Serializable {
 	}
 
 	/**
-	 * 
+	 * Saves the chosen grid in the 'GridStart.save' file.
 	 */
 	@SuppressWarnings("unchecked")
 	public void save() {
@@ -98,7 +113,7 @@ public class GridStart implements java.io.Serializable {
 	}
 
 	/**
-	 * 
+	 * Loads the chosen grid from the 'GridStart.save' file.
 	 */
 	@SuppressWarnings("unchecked")
 	public void delete() {
@@ -130,18 +145,10 @@ public class GridStart implements java.io.Serializable {
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {
 		}
-
 	}
 
 	/**
-	 * 
-	 */
-	public String toString() {
-		return name;
-	}
-
-	/**
-	 * 
+	 * Indicates whether some other object is "equal to" this one.
 	 */
 	public boolean equals(Object obj) {
 		if (obj instanceof GridStart) {

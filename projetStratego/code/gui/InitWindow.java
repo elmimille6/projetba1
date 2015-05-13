@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import main.Game;
-import main.GridIA;
+import main.GridAI;
 import main.GridStart;
 import online.StratClient;
 import pawn.APawn;
@@ -68,7 +68,7 @@ public class InitWindow extends WindowInitPawn {
 	public boolean online = false, send = false;
 	public int Oplayer = 0;
 
-	public JComboBox<GridStart> combo;
+	public JComboBox/* <GridStart> */combo;
 	public GridStart focus;
 	public Vector<GridStart> list;
 
@@ -80,7 +80,7 @@ public class InitWindow extends WindowInitPawn {
 	}
 
 	/**
-	 * Constructor of the grid when the game is online.
+	 * Constructor of the grid when the game is online. //TODO
 	 * 
 	 * @param startClient
 	 * @param Oplayer
@@ -114,9 +114,9 @@ public class InitWindow extends WindowInitPawn {
 		initPane2();
 
 		this.setLocationRelativeTo(null);
-		// On definit le layout a utiliser sur le content pane
+		// The layout for the content pane is defined here.
 		this.setLayout(new BorderLayout());
-		// On ajoute le bouton au content pane de la JFrame
+		// The button is added to the cont pane of the JFrame.
 
 		pane1 = new PaneInitPawn(gridPane1);
 		pane1.setPreferredSize(new Dimension(0, northHeight));
@@ -130,7 +130,7 @@ public class InitWindow extends WindowInitPawn {
 
 		if (loadListGrid()) {
 			focus = list.get(0);
-			combo = new JComboBox<GridStart>();
+			combo = new JComboBox/* <GridStart> */();
 			for (int i = 0; i < list.size(); i++) {
 				combo.addItem(list.get(i));
 			}
@@ -195,7 +195,7 @@ public class InitWindow extends WindowInitPawn {
 						initGame();
 					} else {
 						Game gridPlayer = createGrid();
-						GridIA grid = new GridIA(gridPlayer.getGrid());
+						GridAI grid = new GridAI(gridPlayer.getGrid());
 						startClient.client.sendTCP(grid);
 						send = true;
 						startClient.setState(3);
@@ -208,7 +208,7 @@ public class InitWindow extends WindowInitPawn {
 		auto.addActionListener(new ActionListener() {
 			// AUTO button
 			public void actionPerformed(ActionEvent arg0) {
-				GridIA gridIA = new GridIA(team);
+				GridAI gridIA = new GridAI(team);
 				for (int i = 0; i < 4; i++) {
 					for (int j = 0; j < 10; j++) {
 						gridPane1.set(i, j, gridIA.getPawn(i, j));
@@ -246,11 +246,12 @@ public class InitWindow extends WindowInitPawn {
 	}
 
 	/**
-	 * action listener for the combo
+	 * Action listener for the 'combo' JComboBox where the backups are located.
 	 * 
 	 * @author CAREDDA Giuliano, DUCOBU Alexandre
 	 */
 	class ListGridCombo implements ActionListener {
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (combo.getItemCount() != 0) {
 				focus = (GridStart) combo.getSelectedItem();

@@ -2,36 +2,36 @@
 
 <project name="ProjetBac1" basedir="." default="run">
 
-<path id="classpath">
-	<fileset dir="lib/" includes ="**/*.jar" />
-</path>
+	<path id="classpath">
+		<fileset dir="lib/" includes="**/*.jar" />
+	</path>
 
-	<target name="test"  depends="build">
-		<mkdir dir="junit"/>
+	<target name="test" depends="build">
+		<mkdir dir="junit" />
 		<junit fork="true" printsummary="yes" showoutput="yes">
-			<formatter type="xml"/>
+			<formatter type="xml" />
 			<classpath>
-				<pathelement path="build/classes"/>
-				<pathelement path="lib/junit-4.11.jar; lib/hamcrest-core-1.3.jar"/>
+				<pathelement path="build/classes" />
+				<pathelement path="lib/junit-4.11.jar; lib/hamcrest-core-1.3.jar" />
 			</classpath>
 			<batchtest todir="junit">
-				<fileset dir="build/classes" includes="**/*Tests.class"/>
-		</batchtest>
+				<fileset dir="build/classes" includes="**/*Tests.class" />
+			</batchtest>
 		</junit>
 		<junitreport todir="junit">
-			<report format="frames" todir="junit"/>
+			<report format="frames" todir="junit" />
 			<fileset dir="junit">
-				<include name="TEST-*.xml"/>
+				<include name="TEST-*.xml" />
 			</fileset>
 		</junitreport>
 	</target>
 
 
-	<target name = "run" depends="jar">
+	<target name="run" depends="jar">
 		<java fork="true" classname="main.Main">
 			<classpath>
-				<path refid="classpath"/>
-				<path location="build/jar/${ant.project.name}.jar"/>
+				<path refid="classpath" />
+				<path location="build/jar/${ant.project.name}.jar" />
 			</classpath>
 		</java>
 	</target>
@@ -58,7 +58,9 @@
 
 	<target name="javadoc">
 		<mkdir dir="doc" />
-		<javadoc destdir="doc" sourcepath="code" packagenames="" > <!-- additionalparam="-Xdoclint:none" -->  <!-- For Java 1.8 -->
+		<javadoc destdir="doc" sourcepath="code" packagenames="">
+			<!-- additionalparam="-Xdoclint:none" -->
+			<!-- For Java 1.8 -->
 			<classpath>
 				<pathelement path="lib/kryonet-2.21-all.jar; lib/junit-4.11.jar; lib/hamcrest-core-1.3.jar" />
 			</classpath>
@@ -71,7 +73,7 @@
 			<manifest>
 				<attribute name="Main-Class" value="main.Main" />
 				<attribute name="Class-Path" value="lib/kryonet-2.21-all.jar lib/junit-4.11.jar lib/hamcrest-core-1.3.jar" />
-				
+
 			</manifest>
 
 		</jar>

@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import online.FrameServeur;
 import online.StratClient;
 import main.Game;
-import main.IA;
+import main.AI;
 import main.Main;
 
 /**
@@ -43,19 +43,19 @@ public class MenuWindow extends JFrame {
 	private JMenuItem client = new JMenuItem("Se connecter a un serveur");
 	private JMenuItem serveur = new JMenuItem("Heberger une partie");
 
-	private JComboBox<String> comboJeu = new JComboBox<String>();
+	private JComboBox/* <String> */comboJeu = new JComboBox/* <String> */();
 
 	private JLabel labType = new JLabel("Type de jeu");
-	private JComboBox<String> comboType = new JComboBox<String>();
+	private JComboBox/* <String> */comboType = new JComboBox/* <String> */();
 
 	private JLabel labPlayer = new JLabel("Nombre de joueurs");
-	private JComboBox<String> comboPlayer = new JComboBox<String>();
+	private JComboBox/* <String> */comboPlayer = new JComboBox/* <String> */();
 
 	private JLabel labInit = new JLabel("Initialisation des pions");
-	private JComboBox<String> comboInit = new JComboBox<String>();
+	private JComboBox/* <String> */comboInit = new JComboBox/* <String> */();
 
 	private JLabel labIa1 = new JLabel("Niveau de la premiere IA");
-	private JComboBox<String> comboIa1 = new JComboBox<String>();
+	private JComboBox/* <String> */comboIa1 = new JComboBox/* <String> */();
 
 	private JButton goBtn = new JButton("Lancer la partie !");
 
@@ -78,8 +78,6 @@ public class MenuWindow extends JFrame {
 		this.setTitle("Menu");
 		this.setContentPane(container);
 
-		this.
-
 		quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
@@ -88,12 +86,12 @@ public class MenuWindow extends JFrame {
 
 		testia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new TestIa();
+				new TestAI();
 			}
 		});
 		manager.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new WindowManager();
+				new GridManager();
 			}
 		});
 		startSave.addActionListener(new ActionListener() {
@@ -170,9 +168,9 @@ public class MenuWindow extends JFrame {
 		JPanel panIA1 = new JPanel();
 		panIA1.add(labIa1);
 		panIA1.add(comboIa1);
-		String[] listLvl = IA.getListLvl();
-		for (int i = 0; i < listLvl.length; i++) {
-			comboIa1.addItem(listLvl[i]);
+		String[] listLevel = AI.getListLevel();
+		for (int i = 0; i < listLevel.length; i++) {
+			comboIa1.addItem(listLevel[i]);
 		}
 		comboIa1.addActionListener(new ItemActionIa1());
 		comboIa1.setPreferredSize(new Dimension(150, 20));

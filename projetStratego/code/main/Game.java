@@ -319,8 +319,8 @@ public class Game implements java.io.Serializable {
 	 * 
 	 * @param team
 	 *            The team of the current pawn:<br/>
-	 *            - 1 for Red <br/>
-	 *            - 2 for Blue.
+	 *            1 for Red <br/>
+	 *            2 for Blue.
 	 * 
 	 * @return The team of the winner or 0 if there's none.
 	 */

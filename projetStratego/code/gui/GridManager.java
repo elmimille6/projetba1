@@ -20,29 +20,27 @@ import main.Game;
 import main.GridStart;
 import main.Main;
 
-public class WindowManager extends JFrame {
+/**
+ * This class creates a grid manager.
+ * 
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
+ */
+public class GridManager extends JFrame {
 
 	private static final long serialVersionUID = -6421255455563013157L;
 	private Vector<GridStart> list;
-	private JComboBox<GridStart> combo;
+	private JComboBox/* <GridStart> */combo;
 	private JButton newGrid, change, delete;
 	private GridStart focus;
 	public PaneInitPawn panelCenter;
 	public JPanel paneCombo = new JPanel();
 
 	/**
-	 * 
-	 * @param i
+	 * Main constructor of the class.<br/>
+	 * Creates a window where the user can delete or modify saved grid and
+	 * create grid.
 	 */
-	public WindowManager(int i) {
-		this.setLayout(new GridLayout());
-
-	}
-
-	/**
-	 * 
-	 */
-	public WindowManager() {
+	public GridManager() {
 		this.setLayout(new BorderLayout());
 		this.setTitle("Gestionnaire de grille de depart ");
 		this.setSize(800, 400);
@@ -54,11 +52,11 @@ public class WindowManager extends JFrame {
 			focus = list.get(0);
 			paneNorth.setLayout(new GridLayout(1, 3));
 			paneSouth.setLayout(new GridLayout(1, 2));
-			combo = new JComboBox<GridStart>();
+			combo = new JComboBox/* <GridStart> */();
 			for (int i = 0; i < list.size(); i++) {
 				combo.addItem(list.get(i));
 			}
-			combo.addActionListener(new ChoixCombo());
+			combo.addActionListener(new ChoiceCombo());
 
 			JPanel paneNouv = new JPanel();
 			JLabel selectGrid = new JLabel("Selectionnez une grille");
@@ -70,8 +68,8 @@ public class WindowManager extends JFrame {
 			change = new JButton("Modifier");
 			delete = new JButton("Supprimer");
 			newGrid.addActionListener(new actionNewGrid());
-			delete.addActionListener(new actionSupp());
-			change.addActionListener(new actionModif());
+			delete.addActionListener(new actionDelete());
+			change.addActionListener(new actionModify());
 			paneSouth.add(change);
 			paneSouth.add(delete);
 			paneNouv.add(createNewGrid);
@@ -91,9 +89,9 @@ public class WindowManager extends JFrame {
 	}
 
 	/**
-	 * 
+	 * Update the 'combo' JComboBox.
 	 */
-	public void upCombo() {
+	public void updateCombo() {
 		load();
 		combo.removeAllItems();
 		for (int i = 0; i < list.size(); i++) {
@@ -105,8 +103,10 @@ public class WindowManager extends JFrame {
 	}
 
 	/**
+	 * This method loads the chosen grid from the "GridStart.save" file.
 	 * 
-	 * @return
+	 * @return true if the grid is loaded,<br/>
+	 *         false otherwise.
 	 */
 	@SuppressWarnings("resource")
 	public boolean load() {
@@ -136,18 +136,18 @@ public class WindowManager extends JFrame {
 	}
 
 	/**
-	 * 
+	 * Closes the window.
 	 */
 	public void close() {
 		this.dispose();
 	}
 
 	/**
+	 * Action listener for the choice of the saved grid.
 	 * 
-	 * @author 140897
-	 *
+	 * @author CAREDDA Giuliano, DUCOBU Alexandre
 	 */
-	class ChoixCombo implements ActionListener {
+	class ChoiceCombo implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (combo.getItemCount() != 0) {
 				focus = (GridStart) combo.getSelectedItem();
@@ -158,9 +158,9 @@ public class WindowManager extends JFrame {
 	}
 
 	/**
+	 * Action listener to create a new grid.
 	 * 
-	 * @author 140897
-	 *
+	 * @author CAREDDA Giuliano, DUCOBU Alexandre
 	 */
 	class actionNewGrid implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -170,23 +170,23 @@ public class WindowManager extends JFrame {
 	}
 
 	/**
+	 * Action listener to delete a saved grid.
 	 * 
-	 * @author 140897
-	 *
+	 * @author CAREDDA Giuliano, DUCOBU Alexandre
 	 */
-	class actionSupp implements ActionListener {
+	class actionDelete implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			focus.delete();
-			upCombo();
+			updateCombo();
 		}
 	}
 
 	/**
+	 * Action listener to modify a saved grid.
 	 * 
-	 * @author 140897
-	 *
+	 * @author CAREDDA Giuliano, DUCOBU Alexandre
 	 */
-	class actionModif implements ActionListener {
+	class actionModify implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			new WindowInitPawn(new Game(focus.getGrid()), 1);
 			close();

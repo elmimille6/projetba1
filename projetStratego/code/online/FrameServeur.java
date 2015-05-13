@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import main.Game;
-import main.GridIA;
+import main.GridAI;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
@@ -47,7 +47,7 @@ public class FrameServeur extends JFrame {
 		server = new Server(6000, 6000);
 		Kryo kryo = server.getKryo();
 		kryo.register(main.Game.class);
-		kryo.register(main.GridIA.class);
+		kryo.register(main.GridAI.class);
 		kryo.register(pawn.APawn.class);
 		kryo.register(pawn.APawn[].class);
 		kryo.register(pawn.APawn[][].class);
@@ -101,16 +101,16 @@ public class FrameServeur extends JFrame {
 					}
 				} else if (object instanceof int[][]) {
 
-				} else if (object instanceof GridIA) {
+				} else if (object instanceof GridAI) {
 
 					if (game.getComplete() != 2) {
 						if (connection == pl1) {
-							game.placeTeam(((GridIA) object).getGrid(), 1);
+							game.placeTeam(((GridAI) object).getGrid(), 1);
 							game.setComplete(game.getComplete() + 1);
 						}
 
 						else if (connection == pl2) {
-							game.placeTeam(((GridIA) object).getGrid(), 2);
+							game.placeTeam(((GridAI) object).getGrid(), 2);
 							game.setComplete(game.getComplete() + 1);
 						}
 					}

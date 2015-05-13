@@ -49,20 +49,22 @@ public class PaneInitPawn extends JPanel {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		// dessine le quadrillage
+		// Draws the grid pattern.
 		int nbrLigne = grid.getLine() + 1;
 		int nbrCol = grid.getRow() + 1;
 
 		g.drawImage(imgBack, 0, 0, this.getWidth(), this.getHeight(), this);
 
 		for (int lig = 1; lig < nbrCol; lig++) {
-			g.drawLine((this.getWidth() / nbrCol) * lig, 0, (this.getWidth() / nbrCol) * lig, this.getHeight());
+			g.drawLine((this.getWidth() / nbrCol) * lig, 0,
+					(this.getWidth() / nbrCol) * lig, this.getHeight());
 		}
 		for (int lig = 1; lig < nbrLigne; lig++) {
-			g.drawLine(0, (this.getHeight() / nbrLigne) * lig, this.getWidth(), (this.getHeight() / nbrLigne) * lig);
+			g.drawLine(0, (this.getHeight() / nbrLigne) * lig, this.getWidth(),
+					(this.getHeight() / nbrLigne) * lig);
 		}
 
-		// dessine les images des pions selon la grid
+		// Draws the images of the pawns according to the grid.
 		String link;
 		for (int i = 0; i < (nbrLigne); i++) {
 			for (int j = 0; j < (nbrCol); j++) {
@@ -75,12 +77,19 @@ public class PaneInitPawn extends JPanel {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					g.drawImage(img, (j * (this.getWidth() / (nbrCol))) + 10, (i * (this.getHeight() / (nbrLigne))) + 10, this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne - 20, this);
-					if (pawn.getSelected() && !pawn.getClass().equals(NoPawn.class)) { // Border
-																						// image
+					g.drawImage(img, (j * (this.getWidth() / (nbrCol))) + 10,
+							(i * (this.getHeight() / (nbrLigne))) + 10,
+							this.getWidth() / nbrCol - 20, this.getHeight()
+									/ nbrLigne - 20, this);
+					if (pawn.getSelected()
+							&& !pawn.getClass().equals(NoPawn.class)) {
+						// Border image
 						g.setColor(Color.green);
 
-						g.drawRect((j * (this.getWidth() / (nbrCol))) + 10, (i * (this.getHeight() / (nbrLigne))) + 10, this.getWidth() / nbrCol - 20, this.getHeight() / nbrLigne - 20);
+						g.drawRect((j * (this.getWidth() / (nbrCol))) + 10,
+								(i * (this.getHeight() / (nbrLigne))) + 10,
+								this.getWidth() / nbrCol - 20, this.getHeight()
+										/ nbrLigne - 20);
 
 						g.setColor(Color.black);
 					}
@@ -90,10 +99,10 @@ public class PaneInitPawn extends JPanel {
 	}
 
 	/**
-	 * set the grid
+	 * Sets the grid.
 	 * 
 	 * @param ngrid
-	 *            an APawn[][] grid
+	 *            An APawn[][] grid.
 	 */
 	public void setGrid(APawn[][] ngrid) {
 		Game game = new Game(ngrid);

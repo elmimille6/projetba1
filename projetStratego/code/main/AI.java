@@ -7,22 +7,26 @@ import pawn.APawn;
 import pawn.Scout;
 
 /**
+ * This class contains an artificial intelligence (AI).
  * 
- * @author 140897
- * 
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
-public class IA {
+public class AI {
 	int level = 0, team = 0;
-	final static String[] listLvl = { "Niveau facile", "Niveau moyen" };
+	final static String[] listLevel = { "Niveau facile", "Niveau moyen" };
 
 	/**
+	 * Constructor of the class.
 	 * 
-	 * @param lvl
+	 * @param level
+	 *            The level of the AI.
+	 * 
 	 * @param team
+	 *            The team of the AI.
 	 */
-	public IA(String lvl, int team) {
-		for (int i = 0; i < listLvl.length; i++) {
-			if (lvl == listLvl[i]) {
+	public AI(String level, int team) {
+		for (int i = 0; i < listLevel.length; i++) {
+			if (level == listLevel[i]) {
 				this.level = i;
 			}
 		}
@@ -30,19 +34,24 @@ public class IA {
 	}
 
 	/**
+	 * Constructor of the class.
 	 * 
-	 * @param lvl
+	 * @param level
+	 *            The level of the AI.
 	 */
-	public IA(String lvl) {
-		this(lvl, 2);
+	public AI(String level) {
+		this(level, 2);
 	}
 
 	/**
+	 * This is the easy AI.
 	 * 
 	 * @param game
-	 * @return
+	 *            The current game.
+	 * 
+	 * @return The game after the move of the AI.
 	 */
-	private int[][] iaL0(Game game) {
+	private int[][] aiL0(Game game) {
 		int[][] move = { { -1, -1 }, { -1, -1 } };
 		if (team == ((game.getTurn() + 1) % 2) + 1) {
 			boolean moved = false;
@@ -101,50 +110,65 @@ public class IA {
 	}
 
 	/**
+	 * Gets the grid after the move of the AI,<br/>
+	 * this accessor choose the right AI.
 	 * 
 	 * @param game
-	 * @return
+	 *            The current game.
+	 * 
+	 * @return The game after the move of the AI.
 	 */
 	public int[][] getNext(Game game) {
 		if (level == 1) {
-			return iaL1(game);
+			return aiL1(game);
 		}
-		return iaL0(game);
+		return aiL0(game);
 	}
 
 	/**
+	 * This is the strong AI.
 	 * 
 	 * @param game
-	 * @return
+	 *            The current game.
+	 * 
+	 * @return The game after the move of the AI.
 	 */
-	private int[][] iaL1(Game game) {
+	private int[][] aiL1(Game game) {
 		if (team == ((game.getTurn() + 1) % 2) + 1) {
-			Vector<APawn> pawnSide = getSidedPawn(game);
-			if (pawnSide.size() != 0) { // verifie tout les pions qui sont
-										// collés
-										// a un ennemi
+			Vector<APawn> pawnSide = getSidePawn(game);
+			if (pawnSide.size() != 0) {
+				// Checks all the pawns that are close to an enemy.
 				int[][] move = { { -1, -1 }, { -1, -1 }, { 0 } };
 				int[][] res = iaL1Side(game, pawnSide, move);
 				if (res[2][0] > 0) {
 					return res;
 				}
 			}
-
 		}
-		return iaL0(game);
+		return aiL0(game);
 	}
 
 	/**
+	 * This methods choose the move. 
 	 * 
 	 * @param game
+	 *            The current game.
+	 * 
 	 * @param pawnSide
+	 *            The list of all the pawns that are close to an enemy.
+	 * 
 	 * @param move
-	 * @return
+	 *            An array containing all the possible moves for this turn of
+	 *            the game.
+	 * 
+	 * @return The chosen move.
 	 */
 	private int[][] iaL1Side(Game game, Vector<APawn> pawnSide, int[][] move) {
 		int[][] res = { { -1, -1 }, { -1, -1 }, { 0 } };
 		APawn pawn = pawnSide.get(0);
-		if (pawn.getLevel() == 2) { // si notre pion est un eclaireur
+
+		if (pawn.getLevel() == 2) {
+			// If the pawn is a scout.
 			APawn pawnside = game.getPawn(pawn.posX - 1, pawn.posY);
 			if (pawnside != null) {
 				if (pawnside.getTeam() == (team % 2) + 1 && !pawnside.getKnow()) {
@@ -189,14 +213,10 @@ public class IA {
 			if (res[2][0] > move[2][0]) {
 				move = res;
 			}
+		}
 
-		} // fin pion eclaireur
-
-		else if (pawn.getLevel() != -6 && pawn.getLevel() != 11) { // debut pion
-																	// n est pas
-																	// eclaireur,flag
-																	// ou bomb
-
+		else if (pawn.getLevel() != -6 && pawn.getLevel() != 11) {
+			// If the pawn isn't a scout, a flag or a bomb.
 			APawn pawnside = game.getPawn(pawn.posX - 1, pawn.posY);
 			if (pawnside != null && team % 2 + 1 == pawnside.getTeam()) {
 				res = iaL1SideM(game, pawn, pawnside, pawn.posX - 1, pawn.posY,
@@ -243,9 +263,14 @@ public class IA {
 	}
 
 	/**
+	 * //TODO
 	 * 
 	 * @param game
+	 *            The current game.
+	 * 
 	 * @param pawn
+	 *            The current pawn.
+	 * 
 	 * @param pawnside
 	 * @param x1
 	 *            coord final si attack
@@ -290,12 +315,13 @@ public class IA {
 				}
 			}
 		} else {
-			// si pion ennemi inconnu
+			// If the enemy pawn is unknown.
 			int probLvl;
-			if (pawnside.getMoved()) { // si pion ennemi a
-										// bougé
+			if (pawnside.getMoved()) {
+				// If the enemy pawn has moved.
 				probLvl = probMoved(game);
-			} else { // si pion ennemi n as pas encore bougé
+			} else {
+				// If the enemy pawn hasn't yet moved.
 				probLvl = probUnmoved(game);
 				if (probFlagBomb(game) < 3
 						&& team % 2 + 1 == pawnside.getTeam()) {
@@ -317,7 +343,6 @@ public class IA {
 				}
 
 			}
-
 		}
 		int[][] moveNull = { { -1, -1 }, { -1, -1 }, { -15 } };
 		return moveNull;
@@ -325,9 +350,12 @@ public class IA {
 	}
 
 	/**
+	 * Calculates the probability to find the flag or a bomb.
 	 * 
 	 * @param game
-	 * @return
+	 *            The current game.
+	 * 
+	 * @return The probability to find the flag or a bomb.
 	 */
 	private int probFlagBomb(Game game) {
 		int nbpawn = 0;
@@ -346,11 +374,14 @@ public class IA {
 	}
 
 	/**
+	 * Gets all the pawns that are close to an enemy.
 	 * 
 	 * @param game
-	 * @return
+	 *            The current game.
+	 * 
+	 * @return A vector containing all the pawns that are close to an enemy.
 	 */
-	private Vector<APawn> getSidedPawn(Game game) {
+	private Vector<APawn> getSidePawn(Game game) {
 		Vector<APawn> pawnSide = new Vector<APawn>();
 		for (int i = 0; i <= game.getLine(); i++) {
 			for (int j = 0; j <= game.getRow(); j++) {
@@ -388,10 +419,12 @@ public class IA {
 	}
 
 	/**
-	 * Calculates the probability level of the pawn for unmoved pawn
+	 * Calculates the probable level of an unmoved pawn.
 	 * 
 	 * @param game
-	 * @return
+	 *            The current game.
+	 * 
+	 * @return The probable level of an unmoved pawn.
 	 */
 	private int probUnmoved(Game game) {
 		int allLvl = 0, count = 0;
@@ -415,10 +448,12 @@ public class IA {
 	}
 
 	/**
-	 * Calculates the probability level of the pawn for moved pawn
+	 * Calculates the probability level of the an moved pawn.
 	 * 
 	 * @param game
-	 * @return
+	 *            The current game.
+	 * 
+	 * @return The probable level of an moved pawn.
 	 */
 	private int probMoved(Game game) {
 		int allLvl = 0, count = 0;
@@ -444,9 +479,13 @@ public class IA {
 	}
 
 	/**
+	 * Returns if the given 'pawnside' value is right.
 	 * 
 	 * @param pawnside
-	 * @return
+	 *            The expected side of the grid where the AI would be.
+	 * 
+	 * @return true if the 'pawnside' is right,<br/>
+	 *         false otherwise.
 	 */
 	private boolean isPawnSide(APawn pawnside) {
 		if (pawnside != null) {
@@ -458,21 +497,25 @@ public class IA {
 	}
 
 	/**
+	 * Gets the list of the level of the AI in the game.
 	 * 
-	 * @return
+	 * @return The list of the level of the AI in the game.
 	 */
-	public static String[] getListLvl() {
-		return listLvl;
+	public static String[] getListLevel() {
+		return listLevel;
 	}
 
 	/**
+	 * Gets the level of the AI at the 'level' index in the listlLevel.
 	 * 
-	 * @param lvl
-	 * @return
+	 * @param level
+	 *            The index of the wanted AI in the listlLevel.
+	 * 
+	 * @return The level of the AI.
 	 */
-	public static int getIntLvl(String lvl) {
-		for (int i = 0; i < listLvl.length; i++) {
-			if (lvl == listLvl[i]) {
+	public static int getIntLevel(String level) {
+		for (int i = 0; i < listLevel.length; i++) {
+			if (level == listLevel[i]) {
 				return i;
 			}
 		}

@@ -14,29 +14,36 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import main.IA;
+import main.AI;
 
-public class TestIa extends JFrame {
+/**
+ * This class tests the artificial intelligences.
+ * 
+ * @author CAREDDA Giuliano, DUCOBU Alexandre
+ */
+public class TestAI extends JFrame {
 
 	private static final long serialVersionUID = -3048638208007991240L;
-	public JComboBox<String> ia1 = new JComboBox<String>(),
-			ia2 = new JComboBox<String>();
+	public JComboBox/* <String> */ia1 = new JComboBox/* <String> */(),
+			ia2 = new JComboBox/* <String> */();
 	public JSlider nbr = new JSlider();
 	public JButton goBtn = new JButton("Lancer les tests");
-	public String[] listLvl;
+	public String[] listLevel;
 	JLabel lab1;
 
 	/**
-	 * 
+	 * Main constructor of the class.<br/>
+	 * Creates a window where the user can choose the number of games between
+	 * the AI's as well as the level of each AI.
 	 */
-	public TestIa() {
+	public TestAI() {
 		this.setResizable(true);
 		this.setSize(300, 320);
 		this.setLocationRelativeTo(null);
 		this.setTitle("Tester l'IA");
 		this.setLayout(new GridLayout(4, 1));
 		this.setVisible(true);
-		listLvl = IA.getListLvl();
+		listLevel = AI.getListLevel();
 
 		JPanel panel1 = new JPanel();
 		JPanel panel2 = new JPanel();
@@ -55,9 +62,9 @@ public class TestIa extends JFrame {
 		panel1.add(nbr);
 		this.add(panel1);
 
-		for (int i = 0; i < listLvl.length; i++) {
-			ia1.addItem(listLvl[i]);
-			ia2.addItem(listLvl[i]);
+		for (int i = 0; i < listLevel.length; i++) {
+			ia1.addItem(listLevel[i]);
+			ia2.addItem(listLevel[i]);
 		}
 		JLabel lab2 = new JLabel("Niveau de l'IA 1");
 		JLabel lab3 = new JLabel("Niveau de l'IA 2");
@@ -84,7 +91,7 @@ public class TestIa extends JFrame {
 		goBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (nbr.getValue() != 0) {
-					new ProgressTestIa(nbr.getValue(), (String) ia1
+					new ProgressTestAI(nbr.getValue(), (String) ia1
 							.getSelectedItem(), (String) ia2.getSelectedItem());
 				} else {
 					JOptionPane.showMessageDialog(null,

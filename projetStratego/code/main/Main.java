@@ -21,7 +21,7 @@ public class Main {
 	public static int nbrPlayer, initGridGame, typeOfGame;
 	public static WindowInitPawn initPawn;
 	public static Game game;
-	public static GridIA gridIA, gridIA2;
+	public static GridAI gridIA, gridIA2;
 	public static String level;
 
 	/**
@@ -48,7 +48,7 @@ public class Main {
 		if (typeOfGame == 40) {
 			game = new Game(10, 1);
 			if (initGridGame == 1 || initGridGame == 2) {
-				GridIA gridIA = new GridIA(((initGridGame) % 2) + 1);
+				GridAI gridIA = new GridAI(((initGridGame) % 2) + 1);
 				game.placeTeam(gridIA.getGrid(), ((initGridGame) % 2) + 1);
 				game.setComplete(1);
 			}
@@ -86,8 +86,8 @@ public class Main {
 	 * the root of the project.
 	 */
 	public static void copyFile() {
-		FileChannel in = null; // canal d'entree
-		FileChannel out = null; // canal de sortie
+		FileChannel in = null; // Input channel.
+		FileChannel out = null; // Output channel.
 
 		try {
 			// Init
@@ -95,11 +95,11 @@ public class Main {
 					.getChannel();
 			out = new FileOutputStream("GridStart.save").getChannel();
 
-			// Copie depuis le in vers le out
+			// Copies from the in to the out.
 			in.transferTo(0, in.size(), out);
 		} catch (Exception e) {
-			e.printStackTrace(); // n'importe quelle exception
-		} finally { // finalement on ferme
+			e.printStackTrace(); // Any exception.
+		} finally { // At the end, we close.
 			if (in != null) {
 				try {
 					in.close();

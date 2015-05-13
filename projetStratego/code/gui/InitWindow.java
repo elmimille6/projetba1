@@ -68,7 +68,7 @@ public class InitWindow extends WindowInitPawn {
 	public boolean online = false, send = false;
 	public int Oplayer = 0;
 
-	public JComboBox/* <GridStart> */combo;
+	public JComboBox<GridStart> combo;
 	public GridStart focus;
 	public Vector<GridStart> list;
 
@@ -130,7 +130,7 @@ public class InitWindow extends WindowInitPawn {
 
 		if (loadListGrid()) {
 			focus = list.get(0);
-			combo = new JComboBox/* <GridStart> */();
+			combo = new JComboBox<GridStart>();
 			for (int i = 0; i < list.size(); i++) {
 				combo.addItem(list.get(i));
 			}

@@ -29,7 +29,7 @@ public class GridManager extends JFrame {
 
 	private static final long serialVersionUID = -6421255455563013157L;
 	private Vector<GridStart> list;
-	private JComboBox/* <GridStart> */combo;
+	private JComboBox<GridStart> combo;
 	private JButton newGrid, change, delete;
 	private GridStart focus;
 	public PaneInitPawn panelCenter;
@@ -52,7 +52,7 @@ public class GridManager extends JFrame {
 			focus = list.get(0);
 			paneNorth.setLayout(new GridLayout(1, 3));
 			paneSouth.setLayout(new GridLayout(1, 2));
-			combo = new JComboBox/* <GridStart> */();
+			combo = new JComboBox<GridStart>();
 			for (int i = 0; i < list.size(); i++) {
 				combo.addItem(list.get(i));
 			}

@@ -43,19 +43,19 @@ public class MenuWindow extends JFrame {
 	private JMenuItem client = new JMenuItem("Se connecter a un serveur");
 	private JMenuItem serveur = new JMenuItem("Heberger une partie");
 
-	private JComboBox/* <String> */comboJeu = new JComboBox/* <String> */();
+	private JComboBox<String> comboJeu = new JComboBox<String>();
 
 	private JLabel labType = new JLabel("Type de jeu");
-	private JComboBox/* <String> */comboType = new JComboBox/* <String> */();
+	private JComboBox<String> comboType = new JComboBox<String>();
 
 	private JLabel labPlayer = new JLabel("Nombre de joueurs");
-	private JComboBox/* <String> */comboPlayer = new JComboBox/* <String> */();
+	private JComboBox<String> comboPlayer = new JComboBox<String>();
 
 	private JLabel labInit = new JLabel("Initialisation des pions");
-	private JComboBox/* <String> */comboInit = new JComboBox/* <String> */();
+	private JComboBox<String> comboInit = new JComboBox<String>();
 
 	private JLabel labIa1 = new JLabel("Niveau de la premiere IA");
-	private JComboBox/* <String> */comboIa1 = new JComboBox/* <String> */();
+	private JComboBox<String> comboIa1 = new JComboBox<String>();
 
 	private JButton goBtn = new JButton("Lancer la partie !");
 

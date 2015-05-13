@@ -24,8 +24,8 @@ import main.AI;
 public class TestAI extends JFrame {
 
 	private static final long serialVersionUID = -3048638208007991240L;
-	public JComboBox/* <String> */ia1 = new JComboBox/* <String> */(),
-			ia2 = new JComboBox/* <String> */();
+	public JComboBox<String> ia1 = new JComboBox<String>(),
+			ia2 = new JComboBox<String>();
 	public JSlider nbr = new JSlider();
 	public JButton goBtn = new JButton("Lancer les tests");
 	public String[] listLevel;

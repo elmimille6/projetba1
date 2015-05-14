@@ -32,7 +32,7 @@ public class MenuWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar = new JMenuBar();
-	private JMenu menu1 = new JMenu("Fichier");
+	private JMenu menu1 = new JMenu("Options");
 	private JMenu menu2 = new JMenu("En ligne");
 
 	private JMenuItem quit = new JMenuItem("Quitter");

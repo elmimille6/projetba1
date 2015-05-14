@@ -107,11 +107,11 @@ public class WindowGame extends JFrame {
 	}
 
 	/**
-	 * Constructor of the class.//TODO
+	 * Constructor of the class when the game is online.
 	 * 
-	 * @param ngame
-	 * @param client
-	 * @param Oplayer
+	 * @param ngame The 'game' object of the current game.
+	 * @param client The client object use to communicate with the server.
+	 * @param Oplayer The number of this player (1 or 2).
 	 */
 	public WindowGame(Game ngame, Client client, int Oplayer) {
 		this(ngame);

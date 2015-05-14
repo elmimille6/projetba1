@@ -19,7 +19,11 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.minlog.Log;
-
+/**
+ * This class is the frame with the client to join an online game. 
+ *  @author CAREDDA Giuliano, DUCOBU Alexandre
+ *
+ */
 public class StratClient extends JFrame {
 
 	private static final long serialVersionUID = -1140319931747839365L;
@@ -30,6 +34,9 @@ public class StratClient extends JFrame {
 	private StratClient stratclient = this;
 	private boolean local = false;
 
+	/**
+	 * The constructor of the class
+	 */
 	public StratClient() {
 		init();
 	}
@@ -76,12 +83,17 @@ public class StratClient extends JFrame {
 		state();
 
 	}
-
+/**
+ * The constructor of the class when this computer host the game
+ * @param b true if this computer host the game so don't ask the ip but us "127.0.0.1"
+ */
 	public StratClient(boolean b) {
 		this.local = b;
 		init();
 	}
-
+/**
+ * Method called to check and change the text display on the frame
+ */
 	private void state() {
 		if (state == 1) {
 			lab.setText("Vous etes le joueur " + Oplayer
@@ -105,12 +117,16 @@ public class StratClient extends JFrame {
 		}
 
 	}
-
+/**
+ * Method to close the client and the frame 
+ */
 	public void close() {
 		client.close();
 		this.dispose();
 	}
-
+/**
+ * Method use to try to connect the client at the server. 
+ */
 	private void connect() {
 		client.addListener(new Listener() {
 			public void received(Connection connection, Object object) {
@@ -175,7 +191,9 @@ public class StratClient extends JFrame {
 		}
 
 	}
-
+/**
+ * Method to use to ask with a GetIp dialog box the IP address
+ */
 	public void askIp() {
 		try {
 			GetIp jop = new GetIp(this, "IP", true);
@@ -187,7 +205,11 @@ public class StratClient extends JFrame {
 
 		}
 	}
-
+	/**
+	 * Method to set the state of the frame to change the displayed text
+	 * @param state the state of the window 
+	 *  <br/> 1 if waiting after second player <br/> 2 if game is running <br/> 3 if waiting after init game from the opponent
+	 */
 	public void setState(int state) {
 		this.state = state;
 		state();

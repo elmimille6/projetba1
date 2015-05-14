@@ -149,7 +149,7 @@ public class AI {
 	}
 
 	/**
-	 * This methods choose the move. 
+	 * This methods choose the best move of all the pawn who are close to an enemies. 
 	 * 
 	 * @param game
 	 *            The current game.
@@ -263,7 +263,7 @@ public class AI {
 	}
 
 	/**
-	 * //TODO
+	 * methods to evaluate the move.
 	 * 
 	 * @param game
 	 *            The current game.

@@ -9,9 +9,6 @@ import main.Game;
  */
 public class Flag extends APawn {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**

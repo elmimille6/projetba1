@@ -7,9 +7,6 @@ package pawn;
  */
 public class Spy extends APawn {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -47,9 +44,9 @@ public class Spy extends APawn {
 	 * @param currentPawn
 	 *            The pawn who is targeted by this pawn.
 	 * 
-	 * @return 0 if it's a drawn <br/>
-	 *         1 if this pawn win <br/>
-	 *         2 if this pawn loose.
+	 * @return 0 if it's equality,<br/>
+	 *         1 if this pawn wins,<br/>
+	 *         2 if this pawn loses.
 	 */
 	public int attack(APawn currentPawn) {
 		if (currentPawn instanceof Marshal) {

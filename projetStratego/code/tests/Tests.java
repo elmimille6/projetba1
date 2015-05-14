@@ -135,13 +135,17 @@ public class Tests {
 			}
 		}
 
-		for (int k = 0; k < 5; k++) { // Moves 5 times the pawn.
+		for (int k = 0; k < 5; k++) {
+			// Moves 5 times the pawn.
 			marshal.move(game, (6 + (k % 2)), 5);
 		}
 
-		assertFalse(marshal.movePoss(game, 7, 5)); // marshal can't move.
+		assertFalse(marshal.movePoss(game, 7, 5)); // The Marshal can't move.
 	}
 
+	/**
+	 * This method moves a major more than 5 times between two squares.
+	 */
 	public void initMovesMajor() {
 		game.placeTeam(grid1.getGrid(), 1);
 		game.placeTeam(grid2.getGrid(), 2);
@@ -164,7 +168,7 @@ public class Tests {
 	@Test
 	public void threeMovesMajor() {
 		initMovesMajor();
-		assertFalse(major.movePoss(game, 7, 8)); // marshal can't do it.
+		assertFalse(major.movePoss(game, 7, 8)); // The marshal can't do it.
 	}
 
 	/**
@@ -174,6 +178,6 @@ public class Tests {
 	@Test
 	public void oneMoveMajor() {
 		initMovesMajor();
-		assertTrue(major.movePoss(game, 7, 6)); // marshal can do it.
+		assertTrue(major.movePoss(game, 7, 6)); // The marshal can do it.
 	}
 }

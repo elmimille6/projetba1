@@ -7,9 +7,6 @@ package pawn;
  */
 public class Captain extends APawn {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**

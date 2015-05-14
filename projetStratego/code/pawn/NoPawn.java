@@ -13,7 +13,7 @@ public class NoPawn extends APawn {
 	 * Main constructor of no_pawn pawn.
 	 * 
 	 * @param name
-	 * 
+	 *            The name of the pawn.
 	 */
 	public NoPawn(String name) {
 		setLevelPawn(0);

@@ -139,7 +139,10 @@ public abstract class APawn implements java.io.Serializable {
 	 * Makes a vector of the 40 pawn in a team at the begin of the game.
 	 * 
 	 * @param toInit
-	 * 
+	 *            This value says what the 'initGame' method has to do: if
+	 *            toInit = 0, the grid is complete and there's nothing to do, if
+	 *            toInit = 1, the grid has to be modify, if toInit = 2, a new
+	 *            grid has to be created.
 	 * 
 	 * @param team
 	 *            The team of the pawns:<br/>
@@ -307,31 +310,31 @@ public abstract class APawn implements java.io.Serializable {
 			}
 
 		}
-		if (target instanceof Lake) { // test if the target isn't a lake
+		if (target instanceof Lake) {
+			// Tests if the target isn't a lake.
 			return false;
 		}
-		if (target instanceof APawn) { // test if the target isn't a pawn of the
-										// same team
+		if (target instanceof APawn) {
+			// Tests if the target isn't a pawn of the same team.
 			if (target.getTeam() == this.team) {
 				return false;
 			}
 		}
 
-		if (Math.abs(x - this.posX) > 1) { // test if the move is
-											// not too long
+		if (Math.abs(x - this.posX) > 1) {
+			// Tests if the move is not too long.
 			return false;
 		}
-		if (Math.abs(y - this.posY) > 1) { // test if the move is
-											// not too long
+		if (Math.abs(y - this.posY) > 1) {
+			// Tests if the move is not too long.
 			return false;
 		}
-		if (x - this.posX != 0 && y - this.posY != 0) { // test if the move is
-														// in the same lane
+		if (x - this.posX != 0 && y - this.posY != 0) {
+			// Tests if the move is in the same lane.
 			return false;
 		}
-		if (y - this.posY == 0 && x - this.posX == 0) { // test if the pawn
-														// isn't already on the
-														// target
+		if (y - this.posY == 0 && x - this.posX == 0) {
+			// Tests if the pawn isn't already on the target.
 			return false;
 		}
 		return true;
@@ -343,9 +346,9 @@ public abstract class APawn implements java.io.Serializable {
 	 * @param currentPawn
 	 *            The pawn who is targeted by this pawn.
 	 * 
-	 * @return 0 if it's a drawn <br/>
-	 *         1 if this pawn win <br/>
-	 *         2 if this pawn loose.
+	 * @return 0 if it's equality,<br/>
+	 *         1 if this pawn wins,<br/>
+	 *         2 if this pawn loses.
 	 */
 	public int attack(APawn currentPawn) {
 		if (currentPawn.getLevel() == this.levelPawn) {
@@ -361,7 +364,7 @@ public abstract class APawn implements java.io.Serializable {
 
 	/**
 	 * Moves the pawn. <br/>
-	 * ! warning: be careful to test if the moving is possible BEFORE with
+	 * ! warning: be careful to test if the move is possible BEFORE with
 	 * movePoss(Grid grid, int x, int y).
 	 * 
 	 * @param grid
@@ -393,24 +396,34 @@ public abstract class APawn implements java.io.Serializable {
 		grid.setLastMove(move);
 
 		APawn tar = grid.getPawn(x, y);
-		if (tar == null) {// no pawn on the coordinates targeted
-			grid.set(this.posX, this.posY, null);// delete the old coordinates
-													// of the pawn
-			grid.set(x, y, this);// set the new coordinates of the pawn
+		if (tar == null) {
+			// No pawn on the coordinates targeted pawn.
+			grid.set(this.posX, this.posY, null);
+			// deletes the old coordinates of the pawn.
+			grid.set(x, y, this);
+			// Sets the new coordinates of the pawn.
 			grid.resetMove(this);
 			return grid;
 		}
 
-		int res = this.attack(tar);// get the result of the fight
-		if (res == 0) {// it's a draw
-			grid.set(x, y, null);// delete the pawn targeted
-			grid.set(this.posX, this.posY, null);// delete the pawn who attack
-		} else if (res == 1) {// the pawn who attack win
-			grid.set(this.posX, this.posY, null);// delete the old coordinates
-													// of the pawn
-			grid.set(x, y, this);// set the new coordinates of the pawn
-		} else if (res == 2) {// the pawn who attack loose
-			grid.set(this.posX, this.posY, null);// delete the pawn who attack
+		int res = this.attack(tar);
+		// Gets the result of the fight.
+		if (res == 0) {
+			// It's a draw.
+			grid.set(x, y, null);
+			// Deletes the targeted pawn.
+			grid.set(this.posX, this.posY, null);
+			// Deletes the pawn who attacks.
+		} else if (res == 1) {
+			// The pawn which attacks wins.
+			grid.set(this.posX, this.posY, null);
+			// Deletes the old coordinates of the pawn.
+			grid.set(x, y, this);
+			// Sets the new coordinates of the pawn.
+		} else if (res == 2) {
+			// The pawn which attacks loses.
+			grid.set(this.posX, this.posY, null);
+			// Deletes the pawn which attacks.
 		}
 		grid.resetMove(this);
 		return grid;
@@ -425,7 +438,8 @@ public abstract class APawn implements java.io.Serializable {
 	 */
 	public int[] focus(Game grid) {
 		int[] arrow = { -1, -1, -1, -1, posX, posY };
-		if (posX != grid.getLine()) {// check down move
+		if (posX != grid.getLine()) {
+			// Checks the downward move.
 			if (this.movePoss(grid, posX + 1, posY)) {
 				arrow[2] = 1;
 			} else {
@@ -435,7 +449,8 @@ public abstract class APawn implements java.io.Serializable {
 			arrow[2] = -1;
 
 		}
-		if (posY != grid.getRow()) {// check right move
+		if (posY != grid.getRow()) {
+			// Checks the move to the right.
 			if (this.movePoss(grid, posX, posY + 1)) {
 				arrow[1] = 1;
 			} else {
@@ -444,7 +459,8 @@ public abstract class APawn implements java.io.Serializable {
 		} else {
 			arrow[1] = -1;
 		}
-		if (posX != 0) {// check up move
+		if (posX != 0) {
+			// Checks the upward move.
 			if (this.movePoss(grid, posX - 1, posY)) {
 				arrow[0] = 1;
 			} else {
@@ -453,7 +469,8 @@ public abstract class APawn implements java.io.Serializable {
 		} else {
 			arrow[0] = -1;
 		}
-		if (posY != 0) {// check left move
+		if (posY != 0) {
+			// Checks the move to the left.
 			if (this.movePoss(grid, posX, posY - 1)) {
 				arrow[3] = 1;
 			} else {
@@ -467,6 +484,12 @@ public abstract class APawn implements java.io.Serializable {
 		return arrow;
 	}
 
+	/**
+	 * Indicates whether some other object is "equal to" this one.
+	 * 
+	 * @return true if the two objects are "equals",<br/>
+	 *         false otherwise.
+	 */
 	public boolean equals(Object obj) {
 		if (obj instanceof APawn) {
 			if (((APawn) obj).getLevel() == this.getLevel()) {
@@ -476,26 +499,57 @@ public abstract class APawn implements java.io.Serializable {
 		return false;
 	}
 
+	/**
+	 * 
+	 */
 	public void resetMove() {
 		place.removeAllElements();
 	}
 
+	/**
+	 * Gets if the chosen pawn has already moved.
+	 * 
+	 * @return true if it has moved,<br/>
+	 *         false otherwise.
+	 */
 	public boolean getMoved() {
 		return moved;
 	}
 
+	/**
+	 * Gets if the chosen pawn is known.
+	 * 
+	 * @return true if it's known,<br/>
+	 *         false otherwise.
+	 */
 	public boolean getKnow() {
 		return know;
 	}
 
+	/**
+	 * Sets the chosen pawn as known.
+	 */
 	public void setKnow() {
 		know = true;
 	}
 
+	/**
+	 * Gets if the pawn is selected.
+	 * 
+	 * @return true if the pawn is selected,<br/>
+	 *         false otherwise.
+	 */
 	public boolean getSelected() {
 		return selected;
 	}
 
+	/**
+	 * Sets the pawn as selected regarding of the parameter.
+	 * 
+	 * @param selected
+	 *            true if the pawn is selected,<br/>
+	 *            false otherwise.
+	 */
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}

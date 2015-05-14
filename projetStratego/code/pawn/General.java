@@ -7,9 +7,6 @@ package pawn;
  */
 public class General extends APawn {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**

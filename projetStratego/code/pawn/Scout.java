@@ -9,9 +9,6 @@ import main.Game;
  */
 public class Scout extends APawn {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -80,24 +77,23 @@ public class Scout extends APawn {
 			return false;
 		}
 		APawn target = grid.getPawn(x, y);
-		if (target instanceof Lake) { // test if the target isnt a lake
+		if (target instanceof Lake) {
+			// Tests if the target isn't a lake.
 			return false;
-		} else if (target instanceof APawn) { // test if the target isnt a pawn
-												// of the same team
+		} else if (target instanceof APawn) {
+			// Tests if the target isn't a pawn of the same team.
 			if (target.getTeam() == this.team) {
 				return false;
 			}
-		} else if (x - this.posX != 0 && y - this.posY != 0) { // test if the
-																// move is in
-																// the same lane
+		} else if (x - this.posX != 0 && y - this.posY != 0) {
+			// Tests if the move is in the same lane.
 			return false;
-		} else if (y - this.posY == 0 && x - this.posX == 0) { // test if the
-																// pawn isnt
-																// already on
-																// the target
+		} else if (y - this.posY == 0 && x - this.posX == 0) {
+			// Tests if the pawn isn't already on the target.
 			return false;
 		}
-		if (x - this.posX != 0) {// check if the lane X is empty
+		if (x - this.posX != 0) {
+			// Checks if the chosen lane is empty.
 			if (x < this.posX) {
 				for (int i = 1; posX - i != x && posX - i >= 0; i++) {
 					if (grid.getPawn(posX - i, posY) != null) {
@@ -113,7 +109,8 @@ public class Scout extends APawn {
 				}
 			}
 		}
-		if (y - this.posY != 0) {// check if the lane X is empty
+		if (y - this.posY != 0) {
+			// Checks if the chosen column is empty.
 			if (y < this.posY) {
 				for (int i = 1; posY - i != y && posY - i >= 0; i++) {
 					if (grid.getPawn(posX, posY - i) != null) {
@@ -141,7 +138,8 @@ public class Scout extends APawn {
 	 */
 	public int[] focus(Game grid) {
 		int[] arrow = { -1, -1, -1, -1, posX, posY };
-		if (posX != grid.getLine()) {// check down move
+		if (posX != grid.getLine()) {
+			// Checks the downward move.
 			if (this.movePoss(grid, posX + 1, posY)) {
 				for (int i = 1; this.movePoss(grid, posX + i, posY); i++) {
 					arrow[2] = i;
@@ -154,7 +152,8 @@ public class Scout extends APawn {
 			arrow[2] = -1;
 
 		}
-		if (posY != grid.getRow()) {// check right move
+		if (posY != grid.getRow()) {
+			// Checks the rightward movement
 			if (this.movePoss(grid, posX, posY + 1)) {
 				for (int i = 1; this.movePoss(grid, posX, posY + i); i++) {
 					arrow[1] = i;
@@ -167,7 +166,8 @@ public class Scout extends APawn {
 			arrow[1] = -1;
 		}
 
-		if (posX != 0) {// check up move
+		if (posX != 0) {
+			// Checks the upward move.
 			if (this.movePoss(grid, posX - 1, posY)) {
 				boolean test = true;
 				for (int i = 1; test; i++) {
@@ -185,7 +185,8 @@ public class Scout extends APawn {
 		} else {
 			arrow[0] = -1;
 		}
-		if (posY != 0) {// check left move
+		if (posY != 0) {
+			// Checks the leftward movement
 			if (this.movePoss(grid, posX, posY - 1)) {
 				boolean test = true;
 				for (int i = 1; test; i++) {

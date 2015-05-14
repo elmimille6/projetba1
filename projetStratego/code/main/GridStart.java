@@ -149,6 +149,9 @@ public class GridStart implements java.io.Serializable {
 
 	/**
 	 * Indicates whether some other object is "equal to" this one.
+	 * 
+	 * @return true if the two objects are "equals",<br/>
+	 *         false otherwise.
 	 */
 	public boolean equals(Object obj) {
 		if (obj instanceof GridStart) {

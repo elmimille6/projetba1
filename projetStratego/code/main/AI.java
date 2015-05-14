@@ -271,7 +271,7 @@ public class AI {
 	 * @param pawn
 	 *            The current pawn.
 	 * 
-	 * @param pawnside
+	 * @param pawnside The opponent pawn close to the current pawn.
 	 * @param x1
 	 *            coord final si attack
 	 * @param y1

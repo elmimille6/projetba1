@@ -44,7 +44,7 @@ public class GridStart implements java.io.Serializable {
 	/**
 	 * Gets the chosen grid.
 	 * 
-	 * @return
+	 * @return The chosen grid.
 	 */
 	public APawn[][] getGrid() {
 		return grid;

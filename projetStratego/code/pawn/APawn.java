@@ -266,7 +266,9 @@ public abstract class APawn implements java.io.Serializable {
 	/**
 	 * Gets the show value of the pawn.
 	 * 
-	 * @return The show value of the pawn.
+	 * @return The show value of the pawn:<br/>
+	 *         true if it's shown,<br/>
+	 *         false otherwise.
 	 */
 	public boolean getShow() {
 		return this.show;
@@ -274,6 +276,11 @@ public abstract class APawn implements java.io.Serializable {
 
 	/**
 	 * Sets the show value of the pawn.
+	 * 
+	 * @param show
+	 *            The show value of the pawn:<br/>
+	 *            true if it's shown,<br/>
+	 *            false otherwise.
 	 */
 	public void setShow(boolean show) {
 		this.show = show;
@@ -430,11 +437,13 @@ public abstract class APawn implements java.io.Serializable {
 	}
 
 	/**
-	 * Focus a pawn and checks if move is available for him, stores the result
-	 * into the array 'arrow'.
+	 * Focus a pawn and checks if move is available for him, returns the result
+	 * into the 'arrow' array.
 	 * 
 	 * @param grid
 	 *            The grid of the game.
+	 * 
+	 * @return The result into the 'arrow' array.
 	 */
 	public int[] focus(Game grid) {
 		int[] arrow = { -1, -1, -1, -1, posX, posY };

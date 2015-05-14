@@ -76,6 +76,9 @@ public class InitWindow extends WindowInitPawn {
 	 * Main constructor of the class.
 	 */
 	public InitWindow() {
+		if (modif) {
+			this.gridPane1 = this.gridPane1 = WindowInitPawn.gridPane1;
+		}
 		init();
 	}
 
@@ -142,15 +145,21 @@ public class InitWindow extends WindowInitPawn {
 
 		if (nbPawns == 40) {
 			if (toInit != 1) {
-				Center.add(load); // Search save in the 'Saves' folder
+				Center.add(load);
+				// Searches saved grids in the 'GridStart.save' file.
 				Center.add(combo);
-				Center.add(play);// Launches the game with the grid
-				Center.add(auto); // Add an auto init.
-				Center.add(clear); // Add an auto init.
+				Center.add(play);
+				// Launches the game with the grid.
+				Center.add(auto);
+				// Adds an automatic grid.
+				Center.add(clear);
+				// Clears the grid.
 			}
-			Center.add(save); // Save the grid in the 'Saves' folder
+			Center.add(save);
+			// Saves the grid in the 'GridStart.save' file.
 		} else {
-			Center.add(play);// Launches the game with the grid
+			Center.add(play);
+			// Launches the game with the grid
 		}
 
 		final JFrame fen = this;
@@ -160,8 +169,8 @@ public class InitWindow extends WindowInitPawn {
 				if (verifTheGrid()) {
 					GridStart ngrid = new GridStart();
 					ngrid.setGrid(gridPane1.getGrid());
-
-					Date myDate = new Date(); // Default name
+					// Default name
+					Date myDate = new Date();
 					DateFormat shortDateFormat = DateFormat
 							.getDateTimeInstance(DateFormat.SHORT,
 									DateFormat.SHORT);
@@ -170,7 +179,8 @@ public class InitWindow extends WindowInitPawn {
 							"Sauvegarde", JOptionPane.QUESTION_MESSAGE, null,
 							null, shortDateFormat.format(myDate));
 
-					if (nom != null) { // null if cancel
+					if (nom != null) {
+						// Null if 'cancel' button.
 						ngrid.setName(nom);
 						ngrid.save();
 						JOptionPane.showMessageDialog(null,

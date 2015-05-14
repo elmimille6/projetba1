@@ -39,7 +39,7 @@ public class MenuWindow extends JFrame {
 	private JMenuItem testia = new JMenuItem("Tester l'IA");
 	private JMenuItem startSave = new JMenuItem("Utiliser la sauvegarde");
 	private JMenuItem manager = new JMenuItem(
-			"Gestionnaire de grille de depart");
+			"Gestionnaire de grilles");
 	private JMenuItem client = new JMenuItem("Se connecter a un serveur");
 	private JMenuItem serveur = new JMenuItem("Heberger une partie");
 

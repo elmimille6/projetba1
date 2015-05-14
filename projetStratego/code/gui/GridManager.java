@@ -42,7 +42,7 @@ public class GridManager extends JFrame {
 	 */
 	public GridManager() {
 		this.setLayout(new BorderLayout());
-		this.setTitle("Gestionnaire de grille de depart ");
+		this.setTitle("Gestionnaire de grilles");
 		this.setSize(800, 400);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);

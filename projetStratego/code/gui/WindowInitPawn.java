@@ -16,6 +16,7 @@ public class WindowInitPawn extends WindowGame {
 	public static Game gridPane1, game = new Game(10, 1);
 	public static int team = 1, nbPawn, nbPawns = 40, nbPlayer = 1;
 	public static int toInit, side = 1;
+	public static boolean modif = false;
 
 	/**
 	 * Main constructor of the class.
@@ -52,6 +53,7 @@ public class WindowInitPawn extends WindowGame {
 	public WindowInitPawn(Game gridPane1, int toInit) {
 		WindowInitPawn.gridPane1 = gridPane1;
 		WindowInitPawn.toInit = toInit;
+		WindowInitPawn.modif = true;
 		game.setComplete(0);
 		initGame();
 	}

@@ -77,7 +77,7 @@ public class InitWindow extends WindowInitPawn {
 	 */
 	public InitWindow() {
 		if (modif) {
-			this.gridPane1 = this.gridPane1 = WindowInitPawn.gridPane1;
+			this.gridPane1 = WindowInitPawn.gridPane1;
 		}
 		init();
 	}

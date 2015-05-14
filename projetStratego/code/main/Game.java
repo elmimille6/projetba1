@@ -9,7 +9,6 @@ import java.util.Vector;
 
 import pawn.APawn;
 import pawn.Lake;
-import util.Dic;
 
 /**
  * Grid is the class that creates a "grid" object.

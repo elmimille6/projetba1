@@ -1,4 +1,4 @@
-package util;
+package main;
 
 public class Dic implements java.io.Serializable {
 

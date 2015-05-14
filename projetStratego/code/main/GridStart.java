@@ -148,6 +148,15 @@ public class GridStart implements java.io.Serializable {
 	}
 
 	/**
+	 * Returns the name of the GridStart object.
+	 * 
+	 * @return The name of the GridStart object.
+	 */
+	public String toString() {
+		return name;
+	}
+
+	/**
 	 * Indicates whether some other object is "equal to" this one.
 	 * 
 	 * @return true if the two objects are "equals",<br/>

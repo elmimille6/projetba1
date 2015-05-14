@@ -18,6 +18,7 @@ import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 /**
  * This class is the frame with the server to host an online game. 
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
 public class FrameServer extends JFrame {
@@ -30,7 +31,7 @@ public class FrameServer extends JFrame {
 	JLabel lab = new JLabel();
 
 	/**
-	 * The main constructor of the class
+	 * The main constructor of the class.
 	 */
 	public FrameServer() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,7 +78,7 @@ public class FrameServer extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//add the listener of the server
+		// Adds the listener of the server.
 		server.addListener(new Listener() {
 			public void received(Connection connection, Object object) {
 				if (object instanceof int[]) {

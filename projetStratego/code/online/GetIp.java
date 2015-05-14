@@ -15,8 +15,11 @@ import javax.swing.JTextField;
 
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.minlog.Log;
+
 /**
- * The class of the dialog box which ask you for the IP address when you want to connect on a server
+ * The class of the dialog box which asks you for the IP address when you want
+ * to connect on a server.
+ * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  *
  */
@@ -26,12 +29,22 @@ public class GetIp extends JDialog {
 	private String ip = "";
 	private final static JFrame nn = null;
 	JTextField text;
-/**
- * The constructor of the class.
- * @param parent  the Frame from which the dialog is displayed but unused just here to override the JDialog constructor
- * @param title the String to display in the dialog's title bar
- * @param modal specifies whether dialog blocks user input to other top-level windows when shown. If true, the modality type property is set to DEFAULT_MODALITY_TYPE otherwise the dialog is modeless
- */
+
+	/**
+	 * The constructor of the class.
+	 * 
+	 * @param parent
+	 *            The Frame from which the dialog is displayed but unused just
+	 *            here to override the JDialog constructor.
+	 * 
+	 * @param title
+	 *            The String to display in the dialog's title bar.
+	 * 
+	 * @param modal
+	 *            Specifies whether dialog blocks user input to other top-level
+	 *            windows when shown. If true, the modality type property is set
+	 *            to DEFAULT_MODALITY_TYPE otherwise the dialog is modeless.
+	 */
 	public GetIp(JFrame parent, String title, boolean modal) {
 		super(nn, title, modal);
 		this.setSize(400, 200);
@@ -40,10 +53,12 @@ public class GetIp extends JDialog {
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.initComponent();
 	}
-/**
- * Get the String ip which is in the JTextField and clear it 
- * @return The ip which is the JTextField
- */
+
+	/**
+	 * Gets the String ip which is in the JTextField and clears it.
+	 * 
+	 * @return The ip which is the JTextField.
+	 */
 	public String showDialog() {
 		this.setVisible(true);
 		String ipp = "";
@@ -54,9 +69,10 @@ public class GetIp extends JDialog {
 		}
 		return ipp;
 	}
-/**
- * initialize the component of the dialog box
- */
+
+	/**
+	 * Initializes the component of the dialog box.
+	 */
 	private void initComponent() {
 		Log.set(Log.LEVEL_NONE);
 		JPanel panel = new JPanel();

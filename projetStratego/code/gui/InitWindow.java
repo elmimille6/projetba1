@@ -82,8 +82,11 @@ public class InitWindow extends WindowInitPawn {
 	/**
 	 * Constructor of the grid when the game is online.
 	 * 
-	 * @param startClient the startClient object, use for the connection to the server.
-	 * @param Oplayer the number of this player. (1 or 2)
+	 * @param startClient
+	 *            The startClient object, used for the connection to the server.
+	 * 
+	 * @param Oplayer
+	 *            The number of this player: 1 or 2.
 	 */
 	public InitWindow(StratClient startClient, int Oplayer) {
 		this.startClient = startClient;

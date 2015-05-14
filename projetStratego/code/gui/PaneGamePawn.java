@@ -5,9 +5,9 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import main.Dic;
 import main.Game;
 import pawn.APawn;
-import util.Dic;
 
 /**
  * This class creates a panel that displays the number of pawns in the game of

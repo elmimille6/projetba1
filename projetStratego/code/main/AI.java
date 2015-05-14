@@ -149,7 +149,8 @@ public class AI {
 	}
 
 	/**
-	 * This methods choose the best move of all the pawn who are close to an enemies. 
+	 * This methods choose the best move of all the pawn who are close to an
+	 * enemies.
 	 * 
 	 * @param game
 	 *            The current game.
@@ -263,7 +264,7 @@ public class AI {
 	}
 
 	/**
-	 * methods to evaluate the move.
+	 * This method evaluates the move.
 	 * 
 	 * @param game
 	 *            The current game.
@@ -271,16 +272,22 @@ public class AI {
 	 * @param pawn
 	 *            The current pawn.
 	 * 
-	 * @param pawnside The opponent pawn close to the current pawn.
+	 * @param pawnside
+	 *            The opponent pawn close to the current pawn.
+	 * 
 	 * @param x1
-	 *            coord final si attack
+	 *            Coordinate final if attack.
+	 * 
 	 * @param y1
-	 *            coord final si attack
+	 *            Coordinate final if attack.
+	 * 
 	 * @param x2
-	 *            coord fianl si !attack
+	 *            Coordinate final if no attack.
+	 * 
 	 * @param y2
-	 *            coord final si !attack
-	 * @return
+	 *            Coordinate final if no attack.
+	 * 
+	 * @return The right move.
 	 */
 	private int[][] iaL1SideM(Game game, APawn pawn, APawn pawnside, int x1,
 			int y1, int x2, int y2) {

@@ -13,12 +13,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import main.Dic;
 import main.Game;
 import main.AI;
 import pawn.APawn;
 import pawn.Bomb;
 import pawn.Flag;
-import util.Dic;
 
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
@@ -109,9 +109,14 @@ public class WindowGame extends JFrame {
 	/**
 	 * Constructor of the class when the game is online.
 	 * 
-	 * @param ngame The 'game' object of the current game.
-	 * @param client The client object use to communicate with the server.
-	 * @param Oplayer The number of this player (1 or 2).
+	 * @param ngame
+	 *            The 'game' object of the current game.
+	 * 
+	 * @param client
+	 *            The client object used to communicate with the server.
+	 * 
+	 * @param Oplayer
+	 *            The number of this player: 1 or 2.
 	 */
 	public WindowGame(Game ngame, Client client, int Oplayer) {
 		this(ngame);

@@ -17,7 +17,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import online.FrameServeur;
+import online.FrameServer;
 import online.StratClient;
 import main.Game;
 import main.AI;
@@ -115,7 +115,7 @@ public class MenuWindow extends JFrame {
 
 		serveur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new FrameServeur();
+				new FrameServer();
 			}
 		});
 

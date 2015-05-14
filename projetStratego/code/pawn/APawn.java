@@ -5,7 +5,9 @@ import java.util.Vector;
 import main.Game;
 
 /**
- * This class creates a "pawn" object.
+ * This class creates an 'APawn' object.<br/>
+ * This is a pawn with a level, a name, a position, an image and a team. A pawn
+ * can move and attack other pawns, it can also be shown or hidden.
  * 
  * @author CAREDDA Giuliano, DUCOBU Alexandre
  */
@@ -105,7 +107,7 @@ public abstract class APawn implements java.io.Serializable {
 	 * Sets the team of the pawn.
 	 * 
 	 * @param team
-	 *            The number of the team:<br/>
+	 *            The team of the pawns:<br/>
 	 *            0 for neutral,<br/>
 	 *            1 for red,<br/>
 	 *            2 for blue.
@@ -140,9 +142,15 @@ public abstract class APawn implements java.io.Serializable {
 	 * 
 	 * 
 	 * @param team
-	 * 
+	 *            The team of the pawns:<br/>
+	 *            0 for neutral,<br/>
+	 *            1 for red,<br/>
+	 *            2 for blue.
 	 * 
 	 * @param nbPawns
+	 *            The number of pawns:<br/>
+	 *            40 for the Original Stratego and <br/>
+	 *            10 for the Stratego Duel.
 	 * 
 	 * @return The vector of 40 or 10 pawns.
 	 */

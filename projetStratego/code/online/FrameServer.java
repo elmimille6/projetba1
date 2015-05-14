@@ -17,7 +17,7 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 import com.esotericsoftware.minlog.Log;
 
-public class FrameServeur extends JFrame {
+public class FrameServer extends JFrame {
 	/**
 	 * 
 	 */
@@ -28,7 +28,7 @@ public class FrameServeur extends JFrame {
 	Connection pl1, pl2;
 	JLabel lab = new JLabel();
 
-	public FrameServeur() {
+	public FrameServer() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(400, 400);
 		this.setTitle("Serveur");

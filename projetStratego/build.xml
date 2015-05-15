@@ -54,6 +54,8 @@
 		<delete dir="build" />
 		<delete dir="doc" />
 		<delete dir="junit" />
+		<delete file="grid.save" />
+		<delete file="GridStart.save" />
 	</target>
 
 	<target name="javadoc">
